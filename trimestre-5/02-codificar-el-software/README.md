@@ -428,4 +428,35 @@ En donde entonces obsere el siguente objeto:
 
 Esto tiene como función ahorrarnos bastante código.
 
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+Luego de un tiempo, se empezo a hacer backend con django y esto trajo problemas a mi repositorio respecto al build frontend de github pages.
+
+En donde:
+
+GitHub Pages estaba funcionando pero:
+* luego agregaste Django
+* GitHub Actions/Jekyll empezó a intentar “procesar” el repo completo
+* y el deploy se rompió
+
+Por lo que hay que configurar GitHub Pages para: “Ignorar Django y publicar SOLO los archivos estáticos” y por ende: Usar “Deploy static files”
+
 ---

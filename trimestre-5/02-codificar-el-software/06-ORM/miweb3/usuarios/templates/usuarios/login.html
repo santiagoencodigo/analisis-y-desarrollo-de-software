@@ -1,0 +1,19 @@
+<h1>Login</h1>
+
+<form method="post">
+    <!-- Temas de Seguridad de Consulta -->
+    {% csrf_token %}
+
+    <input type="text" name="username" placeholder="Usuario">
+    <br>
+    <input type="password" name="password" placeholder="Contraseña">
+    <br>
+
+    <button type="submit">Registro</button>
+</form>
+
+{% for message in messages %}
+<p>{{message}}</p>
+
+<!-- Dependiendo de si es exito o error -->
+{% endfor %}

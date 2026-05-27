@@ -1,0 +1,17 @@
+<h1>Registro de Usuario</h1>
+
+<form method="post">
+    <!-- Temas de Seguridad de Consulta -->
+    {% csrf_token %}
+
+    <!-- Para cuando hallan datos, esto lo protege. -->
+    {{% form.as_p %}}
+
+    <button type="submit">Registro</button>
+</form>
+
+{% for message in messages %}
+<p>{{message}}</p>
+
+<!-- Dependiendo de si es exito o error -->
+{% endfor %}
