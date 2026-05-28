@@ -101,3 +101,273 @@ path('nosotros',views.nosotros, name='nosotros')
 #en la primera parte, nosotros vamos a escribir en la url la palabra
 nosotros. Accediendo a views.nosotros para mostrarlo.
 ]
+
+---
+
+Ahorita me salieron unos errores al intentar hacer correr el servidor, la solución era activar XAMPP. Pues el proyecto ya utiliza pymysql y tenia que crear hojash como Bases de Datos en XAMPP. Y ejecutar migraciones
+
+# Solución de Problemas de Compatibilidad entre Django, PyMySQL y MariaDB
+
+## Introducción
+
+Durante la configuración del proyecto Django utilizando `PyMySQL` y `MariaDB`, aparecieron varios errores relacionados con:
+
+* Bases de datos inexistentes.
+* Compatibilidad entre versiones de Django y MariaDB.
+* Configuración del entorno virtual.
+* Conexión entre Django y MySQL/MariaDB.
+
+A continuación se documentan los errores encontrados y las soluciones aplicadas.
+
+---
+
+# Error 1: Base de datos inexistente
+
+## Error encontrado
+
+```txt
+django.db.utils.OperationalError:
+(1049, "Unknown database 'hojash'")
+```
+
+## ¿Qué significa?
+
+Django intentó conectarse a una base de datos llamada:
+
+```txt
+hojash
+```
+
+pero dicha base de datos no existía en MariaDB/MySQL.
+
+---
+
+## Solución
+
+Crear la base de datos manualmente desde:
+
+* phpMyAdmin
+* HeidiSQL
+* Consola MySQL/MariaDB
+
+Ejemplo desde consola:
+
+```sql
+CREATE DATABASE hojash;
+```
+
+Luego volver a ejecutar:
+
+```bash
+python manage.py migrate
+```
+
+---
+
+# Error 2: Incompatibilidad entre Django y MariaDB
+
+## Error encontrado
+
+```txt
+django.db.utils.NotSupportedError:
+MariaDB 10.6 or later is required (found 10.4.32)
+```
+
+Posteriormente:
+
+```txt
+MariaDB 10.5 or later is required (found 10.4.32)
+```
+
+---
+
+# ¿Qué estaba sucediendo?
+
+El proyecto estaba utilizando:
+
+| Tecnología | Versión |
+| ---------- | ------- |
+| Django     | 6.0.5   |
+| MariaDB    | 10.4.32 |
+
+Django 6 requiere versiones más recientes de MariaDB.
+
+Incluso Django 5.2 sigue requiriendo MariaDB 10.5+.
+
+Sin embargo, el entorno local tenía instalada la versión:
+
+```txt
+MariaDB 10.4.32
+```
+
+Por esa razón Django bloqueaba la conexión y lanzaba el error de compatibilidad.
+
+---
+
+# Solución Aplicada
+
+## 1. Desinstalar Django 6
+
+```bash
+pip uninstall django
+```
+
+---
+
+## 2. Instalar una versión compatible
+
+Se instaló Django 4.x:
+
+```bash
+pip install "django<5"
+```
+
+Esto normalmente instala una versión como:
+
+```txt
+Django 4.2.x
+```
+
+La cual sí es compatible con MariaDB 10.4.
+
+---
+
+## 3. Actualizar requirements.txt
+
+```bash
+pip freeze > requirements.txt
+```
+
+---
+
+## 4. Ejecutar migraciones
+
+```bash
+python manage.py migrate
+```
+
+---
+
+## 5. Iniciar el servidor
+
+```bash
+python manage.py runserver
+```
+
+---
+
+# Relación con PyMySQL
+
+El proyecto utiliza:
+
+```python
+import pymysql
+pymysql.install_as_MySQLdb()
+```
+
+Esto permite que Django utilice PyMySQL como reemplazo del paquete:
+
+```txt
+mysqlclient
+```
+
+PyMySQL funciona correctamente, pero la compatibilidad real depende también de:
+
+* La versión de Django.
+* La versión de MariaDB/MySQL.
+
+---
+
+# Recomendaciones
+
+## Opción recomendada
+
+Actualizar MariaDB a versiones modernas:
+
+* MariaDB 10.6+
+* MariaDB 11+
+
+Esto permite utilizar:
+
+* Django 5
+* Django 6
+
+sin problemas de compatibilidad.
+
+---
+
+## Opción práctica para proyectos académicos
+
+Si se trabaja con:
+
+* XAMPP antiguos
+* MariaDB 10.4
+* Entornos institucionales
+
+es más práctico utilizar:
+
+```txt
+Django 4.2
+```
+
+ya que mantiene compatibilidad con versiones antiguas de MariaDB.
+
+---
+
+# Resumen General
+
+| Problema                  | Solución                              |
+| ------------------------- | ------------------------------------- |
+| Unknown database          | Crear la base de datos                |
+| Django 6 incompatible     | Instalar Django 4                     |
+| MariaDB demasiado antigua | Actualizar MariaDB o bajar Django     |
+| Problemas con migraciones | Verificar compatibilidad de versiones |
+
+---
+
+# Comandos Finales Utilizados
+
+## Instalar Django compatible
+
+```bash
+pip uninstall django
+pip install "django<5"
+```
+
+---
+
+## Guardar dependencias
+
+```bash
+pip freeze > requirements.txt
+```
+
+---
+
+## Ejecutar migraciones
+
+```bash
+python manage.py migrate
+```
+
+---
+
+## Iniciar servidor
+
+```bash
+python manage.py runserver
+```
+
+---
+
+
+
+Login SuperUser
+
+● Username: santiagoencodigo
+● Email: *
+● Password: crud 
+
+
+
+---
