@@ -1,0 +1,11 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+
+   path(
+       'entrada/',
+       views.entrada_inventario,
+       name='entrada_inventario'
+   ),
+]
