@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Quicksand:wght@300..700&display=swap');
+
+*{
+    margin:0px;
+    padding:0px;
+}
+
+html{
+    font-size:10px;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:1.6rem;
+    background-image:url("../../assets/img/2-cuadricula-negra.jpg");
+}
+
+.layout{
+    width:100%;
+    height:100%;
+    position: absolute;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+}
+
+.layout__main{
+    padding:30px;
+    background-color:#E9E3DF;
+    border-radius:10px;
+}
+
+.main__title{
+    font-family: "Bitcount Prop Single", system-ui;
+    font-size:5rem;
+    margin-bottom:1rem;
+    color: #c86028;
+}
+
+.main__date,
+.main__hour{
+    text-align:center;
+    font-size:4rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-shadow: 0px 0px 2px #c86028;
+    margin-bottom:0.3rem;
+}
+
+/* Boton para ir a la main page */
+
+.home-container{
+    margin:3rem 0px 10px 0px;
+    border-radius:10px;
+    padding:15px;
+    background-color:#E9E3DF;
+    text-align:center;
+    list-style:none;
+    cursor:pointer;
+    transition:1s;
+    font-size:20px;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.home-container:hover{
+    transform:scale(1.1);
+    background-color:#c86028;
+    border:1px solid black;
+    font-size:25px;
+    font-weight: bold;
+}
+
+.home-container img{
+    width:100px;
+    height:100px;
+}
+
+.home-container a{
+    text-decoration:none;
+    color:black;
+    font-size:15px;
+    font-weight: bold;
+
+    display:flex;
+    flex-direction:column;
+}

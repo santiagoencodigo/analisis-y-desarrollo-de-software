@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>World Skills · Primer Trimestre ADSO | Bitácora de aprendizaje</title>
+    <meta name="description" content="Cápsula histórica de mis primeros pasos en programación durante WorldSkills mientras cursaba el primer trimestre de ADSO. HTML, CSS, JavaScript y mucho descubrimiento.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero__container">
+            <div class="hero__badge" aria-label="Cápsula histórica">PRIMER TRIMESTRE · ADSO</div>
+            <h1 class="hero__title">World Skills<br><span class="hero__subline">Bitácora de descubrimiento</span></h1>
+            <p class="hero__description">
+                Junio de 2025 — mis primeras líneas de HTML, CSS y JS
+                <br>
+                <strong>Bienvenido a mi archivo académico.</strong>
+            </p>
+            <div class="hero__meta">
+                <span>📅 Primer contacto real con programación</span>
+                <span>⚡ WorldSkills 2025</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="context">
+        <div class="context__inner">
+            <div class="context__text">
+                <h2>🧭 El inicio de todo</h2>
+                <p>Durante semanas compartí aula con compañeros de cuarto trimestre. <strong>WorldSkills</strong> fue el catalizador: un entorno de retos, colaboración y mucha pasión por construir.</p>
+                <p>Estos nueve proyectos representan mi evolución desde la incertidumbre hasta la alegría de ver algo funcionar. Cada card es una ventana a esa chispa inicial.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline__node">
+                    <span class="timeline__year">Semana 1</span>
+                    <p>HTML semántico, primeros estilos, palíndromos</p>
+                </div>
+                <div class="timeline__node">
+                    <span class="timeline__year">Semana 2-3</span>
+                    <p>Flexbox · Grid · DOM · Fecha/Hora</p>
+                </div>
+                <div class="timeline__node">
+                    <span class="timeline__year">Semana 4-5</span>
+                    <p>Animaciones CSS · Drag & Drop · Lógica</p>
+                </div>
+                <div class="timeline__node">
+                    <span class="timeline__year">Semana 6-8</span>
+                    <p>Simon Say · Rompecabezas · Órbita Celestial</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== GRID DE PROYECTOS ========== -->
+    <section class="projects" aria-labelledby="proyectos-heading">
+        <div class="projects__container">
+            <h2 id="proyectos-heading" class="projects__title">📂 Cuaderno de proyectos</h2>
+            <p class="projects__intro">Nueve micro-prototipos que registran mi primera cosecha tecnológica. Cada uno representa una habilidad fundamental.</p>
+            
+            <div class="cards-grid">
+
+                <!-- Card 1 - Palíndromo -->
+                <article class="card">
+                    <div class="card__header">
+                        <span class="card__emoji">🔄</span>
+                        <h3 class="card__title">Palíndromo</h3>
+                    </div>
+                    <p class="card__desc">Identifica si una palabra o frase se lee igual al derecho y al revés. Mi primer encuentro con lógica de strings.</p>
+                    <div class="card__tech">
+                        <span>HTML</span><span>CSS</span><span>JS (eventos)</span>
+                    </div>
+                    <div class="card__learning">Aprendizaje: manipulación de cadenas + condicionales</div>
+                    <a href="pages/1-palindromo/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">🔍 Ver Proyecto</a>
+                </article>
+
+                <!-- Card 2 - Fecha y Hora -->
+                <article class="card">
+                    <div class="card__header">
+                        <span class="card__emoji">⏱️</span>
+                        <h3 class="card__title">Fecha y Hora</h3>
+                    </div>
+                    <p class="card__desc">Reloj dinámico y calendario actualizado en tiempo real. Primer uso intensivo del objeto Date.</p>
+                    <div class="card__tech">
+                        <span>HTML</span><span>CSS</span><span>JS Date</span>
+                    </div>
+                    <div class="card__learning">Aprendizaje: funciones + actualización del DOM</div>
+                    <a href="pages/2-fecha-hora/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">🔍 Ver Proyecto</a>
+                </article>
+
+                <!-- Card 3 - WS CSS -->
+                <article class="card">
+                    <div class="card__header">
+                        <span class="card__emoji">🎨</span>
+                        <h3 class="card__title">WS CSS</h3>
+                    </div>
+                    <p class="card__desc">Laboratorio visual: Flexbox, Grid, animaciones y responsive. Exploración libre de layouts modernos.</p>
+                    <div class="card__tech">
+                        <span>Flexbox</span><span>Grid</span><span>Keyframes</span>
+                    </div>
+                    <div class="card__learning">Aprendizaje: diseño responsivo + transiciones CSS</div>
+                    <a href="pages/3-ws-css/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">🔍 Ver Proyecto</a>
+                </article>
+
+                <!-- Card 4 - Simon Say -->
+                <article class="card">
+                    <div class="card__header">
+                        <span class="card__emoji">🎮</span>
+                        <h3 class="card__title">Simon Say</h3>
+                    </div>
+                    <p class="card__desc">Juego de memoria interactivo siguiendo un tutorial. Integración completa HTML/CSS/JS.</p>
+                    <div class="card__tech">
+                        <span>Eventos</span><span>Lógica</span><span>DOM</span>
+                    </div>
+                    <div class="card__learning">Aprendizaje: estructura de proyecto interactivo completo</div>
+                    <a href="pages/5-simon-say/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">🔍 Ver Proyecto</a>
+                </article>
+
+                <!-- Card 5 - Almacén de Cajas -->
+                <article class="card">
+                    <div class="card__header">
+                        <span class="card__emoji">📦</span>
+                        <h3 class="card__title">Almacén de Cajas</h3>
+                    </div>
+                    <p class="card__desc">Interfaz Drag & Drop para organizar elementos visuales. Manipulación de eventos del mouse.</p>
+                    <div class="card__tech">
+                        <span>Drag & Drop</span><span>Eventos</span><span>JS nativo</span>
+                    </div>
+                    <div class="card__learning">Aprendizaje: interacción avanzada + selección de elementos</div>
+                    <a href="pages/6-almacen-de-cajas/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">🔍 Ver Proyecto</a>
+                </article>
+
+                <!-- Card 6 - Rompecabezas Módulo A -->
+                <article class="card">
+                    <div class="card__header">
+                        <span class="card__emoji">🧩</span>
+                        <h3 class="card__title">Rompecabezas Módulo A</h3>
+                    </div>
+                    <p class="card__desc">Puzzle con imágenes WorldSkills 2024 usando Drag & Drop. Organización lógica y reordenamiento.</p>
+                    <div class="card__tech">
+                        <span>HTML/CSS</span><span>Drag & Drop</span><span>DOM</span>
+                    </div>
+                    <div class="card__learning">Aprendizaje: reordenación visual + lógica espacial</div>
+                    <a href="pages/7-rompecabezas-modulo-A/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">🔍 Ver Proyecto</a>
+                </article>
+
+                <!-- Card 7 - Tablas de Multiplicar -->
+                <article class="card">
+                    <div class="card__header">
+                        <span class="card__emoji">🧮</span>
+                        <h3 class="card__title">Tablas de Multiplicar</h3>
+                    </div>
+                    <p class="card__desc">Generador dinámico de tablas usando bucles for y renderizado desde JavaScript.</p>
+                    <div class="card__tech">
+                        <span>Bucles for</span><span>innerHTML</span><span>JS</span>
+                    </div>
+                    <div class="card__learning">Aprendizaje: generación dinámica de HTML, estructuras repetitivas</div>
+                    <a href="pages/8-tablas-de-multiplicar/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">🔍 Ver Proyecto</a>
+                </article>
+
+                <!-- Card 8 - Órbita Celestial -->
+                <article class="card">
+                    <div class="card__header">
+                        <span class="card__emoji">🪐</span>
+                        <h3 class="card__title">Órbita Celestial</h3>
+                    </div>
+                    <p class="card__desc">Sistema planetario con HTML y CSS puro: animaciones, transformaciones y posicionamiento absoluto.</p>
+                    <div class="card__tech">
+                        <span>CSS-only</span><span>Keyframes</span><span>Divs creativos</span>
+                    </div>
+                    <div class="card__learning">Aprendizaje: creatividad visual con solo CSS, posicionamiento</div>
+                    <a href="pages/9-orbita-celestial/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">🔍 Ver Proyecto</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__col">
+                <h4>World Skills · Primer Trimestre ADSO</h4>
+                <p>Cápsula histórica de mi proceso formativo. Esta page documenta el primer momento en que el código dejó de ser abstracto y se convirtió en herramienta de expresión.</p>
+            </div>
+            <div class="footer__col">
+                <h5>Legado</h5>
+                <ul>
+                    <li>Descubrimiento: HTML / CSS / JS</li>
+                    <li>Lógica estructurada y eventos</li>
+                    <li>Diseño con Flexbox, Grid, animaciones</li>
+                    <li>Interacciones Drag & Drop</li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h5>Contexto</h5>
+                <p>Junio 2025 — WorldSkills Colombia. Aprendizaje colaborativo junto a compañeros de 4to trimestre. Primer contacto real con tecnologías web.</p>
+                <span class="footer__sign">ADSO · bitácora de evolución</span>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>Proyecto académico sin fines comerciales · todos los ejercicios forman parte de mi formación integral</p>
+        </div>
+    </footer>
+</body>
+</html>
