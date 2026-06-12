@@ -6,7 +6,7 @@ Las carpetas del repositorio estan organizadas por trimestres, y cada una funcio
 
 <img src="./Assets/img/0-guia-adso.PNG">
 
-[Realice click Aqui para ingresar a la page](https://santiagoencodigo.github.io/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/)
+[Realice click Aqui para ingresar a la page](https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/)
 
 ## Tabla de Contenido
 

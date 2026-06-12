@@ -3,6 +3,8 @@
 > **Cápsula histórica · Bitácora de aprendizaje**  
 > Junio de 2025 – Primer contacto real con HTML, CSS, JavaScript y fundamentos de desarrollo frontend.
 
+* [Demo en Vivo](https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/index.html "https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/index.html")
+
 ---
 
 ## Introducción
