@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Cronometro WorldSkills 2026</title>
+</head>
+<body>
+    <div class="layout">
+        <div class="layout_main">
+            <div class="layout_main_logo">
+                <img class="layout_main_logo--img" src="./assets/img/logo.png" alt="logo">
+            </div>
+            <form action="cronometro.php" method="POST">           
+                <div class="nombres">
+                    <input class="inputNombre" type="text" name="habilidad" value="" placeholder="Nombre de la habilidad">
+                    <input class="inputNombre" type="text" name="modulo" value="" placeholder="Nombre del modulo">
+                </div>
+
+                <div class="tiempos">
+                    <input class="inputTiempo" type="text" name="horas" value="" placeholder="Horas:">
+                    <input class="inputTiempo" type="text" name="minutos" value="" placeholder="Minutos:">
+                    <input class="inputTiempo" type="text" name="segundos" value="" placeholder="Segundos:">
+                </div>
+                <button class="start_button">Empezar</button>
+            </form>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

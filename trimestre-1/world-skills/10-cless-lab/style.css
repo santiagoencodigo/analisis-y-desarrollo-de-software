@@ -1,0 +1,70 @@
+/* 
+Etiqueta universal --> *
+Etiqueta normal --> nada
+Etiqueta ID --> #
+Etiqueta Clase --> .
+*/
+
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: lightgray;
+}
+
+#container {
+    width: 80%;
+    border: 1px solid black;
+    margin: 0px auto;
+    box-shadow: 0px 0px 10px gray
+}
+
+#header {
+    height: 145px;
+    background: #f0f0f0;
+    border: 1px solid blue;
+
+}
+
+#logo {
+    padding: 20px;
+    margin-left: 20px;
+    float: left; 
+}
+#logo img {
+    float:left;
+    height:100px;
+}
+
+#menu {
+    clear: both;
+    background: #222;
+    height:55px;
+    border-bottom:4px solid #01B1EA;
+}
+
+#menu ul{
+    list-style: none;
+    text-decoration: none;
+    margin: 0px auto; 
+    /* el elemento auto me sirve para alinear al centro */
+    margin-left: 25px;
+
+}
+
+#menu ul li {
+    line-height: 55px;
+    float: left;
+    border-right: 1px solid #363636;
+}
+
+#menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding-left:12px;
+    padding-right:12px;
+}

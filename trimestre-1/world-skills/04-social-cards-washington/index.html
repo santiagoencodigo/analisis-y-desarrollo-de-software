@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarjeta de Perfil</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #e0627d;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background-color: #f94f6d;
+      border-radius: 15px;
+      text-align: center;
+      padding: 30px 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      margin-bottom: 15px;
+    }
+
+    .username {
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .handle {
+      color: white;
+      font-size: 14px;
+    }
+
+    .location {
+      color: white;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .stats {
+      background-color: white;
+      border-radius: 0 0 15px 15px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-around;
+      font-size: 14px;
+    }
+
+    .stats div {
+      text-align: center;
+    }
+
+    .stats div span {
+      display: block;
+      font-weight: bold;
+      font-size: 16px;
+      color: #f94f6d;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="perfil.png" alt="Washington Nieto" class="profile-img">
+    <div class="username">Washington Nieto</div>
+    <div class="handle">@washingtonweb</div>
+    <div class="location">Bogotá</div>
+    <div class="stats">
+      <div>
+        <span>15K</span>
+        Seguidores
+      </div>
+      <div>
+        <span>2K</span>
+        Post
+      </div>
+      <div>
+        <span>125K</span>
+        Me gusta
+      </div>
+    </div>
+  </div>
+</body>
+</html>

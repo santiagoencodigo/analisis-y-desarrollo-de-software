@@ -19,3 +19,11 @@ Thumbs.db
 
 # Archivos de LibreOffice o similares
 *.lock
+
+
+# Laravel specific
+/bootstrap/cache/
+/storage/framework/
+/storage/logs/*.log
+/public/storage
+/.phpunit.cache
