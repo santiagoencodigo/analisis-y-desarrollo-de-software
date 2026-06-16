@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Prueba Técnica - Cálculo de Afiliados</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .card {
+            max-width: 650px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .header {
+            background: #1e3c72;
+            color: white;
+            padding: 1.5rem 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .header p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .form-container {
+            padding: 2rem 2rem 1.5rem 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e2a3a;
+            font-size: 0.9rem;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border-radius: 14px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            font-family: inherit;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        select:focus, button:focus {
+            outline: none;
+            border-color: #1e3c72;
+            box-shadow: 0 0 0 3px rgba(30,60,114,0.2);
+        }
+
+        button {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #0f2b4f;
+            cursor: pointer;
+        }
+
+        .resultados {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 1.8rem 2rem;
+        }
+
+        .resultados h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.2rem;
+            color: #0f172a;
+            font-weight: 600;
+            border-left: 4px solid #1e3c72;
+            padding-left: 0.75rem;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 500;
+            color: #334155;
+        }
+
+        .result-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0f172a;
+        }
+
+        .destacado {
+            background: #eef2ff;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 14px;
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .small-note {
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            .form-container, .resultados {
+                padding: 1.5rem;
+            }
+            .header {
+                padding: 1.2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="header">
+        <h1>Calculadora de inscripción</h1>
+        <p>Tarifas con IVA incluido (19%) · Descuento/Recargo por tipo de afiliado</p>
+    </div>
+    <div class="form-container">
+        <form id="afiliadoForm">
+            <div class="form-group">
+                <label for="tarifa">Tarifa de inscripción (IVA incluido)</label>
+                <select id="tarifa" required>
+                    <option value="500000">Comprador - $500.000 COP</option>
+                    <option value="400000">Vendedor - $400.000 COP</option>
+                    <option value="120000">Expositor - $120.000 COP</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo">Tipo de afiliado</label>
+                <select id="tipo" required>
+                    <option value="asociado">Asociado (10% de descuento)</option>
+                    <option value="noAsociado">No Asociado (10% de recargo)</option>
+                    <option value="extranjero">Extranjero (pago en dólares USD)</option>
+                </select>
+            </div>
+
+            <button type="submit">Calcular valores</button>
+        </form>
+    </div>
+
+    <div class="resultados" id="resultadosPanel">
+        <h3>Detalles del pago</h3>
+        <div id="resultadosDinamicos">
+            <div class="result-row">
+                <span class="result-label">Valor Base (sin IVA)</span>
+                <span class="result-value" id="baseValor">-</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Valor IVA (19%)</span>
+                <span class="result-value" id="ivaValor">-</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Ajuste (descuento/recargo)</span>
+                <span class="result-value" id="ajustePorcentaje">-</span>
+            </div>
+            <div class="result-row destacado">
+                <span class="result-label">Total a pagar (COP)</span>
+                <span class="result-value" id="totalCOP">-</span>
+            </div>
+            <div id="usdRow" class="result-row" style="display: none;">
+                <span class="result-label">Total en USD (USD)</span>
+                <span class="result-value" id="totalUSD">-</span>
+            </div>
+        </div>
+        <div class="small-note">
+            TRM utilizada: 1 USD = 3.830,02 COP
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const TRM = 3830.02;
+
+        const tarifaSelect = document.getElementById('tarifa');
+        const tipoSelect = document.getElementById('tipo');
+        const form = document.getElementById('afiliadoForm');
+
+        // Elementos de resultado
+        const baseSpan = document.getElementById('baseValor');
+        const ivaSpan = document.getElementById('ivaValor');
+        const ajustePorcentajeSpan = document.getElementById('ajustePorcentaje');
+        const totalCOPSpan = document.getElementById('totalCOP');
+        const totalUSDSpan = document.getElementById('totalUSD');
+        const usdRow = document.getElementById('usdRow');
+
+        function formatCOP(valor) {
+            return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(valor);
+        }
+
+        function formatUSD(valor) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(valor);
+        }
+
+        function calcularYAmostrar(event) {
+            if (event) event.preventDefault();
+
+            const tarifaCOP = parseFloat(tarifaSelect.value);
+            const tipo = tipoSelect.value;
+
+            // Validación
+            if (isNaN(tarifaCOP) || tarifaCOP <= 0) {
+                alert('Por favor seleccione una tarifa válida.');
+                return;
+            }
+
+            // 1. Base sin IVA y valor IVA (tarifa ya incluye 19% IVA)
+            const baseSinIVA = tarifaCOP / 1.19;
+            const valorIVA = tarifaCOP - baseSinIVA;
+
+            // 2. Ajuste y total en COP según tipo de afiliado
+            let totalCOP = tarifaCOP;
+            let porcentajeAjuste = 0;
+            let textoAjuste = '0%';
+
+            if (tipo === 'asociado') {
+                totalCOP = tarifaCOP * 0.9;   // descuento 10%
+                porcentajeAjuste = -10;
+                textoAjuste = '-10% (descuento)';
+            } else if (tipo === 'noAsociado') {
+                totalCOP = tarifaCOP * 1.1;   // recargo 10%
+                porcentajeAjuste = 10;
+                textoAjuste = '+10% (recargo)';
+            } else if (tipo === 'extranjero') {
+                totalCOP = tarifaCOP;          // sin descuento/recargo
+                porcentajeAjuste = 0;
+                textoAjuste = '0% (sin ajuste)';
+            }
+
+            // 3. Mostrar valores base, IVA y ajuste
+            baseSpan.textContent = formatCOP(baseSinIVA);
+            ivaSpan.textContent = formatCOP(valorIVA);
+            ajustePorcentajeSpan.textContent = textoAjuste;
+            totalCOPSpan.textContent = formatCOP(totalCOP);
+
+            // 4. Lógica para extranjero: mostrar fila en USD
+            if (tipo === 'extranjero') {
+                const totalUSD = totalCOP / TRM;
+                totalUSDSpan.textContent = formatUSD(totalUSD);
+                usdRow.style.display = 'flex';
+            } else {
+                usdRow.style.display = 'none';
+                totalUSDSpan.textContent = '';
+            }
+
+            // Pequeña animación visual en el panel (opcional)
+            const panel = document.getElementById('resultadosDinamicos');
+            panel.style.opacity = '0.95';
+            setTimeout(() => { panel.style.opacity = '1'; }, 50);
+        }
+
+        form.addEventListener('submit', calcularYAmostrar);
+
+        // Cálculo inicial con valores por defecto
+        window.addEventListener('DOMContentLoaded', () => {
+            calcularYAmostrar(null);
+        });
+    })();
+</script>
+</body>
+</html>
