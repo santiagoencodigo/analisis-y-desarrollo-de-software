@@ -168,7 +168,7 @@ Se integro en este repositorio y por ende:
 
 * El código fuente está disponible en: [Repo ADSO - Prueba Técnica](https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/prueba-tecnica "https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/prueba-tecnica")
 
-* Demo en Vivo: [prueba-tecnica](https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-3/world-skills/prueba-tecnica/index.html "https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-3/world-skills/prueba-tecnica/index.html")
+* Demo en Vivo: [prueba-tecnica](https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-3/prueba-tecnica/index.html "https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-3/prueba-tecnica/index.html")
 
 <img src="./calculadora.png">
 
