@@ -1,0 +1,1 @@
+from ejercicios_y_datos import multiplicar

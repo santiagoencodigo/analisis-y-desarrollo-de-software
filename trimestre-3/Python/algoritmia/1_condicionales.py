@@ -1,10 +1,7 @@
-
-
 # Taller Python 
 # Servicio Nacional de Aprendizaje - SENA
 
 # Aprendiz: Santiago Muñeton Hernandez
-# Ficha: 3171608
 # Programa: Analisis y Desarrollo de software
 
 # Instructor: William Herreño
@@ -126,10 +123,10 @@ if Seleccion_Ejercicio == 8:
     print() # Espacio de interlinea
 
     # Fichas - Código Corregido
-    print("Ficha 3171608") 
-    print("Ficha2 3171608")
-    print("Ficha3 3171608")
-    print("Ficha2 3171608")
+    print("Ficha 0000001") 
+    print("Ficha2 000002")
+    print("Ficha3 000003")
+    print("Ficha2 000004")
 
                                                                                            
                                                                                         

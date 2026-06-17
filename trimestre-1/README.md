@@ -332,3 +332,6 @@ Washington, como egresado del SENA, dio unas palabras:
 ### Instructivo Normas APA
 
 [Instructivo APA – Biblioteca SENA](https://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)
+
+
+> Deberia escribir algo sobre Reglamento del Aprendiz

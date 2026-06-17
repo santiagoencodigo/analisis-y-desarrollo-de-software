@@ -1,7 +1,6 @@
 # Aprendiz: Santiago Muñeton Hernandez
 # Instructor: William Herreño
 # Programa: Análisis y Desarrollo de Software
-# Ficha: 3171608
 # Fecha: 24/10/2025
 
 

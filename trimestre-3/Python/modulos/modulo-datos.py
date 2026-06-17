@@ -1,4 +1,4 @@
-from Modulo_Ejecicios_y_Datos import datos
+from ejercicios_y_datos import datos
 
 nombre, ficha, nota1, nota2 = datos()
 

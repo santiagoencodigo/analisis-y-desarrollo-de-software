@@ -2,12 +2,9 @@
 
 # Fecha: 21/11/2025
 
-# Servicio Nacional de Aprenzaje - Centro de Diseño y Metrología
-
 # Instructor: William Herreño
 
 # Temario: Programación Orientada a Objetos (POO)
-
 
 
 
