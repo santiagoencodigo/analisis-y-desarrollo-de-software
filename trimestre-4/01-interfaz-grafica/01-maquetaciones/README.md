@@ -1,5 +1,7 @@
 ## 🧩 Ejercicios de Maquetación
 
+> Esto fue en 3 de marzo del 2026
+
 Estos ejercicios corresponden a la competencia de **interfaz gráfica**, en donde se desarrollaron diferentes prácticas enfocadas en la **maquetación web**. El trabajo fue realizado de forma colaborativa, permitiendo fortalecer habilidades tanto técnicas como de trabajo en equipo.
 
 Durante esta actividad se realizaron un total de **6 maquetaciones**, cuyo objetivo principal fue comprender cómo **distribuir y posicionar contenedores y elementos HTML** dentro de una página web. Se abordaron conceptos como uso de `flexbox`, organización de secciones, jerarquía de elementos y estructuración visual.
