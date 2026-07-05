@@ -2,7 +2,9 @@
 
 Este documento cubre los fundamentos para crear, usar y llamar funciones propias en Python, abordando su necesidad para evitar código repetitivo, gestionar la complejidad de los algoritmos y facilitar el trabajo en equipo.
 
-También se detalla cómo las funciones se comunican con su entorno a través de parámetros, argumentos posicionales, palabras clave y valores predeterminados. El material forma parte de mi proceso de formación como tecnólogo en Análisis y Desarrollo de Software (ADSO), documentando el repaso del curso de Cisco sobre fundamentos de programación.
+También se detalla cómo las funciones se comunican con su entorno a través de parámetros y argumentos, y la devolución de resultados con la instrucción `return`. También se exploran el valor `None`, el paso de listas como argumentos, la devolución de listas como resultados y se incluyen laboratorios prácticos sobre años bisiestos, días por mes, día del año, números primos y conversión de consumo de combustible. 
+
+El material forma parte de mi proceso de formación como tecnólogo en Análisis y Desarrollo de Software (ADSO), documentando el repaso del curso de Cisco sobre fundamentos de programación.
 
 ---
 
@@ -14,7 +16,8 @@ También se detalla cómo las funciones se comunican con su entorno a través de
 4. [Definición y primera función](#definicion-y-primera-funcion)
 5. [Mecanismo de invocación y restricciones](#mecanismo-de-invocacion-y-restricciones)
 6. [Resumen y tipos de funciones (primera parte)](#resumen-y-tipos-de-funciones-primera-parte)
-7. [Cómo se comunican las funciones con su entorno](#como-se-comunican-las-funciones-con-su-entorno)
+7. [Cómo se comunican las funciones con su entorno](#cómo-se-comunican-las-funciones-con-su-entorno)
+8. [Devolviendo el resultado de una función](#devolviendo-el-resultado-de-una-función)
 
 ---
 
@@ -262,6 +265,275 @@ def address(street, city, postal_code):
 
 ---
 
-Este documento cubre los fundamentos esenciales de funciones en Python, tanto su creación como su comunicación con el entorno. La práctica y experimentación con estos ejemplos consolidarán el aprendizaje.
+## Devolviendo el resultado de una función
+
+Esta sección cubre cómo las funciones pueden devolver valores utilizando la instrucción `return`, el significado del valor `None`, y cómo trabajar con listas como argumentos y resultados. Se incluyen ejercicios prácticos para afianzar estos conceptos.
+
+### Efectos y resultados: la instrucción return
+
+Todas las funciones anteriores producían un efecto (como imprimir en consola), pero las funciones también pueden tener un **resultado** (un valor que devuelven). Para ello se usa la palabra clave `return`.
+
+**Primera variante: `return` sin expresión**
+
+```python
+def happy_new_year(wishes=True):
+    print("Tres...")
+    print("Dos...")
+    print("Uno...")
+    if not wishes:
+        return
+    print("¡Feliz año nuevo!")
+```
+
+- Si se invoca sin argumentos (`happy_new_year()`), imprime el mensaje completo.
+- Si se invoca con `False` (`happy_new_year(False)`), `return` termina la función antes de imprimir el saludo.
+
+**Segunda variante: `return` con expresión**
+
+```python
+def boring_function():
+    return 123
+
+x = boring_function()
+print(x)  # 123
+```
+
+- La función evalúa la expresión y la devuelve al lugar de la llamada.
+- El valor devuelto puede asignarse a una variable o ignorarse.
+- Si se ignora, el valor se pierde, pero la función igual se ejecuta.
+
+### Unas pocas palabras sobre None
+
+`None` es un valor especial que representa "ningún valor" o "vacío". No debe usarse en expresiones aritméticas (lanza `TypeError`). Se usa para:
+
+- Asignar a una variable para indicar que no tiene valor.
+- Comparar con una variable para comprobar su estado interno.
+
+```python
+value = None
+if value is None:
+    print("No contiene ningún valor")
+```
+
+**Importante**: Si una función no tiene una instrucción `return` con expresión, devuelve `None` implícitamente.
+
+```python
+def strange_function(n):
+    if n % 2 == 0:
+        return True
+
+print(strange_function(2))  # True
+print(strange_function(1))  # None
+```
+
+### Efectos y resultados: listas y funciones
+
+**Pasar una lista como argumento**:
+
+```python
+def list_sum(lst):
+    s = 0
+    for elem in lst:
+        s += elem
+    return s
+
+print(list_sum([5, 4, 3]))  # 12
+```
+
+La función debe ser capaz de manejar el tipo de dato que recibe. Si se pasa un entero en lugar de una lista, se produce `TypeError`.
+
+**Devolver una lista como resultado**:
+
+```python
+def create_list(n):
+    my_list = []
+    for i in range(n):
+        my_list.append(i)
+    return my_list
+
+print(create_list(5))  # [0, 1, 2, 3, 4]
+```
+
+Cualquier entidad reconocible por Python puede ser tanto argumento como resultado de una función.
+
+### Laboratorios
+
+#### Año bisiesto
+
+Escribe una función `is_leap_year(year)` que devuelva `True` si el año es bisiesto, `False` en caso contrario. Usa la lógica estándar: divisible por 4, pero no por 100, a menos que también sea divisible por 400.
+
+```python
+def is_leap_year(year):
+    if year % 400 == 0:
+        return True
+    if year % 100 == 0:
+        return False
+    if year % 4 == 0:
+        return True
+    return False
+```
+
+#### Días en un mes
+
+Escribe una función `days_in_month(year, month)` que devuelva el número de días del mes dado, o `None` si los argumentos no son válidos. Utiliza la función anterior para febrero.
+
+```python
+def days_in_month(year, month):
+    if month < 1 or month > 12:
+        return None
+    days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    if month == 2 and is_leap_year(year):
+        return 29
+    return days[month - 1]
+```
+
+#### Día del año
+
+Escribe una función `day_of_year(year, month, day)` que devuelva el número de día dentro del año (1‑365 o 366), o `None` si algún argumento no es válido. Usa las funciones anteriores.
+
+```python
+def day_of_year(year, month, day):
+    if month < 1 or month > 12:
+        return None
+    if day < 1 or day > days_in_month(year, month):
+        return None
+    total = 0
+    for m in range(1, month):
+        total += days_in_month(year, m)
+    total += day
+    return total
+```
+
+#### Números primos
+
+Escribe una función `is_prime(num)` que devuelva `True` si el número es primo, `False` en caso contrario. Un número primo es mayor que 1 y solo divisible por 1 y sí mismo. Para optimizar, itera hasta la raíz cuadrada.
+
+```python
+def is_prime(num):
+    if num < 2:
+        return False
+    i = 2
+    while i * i <= num:
+        if num % i == 0:
+            return False
+        i += 1
+    return True
+
+# Prueba: imprime primos del 1 al 20
+for i in range(1, 20):
+    if is_prime(i):
+        print(i, end=" ")
+# Salida esperada: 2 3 5 7 11 13 17 19
+```
+
+#### Conversión de consumo de combustible
+
+Escribe dos funciones:
+- `liters_100km_to_miles_gallon(liters)` – convierte litros por 100 km a millas por galón.
+- `miles_gallon_to_liters_100km(miles)` – convierte millas por galón a litros por 100 km.
+
+Datos: 1 milla = 1609.344 m, 1 galón = 3.785411784 L.
+
+```python
+def liters_100km_to_miles_gallon(liters):
+    miles = 100 * 1000 / 1609.344  # 100 km en millas
+    gallons = liters / 3.785411784
+    return miles / gallons
+
+def miles_gallon_to_liters_100km(miles):
+    km = miles * 1609.344 / 1000
+    liters = 3.785411784
+    return (liters / km) * 100
+
+# Pruebas
+print(liters_100km_to_miles_gallon(3.9))   # 60.31...
+print(liters_100km_to_miles_gallon(7.5))   # 31.36...
+print(liters_100km_to_miles_gallon(10.))   # 23.52...
+print(miles_gallon_to_liters_100km(60.3))  # 3.90...
+print(miles_gallon_to_liters_100km(31.4))  # 7.49...
+print(miles_gallon_to_liters_100km(23.5))  # 10.00...
+```
+
+### Resumen de sección
+
+1. La instrucción `return` sin expresión termina la función y devuelve `None` implícitamente. Con expresión devuelve el valor evaluado.
+2. `None` es un valor especial que indica ausencia de valor. Se usa para comparaciones o asignaciones.
+3. Las listas pueden ser pasadas como argumentos y devueltas como resultados de funciones.
+4. Una función puede tener efectos (como imprimir) y también devolver un resultado.
+
+**Ejemplos**:
+
+```python
+def multiply(a, b):
+    return a * b
+
+def wishes():
+    return "Felíz Cumpleaños"
+
+def hi_everybody(my_list):
+    for name in my_list:
+        print("Hola,", name)
+
+def create_list(n):
+    return [i for i in range(n)]
+```
+
+### Prueba de sección
+
+**Pregunta 1**: ¿Qué imprime `hi()` si está definida como:
+
+```python
+def hi():
+    return
+    print("¡Hola!")
+hi()
+```
+
+**Respuesta**: No imprime nada (la función retorna `None` antes de llegar al `print`).
+
+**Pregunta 2**: Dada la función:
+
+```python
+def is_int(data):
+    if type(data) == int:
+        return True
+    elif type(data) == float:
+        return False
+```
+
+¿Qué devuelve `is_int(5)`, `is_int(5.0)`, `is_int("5")`?
+
+**Respuesta**: `True`, `False`, `None`.
+
+**Pregunta 3**: Con:
+
+```python
+def even_num_lst(ran):
+    lst = []
+    for num in range(ran):
+        if num % 2 == 0:
+            lst.append(num)
+    return lst
+print(even_num_lst(11))
+```
+
+**Respuesta**: `[0, 2, 4, 6, 8, 10]`.
+
+**Pregunta 4**: Con:
+
+```python
+def list_updater(lst):
+    upd_list = []
+    for elem in lst:
+        elem **= 2
+        upd_list.append(elem)
+    return upd_list
+foo = [1, 2, 3, 4, 5]
+print(list_updater(foo))
+```
+
+**Respuesta**: `[1, 4, 9, 16, 25]`.
+
+---
 
 > Gracias por leer.
