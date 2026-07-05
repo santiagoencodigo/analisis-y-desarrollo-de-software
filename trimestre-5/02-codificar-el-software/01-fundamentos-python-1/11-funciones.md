@@ -2,7 +2,7 @@
 
 Este documento cubre los fundamentos para crear, usar y llamar funciones propias en Python, abordando su necesidad para evitar código repetitivo, gestionar la complejidad de los algoritmos y facilitar el trabajo en equipo.
 
-También se detalla cómo las funciones se comunican con su entorno a través de parámetros y argumentos, y la devolución de resultados con la instrucción `return`. También se exploran el valor `None`, el paso de listas como argumentos, la devolución de listas como resultados y se incluyen laboratorios prácticos sobre años bisiestos, días por mes, día del año, números primos y conversión de consumo de combustible. 
+También se detalla cómo las funciones se comunican con su entorno a través de parámetros y argumentos, la devolución de resultados con la instrucción `return`, y el manejo de alcances (variables locales y globales) mediante la palabra clave `global`. Se exploran el valor `None`, el paso de listas como argumentos, la devolución de listas como resultados y se incluyen laboratorios prácticos sobre años bisiestos, días por mes, día del año, números primos y conversión de consumo de combustible.
 
 El material forma parte de mi proceso de formación como tecnólogo en Análisis y Desarrollo de Software (ADSO), documentando el repaso del curso de Cisco sobre fundamentos de programación.
 
@@ -18,6 +18,7 @@ El material forma parte de mi proceso de formación como tecnólogo en Análisis
 6. [Resumen y tipos de funciones (primera parte)](#resumen-y-tipos-de-funciones-primera-parte)
 7. [Cómo se comunican las funciones con su entorno](#cómo-se-comunican-las-funciones-con-su-entorno)
 8. [Devolviendo el resultado de una función](#devolviendo-el-resultado-de-una-función)
+9. [Alcances en Python](#alcances-en-python)
 
 ---
 
@@ -534,6 +535,167 @@ print(list_updater(foo))
 
 **Respuesta**: `[1, 4, 9, 16, 25]`.
 
+
+
+
+
+
+
 ---
+
+
+
+
+
+
+
+## Alcances en Python
+
+Esta sección explica el concepto de alcance (scope) de las variables, la diferencia entre variables locales y globales, y cómo utilizar la palabra clave `global` para modificar variables definidas fuera de una función. También se analiza cómo interactúa una función con sus argumentos, especialmente cuando se trata de listas.
+
+### Funciones y alcances
+
+El **alcance** de un nombre (variable, parámetro, etc.) es la parte del código donde ese nombre es reconocido. Por ejemplo, el alcance de un parámetro de función es el cuerpo de la función; fuera de ella no es accesible.
+
+```python
+def my_function():
+    x = 10  # variable local
+
+# print(x)  # NameError: x no está definida
+```
+
+**Variables definidas fuera de una función**: Son visibles dentro del cuerpo de la función, siempre que no se les asigne un nuevo valor dentro de ella (es decir, solo para lectura).
+
+```python
+var = 1
+
+def my_function():
+    print("¿Conozco a la variable?", var)
+
+my_function()  # imprime: ¿Conozco a la variable? 1
+print(var)     # 1
+```
+
+**Asignación dentro de la función**: Si se asigna un valor a una variable con el mismo nombre dentro de la función, Python crea una **nueva variable local** que "sombrea" a la global. La variable externa no se modifica.
+
+```python
+var = 1
+
+def my_function():
+    var = 2
+    print("¿Conozco a la variable?", var)
+
+my_function()  # imprime: ¿Conozco a la variable? 2
+print(var)     # 1 (la variable global no cambió)
+```
+
+### La palabra clave `global`
+
+Para modificar una variable global desde dentro de una función (no solo leerla), se debe declarar explícitamente como `global` dentro de la función.
+
+```python
+var = 1
+
+def my_function():
+    global var
+    var = 2
+    print("¿Conozco a aquella variable?", var)
+
+my_function()  # imprime: ¿Conozco a aquella variable? 2
+print(var)     # 2 (la variable global fue modificada)
+```
+
+Se puede declarar múltiples variables globales separadas por comas: `global a, b, c`.
+
+### Interacción de la función con sus argumentos
+
+Cuando se pasa un argumento a una función, el parámetro recibe una **copia del valor** (para tipos escalares como enteros, flotantes, cadenas). Modificar el parámetro dentro de la función no afecta al argumento original.
+
+```python
+def my_function(x):
+    x = x + 1
+    print("Ahora tengo", x)
+
+y = 1
+my_function(y)  # imprime: Ahora tengo 2
+print(y)        # 1 (no se modificó)
+```
+
+**Con listas** (y otros mutables): el comportamiento es sutil. Si se reasigna el parámetro (ej. `my_list_1 = [0, 1]`), se crea una nueva lista local y la original no cambia. Pero si se **modifica el contenido** de la lista (ej. `del my_list_1[0]` o `my_list_1.append()`), la lista original se ve afectada porque ambas variables (el argumento y el parámetro) apuntan al mismo objeto.
+
+```python
+def my_function(my_list_1):
+    del my_list_1[0]   # modifica la lista original
+
+my_list_2 = [2, 3]
+my_function(my_list_2)
+print(my_list_2)       # [3] (el primer elemento fue eliminado)
+```
+
+Esto ocurre porque las listas se pasan por referencia (la variable contiene una referencia al objeto, no el objeto en sí). Reasignar el parámetro cambia la referencia local, pero modificar el objeto afecta a todas las referencias.
+
+### Resumen de la sección
+
+- Una variable definida fuera de una función es global y puede ser leída dentro de la función, pero no modificada a menos que se declare `global`.
+- Una variable definida dentro de una función es local y no existe fuera de ella.
+- Los parámetros de una función son locales y reciben copias de los argumentos para tipos inmutables; para mutables (listas, diccionarios), la función puede modificar el objeto original si opera sobre su contenido, no si reasigna el parámetro.
+
+### Prueba de sección
+
+**Pregunta 1**: ¿Qué imprime este código?
+
+```python
+def message():
+    alt = 1
+    print("¡Hola, mundo!")
+
+print(alt)
+```
+
+**Respuesta**: `NameError` – `alt` no está definida fuera de la función.
+
+**Pregunta 2**:
+
+```python
+a = 1
+def fun():
+    a = 2
+    print(a)
+fun()
+print(a)
+```
+
+**Respuesta**: `2` (local) y luego `1` (global no modificada).
+
+**Pregunta 3**:
+
+```python
+a = 1
+def fun():
+    global a
+    a = 2
+    print(a)
+fun()
+a = 3
+print(a)
+```
+
+**Respuesta**: `2` (la función cambia a global a 2) y luego `3` (se reasigna fuera).
+
+**Pregunta 4**:
+
+```python
+a = 1
+def fun():
+    global a
+    a = 2
+    print(a)
+a = 3
+fun()
+print(a)
+```
+
+**Respuesta**: `2` (la función cambia a 2) y luego `2` (ya quedó en 2).
+
 
 > Gracias por leer.
