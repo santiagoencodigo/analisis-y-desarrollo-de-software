@@ -1185,36 +1185,65 @@ Opciones de respuesta:
 
 > Esta es una pregunta que tiene una estetica muy compleja... Y por otro lado me corchó... Realmente no la entiendo, tanto como para tener que responder de forma aleatoria.
 
-¿Qué es 3-i?
+**¿Qué es 3-i?**: Es chistoso que este tema me halla confundido... Recordemos que los espacios en programación realmente no es que afecten... Esto termina siendo una resta de 3 menos la variable i.
+
+> Estos temas empiezan a corresponder a matrices.
 
 Esta y muchas cosas de este código no las entiendo aun realmente.
 
-Entonces analicemos:
+Entonces analicemos.
 
-El código es este:
+Tenemos que desglosar esto, inicialmente... Solo en la primera línea:
 
 ```python
-    # range(3) genera la secuencia de números: 0, 1, 2
-    # Esto es clave, porque los bucles van a dar exactamente 3 vueltas
-
     t = [[3-i for i in range(3)] for j in range (3)]
-
-        # Vamos a calcular manualmente la variable t en dos secciones:
-            # 1. [3 - i for i in range(3)]
-                # Vuelta 1 (`i = 0`)**: `3 - 0 = 3`
-                # Vuelta 2 (`i = 1`)**: `3 - 1 = 2`
-                # Vuelta 3 (`i = 2`)**: `3 - 2 = 1`
-
-            # 2. [ [parte_interna] for j in range(3) ]
-
-                # Esto significa: Repite el cálculo de [3, 2, 1] tres veces (una por cada j), y mete cada resultado como una fila dentro de la lista grande.
-
-                    # Cuando `j = 0` → se crea `[3, 2, 1]`
-                    # Cuando `j = 1` → se crea `[3, 2, 1]`
-                    # Cuando `j = 2` → se crea `[3, 2, 1]`
 ```
 
+Vamos a analizar esta línea en dos secciones para determinar el valor de t.
+
+Entonces la primera:
+
+```python
+    [3 - i for i in range(3) segunda-sección]
+```
+
+* range(3) genera la secuencia de números: 0, 1, 2
+
+* En ese momento i va tomando cada uno de estos valores.
+
+Esto es clave, porque los bucles van a dar exactamente 3 vueltas siendo asi:
+
+Vuelta 1 (`i = 0`)**: `3 - 0 = 3`
+
+Vuelta 2 (`i = 1`)**: `3 - 1 = 2`
+
+Vuelta 3 (`i = 2`)**: `3 - 2 = 1`
+
+Y bien, ahora entendiendo esto... Debemos determinar nuestra segunda sección de esta línea de código.
+
+```python
+    [ [primera-sección] for j in range(3) ]
+```
+
+Esto significa: Repite el cálculo de [3, 2, 1] tres veces (una por cada j), y mete cada resultado como una fila dentro de la lista grande.
+
+* Cuando `j = 0` → se crea `[3, 2, 1]`
+* Cuando `j = 1` → se crea `[3, 2, 1]`
+* Cuando `j = 2` → se crea `[3, 2, 1]`
+
 **Importante:** la variable `j` **no se usa** dentro de la fórmula, solo sirve para contar cuántas filas queremos (3 en total).
+
+> De esta forma, aqui en este momento ya tenemos una integración del código.
+
+Ya en este punto, que tenemos desglosados los elementos de la primera línea del código asi que recordemos nuestro algoritmo:
+
+```python   
+    t = [[3-i for i in range(3)] for j in range (3)]
+    s = 0
+    for i in range(3):
+        s += t[i][i]
+    print(s)
+```
 
 **Resultado final de `t` (una matriz de 3x3):**
 ```python
@@ -1255,6 +1284,26 @@ En cada paso, suma el elemento que está en la **misma fila y columna** (eso es 
 - **Paso 2 (`i = 1`)**: `s += t[1][1]` → `s = 3 + 2 = 5`
 - **Paso 3 (`i = 2`)**: `s += t[2][2]` → `s = 5 + 1 = 6`
 
+Recordemos que s += t[2][2] tambien significa s = s + t[2][2].
+
+1. Python mira el valor actual de s → es 0.
+
+2. Python calcula t[0][0] → esto es el elemento en la fila 0, columna 0, que vale 3.
+
+3. Python hace la suma: 0 + 3 = 3.
+
+4. Python guarda ese 3 dentro de s. Ahora s ya no es 0 sino que es 3.
+
+> Bonito ¿No?
+
+| Paso | Valor de `i` | Elemento tocado (`t[i][i]`) | Valor de `s` (antes) | Operación realizada | Nuevo valor de `s` (después) | Explicación visual |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Inicio** | - | - | `0` | - | `0` | La variable acumuladora empieza vacía (cero). |
+| **Iteración 1** | `0` | `t[0][0]` = **3** | `0` | `s = 0 + 3` | **`3`** | Sumamos el primer número de la diagonal. |
+| **Iteración 2** | `1` | `t[1][1]` = **2** | `3` | `s = 3 + 2` | **`5`** | El `s` ya vale `3`. Le sumamos el segundo número (`2`) → da `5`. |
+| **Iteración 3** | `2` | `t[2][2]` = **1** | `5` | `s = 5 + 1` | **`6`** | El `s` ya vale `5`. Le sumamos el tercer número (`1`) → da `6`. |
+| **Final** | - | - | - | `print(s)` | **`6`** | El resultado final que se muestra en consola es `6`. |
+
 > El programa imprime el valor de `s`, que es **`6`**.
 
 
@@ -1289,3 +1338,43 @@ Opciones de respuesta:
 * B) 1
 * C) el fragmento generará un error de ejecución
 * D) 0
+
+> Entonces, ahora una pregunta similar a la anterior.
+>
+> Me confunde el print... Aun debo reforzar estos temas.
+
+Entonces miremos:
+
+```python
+    # range(2) genera [0, 1]
+    # Cada vez, crea una nueva lista [0, 1, 2, 3].
+    # Entonces my_list es una lista que contiene dos listas internas (cada una de longitud 4).
+    my_list = [[0, 1, 2, 3] for i in range(2)]
+```
+
+De esta forma entonces, nosotros podemos pensar en que la lista es:
+
+> Esto era lo que me faltaba entender para estas iteraciones, se generan otras listas y se pueden ubicar mediante 2 indices [n][n]
+
+```python
+    my_list = [
+        [0, 1, 2, 3],   # índice 0
+        [0, 1, 2, 3]    # índice 1
+    ]
+```
+
+Ahora por otro lado.
+
+my_list[2] intenta acceder al tercer elemento de my_list (índice 2).
+
+```python
+    print(my_list[2][0])
+```
+
+Pero my_list solo tiene índices 0 y 1 (dos elementos).
+
+Por lo tanto, my_list[2] lanza un IndexError: list index out of range.
+
+> wow.
+
+> Si llegaste hasta aqui, muchas gracias por leer!
