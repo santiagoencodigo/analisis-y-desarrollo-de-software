@@ -2,7 +2,7 @@
 
 Este documento cubre los fundamentos para crear, usar y llamar funciones propias en Python, abordando su necesidad para evitar código repetitivo, gestionar la complejidad de los algoritmos y facilitar el trabajo en equipo.
 
-También se detalla cómo las funciones se comunican con su entorno a través de parámetros y argumentos, la devolución de resultados con la instrucción `return`, y el manejo de alcances (variables locales y globales) mediante la palabra clave `global`. Se exploran el valor `None`, el paso de listas como argumentos, la devolución de listas como resultados y se incluyen laboratorios prácticos sobre años bisiestos, días por mes, día del año, números primos y conversión de consumo de combustible.
+También se detalla cómo las funciones se comunican con su entorno a través de parámetros y argumentos, la devolución de resultados con la instrucción `return`, y el manejo de alcances (variables locales y globales) mediante la palabra clave `global`. Se exploran el valor `None`, el paso de listas como argumentos, la devolución de listas como resultados, y se incluyen laboratorios prácticos sobre años bisiestos, días por mes, día del año, números primos y conversión de consumo de combustible. Finalmente, se presentan ejemplos de funciones con múltiples parámetros (cálculo de IMC, verificación de triángulos, área con fórmula de Herón, factorial, serie de Fibonacci) y se introduce el concepto de recursividad.
 
 El material forma parte de mi proceso de formación como tecnólogo en Análisis y Desarrollo de Software (ADSO), documentando el repaso del curso de Cisco sobre fundamentos de programación.
 
@@ -19,6 +19,7 @@ El material forma parte de mi proceso de formación como tecnólogo en Análisis
 7. [Cómo se comunican las funciones con su entorno](#cómo-se-comunican-las-funciones-con-su-entorno)
 8. [Devolviendo el resultado de una función](#devolviendo-el-resultado-de-una-función)
 9. [Alcances en Python](#alcances-en-python)
+10. [Creación de funciones con múltiples parámetros](#creación-de-funciones-con-múltiples-parámetros)
 
 ---
 
@@ -697,5 +698,176 @@ print(a)
 
 **Respuesta**: `2` (la función cambia a 2) y luego `2` (ya quedó en 2).
 
+---
+
+## Creación de funciones con múltiples parámetros
+
+Esta sección presenta ejemplos prácticos de funciones que reciben varios parámetros, abarcando desde cálculos de índice de masa corporal (IMC), verificación de triángulos y área con fórmula de Herón, hasta factorial, serie de Fibonacci y recursividad. Estos ejemplos consolidan el uso de parámetros, retorno de valores y la capacidad de una función para invocarse a sí misma.
+
+### Cálculo del IMC
+
+La función `bmi(weight, height)` calcula el índice de masa corporal. Se incluyen funciones auxiliares para convertir libras a kilogramos y pies/pulgadas a metros, demostrando cómo combinar múltiples funciones.
+
+```python
+def lb_to_kg(lb):
+    return lb * 0.45359237
+
+def ft_and_inch_to_m(ft, inch=0.0):
+    return ft * 0.3048 + inch * 0.0254
+
+def bmi(weight, height):
+    if height < 1.0 or height > 2.5 or weight < 20 or weight > 200:
+        return None
+    return weight / height ** 2
+
+# Ejemplo: 5'7" y 176 lbs
+print(bmi(weight=lb_to_kg(176), height=ft_and_inch_to_m(5, 7)))
+```
+
+- Se verifica que los datos sean razonables (de lo contrario, devuelve `None`).
+- Se usa `\` para continuar líneas largas (opcional).
+- El parámetro `inch` tiene un valor predeterminado `0.0`, permitiendo pasar solo pies.
+
+### Triángulos: verificación y área
+
+**Verificar si tres lados forman un triángulo**  
+Condición: la suma de dos lados cualesquiera debe ser mayor que el tercero.
+
+```python
+def is_a_triangle(a, b, c):
+    return a + b > c and b + c > a and c + a > b
+```
+
+**Teorema de Pitágoras** (triángulo rectángulo):  
+Se identifica el lado más largo como hipotenusa y se comprueba `c² == a² + b²`.
+
+```python
+def is_a_right_triangle(a, b, c):
+    if not is_a_triangle(a, b, c):
+        return False
+    if c > a and c > b:
+        return c ** 2 == a ** 2 + b ** 2
+    if a > b and a > c:
+        return a ** 2 == b ** 2 + c ** 2
+    if b > a and b > c:
+        return b ** 2 == a ** 2 + c ** 2
+    return False
+```
+
+**Área de un triángulo con fórmula de Herón**:
+
+```python
+def heron(a, b, c):
+    p = (a + b + c) / 2
+    return (p * (p - a) * (p - b) * (p - c)) ** 0.5
+
+def area_of_triangle(a, b, c):
+    if not is_a_triangle(a, b, c):
+        return None
+    return heron(a, b, c)
+```
+
+- El resultado puede tener pequeños errores de redondeo debido a la aritmética de punto flotante (ej. `0.49999999999999983` en lugar de `0.5`).
+
+### Factoriales
+
+El factorial de `n` (denotado `n!`) es el producto de todos los enteros positivos desde 1 hasta `n`. Se define `0! = 1`.
+
+**Versión iterativa**:
+
+```python
+def factorial_function(n):
+    if n < 0:
+        return None
+    if n < 2:
+        return 1
+    product = 1
+    for i in range(2, n + 1):
+        product *= i
+    return product
+```
+
+**Versión recursiva** (se explica más adelante).
+
+### Serie de Fibonacci
+
+La secuencia comienza con `Fib₁ = 1`, `Fib₂ = 1`, y cada término siguiente es la suma de los dos anteriores.
+
+**Versión iterativa**:
+
+```python
+def fib(n):
+    if n < 1:
+        return None
+    if n < 3:
+        return 1
+    elem_1 = elem_2 = 1
+    the_sum = 0
+    for i in range(3, n + 1):
+        the_sum = elem_1 + elem_2
+        elem_1, elem_2 = elem_2, the_sum
+    return the_sum
+```
+
+### Recursividad
+
+Una función recursiva se invoca a sí misma. Es fundamental incluir una **condición de terminación** para evitar bucles infinitos.
+
+**Factorial recursivo**:
+
+```python
+def factorial_recursive(n):
+    if n < 0:
+        return None
+    if n < 2:
+        return 1
+    return n * factorial_recursive(n - 1)
+```
+
+**Fibonacci recursivo**:
+
+```python
+def fib_recursive(n):
+    if n < 1:
+        return None
+    if n < 3:
+        return 1
+    return fib_recursive(n - 1) + fib_recursive(n - 2)
+```
+
+**Ventajas**: código más limpio y cercano a la definición matemática.  
+**Desventajas**: mayor consumo de memoria y riesgo de error si no se define bien la condición de parada.
+
+### Resumen de la sección
+
+- Una función puede invocar a otras funciones o a sí misma (recursividad).
+- La recursividad requiere una condición de terminación (caso base).
+- Ejemplos clásicos: factorial y Fibonacci.
+- Se deben considerar tanto las ventajas (claridad) como las desventajas (uso de memoria) al emplear recursividad.
+
+### Prueba de sección
+
+**Pregunta 1**: ¿Qué ocurre al ejecutar este código?
+
+```python
+def factorial(n):
+    return n * factorial(n - 1)
+print(factorial(4))
+```
+
+**Respuesta**: Produce `RecursionError` porque no tiene condición de terminación.
+
+**Pregunta 2**: ¿Cuál es la salida del siguiente código?
+
+```python
+def fun(a):
+    if a > 30:
+        return 3
+    else:
+        return a + fun(a + 3)
+print(fun(25))
+```
+
+**Respuesta**: 56 (25 + 28 + 3 = 56, ya que 28+3=31, que es >30, retorna 3).
 
 > Gracias por leer.
