@@ -2,7 +2,7 @@
 
 Este documento cubre los fundamentos para crear, usar y llamar funciones propias en Python, abordando su necesidad para evitar código repetitivo, gestionar la complejidad de los algoritmos y facilitar el trabajo en equipo.
 
-También se detalla cómo las funciones se comunican con su entorno a través de parámetros y argumentos, la devolución de resultados con la instrucción `return`, y el manejo de alcances (variables locales y globales) mediante la palabra clave `global`. Se exploran el valor `None`, el paso de listas como argumentos, la devolución de listas como resultados, y se incluyen laboratorios prácticos sobre años bisiestos, días por mes, día del año, números primos y conversión de consumo de combustible. Finalmente, se presentan ejemplos de funciones con múltiples parámetros (cálculo de IMC, verificación de triángulos, área con fórmula de Herón, factorial, serie de Fibonacci) y se introduce el concepto de recursividad.
+También se detalla cómo las funciones se comunican con su entorno a través de parámetros y argumentos, la devolución de resultados con la instrucción `return`, y el manejo de alcances (variables locales y globales) mediante la palabra clave `global`. Se exploran el valor `None`, el paso de listas como argumentos, la devolución de listas como resultados, y se incluyen laboratorios prácticos sobre años bisiestos, días por mes, día del año, números primos y conversión de consumo de combustible. Se presentan ejemplos de funciones con múltiples parámetros (cálculo de IMC, verificación de triángulos, área con fórmula de Herón, factorial, serie de Fibonacci) y se introduce el concepto de recursividad. Se abordan las estructuras de datos de tuplas (secuencias inmutables) y diccionarios (colecciones mutables de pares clave-valor), incluyendo sus métodos, operaciones y ejemplos de uso conjunto. Finalmente, se introduce el manejo de excepciones con `try-except`, los tipos de excepciones más comunes, y se ofrecen consejos sobre pruebas y depuración de código.
 
 El material forma parte de mi proceso de formación como tecnólogo en Análisis y Desarrollo de Software (ADSO), documentando el repaso del curso de Cisco sobre fundamentos de programación.
 
@@ -20,6 +20,9 @@ El material forma parte de mi proceso de formación como tecnólogo en Análisis
 8. [Devolviendo el resultado de una función](#devolviendo-el-resultado-de-una-función)
 9. [Alcances en Python](#alcances-en-python)
 10. [Creación de funciones con múltiples parámetros](#creación-de-funciones-con-múltiples-parámetros)
+11. [Tuplas y diccionarios](#tuplas-y-diccionarios)
+12. [Excepciones](#excepciones)
+13. [Pruebas de Modulo](#pruebas-de-modulo)
 
 ---
 
@@ -870,4 +873,1200 @@ print(fun(25))
 
 **Respuesta**: 56 (25 + 28 + 3 = 56, ya que 28+3=31, que es >30, retorna 3).
 
-> Gracias por leer.
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+## Tuplas y diccionarios
+
+> Este tema lo vimos inicialmente en el segundo trimestre.
+
+Esta sección introduce dos tipos de datos fundamentales en Python: las **tuplas** (secuencias inmutables) y los **diccionarios** (colecciones mutables de pares clave-valor). Se explican sus propiedades, métodos de creación, acceso, modificación y operaciones comunes, así como ejemplos de uso conjunto.
+
+### Tipos de secuencia y mutabilidad
+
+Una **secuencia** es un tipo de dato que puede almacenar múltiples valores y ser recorrida elemento por elemento (por ejemplo, con un bucle `for`). La lista es una secuencia mutable. La **mutabilidad** indica si un dato puede modificarse "in situ" (en el lugar) durante la ejecución del programa.
+
+> "Secuencias", esto es importante.
+
+- **Datos mutables**: pueden cambiarse libremente (listas, diccionarios).
+- **Datos inmutables**: no pueden modificarse después de su creación (tuplas, cadenas, números).
+
+### Tuplas
+
+Una **tupla** es una secuencia inmutable. Se define con paréntesis `()` o simplemente separando valores por comas.
+
+```python
+    tuple_1 = (1, 2, 4, 8)
+    tuple_2 = 1., .5, .25, .125
+```
+
+- **Tupla vacía**: `empty = ()`
+- **Tupla de un solo elemento**: `one = (1,)` o `one = 1,` (la coma es obligatoria).
+- **Acceso a elementos**: igual que en listas, con índices: `tuple_1[0]` → `1`.
+
+> Entonces tiene el mismo sistema de índices.
+
+- **Operaciones**: `len()`, `+` (concatenación), `*` (repetición), `in` / `not in`.
+- **Inmutabilidad**: no se puede agregar, eliminar o modificar elementos. Intentarlo produce error.
+
+```python
+my_tuple = (1, 10, 100, 1000)
+# my_tuple.append(10000)   # AttributeError
+# del my_tuple[0]          # TypeError
+# my_tuple[1] = -10        # TypeError
+```
+
+Las tuplas pueden aparecer en el lado izquierdo de una asignación para desempaquetar valores.
+
+```python
+t1 = (1, 2)
+t2 = (3, 4)
+t1, t2 = t2, t1   # intercambio
+```
+
+### Diccionarios
+
+Un **diccionario** es una colección mutable, desordenada (aunque en Python 3.6+ mantienen orden de inserción) de pares **clave:valor**. Se define con llaves `{}`.
+
+```python
+    dictionary = {"gato": "chat", "perro": "chien", "caballo": "cheval"}
+    phone_numbers = {'jefe': 5551234567, 'Suzy': 22657854310}
+    empty_dictionary = {}
+```
+
+- **Claves**: únicas, pueden ser de cualquier tipo inmutable (cadenas, números, tuplas), pero no listas.
+- **Valores**: pueden ser de cualquier tipo.
+- **Acceso**: `dictionary[clave]` o `dictionary.get(clave)` (este último no lanza error si no existe).
+- **Verificar existencia**: `if clave in dictionary:`.
+
+**Modificación y agregado**:
+
+```python
+    dictionary['gato'] = 'minou'          # actualiza valor
+    dictionary['cisne'] = 'cygne'         # agrega nueva clave
+```
+
+**Eliminación**:
+
+```python
+del dictionary['perro']               # elimina par clave-valor
+dictionary.popitem()                  # elimina y devuelve el último par (o uno aleatorio en versiones antiguas)
+dictionary.clear()                    # vacía el diccionario
+```
+
+### Métodos y funciones de los diccionarios
+
+- **`keys()`** → devuelve una vista de todas las claves.
+- **`values()`** → devuelve una vista de todos los valores.
+- **`items()`** → devuelve una vista de tuplas (clave, valor).
+- **`update()`** → agrega pares desde otro diccionario o iterable.
+- **`copy()`** → crea una copia superficial.
+
+```python
+for key in dictionary.keys():
+    print(key, "->", dictionary[key])
+
+for key, value in dictionary.items():
+    print(key, "->", value)
+```
+
+**Ordenación**:
+
+```python
+for key in sorted(dictionary.keys()):
+    print(key, "->", dictionary[key])
+```
+
+### Las tuplas y los diccionarios pueden trabajar juntos
+
+> Para esto, ¿Qué usos se le puede dar?
+
+Ejemplo: calcular el promedio de calificaciones por estudiante. Se usa un diccionario donde la clave es el nombre y el valor es una tupla con las calificaciones.
+
+```python
+school_grades = {}
+
+while True:
+    name = input("Ingresa el nombre del estudiante: ")
+    if name == "":
+        break
+    grade = int(input("Ingresa la calificación (0-10): "))
+    if grade < 0 or grade > 10:
+        break
+    if name in school_grades:
+        school_grades[name] += (grade,)
+    else:
+        school_grades[name] = (grade,)
+
+for name in sorted(school_grades.keys()):
+    sum_grades = 0
+    counter = 0
+    for grade in school_grades[name]:
+        sum_grades += grade
+        counter += 1
+    print(name, ":", sum_grades / counter)
+```
+
+### Resumen de la sección
+
+**Tuplas**:
+- Colección ordenada e inmutable.
+- Sintaxis: `(1, 2, 3)` o `1, 2, 3`.
+- Acceso por índice, operadores `+`, `*`, `in`, `len()`.
+- No se pueden modificar in situ.
+
+**Diccionarios**:
+- Colección mutable de pares clave-valor.
+- Claves únicas, inmutables.
+- Métodos: `keys()`, `values()`, `items()`, `get()`, `update()`, `copy()`, `clear()`.
+- Se puede iterar, verificar existencia con `in`, eliminar con `del`.
+
+### Prueba de sección
+
+**Pregunta 1**: ¿Qué imprime `my_tup[2]` si `my_tup = (1, 2, 3)`?  
+**Respuesta**: `3`.
+
+**Pregunta 2**:
+
+```python
+tup = 1, 2, 3
+a, b, c = tup
+print(a * b * c)
+```
+
+**Respuesta**: `6`.
+
+**Pregunta 3**: Completa para contar cuántos `2` hay en la tupla:
+
+```python
+tup = 1, 2, 3, 2, 4, 5, 6, 2, 7, 2, 8, 9
+duplicates = tup.count(2)
+print(duplicates)  # 4
+```
+
+**Pregunta 4**: Unir dos diccionarios:
+
+```python
+d1 = {'Adam Smith': 'A', 'Judy Paxton': 'B+'}
+d2 = {'Mary Louis': 'A', 'Patrick White': 'C'}
+d3 = {}
+for item in (d1, d2):
+    d3.update(item)
+print(d3)
+```
+
+**Pregunta 5**: Convertir lista en tupla:
+
+```python
+my_list = ["car", "Ford", "flower", "Tulip"]
+t = tuple(my_list)
+print(t)
+```
+
+**Pregunta 6**: Convertir tupla de pares en diccionario:
+
+```python
+colors = (("green", "#008000"), ("blue", "#0000FF"))
+colors_dictionary = dict(colors)
+print(colors_dictionary)
+```
+
+> ¿Y bien? Entiendes el código? En algunas preguntas no deje la respuesta para hacer el ejercicio al momento de leerlo.
+
+
+**Pregunta 7**: ¿Qué imprime?
+
+```python
+my_dictionary = {"A": 1, "B": 2}
+copy_my_dictionary = my_dictionary.copy()
+my_dictionary.clear()
+print(copy_my_dictionary)
+```
+
+**Respuesta**: `{'A': 1, 'B': 2}`.
+
+**Pregunta 8**: ¿Qué imprime el siguiente código?
+
+```python
+colors = {
+    "blanco": (255, 255, 255),
+    "gris": (128, 128, 128),
+    "rojo": (255, 0, 0),
+    "verde": (0, 128, 0)
+    }
+for col, rgb in colors.items():
+    print(col, ":", rgb)
+```
+
+**Respuesta**: Imprime cada color y su tupla RGB en el orden de inserción.
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+## Excepciones
+
+Esta sección introduce el manejo de errores en Python mediante el mecanismo de excepciones. Se explica cómo usar los bloques `try` y `except` para capturar y gestionar errores en tiempo de ejecución, se describen las excepciones más comunes y se ofrecen estrategias para probar y depurar el código.
+
+### Errores: el pan diario del desarrollador
+
+Los errores en programación son inevitables. Existen dos tipos principales:
+
+- **Errores de datos**: ocurren cuando el código recibe entradas incorrectas (por ejemplo, esperar un número y recibir texto).
+- **Errores en el código ("bugs")**: son fallos en la lógica o sintaxis del programa.
+
+Python proporciona herramientas para manejar ambos tipos de manera controlada, evitando que el programa termine abruptamente.
+
+### La rama `try-except`
+
+La forma recomendada en Python para manejar errores es **"pedir perdón en lugar de pedir permiso"**; es decir, ejecutar el código y, si falla, capturar la excepción.
+
+```python
+try:
+    value = int(input("Ingresa un número natural: "))
+    print("El recíproco es", 1/value)
+except:
+    print("Algo salió mal...")
+```
+
+- El bloque `try` contiene el código que puede generar una excepción.
+- El bloque `except` se ejecuta solo si ocurre una excepción.
+- Si no hay excepción, `except` se omite.
+
+### Manejo de múltiples excepciones
+
+Se pueden especificar distintos `except` para diferentes tipos de excepciones:
+
+```python
+try:
+    value = int(input("Ingresa un número: "))
+    print(10 / value)
+except ValueError:
+    print("No es un número válido.")
+except ZeroDivisionError:
+    print("No se puede dividir entre cero.")
+except:
+    print("Error desconocido.")
+```
+
+- Los `except` se evalúan en orden; solo se ejecuta el primero que coincida.
+- El `except` sin nombre (genérico) debe ir al final.
+
+### Excepciones comunes
+
+- **`ZeroDivisionError`**: división por cero (con `/`, `//`, `%`).
+- **`ValueError`**: valor inapropiado para una operación (ej. `int("hola")`).
+- **`TypeError`**: operación no soportada para ese tipo (ej. índice flotante en lista).
+- **`AttributeError`**: acceso a un atributo o método inexistente.
+- **`SyntaxError`**: error de sintaxis (no debe manejarse con `try`, sino corregirse).
+
+### Por qué no puedes evitar probar tu código
+
+Las pruebas son esenciales para detectar errores. Cada camino de ejecución (determinado por condicionales, bucles, etc.) debe ser probado con diferentes conjuntos de datos. Un error de sintaxis en una ruta que no se ejecuta puede pasar desapercibido hasta que el programa llegue a ella.
+
+**Depuración**:
+- **Depurador interactivo**: permite ejecutar línea por línea, inspeccionar variables y pila de llamadas.
+- **Depuración por impresión (`print` debugging)**: agregar `print()` para seguir el flujo y valores de variables.
+- **Técnica del patito de goma**: explicar el código a alguien (o a un objeto) para encontrar el error.
+- **Aislar el problema**: comentar partes, usar valores fijos, reducir el código al mínimo que reproduce el error.
+- **Tomar descansos**: regresar con una mente fresca.
+
+> Chevere pensar en esto, el tester o la persona que hace las pruebas es un muy buen amigo. Que el usuario final sea quien encuentre errores seria de lo peor.
+
+### Pruebas unitarias
+
+Las pruebas unitarias son una práctica avanzada que consiste en escribir pruebas automatizadas junto con el código. Python proporciona el módulo `unittest`. Este enfoque garantiza que los cambios no introduzcan nuevos errores.
+
+### Resumen de la sección
+
+- Los errores de sintaxis (`SyntaxError`) deben corregirse, no manejarse.
+- Las excepciones se manejan con `try-except`. Se pueden capturar excepciones específicas o genéricas.
+- Las excepciones más útiles: `ZeroDivisionError`, `ValueError`, `TypeError`, `AttributeError`, `KeyboardInterrupt`.
+- La depuración es una habilidad clave: usa herramientas, impresiones y estrategias lógicas.
+- Prueba todos los caminos de ejecución con diferentes entradas.
+
+### Prueba de sección
+
+**Pregunta 1**: ¿Qué imprime el siguiente código si el usuario ingresa `0`?
+
+```python
+try:
+    value = int(input("Ingresa un número entero: "))
+    print(value/value)
+except ValueError:
+    print("Entrada incorrecta...")
+except ZeroDivisionError:
+    print("Entrada errónea...")
+except:
+    print("¡Buuuu!")
+```
+
+**Respuesta**: `Entrada errónea...` (se captura `ZeroDivisionError`).
+
+**Pregunta 2**: ¿Qué sucede si el usuario ingresa `0` en este código?
+
+```python
+value = input("Ingresa un número entero: ")
+print(10/value)
+```
+
+**Respuesta**: Se genera un `TypeError` porque `value` es cadena y no se puede dividir un entero por una cadena.
+
+> Gracias por leer y scrollear hasta aqui abajo... ¿Curioso no? ... muy probablemente yo no me daré cuenta...
+
+<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcm10bG43aXRxcjgwdmNjbGgwdzJmOXlneXU3YjBmNG16MzlyY3B3NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wGWFVvwJybDwTlnTSS/giphy.gif">
+
+*Imagen Tomada De: @AllianceDAO - https://giphy.com/gifs/AllianceDAO-alliance-alliancedao-dao-wGWFVvwJybDwTlnTSS
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+> Vamos! A dar un gran paso.
+
+Ahora a continuación tendremos una serie de preguntas, esto va a determinar si realmente se ha entendido el tema o no.
+
+## Pruebas de Modulo
+
+### Pregunta 1 - Definición de función sin parámetros
+
+¿Cuál de las siguientes líneas inicia correctamente una definición de función sin parámetros?
+
+> Hace falta el parentesis
+
+* `def fun:`
+
+> Esta escrito al revez y asi no se crea una función en python
+
+* `fun function():`
+
+> Esta es la correcta:
+
+* `def fun():`
+
+> Asi no se crea tampoco una función en python
+
+* `function fun():`
+
+> Estoy seguro de mi respuesta: def fun(): No hay de otra por la sintaxis.
+
+---
+
+
+### 2. Invocación con parámetros por defecto
+
+Una función definida de la siguiente manera: (Elegir dos respuestas)
+
+```python
+def function(x=0):
+    return x
+
+```
+
+* [ ] puede ser invocado con exactamente un argumento.
+* [ ] debe ser invocada con exactamente un argumento.
+* [ ] puede ser invocada sin ningún argumento.
+* [ ] debe invocarse sin ningún argumento.
+
+> Para mi que puede ser invocada sin ningún argumento y debe invocarse asi.
+>
+> Esto resulto equivocado.
+> Pues tambien puede ser invocado con exactamente un argumento y tambien puede ser sin argumento, y no esta obligada a ninguno de los dos casos.
+
+
+
+
+---
+
+
+### 3. Concepto de función integrada
+
+Una función integrada es una función que:
+
+* [ ] tiene que ser importado antes de su uso
+* [ ] viene con Python, y es una parte integral de Python
+* [ ] ha sido colocado dentro de tu código por otro programador
+* [ ] está oculto a los programadores
+
+> Para mi viene con python, asi como print()
+>
+> Es tal cual como pensé.
+
+
+
+
+---
+
+
+
+### 4. Características de las tuplas como secuencias
+
+El hecho de que las tuplas pertenezcan a tipos de secuencia significa que:
+
+* [ ] en realidad son listas
+* [ ] se pueden modificar usando la instrucción `del`
+* [ ] se pueden indexar y rebanar como las listas
+* [ ] se pueden extender usando el método `.append()`
+
+> Esta ya es una pregunta un poco más compleja, y para mi la respuesta es  se pueden indexar y rebanar como las listas
+>
+> Y sí.
+> Las listas son mutables, una tupla es inmutable, la tupla no usa del ni .append()
+
+
+
+---
+
+
+### 5. Salida de función recursiva suma acumulada
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+def f(x):
+    if x == 0:
+        return 0
+    return x + f(x - 1)
+
+print(f(3))
+
+```
+
+* [ ] `6`
+* [ ] `3`
+* [ ] `el codigo es erroneo`
+* [ ] `1`
+
+> Esta pregunta me corchó... No sé porque en mi cabeza daba 5 y no 6... Aqui hubiera respondido al azar realmente.
+
+Para entender por qué, analicemos:
+
+La función `f(x)` calcula la suma de todos los números enteros desde `x` hasta `0`. El proceso recursivo es:
+
+```python
+f(3) = 3 + f(2)
+     = 3 + (2 + f(1))
+     = 3 + (2 + (1 + f(0)))
+     = 3 + (2 + (1 + 0))
+     = 3 + 2 + 1 + 0
+     = 6
+```
+
+> Es bonito mirar este código, es tal cual una ecuación.
+
+
+---
+
+
+
+### 6. Salida de función con incremento de argumento
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+def fun(x):
+    x += 1
+    return x
+
+x = 2
+x = fun(x + 1)
+print(x)
+
+```
+
+* [ ] `3`
+* [ ] `4`
+* [ ] `5`
+* [ ] `el código es erroneo`
+
+> Para mi, es 4.
+>
+> Y sí lo era!
+
+Explicación:
+
+1. Se define la función fun(x), que toma un argumento, le suma 1 y devuelve el resultado.
+2. Se asigna x = 2.
+3. Se evalúa la llamada fun(x + 1):
+4. Primero se calcula el argumento: x + 1 → 2 + 1 → 3.
+5. Se ejecuta la función con x = 3 (dentro de la función, esta x es local).
+6. Dentro de la función: x += 1 → 3 + 1 → 4.
+7. La función retorna 4.
+8. Ese valor retornado (4) se asigna a la variable global x.
+9. print(x) imprime 4.
+10. El código no tiene errores y la respuesta es 4
+
+
+
+---
+
+
+
+
+### 7. Indexación de elementos en una tupla de diccionario
+
+¿Qué código insertarías en lugar del comentario para obtener el resultado esperado?
+
+Salida esperada:
+
+```text
+a
+b
+c
+
+```
+
+Código:
+
+```python
+dictionary = {}
+my_list = ['a', 'b', 'c', 'd']
+
+for i in range(len(my_list) - 1):
+    dictionary[my_list[i]] = (my_list[i], )
+
+for i in sorted(dictionary.keys()):
+    k = dictionary[i]
+    # Inserta tu código aquí.
+
+```
+
+* [ ] `print(k["0"])`
+* [ ] `print(k)`
+* [ ] `print(k[0])`
+* [ ] `print(k['0'])`
+
+> Esta pregunta ya esta compleja! Que interesante... Aunque me corchó.
+>
+> La respuesta correcta es: print(k[0])
+
+Entonces analicemos:
+
+- El diccionario asigna a cada clave `'a'`, `'b'`, `'c'` una tupla de un solo elemento: `('a',)`, `('b',)`, `('c',)`.
+- En el bucle, `k` recibe esa tupla.
+- Para imprimir solo la letra sin paréntesis ni coma, se debe acceder al primer elemento de la tupla con `k[0]`.
+
+**Por qué las otras opciones son incorrectas:**
+- `print(k)` → imprime `('a',)`, `('b',)`, `('c',)`, no el formato deseado.
+- `print(k["0"])` y `print(k['0'])` → intentan acceder a una tupla con un índice de tipo cadena, lo que produce un error (`TypeError`), ya que las tuplas solo aceptan índices enteros.
+
+> Aqui me doy cuenta entonces que me faltó analizar los indices.
+>
+> Si observamos bien, solo hay una opción de respuesta la cual su indice es un entero y por ende correcto debido a que el resto no.
+
+
+
+
+---
+
+
+
+### 8. Error por falta de argumentos obligatorios
+
+El siguiente fragmento de código:
+
+```python
+def func(a, b):
+    return a ** a
+
+print(func(2))
+
+```
+
+* [ ] es erroneo
+* [ ] dará como salida `4`
+* [ ] devolverá `None`
+* [ ] dará como salida `2`
+
+> Esta es un poco complicada realmente, aunque para mi es erronea porque en el print no hay suficientes argumentos.
+>
+> Dicho y hecho.
+
+
+
+
+---
+
+
+
+
+### 9. Multiplicación de resultados entre funciones exponenciales
+
+El siguiente fragmento de código:
+
+```python
+def func_1(a):
+    return a ** a
+
+def func_2(a):
+    return func_1(a) * func_1(a)
+
+print(func_2(2))
+
+```
+
+* [ ] es erroneo
+* [ ] dará como salida `2`
+* [ ] dará como salida `4`
+* [ ] dará como salida `16`
+
+> Aqui ya es muy sencillo hacer la operación aritmetica en donde 2 ** 2 es 4, y 4 * 4 es 16.
+>
+> Este razonamiento es correcto.
+>
+> Bonito como se juegan con las variables ¿No?
+
+
+
+
+---
+
+
+
+
+### 10. Sintaxis de parámetros por defecto con valor cero
+
+¿Cuál de las siguientes líneas inicia correctamente una función utilizando dos parámetros, ambos con valores predeterminados de cero?
+
+* [ ] `def fun(a=b=0):`
+* [ ] `def fun(a=0, b=0):`
+* [ ] `fun fun(a, b=0):`
+* [ ] `fun fun(a=0, b):`
+
+> Aqui es muy sencillo identificarlo por temas de sintaxis: def fun(a=0, b=0):
+>
+> Y sí.
+
+
+---
+
+
+
+### 11. Propiedades del valor None
+
+¿Cuáles de las siguientes afirmaciones son verdaderas? (Selecciona dos respuestas)
+
+* [ ] El valor `None` puede ser asignado a variables
+* [ ] El valor `None` no puede ser empleado fuera de las funciones
+* [ ] El valor `None` puede ser empleado como argumento de operaciones aritméticas
+* [ ] El valor `None` puede ser comparado con otras variables
+
+> Esta es interesante, para mi que puede ser asignado a variables y puede ser empleado como argumento.
+>
+> Me equivoque!
+>
+> Me falto leer el tema de "Operaciones aritmeticas".
+
+Las dos respuestas correctas son:
+
+> En mi primera opción estuve bien, con la otra no.
+
+- El valor `None` puede ser asignado a variables
+- El valor `None` puede ser comparado con otras variables
+
+¿Por qué?
+
+- **"El valor `None` puede ser asignado a variables"** → Verdadero. Es común usar `x = None` para indicar que una variable no tiene valor asignado aún.
+- **"El valor `None` puede ser comparado con otras variables"** → Verdadero. Se puede comparar usando `is None` (recomendado) o `== None`, por ejemplo: `if variable is None:`.
+
+Las otras opciones son incorrectas porque:
+
+- *"El valor `None` no puede ser empleado fuera de las funciones"* → Falso. `None` es un objeto global que existe en todo el programa, dentro y fuera de funciones.
+- *"El valor `None` puede ser empleado como argumento de operaciones aritméticas"* → Falso. Intentar hacer `None + 5` o `None * 2` produce un error `TypeError`, ya que `None` no es un número.
+
+
+
+
+---
+
+
+### 12. Salida de funciones anidadas con evaluación de paridad
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+def fun(x):
+    if x % 2 == 0:
+        return 1
+    else:
+        return
+
+print(fun(fun(2)) + 1)
+
+```
+
+* [ ] el código provocará un error de tiempo de ejecución
+* [ ] `1`
+* [ ] `None`
+* [ ] `2`
+
+> EL resultado para mi será 2.
+>
+> Y no, no era verdad.
+>
+> La respuesta correcta es: el código provocará un error de tiempo de ejecución
+
+Analicemos por qué:
+
+1. Se define la función `fun(x)`:
+   - Si `x` es par (`x % 2 == 0`), retorna `1`.
+   - Si `x` es impar, entra en el `else` y ejecuta un `return` sin valor, lo que en Python equivale a retornar `None`.
+
+2. Se evalúa la expresión `print(fun(fun(2)) + 1)`:
+   - Primero se evalúa la llamada interna: `fun(2)`.
+     - `2` es par → retorna `1`.
+   - Sustituyendo queda: `fun(1) + 1`.
+   - Ahora se evalúa `fun(1)`:
+     - `1` es impar → entra al `else` y retorna `None`.
+   - Sustituyendo queda: `None + 1`.
+
+3. Python no permite sumar `None` con un entero. Esto lanza una excepción de tipo:
+   ```
+   TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'
+   ```
+
+Por lo tanto, el código produce un error en tiempo de ejecución (no llega a imprimir nada).
+
+> Me faltó analizar más print(fun(fun(2)) + 1) debido a que me salte el uso de la función.
+
+
+
+
+---
+
+
+### 13. Uso de la instrucción global en una función
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+def fun(x):
+    global y
+    y = x * x
+    return y
+
+fun(2)
+print(y)
+
+```
+
+* [ ] `2`
+* [ ] `4`
+* [ ] el código provocará un error de tiempo de ejecución
+* [ ] Ninguno
+
+> Para mi que la respuesta es 4.
+>
+> Y sí.
+
+
+
+---
+
+
+
+### 14. Acceso a variable global y parámetro end en print
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+def any():
+    print(var + 1, end='')
+
+var = 1
+any()
+print(var)
+
+```
+
+* [ ] `11`
+* [ ] `12`
+* [ ] `21`
+* [ ] `22`
+
+> Casi se me dificulta entender qué sucedía aqui. Pero pues end agrega el atributo '' a todo y por ende en texto, de esta forma la respuesta es 12. O ese fue mi razonamiento... Porque mi opción estuvo incorrecta.
+
+> La respuesta correcta es: `21`
+
+Analicemos por qué
+
+1. Se define la función `any()` (que oculta la función integrada `any`, pero esto no causa error). Dentro imprime `var + 1` con `end=''`, lo que suprime el salto de línea.
+2. Se asigna `var = 1` (variable global).
+3. Se llama a `any()`:
+   - `var + 1` → `1 + 1 = 2`.
+   - `print(2, end='')` imprime `2` sin saltar de línea.
+4. Luego se ejecuta `print(var)`:
+   - `var` sigue siendo `1` (la función no modifica la variable global, solo la lee).
+   - Imprime `1` con salto de línea (por defecto).
+5. La salida total es `2` seguido de `1` → `21`.
+
+El código es correcto y no produce errores.
+
+
+
+
+---
+
+
+
+
+### 15. Inmutabilidad de tuplas y asignación de elementos
+
+Asumiendo que `my_tuple` es una tupla creada correctamente, el hecho de que las tuplas son inmutables significa que la siguiente instrucción:
+
+```python
+my_tuple[1] = my_tuple[1] + my_tuple[0]
+```
+
+* [ ] puede ser ilegal si la tupla contiene cadenas
+* [ ] es completamente correcta
+* [ ] puede ser ejecutada solo si la tupla contiene al menos dos elementos
+* [ ] es ilegal
+
+> Esta pregunta es bastante curiosa. Pero en teoria, por la oración my_tuple ya habia sido creada y por ende estos son indices. Y estoy entre que es ilegal o que puede ser ejecutada solo si la tupla contiene al menos dos caracteres.
+>
+> Por intuición escojo que puede ser ejecutada.
+>
+> Recordemos que una tupla es inmutable! Y por ende mi intuición falló.
+
+En consecuencia intenta asignar un nuevo valor a la posición 1 de la tupla, lo cual no está permitido y genera un error de tipo TypeError.
+
+
+
+
+---
+
+
+
+
+### 16. Modificación de lista dentro de una función sin retorno
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+my_list = ['Mary', 'had', 'a', 'little', 'lamb']
+
+def my_list(my_list):
+    del my_list[3]
+    my_list[3] = 'ram'
+
+print(my_list(my_list))
+
+```
+
+* [ ] `['Mary', 'had', 'a', 'little', 'lamb']`
+* [ ] `no hay salida, el fragmento es erroneo`
+* [ ] `['Mary', 'had', 'a', 'lamb']`
+* [ ] `['Mary', 'had', 'a', 'ram']`
+
+> Para mi que la respuesta es en teoria remplazar little con ram, pero no aparece en las opciones de respuesta. Entonces por descarte le daré a No hay salida, el fragmento es erroneo. Porque algo debe pasar para que no sea asi.
+>
+> Y sí.
+
+Entendamos por qué:
+
+El código tiene un error debido al **solapamiento de nombres**.
+
+1. Se define la función `my_list` y se asigna al nombre `my_list`.
+2. Luego se reasigna `my_list` a una lista con `my_list = ['Mary', 'had', 'a', 'little', 'lamb']`, sobrescribiendo la función.
+3. Al intentar ejecutar `print(my_list(my_list))`, el nombre `my_list` ahora hace referencia a la lista, no a la función. Intentar llamar a una lista como si fuera una función produce un error de tipo:
+
+   ```
+   TypeError: 'list' object is not callable
+   ```
+
+Por lo tanto, el código no produce salida y es erróneo.
+
+> wow.
+
+
+
+
+---
+
+
+### 17. Invocación combinando argumentos posicionales y de palabra clave
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+def fun(x, y, z):
+    return x + 2 * y + 3 * z
+
+print(fun(0, z=1, y=3))
+
+```
+
+* [ ] `3`
+* [ ] `el código es erroneo`
+* [ ] `0`
+* [ ] `9`
+
+> Pues yo haciendo la operación aritmetica en la cabeza, en teoria el resultado es 12... Pero seguramente en los argumentos como en unos agrega el valor con el nombre de la variable, pero en el primer argumento solo agrega el valor... Me imagino que genera un error.
+>
+> Y no. Me equivoqué.
+
+> La respuesta correcta es: `9`
+
+Analicemos por qué:
+
+La función `fun(x, y, z)` retorna `x + 2*y + 3*z`.
+
+En la llamada `fun(0, z=1, y=3)`:
+- `0` se asigna al parámetro posicional `x`.
+- `z=1` asigna `1` al parámetro `z`.
+- `y=3` asigna `3` al parámetro `y`.
+
+Sustituyendo: `0 + 2*3 + 3*1 = 0 + 6 + 3 = 9`.
+
+> Analizando esto, ahora no sé por qué realice las operaciones mal... El leer rápido y no seguir la jerarquia de operaciones me jugó mal.
+
+La combinación de argumentos posicionales y de palabra clave es válida, y el código no tiene errores.
+
+
+
+---
+
+
+### 18. Modificación de argumento de palabra clave con valor predeterminado
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+def fun(inp=2, out=3):
+    return inp * out
+
+print(fun(out=2))
+
+```
+
+* [ ] `6`
+* [ ] `2`
+* [ ] `4`
+* [ ] `el código es erroneo`
+
+> Para mi, la respuesta es 4.
+>
+> Y sí.
+
+
+
+
+---
+
+
+### 19. Bucle de acceso iterativo a claves de un diccionario
+
+¿Cuál es la salida del siguiente código?
+
+```python
+dictionary = {'one': 'two', 'three': 'one', 'two': 'three'}
+v = dictionary['one']
+
+for k in range(len(dictionary)):
+    v = dictionary[v]
+
+print(v)
+
+```
+
+* [ ] `three`
+* [ ] `('one', 'two', 'three')`
+* [ ] `two`
+* [ ] `one`
+
+> Haciendo el seguimiento, para mi la respuesta es three. Aunque al inicio casi me confundo, pero pensé "dictionary[v] va a remplazar lo que hay en v = dictionary['one'] y por ende debo seguir las iteraciones no más."
+>
+> Me equivoqué, aunque mi razonamiento estuvo muy cerca.
+
+> La respuesta correcta es: `two`
+
+Analicemos: 
+
+El diccionario es:
+```python
+{'one': 'two', 'three': 'one', 'two': 'three'}
+```
+
+- `v = dictionary['one']` → `v = 'two'`
+- El bucle `for k in range(len(dictionary))` itera 3 veces (0, 1, 2).
+- En cada iteración se actualiza `v = dictionary[v]`:
+
+  - Iteración 1: `v = dictionary['two']` → `'three'`
+  - Iteración 2: `v = dictionary['three']` → `'one'`
+  - Iteración 3: `v = dictionary['one']` → `'two'`
+
+Al final, `v` es `'two'`, que se imprime.
+
+> Me faltó entender que ya iniciaba en el tercer indice.
+
+
+---
+
+
+
+## Pregunta 20
+
+¿Cuál es la salida del siguiente código?
+
+```python
+tup = (1, 2, 4, 8)
+tup = tup[1:-1]
+tup = tup[0]
+print(tup)
+```
+
+* [ ] `2`
+* [ ] `(2, )`
+* [ ] `(2)`
+* [ ] `el código es erroneo`
+
+> Me corchó esta pregunta. Yo seleccioné el código es erroneo debido a que una tupla es inmutable... Pero solo se rebano la tupla y no se modifico nada.
+
+Analicemos:
+
+> La respuesta correcta es: `2`
+
+Analicemos por qué:
+
+1. `tup = (1, 2, 4, 8)` → la tupla tiene 4 elementos.
+2. `tup = tup[1:-1]` → el rebanado (slicing) toma los elementos desde el índice `1` hasta el índice `-1` (excluyendo el último). Es decir, toma los índices `1` y `2` → `(2, 4)`.
+
+> Me faltó entender, asi como me paso con una pregunta en el archivo markdown 10-prueba-modulo.md de esta carpeta
+>
+> El rebanado va a iniciar desde 1, es decir 2. 
+> El rebanado va a descontar el fin, eso quiere decir que -1 ya no se cuenta y por ende 8 ya no existe.
+
+3. `tup = tup[0]` → se accede al primer elemento de la tupla `(2, 4)`, que es el entero `2`. Ahora `tup` ya no es una tupla, sino un entero.
+4. `print(tup)` → imprime `2`.
+
+El código es perfectamente válido y no produce errores.
+
+
+---
+
+
+## Pregunta 21
+
+Selecciona las sentencia **true** sobre el bloque *try-except* en relación con el siguiente ejemplo. (Selecciona **dos** respuestas).
+
+```python
+try:
+    # Algo de código...
+except:
+    # Algo de código...
+
+```
+
+* [ ] El código que sigue a la sentencia `try` será ejecutado si el código dentro de la sentencia `except` se encuentra con un error.
+* [ ] Si sospechas que un fragmento de código puede generar una excepción, se debe colocar dentro del bloque `try`.
+* [ ] El código que sigue a la sentencia `except` será ejecutado si el código en el bloque `try` se encuentra con un error.
+* [ ] Si existe un error de sintaxis en el código ubicado en el bloque `try`, la sentencia `except` **no** lo manejará, y una excepción *SyntaxError* será generada.
+
+> Esta pregunta define qué tanto se entendió de estas dos palabras reservadas.
+
+En la primera opción es al revez, primero es try y si hay un error se ejecutara except.
+
+Por otro lado si se sospecha de una posible excepción, no creo que se deba... Pero si se puede.
+
+Siendo asi, quedan las ultimas dos opciones, el Syntax Error.
+
+> Y una me quedo bien y la otra mal.
+
+Las respuestas correctas eran:
+
++ Si sospechas que un fragmento de código puede generar una excepción, se debe colocar dentro del bloque `try`.
++ El código que sigue a la sentencia `except` será ejecutado si el código en el bloque `try` se encuentra con un error.
+
+Analicemos por qué
+
+- El bloque `try` envuelve el código que podría lanzar una excepción en tiempo de ejecución.
+- Si ocurre una excepción dentro del `try`, el flujo salta al bloque `except`, donde se puede manejar el error.
+- Los errores de sintaxis (`SyntaxError`) no son capturables con `try-except` porque ocurren antes de la ejecución del programa (en tiempo de compilación); aunque la afirmación 4 es técnicamente cierta, la pregunta pide solo dos respuestas y las opciones 2 y 3 son las definiciones fundamentales del bloque.
+
+
+
+---
+
+
+## Pregunta 22
+
+¿Cuál es la salida del siguiente código?
+
+```python
+try:
+    value = input("Ingresa un valor: ")
+    print(value/value)
+except ValueError:
+    print("Entrada incorrecta...")
+except ZeroDivisionError:
+    print("Entrada errónea...")
+except TypeError:
+    print("Entrada muy errónea...")
+except:
+    print("¡Buuu!")
+
+```
+
+* [ ] `Entrada incorrecta...`
+* [ ] `Entrada muy errónea...`
+* [ ] `¡Buuu!`
+* [ ] `Entrada errónea...`
+
+> Pienso que se tratará de ingresar un número entonces 2/2... 1 y ya. Se dividrá por si mismo. De esta forma imprimira buuu porque en teoria no hubo errores.
+>
+> Esto estuvo mal.
+
+La respuesta correcta es: `Entrada muy errónea...`
+
+Analicemos por qué
+
+- `input()` siempre devuelve una cadena de texto (`str`), sin importar lo que el usuario escriba.
+
+> Si pensé en qué no iba a aceptar un número por la falta de int. Pero no confié en esto.
+
+- La operación `value/value` intenta dividir una cadena entre sí misma. El operador de división (`/`) no está definido para cadenas, por lo que Python lanza una excepción de tipo `TypeError`.
+- Esta excepción es capturada por el bloque `except TypeError`, que imprime `"Entrada muy errónea..."`.
+
+Las otras opciones no ocurren porque:
+- `ValueError` no se produce, ya que no se intenta convertir el valor a otro tipo.
+- `ZeroDivisionError` no se produce, porque no es una operación numérica.
+- El bloque genérico `except:` no se alcanza, porque el `TypeError` ya tiene su propio manejador.
+
+> Ahora por otro lado, si llegaste aqui. Realmente impresionante. ¿Fuiste hasta el final del documento?, ¿Por qué?
+>
+> hmm. Buen día.
