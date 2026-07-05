@@ -1939,7 +1939,7 @@ Al final, `v` es `'two'`, que se imprime.
 
 
 
-## Pregunta 20
+### Pregunta 20
 
 ¿Cuál es la salida del siguiente código?
 
@@ -1980,7 +1980,7 @@ El código es perfectamente válido y no produce errores.
 ---
 
 
-## Pregunta 21
+### Pregunta 21
 
 Selecciona las sentencia **true** sobre el bloque *try-except* en relación con el siguiente ejemplo. (Selecciona **dos** respuestas).
 
@@ -2023,7 +2023,7 @@ Analicemos por qué
 ---
 
 
-## Pregunta 22
+### Pregunta 22
 
 ¿Cuál es la salida del siguiente código?
 
