@@ -23,7 +23,7 @@
     <link rel="canonical" href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software">
 
     <!-- ============================================== -->
-    <!-- OPEN GRAPH (Facebook, LinkedIn, WhatsApp)      -->
+    <!-- OPEN GRAPH                                     -->
     <!-- ============================================== -->
     <meta property="og:type" content="website">
     <meta property="og:url"
@@ -53,19 +53,142 @@
     <meta name="twitter:image:alt" content="Guía Completa ADSO - Portada">
 
     <!-- ============================================== -->
-    <!-- HOJAS DE ESTILOS (Unificadas en producción)    -->
+    <!-- HOJAS DE ESTILOS                               -->
     <!-- ============================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
 
-    <!-- Font Awesome 6 (gratuita) -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos propios -->
     <link rel="stylesheet" href="./Assets/style.css">
 
+    <!-- Estilos adicionales para el carrusel (CORREGIDOS) -->
+    <style>
+        /* Ajustes generales del carrusel */
+        #carouselSecciones {
+            background-color: var(--color-bg-primary);
+            position: relative;
+        }
+
+        #carouselSecciones .carousel-inner {
+            background-color: var(--color-bg-primary);
+            height: 450px; /* altura fija para todos los slides */
+        }
+
+        /* Los slides tendrán la misma altura y sin flex (para no romper Bootstrap) */
+        #carouselSecciones .carousel-item {
+            height: 450px;
+            background-color: var(--color-bg-primary);
+            padding: 1rem 0;
+        }
+
+        /* Cada sección dentro del slide se centra verticalmente con flex */
+        #carouselSecciones .carousel-item > section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 0 !important;
+            border-top: none !important;
+        }
+
+        /* Asegurar que los contenedores internos ocupen todo el ancho */
+        #carouselSecciones .carousel-item .repo-showcase-container,
+        #carouselSecciones .carousel-item .showcase-container,
+        #carouselSecciones .carousel-item .tools-grid,
+        #carouselSecciones .carousel-item .objective-container {
+            width: 100%;
+        }
+
+        /* Flechas de navegación: blancas, con área de clic ampliada */
+        #carouselSecciones .carousel-control-prev,
+        #carouselSecciones .carousel-control-next {
+            width: 6%;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            z-index: 5;
+            padding: 0.5rem;
+        }
+
+        #carouselSecciones .carousel-control-prev:hover,
+        #carouselSecciones .carousel-control-next:hover {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        #carouselSecciones .carousel-control-prev-icon,
+        #carouselSecciones .carousel-control-next-icon {
+            background-image: none !important;
+            width: auto;
+            height: auto;
+            font-size: 2.8rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Ocultar los indicadores por defecto de Bootstrap */
+        #carouselSecciones .carousel-indicators {
+            display: none;
+        }
+
+        /* Puntos personalizados: blancos y activo azul */
+        .carousel-indicators-custom {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding: 0;
+            list-style: none;
+        }
+
+        .carousel-indicators-custom button {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            background-color: transparent;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .carousel-indicators-custom button.active {
+            background-color: var(--color-accent-blue);
+            border-color: var(--color-accent-blue);
+            opacity: 1;
+            transform: scale(1.15);
+        }
+
+        .carousel-indicators-custom button:hover {
+            opacity: 1;
+        }
+
+        /* Ajuste responsivo para pantallas pequeñas */
+        @media (max-width: 768px) {
+            #carouselSecciones .carousel-inner,
+            #carouselSecciones .carousel-item {
+                height: 520px;
+            }
+            #carouselSecciones .carousel-control-prev-icon,
+            #carouselSecciones .carousel-control-next-icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+
     <!-- ============================================== -->
-    <!-- FAVICON (Unificado en Assets)                  -->
+    <!-- FAVICON                                        -->
     <!-- ============================================== -->
     <link rel="shortcut icon" href="./trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
         type="image/svg+xml">
@@ -130,8 +253,8 @@
                 <li role="none"><a href="#repositorio" role="menuitem">Repositorio</a></li>
                 <li role="none"><a href="#enlaces" role="menuitem">Enlaces</a></li>
                 <li role="none"><a href="#herramientas" role="menuitem">Herramientas</a></li>
-                <li role="none"><a href="#trimestres" role="menuitem">Trimestres</a></li>
                 <li role="none"><a href="#objetivo" role="menuitem">Objetivo</a></li>
+                <li role="none"><a href="#trimestres" role="menuitem">Trimestres</a></li>
                 <li role="none"><a href="#proyectos" role="menuitem">Proyectos</a></li>
             </ul>
         </nav>
@@ -146,7 +269,7 @@
         <!-- SECCIÓN HERO (INICIO)                     -->
         <!-- ========================================== -->
         <section id="inicio" class="hero-section" aria-labelledby="hero-title">
-            <!-- Fondo animado (canvas para líneas de código) -->
+            <!-- Fondo animado -->
             <div class="hero-background">
                 <div class="bg-grid" aria-hidden="true"></div>
                 <div class="bg-matrix" aria-hidden="true"></div>
@@ -206,141 +329,273 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- SECCIÓN: SOBRE EL REPOSITORIO              -->
+        <!-- CARRUSEL DE SECCIONES                     -->
         <!-- ========================================== -->
-        <section id="repositorio" class="repo-showcase" aria-labelledby="repo-title">
-            <div class="repo-showcase-container">
-                <div class="section-header">
-                    <h2 id="repo-title" class="section-title">SOBRE ESTE REPOSITORIO</h2>
-                    <div class="title-underline" aria-hidden="true"></div>
+        <div id="carouselSecciones" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <!-- Indicadores ocultos (se usan los personalizados debajo) -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselSecciones" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselSecciones" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselSecciones" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselSecciones" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+
+                <!-- Slide 1: SOBRE EL REPOSITORIO -->
+                <div class="carousel-item active">
+                    <section id="repositorio" class="repo-showcase" aria-labelledby="repo-title">
+                        <div class="repo-showcase-container">
+                            <div class="section-header">
+                                <h2 id="repo-title" class="section-title">SOBRE ESTE REPOSITORIO</h2>
+                                <div class="title-underline" aria-hidden="true"></div>
+                            </div>
+
+                            <div class="repo-description-card">
+                                <p class="repo-description">
+                                    Este repositorio recopila todos mis avances, proyectos y ejercicios
+                                    desarrollados durante mi formación como tecnólogo en ADSO.
+                                </p>
+                            </div>
+
+                            <div class="repo-description-card">
+                                <p class="repo-description">
+                                    <strong>OBJETIVO:</strong> Documentar mi proceso de aprendizaje aplicando
+                                    buenas prácticas de organización, documentación técnica y divulgación
+                                    clara de los conceptos aprendidos.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
-                <div class="repo-description-card">
-                    <p class="repo-description">
-                        Este repositorio recopila todos mis avances, proyectos y ejercicios
-                        desarrollados durante mi formación como tecnólogo en ADSO.
-                    </p>
+                <!-- Slide 2: MIS ENLACES -->
+                <div class="carousel-item">
+                    <section id="enlaces" class="showcase-section" aria-labelledby="enlaces-title">
+                        <div class="showcase-container">
+                            <!-- Card 1: GitHub Personal -->
+                            <a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer"
+                                class="showcase-card" id="profile-card" aria-label="Perfil de GitHub de santiagoencodigo">
+                                <div class="card-bg-pattern" aria-hidden="true"></div>
+                                <div class="card-aurora" aria-hidden="true"></div>
+                                <div class="card-content">
+                                    <div class="card-icon-wrapper">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                                            alt="" class="card-icon" aria-hidden="true">
+                                        <div class="icon-glow" aria-hidden="true"></div>
+                                    </div>
+                                    <div class="card-text">
+                                        <h3 class="neon-title">@santiagoencodigo</h3>
+                                        <p class="card-subtitle">Mi perfil personal en GitHub</p>
+                                        <span class="card-path">github.com/santiagoencodigo</span>
+                                    </div>
+                                </div>
+                                <div class="card-stats">
+                                    <span class="stat-item">
+                                        <span class="stat-value">ADSO</span>
+                                        <span class="stat-label">estudiante</span>
+                                    </span>
+                                    <span class="stat-item">
+                                        <span class="stat-value">2024</span>
+                                        <span class="stat-label">inicio</span>
+                                    </span>
+                                </div>
+                                <div class="card-border" aria-hidden="true"></div>
+                            </a>
+
+                            <!-- Card 2: Repositorio ADSO -->
+                            <a href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software"
+                                target="_blank" rel="noopener noreferrer" class="showcase-card" id="repo-card"
+                                aria-label="Repositorio Guía Completa ADSO">
+                                <div class="card-bg-pattern" aria-hidden="true"></div>
+                                <div class="card-aurora" aria-hidden="true"></div>
+                                <div class="card-content">
+                                    <div class="card-icon-wrapper">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                                            alt="" class="card-icon" aria-hidden="true">
+                                        <div class="icon-glow" aria-hidden="true"></div>
+                                        <div class="card-badge" aria-label="Etiqueta ADSO">ADSO</div>
+                                    </div>
+                                    <div class="card-text">
+                                        <h3 class="neon-title">análisis y desarrollo de software</h3>
+                                        <p class="card-subtitle">Repositorio del tecnólogo</p>
+                                        <span class="card-path">github.com/santiagoencodigo/analisis-y-desarrollo-de-software</span>
+                                    </div>
+                                </div>
+                                <div class="card-stats">
+                                    <span class="stat-item">
+                                        <span class="stat-value">27</span>
+                                        <span class="stat-label">meses</span>
+                                    </span>
+                                    <span class="stat-item">
+                                        <span class="stat-value">9</span>
+                                        <span class="stat-label">trimestres</span>
+                                    </span>
+                                </div>
+                                <div class="card-progress">
+                                    <div class="progress-bar" style="width: 75%" role="progressbar" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                    <span class="progress-text">75% completado</span>
+                                </div>
+                                <div class="card-border" aria-hidden="true"></div>
+                            </a>
+                        </div>
+                    </section>
                 </div>
 
-                <div class="repo-description-card">
-                    <p class="repo-description">
-                        <strong>OBJETIVO:</strong> Documentar mi proceso de aprendizaje aplicando
-                        buenas prácticas de organización, documentación técnica y divulgación
-                        clara de los conceptos aprendidos.
-                    </p>
+                <!-- Slide 3: HERRAMIENTAS -->
+                <div class="carousel-item">
+                    <section id="herramientas" class="tools-section" aria-labelledby="tools-title">
+                        <h2 id="tools-title">Herramientas utilizadas durante la formación</h2>
+                        <div class="tools-grid">
+                            <article class="tool-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt=""
+                                    aria-hidden="true">
+                                <h3>Google Workspace</h3>
+                                <p>Docs, Sheets y Drive para documentación, análisis y almacenamiento en la nube.</p>
+                            </article>
+                            <article class="tool-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt=""
+                                    aria-hidden="true">
+                                <h3>Jira</h3>
+                                <p>Gestión de proyectos y tareas ágiles para el seguimiento de sprints y requerimientos.</p>
+                            </article>
+                            <article class="tool-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt=""
+                                    aria-hidden="true">
+                                <h3>Git</h3>
+                                <p>Control de versiones para el manejo eficiente del código y trabajo colaborativo.</p>
+                            </article>
+                            <article class="tool-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt=""
+                                    aria-hidden="true">
+                                <h3>GitHub</h3>
+                                <p>Plataforma para alojar repositorios, compartir proyectos y gestionar versiones.</p>
+                            </article>
+                        </div>
+                    </section>
                 </div>
-            </div>
-        </section>
+
+                <!-- Slide 4: OBJETIVO -->
+                <div class="carousel-item">
+                    <section id="objetivo" class="objective-section" aria-labelledby="objective-title">
+                        <div class="objective-container">
+                            <div class="objective-header">
+                            </div>
+
+                            <div class="objective-description">
+                                <p class="objective-text">
+                                    <span>Este proyecto busca servir como un recurso
+                                    de consulta personal y material de apoyo para aprender
+                                    sobre análisis y desarrollo de software</span>.
+                                </p>
+                            </div>
+
+                            <div class="objective-content-label" aria-hidden="true">
+                                <span class="label-line"></span>
+                                <span class="label-text">El contenido incluye</span>
+                                <span class="label-line"></span>
+                            </div>
+
+                            <ul class="constellation-list">
+                                <li class="constellation-item item-1">
+                                    <div class="item-connector" aria-hidden="true"></div>
+                                    <div class="item-content">
+                                        <span class="item-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-pen-to-square" style="color: var(--color-accent-blue);"></i>
+                                        </span>
+                                        <span class="item-text">Apuntes técnicos</span>
+                                    </div>
+                                    <div class="item-glow" aria-hidden="true"></div>
+                                </li>
+                                <li class="constellation-item item-2">
+                                    <div class="item-connector" aria-hidden="true"></div>
+                                    <div class="item-content">
+                                        <span class="item-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-lightbulb" style="color: var(--color-accent-blue);"></i>
+                                        </span>
+                                        <span class="item-text">Explicaciones conceptuales</span>
+                                    </div>
+                                    <div class="item-glow" aria-hidden="true"></div>
+                                </li>
+                                <li class="constellation-item item-3">
+                                    <div class="item-connector" aria-hidden="true"></div>
+                                    <div class="item-content">
+                                        <span class="item-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-bolt" style="color: var(--color-accent-blue);"></i>
+                                        </span>
+                                        <span class="item-text">Ejercicios prácticos</span>
+                                    </div>
+                                    <div class="item-glow" aria-hidden="true"></div>
+                                </li>
+                                <li class="constellation-item item-4 highlight">
+                                    <div class="item-connector" aria-hidden="true"></div>
+                                    <div class="item-content">
+                                        <span class="item-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-rocket" style="color: var(--color-accent-blue);"></i>
+                                        </span>
+                                        <span class="item-text">Proyectos de desarrollo</span>
+                                    </div>
+                                    <div class="item-glow" aria-hidden="true"></div>
+                                    <div class="item-pulse" aria-hidden="true"></div>
+                                </li>
+                                <li class="constellation-item item-5">
+                                    <div class="item-connector" aria-hidden="true"></div>
+                                    <div class="item-content">
+                                        <span class="item-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-chart-pie" style="color: var(--color-accent-blue);"></i>
+                                        </span>
+                                        <span class="item-text">Diagramas y modelos</span>
+                                    </div>
+                                    <div class="item-glow" aria-hidden="true"></div>
+                                </li>
+                                <li class="constellation-item item-6">
+                                    <div class="item-connector" aria-hidden="true"></div>
+                                    <div class="item-content">
+                                        <span class="item-icon" aria-hidden="true">
+                                            <i class="fa-solid fa-brain" style="color: var(--color-accent-blue);"></i>
+                                        </span>
+                                        <span class="item-text">Reflexiones del proceso de aprendizaje</span>
+                                    </div>
+                                    <div class="item-glow" aria-hidden="true"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+
+            </div> <!-- /.carousel-inner -->
+
+            <!-- Controles de navegación (flechas) -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselSecciones" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselSecciones" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+
+        </div> <!-- /#carouselSecciones -->
 
         <!-- ========================================== -->
-        <!-- SECCIÓN: MIS ENLACES                       -->
+        <!-- INDICADORES PERSONALIZADOS (DEBAJO)        -->
         <!-- ========================================== -->
-        <section id="enlaces" class="showcase-section" aria-labelledby="enlaces-title">
-            <div class="showcase-container">
-                <!-- Card 1: GitHub Personal -->
-                <a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer"
-                    class="showcase-card" id="profile-card" aria-label="Perfil de GitHub de santiagoencodigo">
-                    <div class="card-bg-pattern" aria-hidden="true"></div>
-                    <div class="card-aurora" aria-hidden="true"></div>
-                    <div class="card-content">
-                        <div class="card-icon-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                                alt="" class="card-icon" aria-hidden="true">
-                            <div class="icon-glow" aria-hidden="true"></div>
-                        </div>
-                        <div class="card-text">
-                            <h3 class="neon-title">@santiagoencodigo</h3>
-                            <p class="card-subtitle">Mi perfil personal en GitHub</p>
-                            <span class="card-path">github.com/santiagoencodigo</span>
-                        </div>
-                    </div>
-                    <div class="card-stats">
-                        <span class="stat-item">
-                            <span class="stat-value">ADSO</span>
-                            <span class="stat-label">estudiante</span>
-                        </span>
-                        <span class="stat-item">
-                            <span class="stat-value">2024</span>
-                            <span class="stat-label">inicio</span>
-                        </span>
-                    </div>
-                    <div class="card-border" aria-hidden="true"></div>
-                </a>
-
-                <!-- Card 2: Repositorio ADSO -->
-                <a href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software"
-                    target="_blank" rel="noopener noreferrer" class="showcase-card" id="repo-card"
-                    aria-label="Repositorio Guía Completa ADSO">
-                    <div class="card-bg-pattern" aria-hidden="true"></div>
-                    <div class="card-aurora" aria-hidden="true"></div>
-                    <div class="card-content">
-                        <div class="card-icon-wrapper">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                                alt="" class="card-icon" aria-hidden="true">
-                            <div class="icon-glow" aria-hidden="true"></div>
-                            <div class="card-badge" aria-label="Etiqueta ADSO">ADSO</div>
-                        </div>
-                        <div class="card-text">
-                            <h3 class="neon-title">Guía Completa ADSO</h3>
-                            <p class="card-subtitle">Repositorio del tecnólogo</p>
-                            <span class="card-path">/Guia-Completa-ADSO</span>
-                        </div>
-                    </div>
-                    <div class="card-stats">
-                        <span class="stat-item">
-                            <span class="stat-value">27</span>
-                            <span class="stat-label">meses</span>
-                        </span>
-                        <span class="stat-item">
-                            <span class="stat-value">9</span>
-                            <span class="stat-label">trimestres</span>
-                        </span>
-                    </div>
-                    <div class="card-progress">
-                        <div class="progress-bar" style="width: 75%" role="progressbar" aria-valuenow="75"
-                            aria-valuemin="0" aria-valuemax="100"></div>
-                        <span class="progress-text">75% completado</span>
-                    </div>
-                    <div class="card-border" aria-hidden="true"></div>
-                </a>
-            </div>
-        </section>
-
-        <!-- ========================================== -->
-        <!-- SECCIÓN: HERRAMIENTAS                     -->
-        <!-- ========================================== -->
-        <section id="herramientas" class="tools-section" aria-labelledby="tools-title">
-            <h2 id="tools-title">Herramientas utilizadas durante la formación</h2>
-            <div class="tools-grid">
-                <article class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt=""
-                        aria-hidden="true">
-                    <h3>Google Workspace</h3>
-                    <p>Docs, Sheets y Drive para documentación, análisis y almacenamiento en la nube.</p>
-                </article>
-                <article class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt=""
-                        aria-hidden="true">
-                    <h3>Jira</h3>
-                    <p>Gestión de proyectos y tareas ágiles para el seguimiento de sprints y requerimientos.</p>
-                </article>
-                <article class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt=""
-                        aria-hidden="true">
-                    <h3>Git</h3>
-                    <p>Control de versiones para el manejo eficiente del código y trabajo colaborativo.</p>
-                </article>
-                <article class="tool-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt=""
-                        aria-hidden="true">
-                    <h3>GitHub</h3>
-                    <p>Plataforma para alojar repositorios, compartir proyectos y gestionar versiones.</p>
-                </article>
-            </div>
-        </section>
+        <div class="carousel-indicators-custom" role="tablist">
+            <button type="button" data-bs-target="#carouselSecciones" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Repositorio"></button>
+            <button type="button" data-bs-target="#carouselSecciones" data-bs-slide-to="1" aria-label="Enlaces"></button>
+            <button type="button" data-bs-target="#carouselSecciones" data-bs-slide-to="2" aria-label="Herramientas"></button>
+            <button type="button" data-bs-target="#carouselSecciones" data-bs-slide-to="3" aria-label="Objetivo"></button>
+        </div>
 
         <!-- ========================================== -->
         <!-- SECCIÓN: ESTRUCTURA POR TRIMESTRES         -->
+        <!-- (FUERA DEL CARRUSEL)                      -->
         <!-- ========================================== -->
         <section id="trimestres" class="quarters-section" aria-labelledby="quarters-title">
             <h2 id="quarters-title">Estructura del repositorio por trimestres</h2>
@@ -365,105 +620,6 @@
                     <h3>Trimestre 4</h3>
                     <p>Construcción de software, backend y proyectos integradores.</p>
                 </a>
-            </div>
-        </section>
-
-        <!-- ========================================== -->
-        <!-- SECCIÓN: OBJETIVO                          -->
-        <!-- ========================================== -->
-        <section id="objetivo" class="objective-section" aria-labelledby="objective-title">
-            <div class="objective-container">
-                <div class="objective-header">
-                    <div class="objective-icon-wrapper" aria-hidden="true">
-                        <div class="objective-orbit">
-                            <span class="orbit-ring"></span>
-                            <span class="orbit-ring"></span>
-                            <span class="orbit-ring"></span>
-                        </div>
-                        <span class="objective-icon" aria-hidden="true">
-                            <i class="fa-solid fa-bullseye" style="color: var(--color-accent-blue);"></i>
-                        </span>
-                    </div>
-                    <h2 id="objective-title" class="objective-title">Objetivo de esta guía</h2>
-                </div>
-
-                <div class="objective-description">
-                    <p class="objective-text">
-                        <span class="highlight-text">Guía Completa ADSO</span> busca servir como un recurso
-                        de consulta personal y material de apoyo para estudiantes interesados en aprender
-                        sobre <strong>análisis y desarrollo de software</strong>.
-                    </p>
-                </div>
-
-                <div class="objective-content-label" aria-hidden="true">
-                    <span class="label-line"></span>
-                    <span class="label-text">El contenido incluye</span>
-                    <span class="label-line"></span>
-                </div>
-
-                <ul class="constellation-list">
-                    <li class="constellation-item item-1">
-                        <div class="item-connector" aria-hidden="true"></div>
-                        <div class="item-content">
-                            <span class="item-icon" aria-hidden="true">
-                                <i class="fa-solid fa-pen-to-square" style="color: var(--color-accent-blue);"></i>
-                            </span>
-                            <span class="item-text">Apuntes técnicos</span>
-                        </div>
-                        <div class="item-glow" aria-hidden="true"></div>
-                    </li>
-                    <li class="constellation-item item-2">
-                        <div class="item-connector" aria-hidden="true"></div>
-                        <div class="item-content">
-                            <span class="item-icon" aria-hidden="true">
-                                <i class="fa-solid fa-lightbulb" style="color: var(--color-accent-blue);"></i>
-                            </span>
-                            <span class="item-text">Explicaciones conceptuales</span>
-                        </div>
-                        <div class="item-glow" aria-hidden="true"></div>
-                    </li>
-                    <li class="constellation-item item-3">
-                        <div class="item-connector" aria-hidden="true"></div>
-                        <div class="item-content">
-                            <span class="item-icon" aria-hidden="true">
-                                <i class="fa-solid fa-bolt" style="color: var(--color-accent-blue);"></i>
-                            </span>
-                            <span class="item-text">Ejercicios prácticos</span>
-                        </div>
-                        <div class="item-glow" aria-hidden="true"></div>
-                    </li>
-                    <li class="constellation-item item-4 highlight">
-                        <div class="item-connector" aria-hidden="true"></div>
-                        <div class="item-content">
-                            <span class="item-icon" aria-hidden="true">
-                                <i class="fa-solid fa-rocket" style="color: var(--color-accent-blue);"></i>
-                            </span>
-                            <span class="item-text">Proyectos de desarrollo</span>
-                        </div>
-                        <div class="item-glow" aria-hidden="true"></div>
-                        <div class="item-pulse" aria-hidden="true"></div>
-                    </li>
-                    <li class="constellation-item item-5">
-                        <div class="item-connector" aria-hidden="true"></div>
-                        <div class="item-content">
-                            <span class="item-icon" aria-hidden="true">
-                                <i class="fa-solid fa-chart-pie" style="color: var(--color-accent-blue);"></i>
-                            </span>
-                            <span class="item-text">Diagramas y modelos</span>
-                        </div>
-                        <div class="item-glow" aria-hidden="true"></div>
-                    </li>
-                    <li class="constellation-item item-6">
-                        <div class="item-connector" aria-hidden="true"></div>
-                        <div class="item-content">
-                            <span class="item-icon" aria-hidden="true">
-                                <i class="fa-solid fa-brain" style="color: var(--color-accent-blue);"></i>
-                            </span>
-                            <span class="item-text">Reflexiones del proceso de aprendizaje</span>
-                        </div>
-                        <div class="item-glow" aria-hidden="true"></div>
-                    </li>
-                </ul>
             </div>
         </section>
 
@@ -1237,6 +1393,34 @@
                 GitHub</a>
         </p>
     </footer>
+
+    <!-- Bootstrap JS (necesario para el carrusel) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script para sincronizar los puntos personalizados con el carrusel -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const carousel = document.getElementById('carouselSecciones');
+            const customIndicators = document.querySelectorAll('.carousel-indicators-custom button');
+
+            // Actualizar puntos cuando el carrusel cambie
+            carousel.addEventListener('slid.bs.carousel', function (event) {
+                const index = event.to;
+                customIndicators.forEach((btn, i) => {
+                    btn.classList.toggle('active', i === index);
+                });
+            });
+
+            // Al hacer clic en un punto personalizado, activar el slide correspondiente
+            customIndicators.forEach((btn) => {
+                btn.addEventListener('click', function () {
+                    const slideTo = parseInt(this.getAttribute('data-bs-slide-to'));
+                    const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+                    bsCarousel.to(slideTo);
+                });
+            });
+        });
+    </script>
 
 </body>
 
