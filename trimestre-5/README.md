@@ -1,185 +1,122 @@
-> Clase del 20/04/2026
+# Trimestre 5 – Análisis y Desarrollo de Software
 
-# Trimestre 5
+## Introducción
 
----
+El quinto trimestre del programa de formación en Análisis y Desarrollo de Software se centra en la construcción integral de aplicaciones funcionales, abarcando desde la creación de interfaces de usuario hasta la implementación del backend y la persistencia de datos. Este período consolida los conocimientos previos en programación, bases de datos y metodologías de desarrollo, orientándolos hacia la materialización de proyectos software completos.
 
-# Tabla de Contenido
+A lo largo del trimestre se abordan secuencialmente los siguientes ejes:
 
-[1. Cosas a tener en cuenta](#cosas-a-tener-en-cuenta)
+- Desarrollo de componentes de interfaz con HTML, CSS y Bootstrap.
+- Fundamentos y programación avanzada en Python.
+- Manejo de operaciones CRUD con bases de datos.
+- Programación Orientada a Objetos aplicada.
+- Introducción al framework Django y su ORM.
+- Aplicación del marco de trabajo Scrum para la gestión de proyectos.
 
-[2. Crear Componentes del Frontend](#crear-componentes-del-frontend)
-
----
-
-## Cosas a tener en cuenta
-
-> Se informa que algunos aprendices recibieron notificaciones por incumplimiento en la puntualidad.
-
-No se permite el uso de dispositivos para actividades no relacionadas con la formación, como juegos o consumo de contenido no pertinente.
-
-Se informa que próximamente será obligatorio el uso del uniforme. En caso de incumplimiento, se aplicarán llamados de atención.
-
-Se establece que las evidencias deben cumplir con un mínimo del 70% para ser aprobadas.
-
-Se da mayor relevancia al cumplimiento de las fechas de entrega.
-
-Se promueve el desarrollo de la autonomía en el proceso de aprendizaje.
-
-> Enfoque investigativo, participativo y disciplinario.
-
-Se socializa el acta de la ficha en relación con la competencia de creación de componentes frontend.
-
-> ¿Que información guarda el acta?
-
-¿Qué es una Acta?: Es un testimonio o certificación escrita que deja constancia de lo tratado, acordado y pactado en una reunion. Esto da validez legal a las decisiones tomadas y sirve como prueba si llega a ser necesario.
-
-La leo y veo que contiene información de normas de convivencia, un momento para recordar el reglamento del aprendiz, en una introducción al resultado de aprendizaje.
-
-> Definición de competencia laboral: La competencia laboral es la capacidad para responder exitosamente una demanda compleja o llevar a cabo una actividad o tarea, según criterios de desempeño definidos por la empresa o sector productivo. Las competencias abarcan los conocimientos (Saber), actitudes (Saber Ser) y habilidades (Saber Hacer) de un individuo.
-
-* Se comenta que hay llamado de atención con inasistencia a la sesión de la formación sin excusa y en una segunda, se tiene un llamado de atención escrito. Se comenta que se reciben excusas medicas solamente. Lo mismo sucede con las llegadas tarde en donde una segunda llegada tarde genera un llamado de atención escrito.
-
-* Se tiene que pedir permiso para salir del salon.
-
-El resto de elementos que se mencionan son en teoria lo que ya se sabe, pues la disciplina, el respeto y venir a formarse es la mentalidad que se debe tener.
-
-Por otro lado veo que hay un apartado de marco de trabajo SCRUM, ¿Cómo puedo integrar eso como grupo? Aun nos faltan bastantes cosas en nustro proyecto formativo.
+El repositorio contiene mis apuntes de estudio, ejercicios prácticos y proyectos guía, organizados de manera modular para facilitar un aprendizaje progresivo y autónomo.
 
 ---
 
+## Estructura del Repositorio
 
+El repositorio se organiza en dos bloques principales: **Frontend** y **Backend**, cada uno con sus respectivos submódulos. La numeración indica el orden sugerido de estudio.
 
+```
+trimestre-5/
+├── 01-crear-componentes-frontend/
+├── 02-operations/
+├── 06-project-blueprint/
+├── 02-codificar-el-software/
+├── README.md
+├── .gitignore
+├── LICENSE
+└── index.html
+```
 
+### Bloque Frontend
 
+| Carpeta | Descripción |
+|---------|-------------|
+| `01-crear-componentes-frontend` | Maquetación y estilizado con HTML y CSS nativo. Incluye `01-laika-native`, una réplica de e‑commerce de mascotas sin frameworks. |
+| `02-aprendizaje-bootstrap` | Introducción a Bootstrap con ejemplos de formularios, tarjetas, media queries y clonación de Mercado Libre (con JavaScript). |
+| `03-facebook-bootstrap` | Clonación de la interfaz de Facebook utilizando Bootstrap. |
+| `04-laika-bootstrap` | Replicación de la interfaz de Laika con Bootstrap, organizada en subcarpetas (marcas, cabecera, landing, productos). |
+| `05-operpan-v1` | Primera versión del proyecto integrador **OperPan**, con estructura de páginas y recursos gráficos. |
+| `06-project-blueprint` | Planificación y diseño del proyecto final (activos, índice HTML y documentación). |
+| `02-operations` | Módulo complementario sobre operaciones matemáticas o lógicas. |
 
+### Bloque Backend: `02-codificar-el-software`
 
-
-
-
-
-## Crear Componentes del Frontend
-
-> Clase de los días lunes de la semana.
-
-La primera competencia consiste en crear componentes frontend del software de acuerdo con el diseño establecido.
-
-Con esta clase se da inicio a una etapa de mayor exigencia técnica, donde, aunque se utilicen herramientas de apoyo, será necesario comprender y aplicar conceptos específicos.
-
-Se realiza un recordatorio de conceptos fundamentales como:
-
-- Posicionamiento en CSS  
-- Flexbox  
-
-Se trabajará mediante iteraciones periódicas (aproximadamente cada 15 días), en las cuales se deberán presentar avances del proyecto.
-
-Se recomienda aprovechar las 6 horas de la jornada formativa para el desarrollo del trabajo, garantizando evidencia de progreso.
-
-El marco de trabajo Scrum establece la entrega continua de avances mediante iteraciones.
-
----
-
-**Trabajo en Grupo**
-
-El trabajo en equipo es uno de los aspectos más relevantes del programa. Los grupos conformados se mantendrán hasta la etapa final, incluyendo la sustentación del proyecto.
-
-Se otorga un plazo de una semana para que cada grupo defina su forma de trabajo, teniendo en cuenta aspectos como organización, roles y responsabilidades.
-
-Se resalta que la organización del equipo es tan importante como el conocimiento técnico.
-
-Se enfatiza que el trabajo en grupo requerirá un alto nivel de compromiso.
-
-Se implementará una comunicación basada en el marco de trabajo Scrum.
-
-La instructora asumirá el rol de Scrum Master.
-
-> Se requiere gestionar múltiples actividades en periodos de tiempo reducidos.
-
-Es fundamental planificar como equipo la forma en que se desarrollarán y entregarán los avances.
-
-Al final del proceso se realizarán sustentaciones del proyecto.
-
-Se deberán presentar evidencias completas del trabajo, con participación de todos los integrantes del grupo.
-
-Se contempla la posibilidad de realizar una prueba de suficiencia, la cual podrá ser aprobada o no.
-
-Se da especial importancia al uso de Git y GitHub como herramientas de control de versiones.
-
-Se inicia la integración entre backend, base de datos y frontend dentro del desarrollo del proyecto.
+| Carpeta / Archivo | Contenido |
+|-------------------|-----------|
+| `01-fundamentos-python-1` | Sintaxis básica, cadenas, condicionales, bucles, listas, algoritmos de ordenamiento, funciones y certificado *Python Essentials 1*. |
+| `02-fundamentos-python-2` | Módulos, paquetes, pip, manejo de caracteres, POO, misceláneos y certificado *Python Essentials 2*. |
+| `03-CRUD` | Operaciones CRUD con bases de datos: ejemplos básico (`01-crud-ejemplo-bd`) y aplicado a OperPan (`02-crud-operpan`). |
+| `04-POO` | Ejercicios prácticos: `POO-1.py`, `POO-2.py`, `POO-3-granja.py`. |
+| `05-Django` | Proyecto `miweb` con aplicaciones `inicio` y `miweb`, templates y archivos de gestión. |
+| `06-ORM` | Uso de Object‑Relational Mapping con Django (`miweb2`, `miweb3`). |
+| `07-CRUD-hojas-de-hielo` | Proyecto CRUD para el caso de estudio **Hojas de Hielo**. |
+| `08-dos-apps` | Ejercicio de creación de dos aplicaciones en un mismo proyecto Django. |
+| `09-SCRUM.md` | Guía sobre el marco de trabajo Scrum. |
+| `10-documentacion-django.md` | Documentación complementaria sobre Django. |
 
 ---
 
-Por otro lado me pareció interesante mirar que **evidencias** vamos a ir teniendo a medida del futuro:
+## Tecnologías y Herramientas
 
-1. Taller #1 - Interfaz - Caso de Estudio
+- **Frontend**: HTML5, CSS3, Flexbox, Grid, Bootstrap 5.
+- **Backend**: Python 3.x, Django 4.x.
+- **Bases de datos**: SQL (SQLite, MySQL) y ORM de Django.
+- **Control de versiones**: Git y GitHub.
+- **Metodología**: Scrum (instructor como Scrum Master).
+- **Entorno de desarrollo**: Visual Studio Code, terminal, pip, entornos virtuales.
 
-2. Taller #2 - Interfaz - Caso de Estudio
+---
 
+## Metodología de Trabajo
+
+El trimestre se desarrolla bajo un esquema iterativo basado en Scrum, con entregas periódicas (aproximadamente cada semana). Los equipos definen roles y planifican sus sprints con el acompañamiento del instructor. Se promueve la autonomía, la investigación y la participación activa, así como el cumplimiento estricto de las fechas de entrega.
+
+El uso de Git y GitHub es obligatorio para el control de versiones y la colaboración en equipo.
+
+---
+
+## Evidencias y Evaluación
+
+Las evidencias a presentar son:
+
+1. Taller #1 – Interfaz (caso de estudio)
+2. Taller #2 – Interfaz (caso de estudio)
 3. Cuestionario Frontend
+4. Actividades de avance del proyecto (entregas parciales)
+5. Maquetación completa del proyecto con usabilidad (integración frontend‑backend)
+6. Otras actividades complementarias definidas por el instructor.
 
-4. Actividades de Avance de Proyecto
-
-5. Maquetación completa del proyecto con usabilidad (Esto quiere decir que ya debe tener una relación con front y back)
-
-6. Otras actividades pertinentes a formación.
-
----
-
-Más adelante utilizaremos bootstrap
+Cada evidencia debe alcanzar un mínimo del **70%** de cumplimiento y respetar las fechas límite. La asistencia y puntualidad son requisitos fundamentales; las inasistencias injustificadas o llegadas tardías recurrentes derivan en llamados de atención escritos.
 
 ---
 
-1. Identidad Visual y Estilo Global:
+## Instrucciones para Comenzar
 
-Paleta de colores: El color dominante es un púrpura institucional (aproximadamente #622d91). Se usa blanco para fondos y superficies de tarjetas, y un gris muy claro para fondos de sección.
+1. Clonar el repositorio:
+   ```bash
+   git clone <url-del-repositorio>
+   cd trimestre-5
+   ```
 
-Tipografía: Sans-serif moderna (preferiblemente Lexend o Rubik), con pesos visuales marcados para títulos y precios.
+2. Explorar las carpetas en orden numérico para un aprendizaje progresivo.
 
-Iconografía: Minimalista y lineal en color blanco dentro del header.
+3. Para los módulos de Python y Django, crear un entorno virtual e instalar las dependencias:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # En Windows: venv\Scripts\activate
+   pip install -r requirements.txt   (cuando exista el archivo)
+   ```
 
-2. Estructura del Header (Triple nivel):
+4. Ejecutar los scripts o servidores de desarrollo según las instrucciones particulares de cada módulo.
 
-Top Bar (Negro/Gris Oscuro): Una franja delgada con iconos y texto blanco que incluye: teléfono, "Compras seguras", "Pago contra entrega", "Entregas el mismo día" y enlaces a redes sociales a la derecha.
-
-Main Header (Púrpura): * Izquierda: Logo de la marca (un perro estilizado con globos).
-
-Centro: Barra de búsqueda blanca, larga y redondeada con un icono de lupa.
-
-Derecha: Sección "Mi cuenta" con icono de usuario y un icono de carrito de compras.
-
-NavBar (Blanco): Enlaces de navegación en texto gris/negro: Perro, Gato, Servicios, Promociones, Tiendas, Laika Member. A la derecha, un botón púrpura redondeado con el texto "Selecciona una ciudad" y un icono de ubicación.
-
-3. Secciones de Contenido:
-
-Hero Slider: Un carrusel de banners rectangulares con bordes ligeramente redondeados que muestran promociones (ej. "25% DCTO Laika Member"). Debajo, indicadores de posición (puntos).
-
-Banners de Categoría (Dúo): Dos tarjetas horizontales con bordes redondeados.
-
-Izquierda (Amarillo): Imagen de un perro Dálmata, título "Cuida a tu mejor amigo" y botón púrpura "Comprar".
-
-Derecha (Azul claro): Imagen de un gato persistente, título "Mima a tu felino" y botón púrpura "Comprar".
-
-Grid de Productos ("Favoritos para tu PET-AMIGO"):
-
-Título alineado a la izquierda en negrita con un subtítulo descriptivo en gris.
-
-Tarjetas de producto: Fondo blanco, borde gris muy fino. Cada una contiene:
-
-Imagen del producto centrada.
-
-Texto "Por [Marca]" en gris pequeño.
-
-Nombre del producto en negro.
-
-Precio principal en negrita grande.
-
-Precio "Member" en una línea inferior con un icono de corona dorada.
-
-Etiquetas de tamaño/peso (ej. "56 GR", "27.5 LB") en cajas grises pequeñas al fondo.
-
-Opcional: Etiqueta verde de "OFERTA" en la esquina superior izquierda de la tarjeta.
-
-Genera el código HTML y CSS (usando Flexbox y Grid) para replicar una página de inicio de E-commerce de mascotas. Header: debe tener tres niveles: una barra superior negra con beneficios, una barra principal púrpura con buscador redondeado y una barra de navegación blanca con un botón de 'Selecciona una ciudad'. Sección Hero: un banner ancho con bordes redondeados. Sección Promocional: dos bloques de colores (amarillo y azul) con imágenes de mascotas y botones 'Comprar'. Grid de Productos: una fila de 5 tarjetas blancas. Cada tarjeta debe mostrar la marca, nombre del producto, precio normal y precio 'Member' con una corona dorada. Usa la fuente Lexend, bordes redondeados en todos los contenedores y una estética limpia y profesional.
-
+5. Mantener el repositorio sincronizado con GitHub para el control de versiones.
 
 ---
+
+*Última actualización: Julio de 2026*
