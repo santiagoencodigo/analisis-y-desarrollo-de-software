@@ -1,462 +1,224 @@
-# Codificar El Software
+# Codificar el Software
 
-> A continuación mis apuntes de cada una de las sesiones
+Este directorio contiene el material completo del módulo **Codificar el Software**, correspondiente al quinto trimestre del programa de formación. Aquí se abordan todos los aspectos del desarrollo backend: desde los fundamentos de Python hasta la implementación de aplicaciones web con Django, pasando por programación orientada a objetos, operaciones CRUD y manejo de bases de datos mediante ORM.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+El contenido está organizado de forma secuencial para facilitar el aprendizaje progresivo, y cada subcarpeta incluye ejemplos prácticos, ejercicios y documentación de apoyo.
 
 ---
 
+## Estructura del Repositorio
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Tabla de Contenido
-
-[1. Fundamentos de Python 1.](#1-fundamentos-de-python-1)
-
-[2. Fundamentos de Python 2.](#2-fundamentos-de-python-2)
-
-[3. Programación Orientada a Objetos y Creación de CRUD](#3-programación-orientada-a-objetos-y-creación-de-crud)
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 1. Fundamentos de Python 1
-
-a
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 2. Fundamentos de Python 2
-
-a
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 3. Programación Orientada a Objetos y Creación de CRUD
-
-
-
-A lo largo del trimestre se debe desarrollar una aplicación completa que incluya:
-
-- Conexión a base de datos (usando XAMPP + Python).
-- CRUD completo (Crear, Leer, Actualizar, Eliminar).
-- Sistema de inicio de sesión.
-- Backend con interfaz de usuario (frontend básico).
-- Descarga de archivos.
-
-
----
-
-Actividad de Sesión
-
-* Se pide escribir python en la terminal de VSCODE para instalar el entorno de python en el visual, además de que termina abriendo la tienda de microsoft para instalarlo.
-
-> Se comenta que se debe adjuntar el certificado python 
-
-* Se pide tambien abrir XAMPP
-
-La idea de esta ocasión sera aprender conceptos de POO y la creación de CRUD básico.
-
-El primer paso de todo es conocer el código.
-
-> Vamos a entender a hacer una conexión con la base de datos con python.
-
-Eventualmente estaremos aprendiendo a usar un framework de python.
-
-Tenemos que hacer propuesta con este proyecto.
-
----
-
-**POO - Programación Orientada a Objetos**
-
-Se le conoce como el paradigma o forma de programar, la forma en la que se resuelve un problema.
-
-Todo lo que existe en la vida real, son objetos. En otras palabras podemos pensar de nuestras tablas como objetos.
-
----
-
-¿Qué seria una clase?
-
-Algo que agrupa objetos, podemos pensarlo como un conjunto de cosas en común, podemos pensarlo como un fabricante de objetos.
-
-    El objeto es una instancia de una clase.
-
-    Una instancia es una creación
-
-    Esto significa que el objeto representa a una clase o que fue creado con una clase.
-
-    Es como pensarlo como clase vehiculo con atributos de modelo, placa, color, metodos como acelerar, frenar.
-
-Entonces los objetos se crean a partir de una plantilla llamada clase.
-
-> A la final somos usuarios tambien.
-
-Por lo que tenemos una clase, hacemos una instanciación y de ahí sale un objeto que contiene atributos (datos) y metodos (funciones)
-
----
-
-POO tiene 4 pilares para dar solución a problemas.
-
-1. Abstracción: Proceso de definir atributos y metodos de una clase
-
-2. Encapsulamiento: Protege la información de manipulaciones no autorizadas.
-
-3. Polimorfismo: Da la misma orden a varios objetos para que respondan de diferentes formas
-
-4. Herencia: Las instancias heredan los atributos y metodos de la clase
-
-```python
-    #nombre/identificador de la clase
-    #class es palabra reservada
-    class Coche:
-        """Docstring: Esta clase define el estado y el 
-    comportamiento de un coche"""
-        #atributos de clase
-        ruedas=4
-        #constructor
-        def __init__(self, color, aceleracion):
-            #atributos de instancia
-            self.color= color
-            self.acceleracion=aceleracion
-            self.velocidad=0
-        #métodos
-        def acelera(self):
-            self.velocidad=self.velocidad+self.aceleracion
-        def frena(self):
-            v=self.velocidad - self.aceleracion
-            if v<0:
-                v=0
-            self.velocidad=v
 ```
-
-Hay una función que se llama constructor que es __init que cuando se necesite un objeto coche tenga (por eso self debido a una referencia a si mismo.) los parametros como color, aceleracion, velocidad.
-
-Los atributos de la clase con los "propios" de la clase y existen atributos de clase y atributos de instancia.
-
-```python
-    c1 = Coche('rojo', 20)
-    c2 = Coche('azul', 20)
-
-    print(c1.color) #rojo
-    print(c2.color) #azul
-
-    print(c1.ruedas) # Atributo de clase, resultado 4
-    print(c2.ruedas) # Atributo de clase, resultado 4
-
-    Coche.ruedas = 6 # Atributo de clase, resultado 6
-
-    print(c1.ruedas) # Atributo de clase, resultado 6
-    print(c2.ruedas) # Atributo de clase, resultado 6
-```
-
-O en otro caso:
-
-```python
-    c1 = Coche('rojo', 20)
-    c2 = Coche('azul', 20)
-
-    print(c1.color) #rojo
-    print(c2.color) #azul
-
-    print(c1.ruedas) # Atributo de clase, resultado 4
-    print(c2.ruedas) # Atributo de clase, resultado 4
-
-    c1.ruedas = 6
-
-    print(c1.ruedas) # Atributo de clase, resultado 6
-    print(c2.ruedas) # Atributo de clase, resultado 6
+02-codificar-el-software/
+├── 01-fundamentos-python-1/
+│   ├── 0-python-essentials-1-certificate.pdf
+│   ├── 01-introduccion.md
+│   ├── 02-cadenas-y-maths.md
+│   ├── 03-inputs-condicionales-bucle.md
+│   ├── 04-bucle-y-bit-a-bit.md
+│   ├── 05-bit-a-bit.md
+│   ├── 06-listas.md
+│   ├── 07-algoritmo-burbuja.md
+│   ├── 08-operaciones-con-listas.md
+│   ├── 09-aplicaciones-avanzadas-listas.md
+│   ├── 10-prueba-de-modulo.md
+│   ├── 11-funciones.md
+│   └── README.md
+│
+├── 02-fundamentos-python-2/
+│   ├── 0-python-essentials-2-certificate.pdf
+│   ├── 01-modulo-paquetes-pip.md
+│   ├── 02-caracteres-y-cadenas-vs-pc.md
+│   ├── 03-prueba-modulo-caracteres.md
+│   ├── 04-fundamentos-poo.md
+│   ├── 05-miscelaneos.md
+│   └── README.md
+│
+├── 03-CRUD/
+│   ├── 01-crud-ejemplo-bd/
+│   │   ├── config/
+│   │   ├── models/
+│   │   ├── services/
+│   │   ├── ejemplo_db.sql
+│   │   ├── main.py
+│   │   └── README.md
+│   └── 02-crud-operpan/
+│       ├── assets/
+│       ├── config/
+│       ├── models/
+│       ├── services/
+│       ├── .gitignore
+│       ├── main.py
+│       ├── README.md
+│       └── requirements.txt
+│
+├── 04-POO/
+│   ├── POO-1.py
+│   ├── POO-2.py
+│   ├── POO-3-granja.py
+│   └── README.md
+│
+├── 05-Django/
+│   ├── django_santiagoencodigo/
+│   │   ├── django_santiagoencodigo/
+│   │   ├── projectApp/
+│   │   ├── manage.py
+│   │   └── requirements.txt
+│   ├── miweb/
+│   │   ├── inicio/
+│   │   ├── miweb/
+│   │   ├── templates/
+│   │   ├── manage.py
+│   │   └── requirements.txt
+│   ├── .gitignore
+│   └── README.md
+│
+├── 06-ORM/
+│   ├── miweb2/
+│   ├── miweb3/
+│   ├── .gitignore
+│   └── README.md
+│
+├── 07-CRUD-hojas-de-hielo/
+│   ├── project/
+│   │   ├── hojitas/
+│   │   ├── imagenes/
+│   │   ├── project/
+│   │   ├── manage.py
+│   │   └── requirements.txt
+│   ├── .gitignore
+│   └── README.md
+│
+├── 08-dos-apps/
+│   ├── config/
+│   ├── .gitignore
+│   └── README.md
+│
+├── 09-SCRUM.md
+├── 10-documentacion-django.md
+├── README.md
+├── .gitignore
+└── index.html
 ```
 
 ---
 
-La herencia es reutilizar código en lo posible.
+## Módulos
 
-Observe el código a continuación
+### 1. Fundamentos de Python 1
+Carpeta `01-fundamentos-python-1`
 
-```python
-#la clase CocheVolador hereda de la clase Coche
-class CocheVolador(Coche):
-    ruedas = 6
-    def __init__(self, color, aceleracion, esta_volando=False):
-        # la función super(). Esta función devuelve un objeto 
-        # temporal de la superclase que permite invocar a los métodos 
-        # definidos en la misma.
-        super().__init__(color, aceleracion)
-        #se crea el atributo de instancia esta_volando solo para 
-        # objetos de la clase CocheVolador.
-        self.esta_volando = esta_volando
+Introducción a la sintaxis y estructuras básicas del lenguaje:
+- Variables, cadenas, operaciones matemáticas.
+- Entrada de datos, condicionales, bucles.
+- Operaciones bit a bit.
+- Listas, algoritmos de ordenamiento (burbuja).
+- Aplicaciones avanzadas con listas.
+- Funciones y prueba de módulo.
+- Incluye el certificado *Python Essentials 1* como referencia.
 
-    def vuela(self):
-        self.esta_volando = True
+### 2. Fundamentos de Python 2
+Carpeta `02-fundamentos-python-2`
 
-    def aterriza(self):
-        self.esta_volando = False
+Temas más avanzados:
+- Módulos, paquetes y uso de pip.
+- Manejo de caracteres y cadenas.
+- Pruebas de módulos.
+- Fundamentos de Programación Orientada a Objetos (POO).
+- Misceláneos de utilidad.
+- Incluye el certificado *Python Essentials 2*.
 
-c = Coche('azul', 10)
-cv1 = CocheVolador('rojo', 60)
+### 3. CRUD
+Carpeta `03-CRUD`
 
-print(cv1.color) #resultado rojo
-print(cv1.esta_volando) #resultado False
+Implementación de operaciones básicas sobre bases de datos. Dos ejemplos:
 
-cv1.acelera()
+- **`01-crud-ejemplo-bd`**: CRUD básico con estructura de configuración, modelos y servicios. Incluye un script `main.py` y un archivo SQL de ejemplo.
+- **`02-crud-operpan`**: CRUD aplicado al proyecto **OperPan**. Contiene modelos para `Usuario` y `SolicitudEmpleado`, servicios para cada uno, configuración de base de datos y un `main.py` ejecutable.
 
-print(cv1.velocidad) #resultado 60
-print(CocheVolador.ruedas) #resultado 6
-print(c.esta_volando) #resultado Traceback (most recent call last)...        
-```
+### 4. Programación Orientada a Objetos (POO)
+Carpeta `04-POO`
 
-Funciones para tener en cuenta en donde a veces
+Ejercicios prácticos que ilustran los pilares de la POO en Python:
+- `POO-1.py`: clases, atributos, métodos, herencia simple.
+- `POO-2.py`: encapsulamiento con atributos privados (`_` y `__`).
+- `POO-3-granja.py`: polimorfismo mediante una función que opera sobre distintos tipos de objetos.
+- Un `README.md` que explica cada archivo y los conceptos clave.
 
-Esta la función type() para saber que tipo de dato, entonces tenemos las funciones isinstance() e issubclass() para saber de qué clase viene.
+### 5. Django
+Carpeta `05-Django`
 
-```python
-    print(isinstance(c, Coche))               # True
-    print(isinstance(cv, Coche))              # True
-    print(isinstance(c, CocheVolador))        # False
-    print(isinstance(cv, CocheVolador))       # True
-    print(issubclass(CocheVolador, Coche))    # True
-    print(issubclass(Coche, CocheVolador))    # False
-```
+Introducción al framework web Django. Contiene dos proyectos de ejemplo:
 
-Existe la herencia multiple en donde tengo a varios hijos que les puedo dar varias cosas a la vez. Entonces basicamente, esto significa que puedo tener 2 padres en una instancia.
+- **`django_santiagoencodigo`**: proyecto base con una aplicación `projectApp`. Muestra la estructura básica de Django (settings, urls, views, models).
+- **`miweb`**: proyecto con dos aplicaciones (`inicio` y `miweb`), incluye templates y archivos de gestión. Proporciona una base para desarrollar aplicaciones web completas.
 
-```python
-    class A:
-        def print_a(self):
-            print(a)
-    class B:
-        def print_b(self):
-            print(b)
+Ambos proyectos incluyen `requirements.txt` para instalar las dependencias necesarias.
 
-    # Clase 3 hereda entonces A y B
-    class C(A,B):
-        def print_c(self):
-            print(c)
-```
+### 6. ORM (Object-Relational Mapping)
+Carpeta `06-ORM`
 
----
+Uso del ORM de Django para interactuar con bases de datos. Se incluyen dos proyectos (`miweb2` y `miweb3`) que muestran la definición de modelos, consultas, relaciones y migraciones. El README de esta carpeta detalla los ejemplos.
 
-Encapsulación: Atributos privados.
+### 7. CRUD Hojas de Hielo
+Carpeta `07-CRUD-hojas-de-hielo`
 
-Por defecto python tiene los atributos publicos y hay una forma de tenerlos privados, en donde entornos de desarrollo como JAVA pide encapsular 
+Proyecto CRUD para el caso de estudio **Hojas de Hielo**. La aplicación `hojitas` contiene modelos, formularios, vistas y templates, y está integrada con el proyecto principal. Incluye archivos de migración y requerimientos.
 
-> Encapsular es uno por uno.
+### 8. Dos Apps
+Carpeta `08-dos-apps`
 
-Python puede ser flexible, pero como todo hay cosas buenas y cosas malas.
+Ejercicio que demuestra cómo estructurar un proyecto Django con dos aplicaciones independientes, fomentando la modularidad y reutilización de código.
 
-```python
-    class A:
-        def __init__(self):
-            self._contador = 0  # Este atributo es privado
-        def incrementa(self):
-            self._contador += 1
-        def cuenta(self):
-            return self._contador
+### 9. Documentación de Scrum
+Archivo `09-SCRUM.md`
 
-    class B(object):
-        def __init__(self):
-            self.__contador = 0  # Este atributo es privado
-        def incrementa(self):
-            self.__contador += 1
-        def cuenta(self):
-            return self.__contador
+Guía sobre el marco de trabajo Scrum: roles, eventos, artefactos y su aplicación en el desarrollo del proyecto formativo. Incluye recomendaciones para la planificación de sprints y la gestión del equipo.
 
-    # Pruebas con la clase A
-    a = A()
-    a.incrementa()
-    a.incrementa()
-    a.incrementa()
-    print(a.cuenta()) # #3
-    print(a._contador) # #3
+### 10. Documentación de Django
+Archivo `10-documentacion-django.md`
 
-    # Pruebas con la clase B
-    b = B()
-    b.incrementa()
-    b.incrementa()
-    print(b.cuenta()) # #2
-    # print(b.__contador) # Traceback...AttributeError: 'B' object has no attribute '__contador'. Did you mean: '_B__contador'?
-    print(b._B__contador) # #2
-```
+Resumen de buenas prácticas, comandos útiles y conceptos avanzados de Django, complementario a los proyectos de ejemplo.
 
-* La forma de darle entender al lenguaje es el guion bajo que contenemos al momento de crear la función como self._contador += 1
-
-* Cuando usamos el doble guion bajo no vamos a tener ningún acceso a la función.
+### Archivos adicionales
+- `README.md`: este archivo.
+- `.gitignore`: reglas para ignorar archivos innecesarios (entornos virtuales, cachés, etc.).
+- `index.html`: posible punto de entrada para pruebas de frontend (no central en este módulo).
 
 ---
 
-**Polimorfismo**
+## Tecnologías Utilizadas
 
-Es cuando yo puedo hacer varios objetos o cuando puedo instanciar a diferentes clases para que podamos hacer una misma acción.
-
-En donde entonces obsere el siguente objeto:
-
-```python
-# Definición de clases.
-
-    class Perro:
-        def sonido(self):
-            print("wofff wofff")
-
-    class Gato:
-    def sonido(self):
-        print("Miauuuuuuuuuuu")
-
-    class Vaca:
-    def sonido(self):
-        print("Muuuuuuuuuuu")
-
-    # Función que recibe una lista de objetos
-    # y llama al método "sonido" de cada uno
-    def a_cantar(animales):
-        for animal in animales:
-            animal.sonido()  # aquí ocurre el polimorfismo
-
-    # Punto de entrada del programa
-    if __name__ == '__main__':
-        perro = Perro()
-        gato = Gato()
-        gato_2 = Gato()
-        vaca = Vaca()
-        perro_2 = Perro()
-
-        # Lista con diferentes tipos de objetos
-        granja = [perro, gato, vaca, gato_2, perro_2]
-
-        # Ejecuta la función
-        a_cantar(granja)
-```
-
-Esto tiene como función ahorrarnos bastante código.
-
-
-
-
-
-
-
-
-
+- **Lenguajes**: Python 3.x, SQL, HTML/CSS (básico para templates).
+- **Frameworks**: Django 4.x.
+- **Bases de datos**: SQLite (por defecto) y MySQL (configurable en algunos ejemplos).
+- **Control de versiones**: Git y GitHub.
+- **Entorno**: Visual Studio Code, terminal, pip, entornos virtuales.
 
 ---
 
+## Instrucciones de Ejecución
 
+Cada subcarpeta contiene sus propias instrucciones en su respectivo `README.md`. A continuación, una guía general:
 
+1. **Clonar el repositorio** y navegar a la carpeta deseada.
+2. **Crear un entorno virtual** (recomendado):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate      # Linux/Mac
+   venv\Scripts\activate         # Windows
+   ```
+3. **Instalar dependencias** (cuando exista `requirements.txt`):
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. **Ejecutar scripts Python** (ej. `main.py`) o **servidores Django**:
+   ```bash
+   python manage.py runserver
+   ```
 
-
-
-
-
-
-
-Luego de un tiempo, se empezo a hacer backend con django y esto trajo problemas a mi repositorio respecto al build frontend de github pages.
-
-En donde:
-
-GitHub Pages estaba funcionando pero:
-* luego agregaste Django
-* GitHub Actions/Jekyll empezó a intentar “procesar” el repo completo
-* y el deploy se rompió
-
-Por lo que hay que configurar GitHub Pages para: “Ignorar Django y publicar SOLO los archivos estáticos” y por ende: Usar “Deploy static files”
+Consulte la documentación específica de cada módulo para detalles adicionales.
 
 ---
+
+*Última actualización: julio de 2026*
