@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ============================================== -->
+    <!-- SEO BÁSICO Y AVANZADO                          -->
+    <!-- ============================================== -->
+    <title>Trimestre 5 - Análisis y Desarrollo de Software SENA | santiagoencodigo</title>
+    <meta name="description"
+        content="Proyectos del Trimestre 5 del Tecnólogo en Análisis y Desarrollo de Software (ADSO) del SENA. Creación de componentes frontend avanzados, Bootstrap y maquetación semántica.">
+    <meta name="keywords"
+        content="ADSO, Trimestre 5, SENA, componentes frontend, Bootstrap, maquetación semántica, CSS avanzado, desarrollo web, santiagoencodigo">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Spanish">
+    <meta name="revisit-after" content="7 days">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- URL CANÓNICA -->
+    <link rel="canonical" href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software">
+
+    <!-- ============================================== -->
+    <!-- OPEN GRAPH                                     -->
+    <!-- ============================================== -->
+    <meta property="og:type" content="website">
+    <meta property="og:url"
+        content="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software">
+    <meta property="og:title" content="Trimestre 5 | Análisis y Desarrollo de Software SENA">
+    <meta property="og:description"
+        content="Proyectos del Trimestre 5 del Tecnólogo en ADSO. Componentes frontend, Bootstrap y maquetación semántica.">
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/main/assets/og-image.jpg">
+    <meta property="og:image:alt" content="Trimestre 5 - Portada">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Guía Completa ADSO">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- ============================================== -->
+    <!-- TWITTER CARD                                   -->
+    <!-- ============================================== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@santiagoencodigo">
+    <meta name="twitter:creator" content="@santiagoencode">
+    <meta name="twitter:title" content="Trimestre 5 | SENA">
+    <meta name="twitter:description"
+        content="Proyectos del Trimestre 5 del Tecnólogo en Análisis y Desarrollo de Software.">
+    <meta name="twitter:image"
+        content="https://raw.githubusercontent.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/main/assets/og-image.jpg">
+    <meta name="twitter:image:alt" content="Trimestre 5 - Portada">
+
+    <!-- ============================================== -->
+    <!-- HOJAS DE ESTILOS                               -->
+    <!-- ============================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos propios (desde la raíz) -->
+    <link rel="stylesheet" href="../Assets/style.css">
+
+    <!-- ============================================== -->
+    <!-- FAVICON (apuntando a Assets raíz)             -->
+    <!-- ============================================== -->
+    <link rel="shortcut icon" href="../Assets/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="icon" href="../Assets/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="../Assets/img/1-person-icon.svg">
+
+    <!-- ============================================== -->
+    <!-- DATOS ESTRUCTURADOS (Schema.org)               -->
+    <!-- ============================================== -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "EducationalResource",
+            "name": "Trimestre 5 - Análisis y Desarrollo de Software (ADSO)",
+            "description": "Repositorio de proyectos y ejercicios del Trimestre 5 del Tecnólogo en ADSO del SENA. Enfocado en componentes frontend y Bootstrap.",
+            "author": {
+                "@type": "Person",
+                "name": "santiagoencodigo",
+                "url": "https://github.com/santiagoencodigo"
+            },
+            "provider": {
+                "@type": "Organization",
+                "name": "SENA - Servicio Nacional de Aprendizaje",
+                "url": "https://www.sena.edu.co"
+            },
+            "educationalLevel": "Tecnólogo",
+            "teaches": [
+                "Componentes Frontend",
+                "Bootstrap",
+                "Maquetación Semántica",
+                "CSS Avanzado"
+            ],
+            "inLanguage": "es"
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN CON BOOTSTRAP              -->
+    <!-- ============================================== -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <!-- Logo -->
+                <a href="../index.html#inicio" class="navbar-brand nav-logo" aria-label="Ir al inicio">
+                    <img src="../Assets/img/1-person-icon.svg"
+                        alt="Logo ADSO"
+                        class="nav-logo-img">
+                    ADSO
+                </a>
+
+                <!-- Botón hamburguesa (Bootstrap) -->
+                <button class="navbar-toggler nav-toggle" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menú colapsable -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#contexto">Contexto</a>
+                        </li>
+
+                        <!-- Dropdown Trimestres con Bootstrap -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#trimestres"
+                            id="trimestresDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-6/index.html">Trimestre 6</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#proyectos">Proyectos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../sitemap.html">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#mapa-de-sitio">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================================== -->
+    <!-- CONTENIDO PRINCIPAL                            -->
+    <!-- ============================================== -->
+    <main>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN HERO (Trimestre 5)                -->
+        <!-- ========================================== -->
+        <section id="inicio" class="hero-section" aria-labelledby="hero-title">
+            <!-- Fondo animado -->
+            <div class="hero-background">
+                <div class="bg-grid" aria-hidden="true"></div>
+                <div class="bg-matrix" aria-hidden="true"></div>
+                <div class="bg-orb" aria-hidden="true"></div>
+            </div>
+
+            <div class="hero-container">
+                <h1 id="hero-title" class="hero-title">
+                    <span class="title-line gradient-text">Trimestre 5</span>
+                    <span class="title-line">Análisis y Desarrollo</span>
+                    <span class="title-line">de Software</span>
+                </h1>
+
+                <p class="hero-description">
+                    Proyectos y ejercicios prácticos desarrollados durante el quinto trimestre
+                    del Tecnólogo en Análisis y Desarrollo de Software (ADSO) del SENA.
+                </p>
+
+                <div class="adso-card">
+                    <h2 class="adso-title">Enfoque del trimestre</h2>
+                    <p class="adso-text">
+                        Creación de componentes frontend avanzados, integración con Bootstrap
+                        y profundización en maquetación semántica. Se aborda la arquitectura
+                        de interfaces modernas y reutilizables.
+                    </p>
+                    <div class="adso-stats">
+                        <div class="stat">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Trimestre</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Proyectos destacados</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SUBSECCIÓN: PROYECTOS TRIMESTRE #5        -->
+        <!-- ========================================== -->
+        <div class="projects-header">
+            <h3 class="projects-title">
+                Proyectos - Trimestre #5 (Componentes Avanzados)
+            </h3>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Proyecto 7: Réplica Laika -->
+            <article class="project-card">
+                <div class="card-image-wrapper">
+                    <!-- CORREGIDO: ruta a la imagen (sube un nivel a Assets) -->
+                    <img src="../Assets/img/2-paginas-quinto-trimestre/1-ejercicio-1-laika.png"
+                        alt="Captura de pantalla de la réplica de la tienda Laika con componentes avanzados">
+                    <div class="image-overlay">
+                        <span class="overlay-icon" aria-hidden="true">
+                            <i class="fa-solid fa-paw"></i>
+                        </span>
+                        <span class="overlay-text">Ver proyecto</span>
+                    </div>
+                    <div class="project-badge">CSS Avanzado</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="project-name">Réplica Laika - Tienda Mascotas</h3>
+                    <p class="project-description">
+                        Maquetación fiel de componentes de la tienda Laika. Incluye banner "Miles de historias
+                        juntos",
+                        banner espacial "EL UNIVERSO PARA TU PET-AMIGO", grilla de servicios y banner "Días Morados"
+                        con efecto neón.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Flexbox</span>
+                        <span class="tag">CSS Grid</span>
+                        <span class="tag">Neon Effect</span>
+                        <span class="tag">SVG Icons</span>
+                        <span class="tag">Banners</span>
+                    </div>
+                    <!-- CORREGIDO: enlace directo (sin prefijo trimestre-5/) -->
+                    <a href="./01-crear-componentes-frontend/01-laika-native/sesion1-2-laika.html"
+                        class="card-button" target="_blank" rel="noopener noreferrer">
+                        <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span> Ver
+                        proyecto
+                        <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                </div>
+                <div class="card-glow" aria-hidden="true"></div>
+            </article>
+
+            <!-- Proyecto 8: Maquetación Semántica -->
+            <article class="project-card">
+                <div class="card-image-wrapper">
+                    <!-- CORREGIDO -->
+                    <img src="../Assets/img/2-paginas-quinto-trimestre/1-ejercicio-2-maquetacion.png"
+                        alt="Captura de pantalla del esquema de maquetación semántica con Flexbox">
+                    <div class="image-overlay">
+                        <span class="overlay-icon" aria-hidden="true">
+                            <i class="fa-solid fa-ruler-combined"></i>
+                        </span>
+                        <span class="overlay-text">Ver proyecto</span>
+                    </div>
+                    <div class="project-badge">HTML Semántico</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="project-name">Maquetación Semántica - Flex Layout</h3>
+                    <p class="project-description">
+                        Representación abstracta de estructura HTML mediante bloques de colores sólidos. Header,
+                        Nav, Secciones, Articles y Footer. Ejercicio fundamental de arquitectura web.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">HTML5 Semántico</span>
+                        <span class="tag">Flexbox</span>
+                        <span class="tag">Header/Nav</span>
+                        <span class="tag">Section/Article</span>
+                        <span class="tag">Footer</span>
+                    </div>
+                    <!-- CORREGIDO -->
+                    <a href="./01-crear-componentes-frontend/02-aprendizaje-bootstrap/sesion1-1.html"
+                        class="card-button" target="_blank" rel="noopener noreferrer">
+                        <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span> Ver
+                        proyecto
+                        <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                </div>
+                <div class="card-glow" aria-hidden="true"></div>
+            </article>
+        </div>
+
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER / MAPA DE SITIO (REDISEÑADO)          -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" id="mapa-de-sitio" class="bg-hero">
+        <style>
+            /* Estilos exclusivos para el footer rediseñado */
+            #mapa-de-sitio .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #mapa-de-sitio .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #mapa-de-sitio .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #mapa-de-sitio .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #mapa-de-sitio .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            /* Colores de hover individuales (nth-child) para todos los enlaces */
+            /* Columna 1: Navegación (5 enlaces) */
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(1) .footer-link:hover { color: #3b82f6; }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(2) .footer-link:hover { color: #4b8ef7; }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(3) .footer-link:hover { color: #5b9af8; }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(4) .footer-link:hover { color: #6ba6f9; }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(5) .footer-link:hover { color: #7bb2fa; }
+
+            /* Columna 2: Trimestres (6 enlaces) */
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(1) .footer-link:hover { color: #8bbefb; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(2) .footer-link:hover { color: #9bcafc; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(3) .footer-link:hover { color: #abd6fd; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(4) .footer-link:hover { color: #bbe2fe; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(5) .footer-link:hover { color: #cbeefe; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(6) .footer-link:hover { color: #dbfaff; }
+
+            /* Columna 3: Recursos (3 enlaces) */
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(1) .footer-link:hover { color: #67e8f9; }
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(2) .footer-link:hover { color: #22d3ee; }
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(3) .footer-link:hover { color: #06b6d4; }
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(4) .footer-link:hover { color: #05a7c4; }
+
+            /* Créditos al final (fuera del grid) */
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            .footer-bottom a {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+            }
+
+            .footer-bottom a:hover {
+                color: var(--color-accent-blue);
+            }
+
+            /* Responsive: tablet y móvil */
+            @media (max-width: 768px) {
+                #mapa-de-sitio .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #mapa-de-sitio .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
+        <!-- Grid de 3 columnas -->
+        <div class="footer-grid">
+            <!-- Columna 1: Navegación -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="../index.html#contexto" class="footer-link">Contexto</a></li>
+                    <li><a href="../index.html#trimestres" class="footer-link">Estructura</a></li>
+                    <li><a href="../index.html#proyectos" class="footer-link">Proyectos</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 2: Trimestres -->
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../trimestre-1/index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Recursos -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="./trimestre-5/01-crear-componentes-frontend/06-project-blueprint/index.html" target="_blank" rel="noopener noreferrer">Project Blueprint: Roadmap</a>
+
+
+        <!-- Barra inferior con créditos -->
+        <div class="footer-bottom">
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+            <p>&copy; 2026 - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (necesario para el menú) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ============================================== -->
+    <!-- SCRIPTS PARA EL MENÚ HAMBURGUESA             -->
+    <!-- ============================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Script del menú hamburguesa y dropdown
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navbarNav');
+
+            if (navToggle && navMenu) {
+                // Crear overlay si no existe
+                let navOverlay = document.querySelector('.nav-overlay');
+                if (!navOverlay) {
+                    navOverlay = document.createElement('div');
+                    navOverlay.className = 'nav-overlay';
+                    document.body.appendChild(navOverlay);
+                }
+
+                function toggleMenu() {
+                    const isOpen = navMenu.classList.contains('show');
+                    navMenu.classList.toggle('show');
+                    navToggle.classList.toggle('active');
+                    navOverlay.classList.toggle('active');
+                    navToggle.setAttribute('aria-expanded', !isOpen);
+                    document.body.style.overflow = !isOpen ? 'hidden' : '';
+                }
+
+                navToggle.addEventListener('click', toggleMenu);
+
+                navOverlay.addEventListener('click', function () {
+                    if (navMenu.classList.contains('show')) {
+                        toggleMenu();
+                    }
+                });
+
+                // Cerrar menú al hacer clic en un enlace (en móvil)
+                const menuLinks = navMenu.querySelectorAll('a');
+                menuLinks.forEach(function (link) {
+                    link.addEventListener('click', function (e) {
+                        // Si es un dropdown en móvil, no cerrar inmediatamente
+                        if (window.innerWidth <= 768 &&
+                            link.closest('.dropdown') &&
+                            link.getAttribute('href') === '#trimestres') {
+                            e.preventDefault();
+                            const dropdownMenu = link.nextElementSibling;
+                            if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                                dropdownMenu.classList.toggle('show');
+                            }
+                            return;
+                        }
+                        // Cerrar menú al hacer clic en cualquier enlace (excepto dropdown toggles)
+                        if (navMenu.classList.contains('show')) {
+                            toggleMenu();
+                        }
+                    });
+                });
+
+                // Cerrar menú al redimensionar a >768px
+                window.addEventListener('resize', function () {
+                    if (window.innerWidth > 768 && navMenu.classList.contains('show')) {
+                        toggleMenu();
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

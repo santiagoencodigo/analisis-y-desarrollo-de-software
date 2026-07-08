@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ============================================== -->
+    <!-- SEO BÁSICO Y AVANZADO                          -->
+    <!-- ============================================== -->
+    <title>Trimestre 3 - Análisis y Desarrollo de Software SENA | santiagoencodigo</title>
+    <meta name="description"
+        content="Proyectos del Trimestre 3 del Tecnólogo en Análisis y Desarrollo de Software (ADSO) del SENA. Bases de datos, SQL, triggers, XAMPP, JavaScript y Python." />
+    <meta name="keywords"
+        content="ADSO, Trimestre 3, SENA, bases de datos, SQL, triggers, XAMPP, JavaScript, Python, santiagoencodigo" />
+    <meta name="author" content="santiagoencodigo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Spanish" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- URL CANÓNICA -->
+    <link rel="canonical" href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software" />
+
+    <!-- ============================================== -->
+    <!-- OPEN GRAPH                                     -->
+    <!-- ============================================== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url"
+        content="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software" />
+    <meta property="og:title" content="Trimestre 3 | Análisis y Desarrollo de Software SENA" />
+    <meta property="og:description"
+        content="Proyectos del Trimestre 3 del Tecnólogo en ADSO. Bases de datos, SQL, triggers, XAMPP, JavaScript y Python." />
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/main/assets/og-image.jpg" />
+    <meta property="og:image:alt" content="Trimestre 3 - Portada" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Guía Completa ADSO" />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- ============================================== -->
+    <!-- TWITTER CARD                                   -->
+    <!-- ============================================== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@santiagoencodigo" />
+    <meta name="twitter:creator" content="@santiagoencode" />
+    <meta name="twitter:title" content="Trimestre 3 | SENA" />
+    <meta name="twitter:description"
+        content="Proyectos del Trimestre 3 del Tecnólogo en Análisis y Desarrollo de Software." />
+    <meta name="twitter:image"
+        content="https://raw.githubusercontent.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/main/assets/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Trimestre 3 - Portada" />
+
+    <!-- ============================================== -->
+    <!-- HOJAS DE ESTILOS                               -->
+    <!-- ============================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Estilos propios (desde la raíz) -->
+    <link rel="stylesheet" href="../Assets/style.css" />
+
+    <!-- ============================================== -->
+    <!-- FAVICON (usando la ruta de trimestre-4)       -->
+    <!-- ============================================== -->
+    <link rel="shortcut icon" href="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml" />
+    <link rel="icon" href="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" />
+
+    <!-- ============================================== -->
+    <!-- DATOS ESTRUCTURADOS (Schema.org)               -->
+    <!-- ============================================== -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "EducationalResource",
+            "name": "Trimestre 3 - Análisis y Desarrollo de Software (ADSO)",
+            "description": "Repositorio de proyectos y ejercicios del Trimestre 3 del Tecnólogo en ADSO del SENA. Enfocado en bases de datos, SQL, triggers, XAMPP, JavaScript y Python.",
+            "author": {
+                "@type": "Person",
+                "name": "santiagoencodigo",
+                "url": "https://github.com/santiagoencodigo"
+            },
+            "provider": {
+                "@type": "Organization",
+                "name": "SENA - Servicio Nacional de Aprendizaje",
+                "url": "https://www.sena.edu.co"
+            },
+            "educationalLevel": "Tecnólogo",
+            "teaches": [
+                "Bases de Datos",
+                "SQL",
+                "Triggers",
+                "XAMPP",
+                "JavaScript",
+                "Python"
+            ],
+            "inLanguage": "es"
+        }
+    </script>
+
+    <!-- Estilos adicionales para el contenido Markdown y layout de una sola columna -->
+    <style>
+        /* Contenedor de scroll para el contenido Markdown - más grande */
+        .markdown-scroll {
+            max-height: 700px;
+            overflow-y: auto;
+            padding: 1.5rem;
+            background-color: #0d1117;
+            border-radius: 8px;
+            border: 1px solid #2d333b;
+            color: #c9d1d9;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .markdown-scroll h1,
+        .markdown-scroll h2,
+        .markdown-scroll h3 {
+            color: #f0f6fc;
+            margin-top: 0.75rem;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.3rem;
+        }
+
+        .markdown-scroll h1 {
+            font-size: 1.6rem;
+        }
+        .markdown-scroll h2 {
+            font-size: 1.4rem;
+        }
+        .markdown-scroll h3 {
+            font-size: 1.2rem;
+        }
+
+        .markdown-scroll p {
+            margin: 0.6rem 0;
+        }
+
+        /* Enlaces dentro del Markdown - hover oscuro */
+        .markdown-scroll a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        .markdown-scroll a:hover {
+            color: #555 !important;
+            text-decoration: underline;
+        }
+
+        .markdown-scroll ul,
+        .markdown-scroll ol {
+            padding-left: 1.5rem;
+        }
+
+        .markdown-scroll code {
+            background-color: #1e242c;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #e6edf3;
+        }
+
+        .markdown-scroll pre {
+            background-color: #161b22;
+            padding: 0.8rem;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        .markdown-scroll pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .markdown-scroll blockquote {
+            border-left: 4px solid #30363d;
+            padding-left: 1rem;
+            color: #8b949e;
+            margin-left: 0;
+        }
+
+        .markdown-scroll img {
+            max-width: 100%;
+            border-radius: 6px;
+        }
+
+        .markdown-scroll table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .markdown-scroll th,
+        .markdown-scroll td {
+            border: 1px solid #30363d;
+            padding: 0.4rem 0.6rem;
+        }
+
+        .markdown-scroll th {
+            background-color: #1e242c;
+        }
+
+        /* Layout de una sola columna */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .project-card {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .project-card .card-content {
+            padding: 1.5rem;
+        }
+
+        .project-card .card-content .project-name {
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card .card-content .card-button {
+            margin-top: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Eliminar el espacio de la imagen en estas tarjetas */
+        .project-card.no-image .card-image-wrapper {
+            display: none;
+        }
+
+        .project-card.no-image .card-content {
+            padding-top: 1.5rem;
+        }
+
+        /* Tarjeta para imagen (calculadora) */
+        .project-card.image-card .card-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin: 0.5rem 0 1rem 0;
+            border: 1px solid #2d333b;
+            background-color: #0d1117;
+        }
+
+        /* Tarjeta para carpetas de Python (ahora con un solo botón a GitHub) */
+        .project-card.folder-card .folder-description {
+            color: #8b949e;
+            margin-bottom: 1rem;
+        }
+
+        /* Ajustes responsivos */
+        @media (max-width: 768px) {
+            .projects-grid {
+                padding: 0 0.5rem;
+                gap: 1.5rem;
+            }
+            .markdown-scroll {
+                max-height: 500px;
+                padding: 1rem;
+            }
+            .project-card.image-card .card-image {
+                max-height: 300px;
+            }
+        }
+
+        .projects-header {
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .projects-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .projects-description {
+            color: var(--color-text-secondary);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN CON BOOTSTRAP              -->
+    <!-- ============================================== -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <!-- Logo -->
+                <a href="../index.html#inicio" class="navbar-brand nav-logo" aria-label="Ir al inicio">
+                    <img src="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                        alt="Logo ADSO" class="nav-logo-img" />
+                    ADSO
+                </a>
+
+                <!-- Botón hamburguesa -->
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menú colapsable -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <!-- Eliminado "Contexto" -->
+
+                        <!-- Dropdown Trimestres -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#trimestres" id="trimestresDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-6/index.html">Trimestre 6</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#proyectos">Proyectos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../sitemap.html">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html#mapa-de-sitio">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================================== -->
+    <!-- CONTENIDO PRINCIPAL                            -->
+    <!-- ============================================== -->
+    <main>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN HERO (Trimestre 3)                -->
+        <!-- ========================================== -->
+        <section id="inicio" class="hero-section" aria-labelledby="hero-title">
+            <!-- Fondo animado -->
+            <div class="hero-background">
+                <div class="bg-grid" aria-hidden="true"></div>
+                <div class="bg-matrix" aria-hidden="true"></div>
+                <div class="bg-orb" aria-hidden="true"></div>
+            </div>
+
+            <div class="hero-container">
+                <h1 id="hero-title" class="hero-title">
+                    <span class="title-line gradient-text">Trimestre 3</span>
+                    <span class="title-line">Análisis y Desarrollo</span>
+                    <span class="title-line">de Software</span>
+                </h1>
+
+                <p class="hero-description">
+                    Bases de datos, SQL, triggers, XAMPP, JavaScript y Python.
+                    Desarrollo de habilidades en backend y fundamentos de programación.
+                </p>
+
+                <div class="adso-card">
+                    <h2 class="adso-title">Enfoque del trimestre</h2>
+                    <p class="adso-text">
+                        Se profundiza en el diseño y gestión de bases de datos relacionales,
+                        uso de SQL, triggers, configuración de entornos con XAMPP,
+                        y se introducen conceptos de JavaScript y Python para el desarrollo
+                        de aplicaciones.
+                    </p>
+                    <div class="adso-stats">
+                        <div class="stat">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Trimestre</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">14+</span>
+                            <span class="stat-label">Recursos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SUBSECCIÓN: PROYECTOS / RECURSOS          -->
+        <!-- ========================================== -->
+        <section id="proyectos" class="projects-section">
+            <div class="projects-header">
+                <h3 class="projects-title">
+                    Recursos - Trimestre #3
+                </h3>
+                <p class="projects-description">
+                    Documentación, scripts, imágenes y ejemplos de código. Cada tarjeta
+                    muestra el contenido o un enlace para visualizar/descargar.
+                </p>
+            </div>
+
+            <div class="projects-grid" id="markdown-cards-container">
+                <!-- Las tarjetas se generarán con JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER / MAPA DE SITIO (REDISEÑADO)          -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" id="mapa-de-sitio" class="bg-hero">
+        <style>
+            /* Estilos exclusivos para el footer rediseñado */
+            #mapa-de-sitio .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #mapa-de-sitio .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #mapa-de-sitio .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #mapa-de-sitio .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #mapa-de-sitio .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            /* Hovers de colores */
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(1) .footer-link:hover {
+                color: #3b82f6;
+            }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(2) .footer-link:hover {
+                color: #4b8ef7;
+            }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(3) .footer-link:hover {
+                color: #5b9af8;
+            }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(4) .footer-link:hover {
+                color: #6ba6f9;
+            }
+
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(1) .footer-link:hover {
+                color: #8bbefb;
+            }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(2) .footer-link:hover {
+                color: #9bcafc;
+            }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(3) .footer-link:hover {
+                color: #abd6fd;
+            }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(4) .footer-link:hover {
+                color: #bbe2fe;
+            }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(5) .footer-link:hover {
+                color: #cbeefe;
+            }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(6) .footer-link:hover {
+                color: #dbfaff;
+            }
+
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(1) .footer-link:hover {
+                color: #67e8f9;
+            }
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(2) .footer-link:hover {
+                color: #22d3ee;
+            }
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(3) .footer-link:hover {
+                color: #06b6d4;
+            }
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(4) .footer-link:hover {
+                color: #05a7c4;
+            }
+
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            .footer-bottom a {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+            }
+
+            .footer-bottom a:hover {
+                color: var(--color-accent-blue);
+            }
+
+            @media (max-width: 768px) {
+                #mapa-de-sitio .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #mapa-de-sitio .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
+        <!-- Grid de 3 columnas -->
+        <div class="footer-grid">
+            <!-- Columna 1: Navegación (sin "Contexto") -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="../index.html#trimestres" class="footer-link">Estructura</a></li>
+                    <li><a href="#proyectos" class="footer-link">Proyectos</a></li>
+                    <li><a href="../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 2: Trimestres -->
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../trimestre-1/index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Recursos -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank"
+                            rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github"></i>
+                            Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer"
+                            class="footer-link"><i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Barra inferior -->
+        <div class="footer-bottom">
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+            <p>&copy; 2026 - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================== -->
+    <!-- SCRIPTS                                        -->
+    <!-- ============================================== -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <!-- Librería marked.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
+    </script>
+
+    <!-- ============================================== -->
+    <!-- SCRIPTS PARA EL MENÚ HAMBURGUESA             -->
+    <!-- ============================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navbarNav');
+
+            if (navToggle && navMenu) {
+                let navOverlay = document.querySelector('.nav-overlay');
+                if (!navOverlay) {
+                    navOverlay = document.createElement('div');
+                    navOverlay.className = 'nav-overlay';
+                    document.body.appendChild(navOverlay);
+                }
+
+                function toggleMenu() {
+                    const isOpen = navMenu.classList.contains('show');
+                    navMenu.classList.toggle('show');
+                    navToggle.classList.toggle('active');
+                    navOverlay.classList.toggle('active');
+                    navToggle.setAttribute('aria-expanded', !isOpen);
+                    document.body.style.overflow = !isOpen ? 'hidden' : '';
+                }
+
+                navToggle.addEventListener('click', toggleMenu);
+
+                navOverlay.addEventListener('click', function() {
+                    if (navMenu.classList.contains('show')) {
+                        toggleMenu();
+                    }
+                });
+
+                const menuLinks = navMenu.querySelectorAll('a');
+                menuLinks.forEach(function(link) {
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 768 &&
+                            link.closest('.dropdown') &&
+                            link.getAttribute('href') === '#trimestres') {
+                            e.preventDefault();
+                            const dropdownMenu = link.nextElementSibling;
+                            if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                                dropdownMenu.classList.toggle('show');
+                            }
+                            return;
+                        }
+                        if (navMenu.classList.contains('show')) {
+                            toggleMenu();
+                        }
+                    });
+                });
+
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && navMenu.classList.contains('show')) {
+                        toggleMenu();
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- ============================================== -->
+    <!-- SCRIPT PARA GENERAR TARJETAS Y CARGAR MARKDOWN -->
+    <!-- ============================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Definición de recursos
+            const resources = [
+                // --- Markdown de databases ---
+                { type: 'markdown', id: 'db-readme', file: 'databases/README.md', title: '📄 databases/README.md' },
+                { type: 'markdown', id: 'db-sintaxis', file: 'databases/sintaxis-sql.md', title: '📄 sintaxis-sql.md' },
+                { type: 'markdown', id: 'db-triggers', file: 'databases/triggers.md', title: '📄 triggers.md' },
+                { type: 'markdown', id: 'db-xampp2', file: 'databases/xampp-2.md', title: '📄 xampp-2.md' },
+                { type: 'markdown', id: 'db-xampp', file: 'databases/xampp.md', title: '📄 xampp.md' },
+
+                // --- Markdown de investigacion ---
+                { type: 'markdown', id: 'inv-readme', file: 'investigacion/README.md', title: '📄 investigacion/README.md' },
+
+                // --- Markdown de main.js ---
+                { type: 'markdown', id: 'mainjs-readme', file: 'main.js/README.md', title: '📄 main.js/README.md' },
+
+                // --- Markdown de prueba-tecnica ---
+                { type: 'markdown', id: 'pt-readme', file: 'prueba-tecnica/README.md', title: '📄 prueba-tecnica/README.md' },
+
+                // --- Enlace a javascript/index.html ---
+                { type: 'link', id: 'js-index', title: '🌐 javascript/index.html', desc: 'Sitio web de JavaScript.',
+                    link: 'javascript/index.html' },
+
+                // --- Enlace a prueba-tecnica/index.html ---
+                { type: 'link', id: 'pt-index', title: '🌐 prueba-tecnica/index.html', desc: 'Sitio web de la prueba técnica.',
+                    link: 'prueba-tecnica/index.html' },
+
+                // --- Imagen calculadora.png ---
+                { type: 'image', id: 'calc-img', title: '🖼️ calculadora.png', image: 'prueba-tecnica/calculadora.png',
+                    desc: 'Vista previa del mockup de la calculadora.' },
+
+                // --- Carpeta Python: algoritmia (enlace a GitHub) ---
+                {
+                    type: 'folder',
+                    id: 'py-algoritmia',
+                    title: '🐍 Python - algoritmia',
+                    desc: 'Ejercicios de algoritmia con condicionales, operadores y listas.',
+                    githubUrl: 'https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/Python/algoritmia'
+                },
+
+                // --- Carpeta Python: modulos (enlace a GitHub) ---
+                {
+                    type: 'folder',
+                    id: 'py-modulos',
+                    title: '🐍 Python - modulos',
+                    desc: 'Módulos con ejercicios y datos.',
+                    githubUrl: 'https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/Python/modulos'
+                },
+
+                // --- Carpeta Python: modulos-2 (enlace a GitHub) ---
+                {
+                    type: 'folder',
+                    id: 'py-modulos2',
+                    title: '🐍 Python - modulos-2',
+                    desc: 'Módulos adicionales con calculadora y módulo principal.',
+                    githubUrl: 'https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/Python/Modulos-2'
+                },
+
+                // --- Carpeta Python: poo (enlace a GitHub) ---
+                {
+                    type: 'folder',
+                    id: 'py-poo',
+                    title: '🐍 Python - poo',
+                    desc: 'Ejercicios de Programación Orientada a Objetos.',
+                    githubUrl: 'https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/Python/poo'
+                }
+            ];
+
+            const container = document.getElementById('markdown-cards-container');
+            container.innerHTML = ''; // Limpiar
+
+            // --- Funciones para crear tarjetas ---
+
+            // Tarjeta Markdown
+            function createMarkdownCard(id, title, file) {
+                const card = document.createElement('article');
+                card.className = 'project-card no-image';
+                card.id = `card-${id}`;
+                card.innerHTML = `
+                    <div class="card-content">
+                        <h3 class="project-name">${title}</h3>
+                        <div class="markdown-scroll" id="markdown-${id}">
+                            <p style="color: #8b949e; text-align: center; padding: 2rem 0;">
+                                <i class="fa-solid fa-spinner fa-spin"></i> Cargando contenido...
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return card;
+            }
+
+            // Tarjeta de enlace (link)
+            function createLinkCard(id, title, desc, link) {
+                const card = document.createElement('article');
+                card.className = 'project-card no-image';
+                card.id = `card-${id}`;
+                card.innerHTML = `
+                    <div class="card-content">
+                        <h3 class="project-name">${title}</h3>
+                        <p style="color: #8b949e; margin-bottom: 1rem;">${desc}</p>
+                        <a href="${link}" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-link"></i></span>
+                            Abrir
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                `;
+                return card;
+            }
+
+            // Tarjeta de imagen
+            function createImageCard(id, title, image, desc) {
+                const card = document.createElement('article');
+                card.className = 'project-card image-card';
+                card.id = `card-${id}`;
+                card.innerHTML = `
+                    <div class="card-content">
+                        <h3 class="project-name">${title}</h3>
+                        <p style="color: #8b949e; margin-bottom: 0.5rem;">${desc}</p>
+                        <img src="${image}" alt="${title}" class="card-image" />
+                    </div>
+                `;
+                return card;
+            }
+
+            // Tarjeta de carpeta (ahora con un solo botón a GitHub)
+            function createFolderCard(id, title, desc, githubUrl) {
+                const card = document.createElement('article');
+                card.className = 'project-card folder-card no-image';
+                card.id = `card-${id}`;
+                card.innerHTML = `
+                    <div class="card-content">
+                        <h3 class="project-name">${title}</h3>
+                        <p class="folder-description">${desc}</p>
+                        <a href="${githubUrl}" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-brands fa-github"></i></span>
+                            Ver en GitHub
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                `;
+                return card;
+            }
+
+            // --- Construir tarjetas en orden ---
+            resources.forEach(item => {
+                let card;
+                switch (item.type) {
+                    case 'markdown':
+                        card = createMarkdownCard(item.id, item.title, item.file);
+                        break;
+                    case 'link':
+                        card = createLinkCard(item.id, item.title, item.desc, item.link);
+                        break;
+                    case 'image':
+                        card = createImageCard(item.id, item.title, item.image, item.desc);
+                        break;
+                    case 'folder':
+                        card = createFolderCard(item.id, item.title, item.desc, item.githubUrl);
+                        break;
+                    default:
+                        return;
+                }
+                container.appendChild(card);
+            });
+
+            // --- Cargar contenido Markdown ---
+            function loadMarkdown(file, elementId) {
+                fetch(file)
+                    .then(response => {
+                        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+                        return response.text();
+                    })
+                    .then(text => {
+                        const html = marked.parse(text);
+                        const target = document.getElementById(elementId);
+                        if (target) {
+                            target.innerHTML = html;
+                        }
+                    })
+                    .catch(err => {
+                        console.error(`Error cargando ${file}:`, err);
+                        const target = document.getElementById(elementId);
+                        if (target) {
+                            target.innerHTML = `
+                                <p style="color: #f85149; text-align: center; padding: 2rem 0;">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Error al cargar el archivo. Verifica que existe.
+                                </p>
+                            `;
+                        }
+                    });
+            }
+
+            // Obtener todos los markdown y cargarlos
+            const markdownItems = resources.filter(r => r.type === 'markdown');
+            markdownItems.forEach(item => {
+                loadMarkdown(item.file, `markdown-${item.id}`);
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
