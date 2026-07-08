@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ============================================== -->
+    <!-- SEO BÁSICO                                     -->
+    <!-- ============================================== -->
+    <title>Mapa del Sitio | Guía Completa ADSO - santiagoencodigo</title>
+    <meta name="description" content="Mapa del sitio del repositorio Guía Completa de Análisis y Desarrollo de Software (ADSO) del SENA. Enlaces organizados por trimestres y categorías.">
+    <meta name="keywords" content="mapa del sitio, sitemap, ADSO, SENA, repositorio, enlaces, trimestres, santiagoencodigo">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Spanish">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- URL CANÓNICA -->
+    <link rel="canonical" href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/sitemap.html">
+
+    <!-- ============================================== -->
+    <!-- OPEN GRAPH                                     -->
+    <!-- ============================================== -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/sitemap.html">
+    <meta property="og:title" content="Mapa del Sitio | Guía Completa ADSO">
+    <meta property="og:description" content="Mapa del sitio del repositorio Guía Completa de Análisis y Desarrollo de Software (ADSO) del SENA.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/main/assets/og-image.jpg">
+    <meta property="og:image:alt" content="Mapa del Sitio ADSO">
+    <meta property="og:site_name" content="Guía Completa ADSO">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- ============================================== -->
+    <!-- TWITTER CARD                                   -->
+    <!-- ============================================== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@santiagoencodigo">
+    <meta name="twitter:creator" content="@santiagoencode">
+    <meta name="twitter:title" content="Mapa del Sitio | Guía Completa ADSO">
+    <meta name="twitter:description" content="Mapa del sitio del repositorio Guía Completa de Análisis y Desarrollo de Software (ADSO) del SENA.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/main/assets/og-image.jpg">
+
+    <!-- ============================================== -->
+    <!-- HOJAS DE ESTILOS                               -->
+    <!-- ============================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <!-- Fuente Silkscreen -->
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos propios (mismo style.css que index) -->
+    <link rel="stylesheet" href="./Assets/style.css">
+
+    <!-- ============================================== -->
+    <!-- ESTILOS ADICIONALES PARA EL SITEMAP            -->
+    <!-- ============================================== -->
+    <style>
+        /* Aplicar Silkscreen a todo el contenido del sitemap */
+        .sitemap-section,
+        .sitemap-section * {
+            font-family: 'Silkscreen', sans-serif;
+        }
+
+        /* Fondo hero */
+        body.bg-hero {
+            position: relative;
+            background: linear-gradient(160deg, #0b1120 0%, #111c2e 100%);
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+        body.bg-hero::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--color-border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+            background-size: 48px 48px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body.bg-hero::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 60% at 65% 35%, rgba(59, 130, 246, 0.05) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Contenido por encima del fondo */
+        .sitemap-wrapper {
+            position: relative;
+            z-index: 1;
+            padding: 90px var(--container-pad) 3rem; /* más padding superior para evitar el navbar */
+            max-width: var(--container-max);
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* Título principal más grande y con separación */
+        .sitemap-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Cada trimestre: sin caja, solo borde izquierdo y hover aleatorio */
+        .trimestre-block {
+            padding: 1rem 1.5rem;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid transparent; /* se asigna color en hover con JS */
+            transition: border-color 0.4s ease, background-color 0.3s ease;
+            background-color: transparent;
+        }
+        .trimestre-block:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .trimestre-block h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-accent-amber);
+            margin: 0 0 0.8rem 0;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.3rem;
+            letter-spacing: 0.04em;
+        }
+
+        .trimestre-block h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0.8rem 0 0.2rem;
+        }
+
+        .trimestre-block ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .trimestre-block ul ul {
+            padding-left: 1.8rem;
+            margin-top: 0.2rem;
+        }
+        .trimestre-block ul ul ul {
+            padding-left: 1.8rem;
+        }
+
+        .trimestre-block li {
+            margin-bottom: 0.3rem;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 0.2rem;
+        }
+        .trimestre-block li::before {
+            content: "▹";
+            color: var(--color-accent-blue);
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        .trimestre-block ul ul li::before {
+            content: "◦";
+            color: var(--color-text-secondary);
+        }
+        .trimestre-block ul ul ul li::before {
+            content: "▪";
+            color: var(--color-text-secondary);
+            opacity: 0.6;
+        }
+
+        .trimestre-block a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: color 0.3s, border-bottom 0.3s;
+            border-bottom: 1px solid transparent;
+            word-break: break-word;
+        }
+        .trimestre-block a:hover {
+            color: var(--color-accent-blue);
+            border-bottom-color: var(--color-accent-blue);
+        }
+
+        .badge-github {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 0.05rem 0.5rem;
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+            margin-left: 0.3rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            vertical-align: middle;
+        }
+
+        /* Enlaces generales */
+        .enlaces-generales {
+            margin-top: 2.5rem;
+            border-top: 1px solid var(--color-border);
+            padding-top: 2rem;
+        }
+        .enlaces-generales h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-accent-amber);
+            margin-bottom: 1rem;
+        }
+        .enlaces-generales ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .enlaces-generales li {
+            margin-bottom: 0.4rem;
+        }
+        .enlaces-generales a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .enlaces-generales a:hover {
+            color: var(--color-accent-blue);
+            border-bottom-color: var(--color-accent-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sitemap-title { font-size: 2.5rem; }
+            .trimestre-block h2 { font-size: 1.4rem; }
+            .sitemap-wrapper { padding-top: 80px; }
+        }
+        @media (max-width: 480px) {
+            .sitemap-title { font-size: 2rem; }
+        }
+
+        /* Scroll-margin para anclas */
+        #trimestre1, #trimestre2, #trimestre3, #trimestre4, #trimestre5, #trimestre6 {
+            scroll-margin-top: 80px;
+        }
+    </style>
+
+    <!-- ============================================== -->
+    <!-- FAVICON                                        -->
+    <!-- ============================================== -->
+    <link rel="shortcut icon" href="./trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="icon" href="./trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="./trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- ============================================== -->
+    <!-- DATOS ESTRUCTURADOS (Schema.org)               -->
+    <!-- ============================================== -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Mapa del Sitio - Guía Completa ADSO",
+            "description": "Mapa del sitio del repositorio educativo del Tecnólogo en Análisis y Desarrollo de Software del SENA.",
+            "url": "https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/sitemap.html",
+            "inLanguage": "es",
+            "isPartOf": {
+                "@type": "WebSite",
+                "name": "Guía Completa ADSO",
+                "url": "https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/"
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-hero">
+
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN modificada                 -->
+    <!-- ============================================== -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <!-- Logo -->
+                <a href="./index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio">
+                    <img src="./trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                         alt="Logo ADSO"
+                         class="nav-logo-img">
+                    ADSO
+                </a>
+
+                <!-- Botón hamburguesa -->
+                <button class="navbar-toggler nav-toggle" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menú colapsable -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <!-- Enlaces a los trimestres (secciones internas) -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#trimestre1">Trimestre 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#trimestre2">Trimestre 2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#trimestre3">Trimestre 3</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#trimestre4">Trimestre 4</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#trimestre5">Trimestre 5</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#trimestre6">Trimestre 6</a>
+                        </li>
+
+                        <!-- Dropdown Trimestres (sin cambios) -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"
+                               id="trimestresDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="./trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-6/index.html">Trimestre 6</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================================== -->
+    <!-- CONTENIDO PRINCIPAL                            -->
+    <!-- ============================================== -->
+    <main>
+        <div class="sitemap-wrapper">
+            <section class="sitemap-section" aria-labelledby="sitemap-title">
+
+                <h1 id="sitemap-title" class="sitemap-title gradient-text">Mapa del Sitio</h1>
+
+                <!-- ========================================== -->
+                <!-- TRIMESTRE 1                                -->
+                <!-- ========================================== -->
+                <div id="trimestre1" class="trimestre-block">
+                    <h2>Trimestre 1</h2>
+                    <ul>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-1">Carpeta principal del trimestre</a> <span class="badge-github">GitHub</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-1/01-elicitacion-requisitos.md">01 – Elicitación de requisitos</a> <span class="badge-github">Markdown</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-1/02-unified-modeling-language.md">02 – Unified Modeling Language (UML)</a> <span class="badge-github">Markdown</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-1/03-bitacora-aprendizaje.md">03 – Bitácora de aprendizaje</a> <span class="badge-github">Markdown</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-1/04-teoria-general-sistemas.md">04 – Teoría general de sistemas</a> <span class="badge-github">Markdown</span></li>
+                        <li>
+                            <strong>World Skills</strong>
+                            <ul>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-1/world-skills">Carpeta World Skills</a> <span class="badge-github">GitHub</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/index.html">Índice World Skills</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/01-lorem-cards/index.html">01 – Lorem Cards</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/02-social-cards/index.html">02 – Social Cards</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/03-metodologia-bem/index.html">03 – Metodología BEM</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/04-social-cards-washington/index.html">04 – Social Cards Washington</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/07-palindromo/index.html">07 – Palíndromo</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/08-login/index.html">08 – Login</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/09-pantalla/index.html">09 – Pantalla</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/11-fecha-hora/index.html">11 – Fecha y Hora</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/12-tablas-de-multiplicar/index.html">12 – Tablas de Multiplicar</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/13-almacen-de-cajas/index.html">13 – Almacén de Cajas</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/14-menu-cuadricula/index.html">14 – Menú Cuadrícula</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/15-cronometro-world-skills/index.html">15 – Cronómetro World Skills</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/16-rompecabezas-modulo-a/index.html">16 – Rompecabezas Módulo A</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/17-orbita-celestial/index.html">17 – Órbita Celestial</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/18-interactive-rating-component/index.html">18 – Interactive Rating Component</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/19-simon-say/index.html">19 – Simon Say</a> <span class="badge-github">Live</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-1/world-skills/20-laravel">20 – Laravel</a> <span class="badge-github">Carpeta</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TRIMESTRE 2                                -->
+                <!-- ========================================== -->
+                <div id="trimestre2" class="trimestre-block">
+                    <h2>Trimestre 2</h2>
+                    <ul>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-2">Carpeta principal del trimestre</a> <span class="badge-github">GitHub</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-2/README.md">README</a> <span class="badge-github">Markdown</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-2/Reglas%20de%20Consistencia.md">Reglas de Consistencia</a> <span class="badge-github">Markdown</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-2/Verificaci%C3%B3n%20Modelos.md">Verificación Modelos</a> <span class="badge-github">Markdown</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-2/ejercicios-pseudocodigo-1.md">Ejercicios Pseudocódigo</a> <span class="badge-github">Markdown</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-2/mockups-operpan-v0.png">Mockups OperPan v0</a> <span class="badge-github">Imagen</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-2/aprendizaje-python">Aprendizaje Python</a> <span class="badge-github">Carpeta</span></li>
+                    </ul>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TRIMESTRE 3                                -->
+                <!-- ========================================== -->
+                <div id="trimestre3" class="trimestre-block">
+                    <h2>Trimestre 3</h2>
+                    <ul>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3">Carpeta principal del trimestre</a> <span class="badge-github">GitHub</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/Javascript">Javascript</a> <span class="badge-github">Carpeta</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/Python">Python</a> <span class="badge-github">Carpeta</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/databases">Bases de datos</a> <span class="badge-github">Carpeta</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/investigacion">Investigación</a> <span class="badge-github">Carpeta</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-3/prueba-tecnica">Prueba técnica</a> <span class="badge-github">Carpeta</span></li>
+                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-3/prueba-tecnica/index.html">Ver prueba técnica (live)</a> <span class="badge-github">Live</span></li>
+                    </ul>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TRIMESTRE 4                                -->
+                <!-- ========================================== -->
+                <div id="trimestre4" class="trimestre-block">
+                    <h2>Trimestre 4</h2>
+                    <ul>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-4">Carpeta principal del trimestre</a> <span class="badge-github">GitHub</span></li>
+                        <li>
+                            <strong>Interfaz Gráfica</strong>
+                            <ul>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-4/01-interfaz-grafica">Carpeta Interfaz Gráfica</a> <span class="badge-github">GitHub</span></li>
+                                <li><strong>Maquetaciones (HTML + CSS)</strong>
+                                    <ul>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/01-maquetaciones/index_1.html">Maquetación 1</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/01-maquetaciones/index_2.html">Maquetación 2</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/01-maquetaciones/index_3.html">Maquetación 3</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/01-maquetaciones/index_4.html">Maquetación 4</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/01-maquetaciones/index_5.html">Maquetación 5</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/01-maquetaciones/index_6.html">Maquetación 6</a> <span class="badge-github">Live</span></li>
+                                    </ul>
+                                </li>
+                                <li><strong>Aprendizaje HTML</strong>
+                                    <ul>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/02-aprendizaje-html/00-index.html">00 – Mi primera página web</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/02-aprendizaje-html/01-delicias-gourmet.html">01 – Delicias Gourmet</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/02-aprendizaje-html/02-cv.html">02 – Currículum Vitae</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/02-aprendizaje-html/03-tipos-inputs.html">03 – Tipos de Inputs HTML5</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/02-aprendizaje-html/04-maquetacion.html">04 – Maquetación por Bloques</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/02-aprendizaje-html/05-fix.html">05 – Posicionamiento Fixed</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-4/01-interfaz-grafica/02-aprendizaje-html/04-maquetacion.css">04 – CSS maquetación</a> <span class="badge-github">GitHub</span></li>
+                                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-4/01-interfaz-grafica/02-aprendizaje-html/05.fix.css">05 – CSS fix</a> <span class="badge-github">GitHub</span></li>
+                                    </ul>
+                                </li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-4/01-interfaz-grafica/03-botfriends">Botfriends (carpeta)</a> <span class="badge-github">GitHub</span></li>
+                                <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/01-interfaz-grafica/03-botfriends/index_5.html">Botfriends – demo</a> <span class="badge-github">Live</span></li>
+                            </ul>
+                        </li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-4/02-construir-bases-de-datos">Construir bases de datos</a> <span class="badge-github">Carpeta</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-4/03-construccion-de-software">Construcción de software</a> <span class="badge-github">Carpeta</span></li>
+                    </ul>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TRIMESTRE 5                                -->
+                <!-- ========================================== -->
+                <div id="trimestre5" class="trimestre-block">
+                    <h2>Trimestre 5</h2>
+                    <ul>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5">Carpeta principal del trimestre</a> <span class="badge-github">GitHub</span></li>
+                        <li>
+                            <strong>Crear componentes frontend</strong>
+                            <ul>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/01-crear-componentes-frontend">Carpeta principal</a> <span class="badge-github">GitHub</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/01-crear-componentes-frontend/01-laika-native">Laika Native</a> <span class="badge-github">Carpeta</span>
+                                    <ul>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-5/01-crear-componentes-frontend/01-laika-native/sesion1-2-laika.html">Réplica Laika (sesión 1-2)</a> <span class="badge-github">Live</span></li>
+                                    </ul>
+                                </li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/01-crear-componentes-frontend/02-aprendizaje-bootstrap">Aprendizaje Bootstrap</a> <span class="badge-github">Carpeta</span>
+                                    <ul>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-5/01-crear-componentes-frontend/02-aprendizaje-bootstrap/sesion1-1.html">Sesión 1-1 (maquetación semántica)</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-5/01-crear-componentes-frontend/02-aprendizaje-bootstrap/index.html">Ejemplo Toasts Bootstrap</a> <span class="badge-github">Live</span></li>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-5/01-crear-componentes-frontend/02-aprendizaje-bootstrap/sesion6.html">Sesión 6 – maquetación avanzada</a> <span class="badge-github">Live</span></li>
+                                    </ul>
+                                </li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/01-crear-componentes-frontend/03-facebook-bootstrap">Facebook Bootstrap</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/01-crear-componentes-frontend/04-laika-bootstrap">Laika Bootstrap</a> <span class="badge-github">Carpeta</span>
+                                    <ul>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-5/01-crear-componentes-frontend/04-laika-bootstrap/laika-bootstrap.html">Clon Laika con Bootstrap</a> <span class="badge-github">Live</span></li>
+                                    </ul>
+                                </li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/01-crear-componentes-frontend/05-operpan-v1">OperPan V1</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/01-crear-componentes-frontend/06-project-blueprint">Project Blueprint</a> <span class="badge-github">Carpeta</span>
+                                    <ul>
+                                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-5/01-crear-componentes-frontend/06-project-blueprint/index.html">Project Blueprint – Roadmap</a> <span class="badge-github">Live</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Codificar el software</strong>
+                            <ul>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/02-codificar-el-software">Carpeta principal</a> <span class="badge-github">GitHub</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/02-codificar-el-software/01-fundamentos-python-1">01 – Fundamentos Python 1</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/02-codificar-el-software/02-fundamentos-python-2">02 – Fundamentos Python 2</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/02-codificar-el-software/03-CRUD">03 – CRUD</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/02-codificar-el-software/04-POO">04 – POO</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/02-codificar-el-software/05-Django">05 – Django</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/02-codificar-el-software/06-ORM">06 – ORM</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/02-codificar-el-software/07-CRUD-hojas-de-hielo">07 – CRUD Hojas de Hielo</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-5/02-codificar-el-software/08-dos-apps">08 – Dos apps</a> <span class="badge-github">Carpeta</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-5/02-codificar-el-software/09-SCRUM.md">09 – SCRUM</a> <span class="badge-github">Markdown</span></li>
+                                <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/trimestre-5/02-codificar-el-software/10-documentacion-django.md">10 – Documentación Django</a> <span class="badge-github">Markdown</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- TRIMESTRE 6                                -->
+                <!-- ========================================== -->
+                <div id="trimestre6" class="trimestre-block">
+                    <h2>Trimestre 6</h2>
+                    <ul>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-6">Carpeta principal del trimestre</a> <span class="badge-github">GitHub</span></li>
+                        <li><em>Próximamente… (en desarrollo)</em></li>
+                    </ul>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- ENLACES GENERALES                          -->
+                <!-- ========================================== -->
+                <div id="enlaces-generales" class="enlaces-generales">
+                    <h2>Enlaces Generales</h2>
+                    <ul>
+                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/">Página principal (index)</a> <span class="badge-github">Live</span></li>
+                        <li><a href="https://github.com/santiagoencodigo">Perfil de GitHub – santiagoencodigo</a> <span class="badge-github">GitHub</span></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software">Repositorio principal del proyecto</a> <span class="badge-github">GitHub</span></li>
+                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/index.html">Índice Trimestre 1</a> <span class="badge-github">Live</span></li>
+                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-2/index.html">Índice Trimestre 2</a> <span class="badge-github">Live</span></li>
+                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-3/index.html">Índice Trimestre 3</a> <span class="badge-github">Live</span></li>
+                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-4/index.html">Índice Trimestre 4</a> <span class="badge-github">Live</span></li>
+                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-5/index.html">Índice Trimestre 5</a> <span class="badge-github">Live</span></li>
+                        <li><a href="https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-6/index.html">Índice Trimestre 6</a> <span class="badge-github">Live</span></li>
+                    </ul>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER simplificado                           -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" style="background: transparent; border-top: 1px solid var(--color-border); padding: 1.5rem var(--container-pad);">
+        <div style="max-width: var(--container-max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+            <p style="color: var(--color-text-secondary); font-size: 0.8rem; margin: 0;">
+                Creado por <a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-blue); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s;">santiagoencodigo</a>
+            </p>
+            <p style="color: var(--color-text-secondary); font-size: 0.8rem; margin: 0;">&copy; 2026 - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================== -->
+    <!-- SCRIPTS (Bootstrap y menú + random colors)    -->
+    <!-- ============================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Cerrar menú al hacer clic en un enlace
+            const navCollapse = document.getElementById('navbarNav');
+            if (navCollapse) {
+                const navLinks = navCollapse.querySelectorAll('.nav-link');
+                navLinks.forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+                        if (bsCollapse && navCollapse.classList.contains('show')) {
+                            bsCollapse.hide();
+                        }
+                    });
+                });
+            }
+
+            // Colores neón oscuros para el hover aleatorio
+            const neonColors = [
+                '#3b82f6', // azul
+                '#22d3ee', // cian
+                '#8b5cf6', // violeta
+                '#ec4899', // rosa
+                '#10b981', // verde
+                '#f59e0b', // ámbar
+                '#f472b6', // rosa claro
+                '#06b6d4', // cian profundo
+                '#6366f1', // índigo
+                '#14b8a6'  // teal
+            ];
+
+            // Seleccionar todos los bloques de trimestre
+            const blocks = document.querySelectorAll('.trimestre-block');
+            blocks.forEach(block => {
+                // Al hacer hover, asignar un color aleatorio al borde izquierdo
+                block.addEventListener('mouseenter', function(e) {
+                    const randomIndex = Math.floor(Math.random() * neonColors.length);
+                    const color = neonColors[randomIndex];
+                    this.style.borderLeftColor = color;
+                    // También podemos aplicar un glow sutil
+                    this.style.boxShadow = `inset 0 0 30px ${color}33, 0 0 15px ${color}22`;
+                });
+                // Restaurar al quitar el hover (se puede dejar transparente o un color base)
+                block.addEventListener('mouseleave', function() {
+                    this.style.borderLeftColor = 'transparent';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
