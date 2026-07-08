@@ -121,6 +121,33 @@ img[src*="github-original"] {
     transition: filter var(--transition);
 }
 
+/* Fondo tipo hero (gradiente + grid) */
+.bg-hero {
+    position: relative;
+    background: linear-gradient(160deg, #0b1120 0%, #111c2e 100%);
+    overflow: hidden;
+}
+
+.bg-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--color-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.bg-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 65% 35%, rgba(59, 130, 246, 0.05) 0%, transparent 65%);
+    pointer-events: none;
+}
+
 
 /* ============================================== */
 /* 4. NAVBAR CON BOOTSTRAP - ESTILOS PERSONALIZADOS */
@@ -987,7 +1014,7 @@ img[src*="github-original"] {
 .quarters-section {
     padding: var(--section-pad-v) 0;
     border-top: 1px solid var(--color-border);
-    background-color: var(--color-bg-primary);
+    /* background-color: var(--color-bg-primary); */
 }
 
 .quarters-section > h2 {
@@ -1562,7 +1589,7 @@ img[src*="github-original"] {
 /* ============================================== */
 
 footer {
-    background-color: #060b17;
+    /* background-color: #060b17; */
     border-top: 1px solid var(--color-border);
     padding: 2.5rem var(--container-pad);
 }
