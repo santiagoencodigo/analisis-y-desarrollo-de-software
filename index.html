@@ -239,24 +239,67 @@
 <body>
 
     <!-- ============================================== -->
-    <!-- HEADER / NAVEGACIÓN PRINCIPAL                  -->
+    <!-- HEADER / NAVEGACIÓN CON BOOTSTRAP              -->
     <!-- ============================================== -->
     <header class="main-header" role="banner">
-        <nav class="nav-container" aria-label="Navegación principal">
-            <!-- Logo -->
-            <a href="#inicio" class="nav-logo" aria-label="Ir al inicio">
-                <i class="fa-solid fa-book-open" aria-hidden="true"></i> ADSO
-            </a>
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <!-- Logo -->
+                <a href="#inicio" class="navbar-brand nav-logo" aria-label="Ir al inicio">
+                    <img src="./trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                        alt="Logo ADSO"
+                        class="nav-logo-img">
+                    ADSO
+                </a>
 
-            <!-- Menú de navegación -->
-            <ul class="nav-menu" role="menubar">
-                <li role="none"><a href="#repositorio" role="menuitem">Repositorio</a></li>
-                <li role="none"><a href="#enlaces" role="menuitem">Enlaces</a></li>
-                <li role="none"><a href="#herramientas" role="menuitem">Herramientas</a></li>
-                <li role="none"><a href="#objetivo" role="menuitem">Objetivo</a></li>
-                <li role="none"><a href="#trimestres" role="menuitem">Trimestres</a></li>
-                <li role="none"><a href="#proyectos" role="menuitem">Proyectos</a></li>
-            </ul>
+                <!-- Botón hamburguesa (Bootstrap) -->
+                <button class="navbar-toggler nav-toggle" type="button" 
+                        data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" 
+                        aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menú colapsable -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contexto">Contexto</a>
+                        </li>
+
+                        <!-- Dropdown Trimestres con Bootstrap -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#trimestres" 
+                            id="trimestresDropdown" role="button" 
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="./trimestre-6/index.html">Trimestre 6</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#proyectos">Proyectos</a>
+                        </li>
+
+                        <!-- NUEVO: Mapa de sitio -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#mapa-de-sitio">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -278,7 +321,7 @@
 
             <div class="hero-container">
                 <h1 id="hero-title" class="hero-title">
-                    <span class="title-line">Guía Completa de</span>
+                    <!-- <span class="title-line">Guía Completa de</span> -->
                     <span class="title-line gradient-text">Análisis y Desarrollo</span>
                     <span class="title-line gradient-text">de Software</span>
                 </h1>
@@ -305,7 +348,7 @@
                             <span class="stat-number">21</span>
                             <span class="stat-label">etapa lectiva</span>
                         </div>
-                        <div class="stat">
+                        <div class="stat" id="contexto">
                             <span class="stat-number">6</span>
                             <span class="stat-label">etapa productiva</span>
                         </div>
@@ -786,7 +829,7 @@
                     </div>
                     <div class="card-glow" aria-hidden="true"></div>
                 </article>
-
+                    <img src="./trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
                 <!-- Proyecto 5: Maquetación con Bloques -->
                 <article class="project-card">
                     <div class="card-image-wrapper">
@@ -1354,73 +1397,324 @@
             </div>
 
             <a href="./trimestre-5/01-crear-componentes-frontend/06-project-blueprint/index.html" target="_blank" rel="noopener noreferrer">Project Blueprint: Roadmap</a>
-
-            <!-- Footer de Proyectos (Progreso) -->
-            <div class="projects-footer">
-                <div class="progress-indicator" role="progressbar" aria-valuenow="14" aria-valuemin="0"
-                    aria-valuemax="14" aria-label="14 ejercicios completados">
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                    <span class="progress-dot completed" aria-hidden="true"></span>
-                </div>
-                <p class="footer-note">14 ejercicios completados - Trimestre 4 y 5: Interfaz Gráfica + Componentes
-                    Avanzados + Maquetaciones</p>
-            </div>
         </section>
 
     </main>
 
+
     <!-- ============================================== -->
-    <!-- FOOTER                                         -->
+    <!-- FOOTER / MAPA DE SITIO (REDISEÑADO)          -->
     <!-- ============================================== -->
-    <footer role="contentinfo">
-        <p>
-            Creado por <strong>santiagoencodigo</strong>
-        </p>
-        <p>
-            <a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer">Repositorio en
-                GitHub</a>
-        </p>
+    <footer role="contentinfo" id="mapa-de-sitio">
+        <style>
+            /* Estilos exclusivos para el footer rediseñado */
+            #mapa-de-sitio .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #mapa-de-sitio .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #mapa-de-sitio .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #mapa-de-sitio .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #mapa-de-sitio .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            /* Colores de hover individuales (nth-child) para todos los enlaces */
+            /* Columna 1: Navegación (5 enlaces) */
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(1) .footer-link:hover { color: #3b82f6; }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(2) .footer-link:hover { color: #4b8ef7; }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(3) .footer-link:hover { color: #5b9af8; }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(4) .footer-link:hover { color: #6ba6f9; }
+            #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(5) .footer-link:hover { color: #7bb2fa; }
+
+            /* Columna 2: Trimestres (6 enlaces) */
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(1) .footer-link:hover { color: #8bbefb; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(2) .footer-link:hover { color: #9bcafc; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(3) .footer-link:hover { color: #abd6fd; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(4) .footer-link:hover { color: #bbe2fe; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(5) .footer-link:hover { color: #cbeefe; }
+            #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(6) .footer-link:hover { color: #dbfaff; }
+
+            /* Columna 3: Recursos (3 enlaces) */
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(1) .footer-link:hover { color: #67e8f9; }
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(2) .footer-link:hover { color: #22d3ee; }
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(3) .footer-link:hover { color: #06b6d4; }
+            #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(4) .footer-link:hover { color: #05a7c4; }
+
+            /* Créditos al final (fuera del grid) */
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            .footer-bottom a {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+            }
+
+            .footer-bottom a:hover {
+                color: var(--color-accent-blue);
+            }
+
+            /* Responsive: tablet y móvil */
+            @media (max-width: 768px) {
+                #mapa-de-sitio .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #mapa-de-sitio .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
+        <!-- Grid de 3 columnas -->
+        <div class="footer-grid">
+            <!-- Columna 1: Navegación -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="#contexto" class="footer-link">Contexto</a></li>
+                    <li><a href="#trimestres" class="footer-link">Estructura</a></li>
+                    <li><a href="#proyectos" class="footer-link">Proyectos</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 2: Trimestres -->
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="./trimestre-1/index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="./trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="./trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="./trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="./trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="./trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Recursos -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="#" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Barra inferior con créditos -->
+        <div class="footer-bottom">
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+            <p>&copy; 2026 - Todos los derechos reservados.</p>
+        </div>
     </footer>
 
     <!-- Bootstrap JS (necesario para el carrusel) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Script para sincronizar los puntos personalizados con el carrusel -->
+    <!-- ============================================== -->
+    <!-- SCRIPTS COMBINADOS: CARRUSEL + MENÚ          -->
+    <!-- ============================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
+            // ==============================================
+            // 1. SCRIPT DEL CARRUSEL (ya existente)
+            // ==============================================
             const carousel = document.getElementById('carouselSecciones');
             const customIndicators = document.querySelectorAll('.carousel-indicators-custom button');
 
-            // Actualizar puntos cuando el carrusel cambie
-            carousel.addEventListener('slid.bs.carousel', function (event) {
-                const index = event.to;
-                customIndicators.forEach((btn, i) => {
-                    btn.classList.toggle('active', i === index);
+            if (carousel) {
+                // Actualizar puntos cuando el carrusel cambie
+                carousel.addEventListener('slid.bs.carousel', function (event) {
+                    const index = event.to;
+                    customIndicators.forEach((btn, i) => {
+                        btn.classList.toggle('active', i === index);
+                    });
+                });
+
+                // Al hacer clic en un punto personalizado, activar el slide correspondiente
+                customIndicators.forEach((btn) => {
+                    btn.addEventListener('click', function () {
+                        const slideTo = parseInt(this.getAttribute('data-bs-slide-to'));
+                        const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+                        if (bsCarousel) {
+                            bsCarousel.to(slideTo);
+                        }
+                    });
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('carouselSecciones');
+            if (!carousel) return;
+
+            // Mapeo de IDs de secciones a índices de slide
+            const slideMap = {
+                'repositorio': 0,
+                'enlaces': 1,
+                'herramientas': 2,
+                'objetivo': 3
+            };
+
+            // Función para ir a un slide y hacer scroll al carrusel
+            function goToSlide(slideIndex) {
+                const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+                if (bsCarousel) {
+                    bsCarousel.to(slideIndex);
+                }
+                // Hacer scroll suave hasta el carrusel
+                carousel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // Escuchar clics en todos los enlaces que apunten a #algo
+            document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    const targetId = href.substring(1); // quita el #
+                    if (slideMap.hasOwnProperty(targetId)) {
+                        e.preventDefault(); // Evita el salto instantáneo
+                        const slideIndex = slideMap[targetId];
+                        goToSlide(slideIndex);
+                        // Actualiza la URL sin recargar (opcional)
+                        history.pushState(null, '', href);
+                    }
                 });
             });
 
-            // Al hacer clic en un punto personalizado, activar el slide correspondiente
-            customIndicators.forEach((btn) => {
-                btn.addEventListener('click', function () {
-                    const slideTo = parseInt(this.getAttribute('data-bs-slide-to'));
-                    const bsCarousel = bootstrap.Carousel.getInstance(carousel);
-                    bsCarousel.to(slideTo);
+            // También, si la URL contiene un ancla al cargar, ir a ese slide
+            const initialHash = window.location.hash.substring(1);
+            if (slideMap.hasOwnProperty(initialHash)) {
+                setTimeout(function() {
+                    goToSlide(slideMap[initialHash]);
+                }, 300); // Pequeño retraso para que el carrusel esté listo
+            }
+        });
+
+            // ==============================================
+            // 2. SCRIPT DEL MENÚ HAMBURGUESA Y DROPDOWN
+            // ==============================================
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (navToggle && navMenu) {
+                // Crear overlay si no existe
+                let navOverlay = document.querySelector('.nav-overlay');
+                if (!navOverlay) {
+                    navOverlay = document.createElement('div');
+                    navOverlay.className = 'nav-overlay';
+                    document.body.appendChild(navOverlay);
+                }
+
+                function toggleMenu() {
+                    const isOpen = navMenu.classList.toggle('open');
+                    navToggle.classList.toggle('active');
+                    navOverlay.classList.toggle('active');
+                    navToggle.setAttribute('aria-expanded', isOpen);
+                    document.body.style.overflow = isOpen ? 'hidden' : '';
+                }
+
+                // Abrir/cerrar menú al hacer clic en el botón hamburguesa
+                navToggle.addEventListener('click', toggleMenu);
+
+                // Cerrar menú al hacer clic en el overlay
+                navOverlay.addEventListener('click', function () {
+                    if (navMenu.classList.contains('open')) {
+                        toggleMenu();
+                    }
                 });
-            });
+
+                // Manejar clics en los enlaces del menú
+                const menuLinks = navMenu.querySelectorAll('a');
+                menuLinks.forEach(function (link) {
+                    link.addEventListener('click', function (e) {
+                        // En móvil, si el enlace es "Trimestres", desplegar/ocultar submenú
+                        if (window.innerWidth <= 768 &&
+                            link.closest('.nav-item-dropdown') &&
+                            link.getAttribute('href') === '#trimestres') {
+                            e.preventDefault();
+                            const dropdownMenu = link.nextElementSibling;
+                            if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                                dropdownMenu.classList.toggle('show');
+                            }
+                            return;
+                        }
+
+                        // Para cualquier otro enlace, cerrar el menú (si está abierto)
+                        if (navMenu.classList.contains('open')) {
+                            toggleMenu();
+                        }
+                    });
+                });
+
+                // Cerrar menú automáticamente al redimensionar a >768px
+                window.addEventListener('resize', function () {
+                    if (window.innerWidth > 768 && navMenu.classList.contains('open')) {
+                        toggleMenu();
+                    }
+                });
+            }
+
         });
     </script>
+
+</body>
+</html>
 
 </body>
 
