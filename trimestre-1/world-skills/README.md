@@ -144,9 +144,6 @@ Este primer trimestre fue una inmersión en el pensamiento lógico y la construc
 
 WorldSkills y el primer trimestre de ADSO marcaron el inicio de un viaje que hoy sigue activo. Este sitio no es solo una galería de proyectos: es el espejo de mis primeras victorias técnicas. Cada carpeta representa una pequeña victoria sobre la incertidumbre. Construir esta cápsula me permite recordar de dónde vengo y reconocer que los grandes aprendizajes empiezan con una línea de código tímida y mucha curiosidad.
 
-*“Cada gran desarrollador tuvo un día su primer console.log.”*  
-— Bitácora ADSO, primer trimestre.
-
 ---
 
 Proyecto académico sin fines comerciales. Desarrollado con HTML5, CSS3, JavaScript nativo y Laravel como testimonio de formación integral.
