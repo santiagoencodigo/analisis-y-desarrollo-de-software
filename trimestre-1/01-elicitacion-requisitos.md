@@ -4,11 +4,68 @@
 
 **Actividad:** Técnicas de elicitación de requisitos   
 
-**Fecha:** 21 de mayo de 2025  
+**Fechas:** 21 de mayo de 2025, 1 de julio de 2025
 
 ---
 
-## Técnicas de elicitación de requisitos
+## Tabla de contenido
+
+1. [Introducción a la especificación de requisitos](#introducción-a-la-especificación-de-requisitos)
+2. [Fuentes de la información](#fuentes-de-la-información)
+3. [Técnicas de recolección de datos](#técnicas-de-recolección-de-datos)
+   - [Preguntas cerradas y abiertas](#preguntas-cerradas-y-abiertas)
+   - [Entrevista](#entrevista)
+   - [Encuesta y cuestionario](#encuesta-y-cuestionario)
+   - [Taller de trabajo (Workshop)](#taller-de-trabajo-workshop)
+   - [Observación](#observación)
+   - [Prototipos](#prototipos)
+   - [Historias de usuario](#historias-de-usuario)
+4. [Requerimientos funcionales y no funcionales](#requerimientos-funcionales-y-no-funcionales)
+5. [Roles en el desarrollo de software](#roles-en-el-desarrollo-de-software)
+6. [Diagramas de flujo de datos (DFD)](#diagramas-de-flujo-de-datos-dfd)
+   - [Notación Yourdon‑Coad](#notación-yourdoncoad)
+   - [Notación Gane‑Sarson](#notación-ganesarson)
+   - [Ejercicios de DFD](#ejercicios-de-dfd)
+7. [Ejemplo de proyecto sencillo: Panadería Estación Paisa](#ejemplo-de-proyecto-sencillo-panadería-estación-paisa)
+8. [UML (Unified Modeling Language)](#uml-unified-modeling-language)
+
+---
+
+## Introducción a la especificación de requisitos
+
+La **especificación de requisitos del software** es la base fundamental de todo proyecto de desarrollo. El mundo empresarial se basa en la resolución de problemas, por lo que en el desarrollo de software es necesario definir un **objeto de estudio** para plantear qué se va a hacer y delimitar los tiempos estimados y costos.
+
+Para resolver un problema, se debe buscar realmente qué es lo que se espera que solucione. Por ende, se debe hacer un **levantamiento de información** por medio de técnicas de recolección de datos.
+
+---
+
+## Fuentes de la información
+
+Es importante saber de dónde proviene la información:
+
+- **Fuente primaria:** Información obtenida directamente de la persona involucrada.  
+  *Ejemplo: Cuando alguien da su opinión de lo que observa.*
+
+- **Fuente secundaria:** Información que llega por medio de otra persona.  
+  *Ejemplo: Cuando se presenta una situación y la información llega a través de una anécdota.*
+
+- **Fuente terciaria:** Información que se conoce a partir de dos o más personas.  
+  *Ejemplo: Cuando se requieren varias opiniones o puntos de vista de diferentes personas.*
+
+---
+
+## Técnicas de recolección de datos
+
+Las técnicas de recolección de datos son la base principal del proyecto. Existen múltiples técnicas que permiten obtener información desde las fuentes primarias —siendo el cliente quien ofrece la información más confiable y real—. Si se obtiene una buena recolección de datos, el proyecto tendrá una base sólida para su construcción.
+
+### Preguntas cerradas y abiertas
+
+- **Preguntas cerradas:** Son aquellas que ofrecen opciones de respuesta limitadas y predefinidas (por ejemplo, sí/no, opción múltiple, escala de valoración). Facilitan el análisis cuantitativo y la tabulación de datos.  
+  *Ejemplo: ¿Cuál nivel de impacto en el mercado tiene su empresa? A. 20% B. 30% C. 40% D. +50%*
+
+- **Preguntas abiertas:** Permiten al encuestado responder con sus propias palabras, sin restricciones. Son útiles para explorar opiniones, experiencias y razones de fondo, pero su análisis es más complejo.
+
+---
 
 ### Entrevista
 
@@ -338,3 +395,136 @@ Se recolectan los requisitos conversando con los usuarios. A partir de esas nece
 4. Como usuario, quiero ver una lista de todas mis tareas pendientes y completadas, para tener una visión general de mi trabajo.
 5. Como usuario, quiero recibir recordatorios antes de la fecha límite, para no olvidar tareas importantes.
 6. Como administrador, quiero gestionar múltiples usuarios, para supervisar el uso de la app en un equipo de trabajo.
+
+---
+
+## Requerimientos funcionales y no funcionales
+
+Una vez recolectada la información y haber hallado las necesidades que hay, se debe definir qué es lo que se necesita para que el software funcione. Se debe saber qué funciones se necesitan, qué requisitos funcionales y no funcionales se esperan del sistema de información.
+
+- **Requerimientos funcionales:** Son declaraciones de los servicios que el sistema debe proporcionar al usuario. Detallan las acciones específicas que el sistema debe realizar, como procesar datos, generar informes o manejar la autenticación de usuarios.
+
+- **Requerimientos no funcionales:** Son restricciones o cualidades que limitan la funcionalidad del sistema. Definen cómo el sistema debe funcionar, incluyendo aspectos como rendimiento, seguridad, usabilidad, escalabilidad, etc.
+
+---
+
+## Roles en el desarrollo de software
+
+En un proyecto de software intervienen diferentes perfiles, cada uno con responsabilidades específicas:
+
+- **Cliente:** Quien solicita el producto y define las necesidades generales.
+- **Usuario:** Quien interactuará directamente con el sistema.
+- **Líder de proyecto:** Coordina el equipo, gestiona recursos y plazos.
+- **Analista:** Se encarga del levantamiento de requisitos y del análisis funcional.
+- **Programador / Desarrollador:** Construye el software siguiendo el diseño.
+- **Asegurador de calidad (QA):** Prueba el software para garantizar que cumple con los requisitos.
+- **Arquitecto de software:** Define la estructura y tecnologías del sistema (por ejemplo, Bill Gates es reconocido como arquitecto de software en Microsoft).
+
+---
+
+## Diagramas de flujo de datos (DFD)
+
+Los DFD son una herramienta gráfica que representa el flujo de información en un sistema. Muestran cómo los datos entran, salen y se transforman dentro del sistema, identificando procesos, fuentes, destinos y almacenes de datos.
+
+### Notación Yourdon‑Coad
+
+Esta notación utiliza los siguientes símbolos:
+
+| Símbolo | Representación | Significado |
+|---------|----------------------|-------------|
+| Entidad externa | `[   ]` | Rectángulo con los bordes abiertos, representa una fuente o destino de datos fuera del sistema. |
+| Proceso | `(   )` | Círculo u óvalo, transforma los datos de entrada en salida. |
+| Almacén de datos | `||`  o `══`  | Dos líneas paralelas, representa un depósito de datos (archivo, base de datos). |
+| Flujo de datos | `→`  | Flecha que indica la dirección del movimiento de los datos. |
+
+**Simulación visual con caracteres:**
+
+```
+Entidad externa:  [ Cliente ]
+Proceso:          ( Calcular total )
+Almacén:          || Pedidos ||
+Flujo:            Datos → Proceso
+```
+
+### Notación Gane‑Sarson
+
+Esta notación es similar pero con una representación ligeramente distinta:
+
+| Símbolo | Representación | Significado |
+|---------|----------------------|-------------|
+| Entidad externa |  (cuadrado con sombra) | Representa una entidad externa. |
+| Proceso |  (rectángulo con esquinas redondeadas) | Proceso que transforma datos. |
+| Almacén de datos |  (rectángulo abierto por la derecha) | Almacén de datos. |
+| Flujo de datos | `→`  | Flecha que indica el movimiento de los datos. |
+
+**Simulación visual con caracteres:**
+
+```
+Entidad externa:  ┌────────────┐
+                  │  Cliente    │
+                  └────────────┘
+
+Proceso:          ┌────────────┐
+                  │ Procesar    │
+                  └────────────┘
+
+Almacén:          ┌────────────┐
+                  │ Pedidos     │
+                  └────────────┘
+
+Flujo:            Datos → Proceso
+```
+
+### Ejercicios de DFD
+
+Practica la elaboración de DFD con los siguientes ejercicios:
+
+1. Hallar el número mayor.
+2. Hallar el área de un círculo.
+3. Hallar el área de un rombo.
+4. Hallar el área de un paralelepípedo.
+
+---
+
+## Ejemplo de proyecto sencillo: Panadería Estación Paisa
+
+> La razón de esto, es nuestro proyecto formativo... A medida de los trimestres se iran pasando por todos los ciclos del software y entonces esta propuesta es una de las iniciales que eventualmente con el tiempo fue con la que empezamos el desarrollo de nuestro proyecto formativo. 
+
+> Siendo asi, el instructor lo que hace es guiar a los grupos de aprendices por proyecto. Cada uno con un desarrollo individual, pero a medida de las clases las metodologias de desarrollo y documentación son las mismas.
+
+A continuación se muestra un ejemplo práctico de aplicación de las técnicas de elicitación y modelado para un proyecto de software real.
+
+### Usar una sola área
+
+El proyecto se enfoca en un área específica: el control de personal en la panadería.
+
+### Objetivo
+
+Desarrollar un software para el control del personal en la panadería **Estación Paisa en Terreros**.
+
+### Objetivos específicos
+
+- **Levantamiento de información:**
+  - Observación directa de los procesos actuales.
+  - Entrevistas con el personal y administradores.
+  - Historias de usuario para capturar necesidades desde la perspectiva de los empleados.
+
+- **DFD:** Representar el manejo de la información en el software, ilustrando las situaciones de la vida real mediante diagramas de flujo de datos.
+
+- **UML:** Utilizar el Lenguaje Unificado de Modelado para describir la estructura y comportamiento del sistema.
+
+- **Requerimientos:** Definir tanto los requisitos funcionales como los no funcionales del sistema.
+
+> Estos son algunos nombres de los indices en la documentación que se realizo eventualmente para nuestro proyecto formativo. 
+
+---
+
+## UML (Unified Modeling Language)
+
+UML es un lenguaje de modelado estandarizado que permite visualizar, especificar, construir y documentar los artefactos de un sistema software. Se utilizan diferentes tipos de diagramas (casos de uso, clases, secuencia, actividades, etc.) para representar distintas perspectivas del sistema.
+
+Este tema lo miramos a fondo en el documento [02-unified-modeling-language.md](02-unified-modeling-language.md) en la misma carpeta en la que esta este documento actual que estas leyendo.
+
+---
+
+> Gracias por leer.
