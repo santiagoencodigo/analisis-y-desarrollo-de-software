@@ -4,6 +4,16 @@ Este directorio contiene los materiales, apuntes y ejercicios prácticos corresp
 
 ---
 
+## Tabla de contenido
+
+- [Navegación principal](#navegación-principal)
+- [Estructura del directorio](#estructura-del-directorio-trimestre-1)
+- [Documentación técnica del trimestre](#documentación-técnica-del-trimestre)
+- [Proyectos y ejercicios destacados](#proyectos-y-ejercicios-destacados-world-skills)
+- [Metodologías, herramientas y conceptos clave](#metodologías-herramientas-y-conceptos-clave)
+
+---
+
 ## Navegación principal
 
 | **Repositorio raíz** | [README principal](https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/blob/main/README.md) |
@@ -61,7 +71,7 @@ Los siguientes documentos consolidan los conceptos y metodologías abordadas dur
 
 ---
 
-## Prácticas y ejercicios (world-skills)
+## Proyectos y ejercicios destacados (World Skills)
 
 La carpeta `world-skills/` contiene **20 ejercicios prácticos** desarrollados como preparación para la competencia WorldSkills. Cada uno está en su propia subcarpeta con el código fuente correspondiente (HTML, CSS, JavaScript, PHP). Estos ejercicios cubren:
 
@@ -71,8 +81,23 @@ La carpeta `world-skills/` contiene **20 ejercicios prácticos** desarrollados c
 - Componentes reutilizables (tarjetas, login, calificaciones).
 - Introducción a frameworks (Laravel).
 
-Puedes explorar cada ejercicio navegando a sus respectivas carpetas y abriendo los archivos `index.html` o el código fuente correspondiente. O tambien puedes mirarlo en vivo en la pagina: [santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/index.html](https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/index.html "https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/index.html")
+Puedes explorar cada ejercicio navegando a sus respectivas carpetas y abriendo los archivos `index.html` o el código fuente correspondiente. También puedes verlos en vivo en: [santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/index.html](https://santiagoencodigo.github.io/analisis-y-desarrollo-de-software/trimestre-1/world-skills/index.html)
 
 ---
 
-*Gracias por visitar este repositorio! Si encuentras algún error o deseas contribuir, abre un issue o un pull request.*
+## Metodologías, herramientas y conceptos clave
+
+A lo largo del trimestre se han trabajado en la introducción a los siguientes conceptos y herramientas, fundamentales para el perfil del tecnólogo en ADSO:
+
+| Categoría | Elementos |
+|-----------|-----------|
+| **Metodologías de desarrollo** | Scrum, Canvas, Metodologías ágiles, BEM (CSS), Flexbox, CSS Grid |
+| **Conceptos de negocio** | Propuesta técnica vs. propuesta económica, canales de venta, modelo de negocio, fidelización de clientes, pasarelas de pago (PSE, tarjetas) |
+| **Infraestructura y sistemas** | Sistemas operativos (Windows, Linux, ChromeOS), discos SSD vs. HDD, periféricos, redes, protocolos de comunicación (HTTP, HTTPS) |
+| **Bases de datos** | MySQL, PostgreSQL, Access, sistemas orientados a objetos |
+| **Entornos de desarrollo** | VS Code, Sublime Text, NetBeans, W3Schools, PSeInt |
+| **Competencias WorldSkills** | Preparación en frontend, backend, lógica de programación, y componentes reutilizables |
+
+---
+
+*Gracias por visitar este repositorio. Si encuentras algún error o deseas contribuir, abre un issue o un pull request.*
