@@ -254,7 +254,7 @@ Durante la sesión del 19 de mayo de 2025 se enfatizaron varios principios funda
 ## Proyectos finales – Sustentación de otras fichas
 
 > **Fecha:** 26 de junio de 2025  
-> **Modalidad:** Sustentación de proyecto de seis grupos que estaban en el último trimestre del tecnólogo, con un máximo de 30 minutos (20 minutos de exposición + 10 minutos de demostración funcional).
+> **Modalidad:** Sustentación de proyecto de cinco grupos que estaban en el último trimestre del tecnólogo, con un máximo de 30 minutos (20 minutos de exposición + 10 minutos de demostración funcional).
 
 ### 1. World Food
 
@@ -310,8 +310,6 @@ Durante la sesión del 19 de mayo de 2025 se enfatizaron varios principios funda
 |--------------|------------------------------------------------------------------------------------------------------|
 | **Solución** | Página web de donaciones que conecta fundaciones con posibles donantes, facilitando el proceso de donación y mejorando la transparencia. |
 | **Actores / Usuarios** | Fundaciones, donantes, personas interesadas en causas sociales. |
-
-> Fin.
 
 ---
 
