@@ -6,6 +6,8 @@ Este documento consolida los modelos de negocio, ideas de proyecto y soluciones 
 > Este proceso fue importante para generar ideas, antes de realmente iniciar con un proyecto formativo.  
 > Esta información hace parte de los apuntes que tomé sobre las exposiciones que llegué a presenciar.
 
+Adicionalmente, se incluyen los proyectos finales presentados por grupos de **ultimo trimestre** (sustentación del 26 de junio de 2025), como referencia de lo que se puede lograr al finalizar la etapa lectiva.
+
 ---
 
 ## Tabla de contenido
@@ -22,13 +24,14 @@ Este documento consolida los modelos de negocio, ideas de proyecto y soluciones 
 - [Sector ganadero](#sector-ganadero)
 - [Sector mascotas](#sector-mascotas)
 - [Sector ambiental y energético](#sector-ambiental-y-energético)
+- [Proyectos finales – Sustentación de otras fichas](#proyectos-finales--sustentación-de-otras-fichas)
 - [Metodologías y herramientas de negocio](#metodologías-y-herramientas-de-negocio)
 
 ---
 
 ## Conceptos clave
 
-Durante la sesión del 19 de mayo del 2025 se enfatizaron varios principios fundamentales para el desarrollo de software y la construcción de modelos de negocio:
+Durante la sesión del 19 de mayo de 2025 se enfatizaron varios principios fundamentales para el desarrollo de software y la construcción de modelos de negocio:
 
 | **Concepto** | **Descripción** |
 |--------------|-----------------|
@@ -44,7 +47,7 @@ Durante la sesión del 19 de mayo del 2025 se enfatizaron varios principios fund
 
 > **Dato:** En Colombia, el 90% de la población tiene un celular con conectividad (fuente: Colombia Digital).
 
-> Aun presento resistencia respecto a siempre tener que tomar de referencia a una empresa, pero es un hecho de que los problemas siempre han existido y es muy poco probable que alguien ya no halla intentado solucionarlo... Por ende este análisis sigue siendo fundamental.
+> Aun presento resistencia respecto a siempre tener que tomar de referencia a una empresa, pero es un hecho de que los problemas siempre han existido y es muy poco probable que alguien no haya intentado solucionarlo... Por ende este análisis sigue siendo fundamental.
 
 ---
 
@@ -248,20 +251,67 @@ Durante la sesión del 19 de mayo del 2025 se enfatizaron varios principios fund
 
 ---
 
-## Metodologías y herramientas de negocio
+## Proyectos finales – Sustentación de otras fichas
 
-Además de las soluciones específicas, durante el trimestre se abordaron conceptos transversales para la construcción de modelos de negocio:
+> **Fecha:** 26 de junio de 2025  
+> **Modalidad:** Sustentación de proyecto de seis grupos que estaban en el último trimestre del tecnólogo, con un máximo de 30 minutos (20 minutos de exposición + 10 minutos de demostración funcional).
 
-| **Concepto** | **Descripción** |
-|--------------|-----------------|
-| **Propuesta técnica vs. económica** | La propuesta técnica describe cómo se realizará el proyecto (metodología, cronograma, especificaciones); la económica detalla costos, presupuesto y forma de pago. Ambas son esenciales en licitaciones y contratos. |
-| **Canales de venta** | Identificación de canales físicos (tiendas, catálogos) y virtuales (marketplace, redes sociales) para llegar al cliente. |
-| **Fidelización de clientes** | Mecanismos como reseñas, estrellas, programas de lealtad, y sistemas de calificación para retener usuarios. |
-| **Pasarelas de pago** | Integración con PSE, tarjetas de crédito, billeteras digitales; aspectos legales y de seguridad. |
-| **Modelo de negocio** | Estudio de la cadena de valor, proveedores, clientes, flujo de ingresos y costos. |
-| **Metodologías ágiles** | Scrum, Canvas y otras herramientas para la gestión de proyectos de software. |
-| **Microservicios y bases de datos** | Arquitectura para sistemas escalables; uso de bases de datos transaccionales para operaciones financieras y de inventario. |
-| **Visión artificial y ML** | Técnicas para reconocimiento de patrones en imágenes, aplicadas a agricultura, ganadería, seguridad, etc. |
+### 1. World Food
+
+| **Problema** | Dificultad para encontrar recetas de cocina adaptadas a necesidades específicas (alergias, nivel de habilidad culinaria, presupuesto). |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| **Solución** | Plataforma web de recetas con buscador inteligente, categorización por alergias, y listado de salud según IMS. Incluye login con validación y panel de administrador con CRUD. |
+| **Tecnologías** | HTML, CSS, JS, Bootstrap (frontend), PHP (backend), MySQL (base de datos). |
+| **Despliegue** | Hostinger. |
+| **Inversión estimada** | 38.000.000 COP, retorno esperado del 100% en 4 meses. |
+| **Actores / Usuarios** | Universitarios, personas con alergias, usuarios sin habilidades culinarias. |
+
+---
+
+### 2. CVA – Canadian Visa Advise
+
+| **Problema** | Dificultad para obtener visa canadiense debido a la complejidad del proceso migratorio. |
+|--------------|-----------------------------------------------------------------------------------------|
+| **Solución** | Plataforma que conecta a usuarios con asesores migratorios certificados. Permite solicitar asesoría, agendar citas y gestionar documentos. |
+| **Tecnologías** | Tailwind CSS, AWS (MySQL), Python (Flask, Stripe), HTML con Jinja2. |
+| **Despliegue** | Render (2 GB RAM, 1 CPU, 25 USD/mes). |
+| **Costos totales** | 28.000.000 COP. |
+| **Actores / Usuarios** | Usuario (solicita asesoría), Asesor (agenda citas), Administrador (supervisión). |
+
+---
+
+### 3. Eco Green
+
+| **Problema** | Pereza o desconocimiento para reciclar, falta de incentivos para hacerlo. |
+|--------------|---------------------------------------------------------------------------|
+| **Solución** | Plataforma que crea interacción entre usuario y reciclador mediante incentivos (recompensas). Empresa asociada en Fontibón. |
+| **Tecnologías** | HTML, CSS, JS con AJAX, PHP, MySQL. |
+| **Control de versiones** | Git y GitHub. |
+| **Despliegue** | Hostinger (40.000 COP/mes). |
+| **Costos totales** | 23.000.000 COP (6 meses). |
+| **Actores / Usuarios** | Usuarios, recicladores, empresa asociada. |
+
+---
+
+### 4. Carbono Cero
+
+| **Problema** | Falta de conciencia y herramientas para medir y reducir la huella de carbono en empresas. |
+|--------------|-------------------------------------------------------------------------------------------|
+| **Solución** | Plataforma para la medición y registro de huella de carbono, con ideas diarias para reducirla y cálculos automáticos. |
+| **Tecnologías** | Desarrollo web, herramientas de diseño: Draw.io, Balsamiq. |
+| **Costos estimados** | 17.000.000 COP. |
+| **Actores / Usuarios** | Empresas, responsables de sostenibilidad, empleados. |
+
+---
+
+### 5. Pantry Amigo
+
+| **Problema** | Falta de visibilidad de las fundaciones y desconocimiento de los donantes sobre cómo y dónde donar. |
+|--------------|------------------------------------------------------------------------------------------------------|
+| **Solución** | Página web de donaciones que conecta fundaciones con posibles donantes, facilitando el proceso de donación y mejorando la transparencia. |
+| **Actores / Usuarios** | Fundaciones, donantes, personas interesadas en causas sociales. |
+
+> Fin.
 
 ---
 

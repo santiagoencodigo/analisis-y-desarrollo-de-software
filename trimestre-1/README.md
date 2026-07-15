@@ -6,11 +6,28 @@ Este directorio contiene los materiales, apuntes y ejercicios prácticos corresp
 
 ## Tabla de contenido
 
+- [Visión general](#visión-general)
 - [Navegación principal](#navegación-principal)
 - [Estructura del directorio](#estructura-del-directorio-trimestre-1)
 - [Documentación técnica del trimestre](#documentación-técnica-del-trimestre)
+- [Instructores y líneas de formación](#instructores-y-líneas-de-formación)
 - [Proyectos y ejercicios destacados](#proyectos-y-ejercicios-destacados-world-skills)
 - [Metodologías, herramientas y conceptos clave](#metodologías-herramientas-y-conceptos-clave)
+- [Recursos y herramientas recomendadas](#recursos-y-herramientas-recomendadas)
+- [Reglamento del aprendiz SENA](#reglamento-del-aprendiz-sena)
+
+---
+
+## Visión general
+
+La formación en ADSO se fundamenta en dos pilares principales:
+
+- **Trabajo colaborativo**: construcción de soluciones de manera conjunta, compartiendo conocimiento y habilidades en equipo.
+- **Trabajo autónomo**: capacidad de investigar, indagar y resolver problemas por cuenta propia.
+
+En el desarrollo de software, la **documentación técnica** y los manuales de usuario son entregables obligatorios. La generación de documentación debe ser simultánea al desarrollo del código, integrándose como parte del proceso de construcción del software.
+
+El desarrollo de software es una herramienta para solucionar problemas reales en diversos sectores económicos. La demanda de profesionales en esta área es alta debido a la creciente dependencia de las tecnologías de la información en todas las organizaciones.
 
 ---
 
@@ -49,8 +66,9 @@ trimestre-1/
 │   └── 20-laravel/             # Introducción a Laravel (PHP)
 ├── 01-elicitacion-requisitos.md   # Técnicas de elicitación de requisitos
 ├── 02-unified-modeling-language.md # Fundamentos de UML (Casos de Uso, DFD)
-├── 03-overview.md                 # Visión general del trimestre (metodologías, instructores, proyectos)
 ├── 04-teoria-general-sistemas.md  # Teoría General de Sistemas (TGS)
+├── 05-business-models.md          # Modelos de negocio y soluciones tecnológicas
+├── 06-google-search-operators.md  # Operadores de búsqueda y comandos de Google
 ├── index.html                     # Página de inicio (ejemplo)
 └── README.md                      # Este archivo
 ```
@@ -65,9 +83,24 @@ Los siguientes documentos consolidan los conceptos y metodologías abordadas dur
 
 - **[02-unified-modeling-language.md](./02-unified-modeling-language.md)** – Introducción a UML: casos de uso, diagramas de flujo de datos (DFD), clasificación de requisitos funcionales y no funcionales, y estructuración de objetivos generales y específicos.
 
-- **[03-overview.md](./03-overview.md)** – Resumen completo del trimestre: metodologías de trabajo, perfiles de instructores, propuestas de proyectos iniciales, actividad "Sharks" (presentación en inglés), sustentaciones de proyectos de otros grupos, conceptos técnicos básicos, recursos recomendados y el reglamento del aprendiz SENA.
+- **[03-teoria-general-sistemas.md](./03-teoria-general-sistemas.md)** – Fundamentos de la Teoría General de Sistemas (TGS): origen, tipos de sistemas, propiedades clave (entropía, homeostasis, sinergia, adaptabilidad), enfoque sistémico y aplicación en el desarrollo de software.
 
-- **[04-teoria-general-sistemas.md](./04-teoria-general-sistemas.md)** – Fundamentos de la Teoría General de Sistemas (TGS): origen, tipos de sistemas, propiedades clave (entropía, homeostasis, sinergia, adaptabilidad), enfoque sistémico y aplicación en el desarrollo de software.
+- **[04-business-models.md](./04-business-models.md)** – Consolidación de modelos de negocio, ideas de proyecto y soluciones tecnológicas planteadas durante el trimestre, organizadas por sector económico. Incluye proyectos de compañeros y referencias de sustentaciones finales.
+
+- **[05-google-search-operators-and-commands.md](./05-google-search-operators-and-commands.md)** – Operadores de búsqueda y comandos de Google, con ejemplos prácticos, tablas de verdad y lógica booleana. Incluye funciones de calculadora integrada y utilidades.
+
+---
+
+## Instructores y líneas de formación
+
+Durante el primer trimestre se contó con la guía de varios instructores, cada uno con un enfoque particular:
+
+| Instructor | Enfoque Principal | Conceptos Destacados |
+|------------|-------------------|----------------------|
+| **1** | Proyectos y sectores económicos | - Investigación previa al desarrollo.<br>- Selección de sector económico (agrícola, salud, automotriz, alimentos, textil).<br>- Estudio de empresas referentes.<br>- El software es intangible, genera resistencia al cambio.<br>- Optimización de procesos y generación de empleo. |
+| **2** | Investigación y referentes | - Los problemas ya existen y han sido abordados por otras empresas.<br>- El valor agregado está en la innovación sobre soluciones existentes.<br>- Identificación de referentes sólidos. |
+| **3** | Fundamentos tecnológicos | - Definición de tecnología y evolución histórica.<br>- Componentes de hardware y software.<br>- Sistemas operativos (Windows, Linux, ChromeOS, Solaris).<br>- Gestión de procesos, información y datos.<br>- Herramientas ofimáticas. |
+| **4** | Propuestas técnicas y económicas | - Diferencia entre propuesta técnica y económica.<br>- Estructura de una propuesta técnica: metodología, cronograma, especificaciones.<br>- Estructura de una propuesta económica: precios, presupuestos, costos, forma de pago. |
 
 ---
 
@@ -87,13 +120,13 @@ Puedes explorar cada ejercicio navegando a sus respectivas carpetas y abriendo l
 
 ## Metodologías, herramientas y conceptos clave
 
-A lo largo del trimestre se han trabajado en la introducción a los siguientes conceptos y herramientas, fundamentales para el perfil del tecnólogo en ADSO:
+A lo largo del trimestre se han trabajado los siguientes conceptos y herramientas, fundamentales para el perfil del tecnólogo en ADSO:
 
 | Categoría | Elementos |
 |-----------|-----------|
 | **Metodologías de desarrollo** | Scrum, Canvas, Metodologías ágiles, BEM (CSS), Flexbox, CSS Grid |
 | **Conceptos de negocio** | Propuesta técnica vs. propuesta económica, canales de venta, modelo de negocio, fidelización de clientes, pasarelas de pago (PSE, tarjetas) |
-| **Infraestructura y sistemas** | Sistemas operativos (Windows, Linux, ChromeOS), discos SSD vs. HDD, periféricos, redes, protocolos de comunicación (HTTP, HTTPS) |
+| **Infraestructura y sistemas** | Sistemas operativos (Windows, Linux, ChromeOS, Solaris), discos SSD vs. HDD, periféricos, redes, protocolos de comunicación (HTTP, HTTPS) |
 | **Bases de datos** | MySQL, PostgreSQL, Access, sistemas orientados a objetos |
 | **Entornos de desarrollo** | VS Code, Sublime Text, NetBeans, W3Schools, PSeInt |
 | **Competencias WorldSkills** | Preparación en frontend, backend, lógica de programación, y componentes reutilizables |
@@ -101,3 +134,5 @@ A lo largo del trimestre se han trabajado en la introducción a los siguientes c
 ---
 
 *Gracias por visitar este repositorio. Si encuentras algún error o deseas contribuir, abre un issue o un pull request.*
+
+> Gracias por leer.
