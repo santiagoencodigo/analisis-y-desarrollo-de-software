@@ -289,11 +289,5 @@ La TGS ofrece una visión integral que permite:
 
 El conocimiento de los sistemas de información, el ciclo de vida del software y las metodologías de desarrollo (especialmente las ágiles como Scrum) es fundamental para caracterizar procesos, recolectar información y establecer requisitos de acuerdo con las necesidades del cliente.
 
----
-
-<img src="https://examtimeassets.s3.amazonaws.com/uploads/media/image/20641259/desktop_8f0ef0f3-4b82-4df3-87ff-be5397270f3e.png">
-
-*Imagen Tomada De: https://www.goconqr.com/ficha/18058463/conceptos-basicos-de-la-teoria-general-de-sistemas*
-
 > Gracias por leer.
 

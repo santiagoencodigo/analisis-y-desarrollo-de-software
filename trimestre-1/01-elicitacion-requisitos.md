@@ -10,7 +10,7 @@
 
 ## Tabla de contenido
 
-1. [Introducción a la especificación de requisitos](#introducción-a-la-especificación-de-requisitos)
+1. [Introducción a la elicitación de requisitos](#introducción-a-la-elicitación-de-requisitos)
 2. [Fuentes de la información](#fuentes-de-la-información)
 3. [Técnicas de recolección de datos](#técnicas-de-recolección-de-datos)
    - [Preguntas cerradas y abiertas](#preguntas-cerradas-y-abiertas)
@@ -31,9 +31,9 @@
 
 ---
 
-## Introducción a la especificación de requisitos
+## Introducción a la elicitación de requisitos
 
-La **especificación de requisitos del software** es la base fundamental de todo proyecto de desarrollo. El mundo empresarial se basa en la resolución de problemas, por lo que en el desarrollo de software es necesario definir un **objeto de estudio** para plantear qué se va a hacer y delimitar los tiempos estimados y costos.
+La **elicitación de requisitos del software** es la base fundamental de todo proyecto de desarrollo. El mundo empresarial se basa en la resolución de problemas, por lo que en el desarrollo de software es necesario definir un **objeto de estudio** para plantear qué se va a hacer y delimitar los tiempos estimados y costos.
 
 Para resolver un problema, se debe buscar realmente qué es lo que se espera que solucione. Por ende, se debe hacer un **levantamiento de información** por medio de técnicas de recolección de datos.
 
