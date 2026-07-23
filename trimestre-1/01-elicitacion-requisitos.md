@@ -269,6 +269,14 @@ La observación es una técnica de recolección de requisitos que consiste en ve
 - **Observación**: ¿Qué se quiere observar y para qué? Debe existir una pregunta o propósito de observación claro (por ejemplo: observar la conducta de los estudiantes en clase, identificar patrones de comportamiento, registrar interacciones sociales, etc.).
 - **Contexto y entorno claro**: selección del lugar, momento y condiciones donde se hará la observación. Asegurar que el ambiente sea propicio y permita ver lo que se desea registrar.
 - **Instrumento de registro**: puede ser una guía de observación, lista de verificación, diario de campo, grilla de observación o notas descriptivas. El instrumento debe contener categorías o variables a observar.
+
+  **Ejemplo de categorías para una guía de observación:**
+
+  | **Categoría** | **Aspectos a observar** |
+  |---------------|-------------------------|
+  | **Materia comunicativa** | - ¿Qué canales de comunicación se utilizan en el ejercicio de los distintos procesos? <br> - ¿Cómo ha sido la comunicación de las diferentes áreas intervinientes en los procesos de la compañía? <br> - ¿Qué incidencia ha tenido la propuesta comunicativa sobre el resultado final del proceso? <br> - ¿Existen casos exitosos que se deriven del proceso comunicativo, en la articulación de los procesos? |
+  | **Sistema de información** | - ¿Cuál es el proceso que se sigue a partir del sistema de información? <br> - ¿Cuáles son los principales inconvenientes en el manejo del sistema de información? |
+
 - **Duración y frecuencia**: establecer cuánto tiempo durará cada sesión de observación y cuántas veces se repetirá. Ejemplo: 30 minutos por sesión, 3 veces por semana durante un mes.
 - **Registro preciso y ético**: anotar lo que se ve, no lo que se interpreta (evitar juicios de valor). Si hay personas involucradas, considerar aspectos éticos: consentimiento informado, confidencialidad y autorización si se graba.
 - **Análisis posterior**: contrastar lo observado con otras fuentes (entrevistas, encuestas, documentos). Puede ser útil para la triangulación en una investigación.
@@ -297,18 +305,70 @@ La observación es más efectiva en situaciones donde se desea obtener informaci
 
 Un investigador del equipo visita a varios profesionales freelance en sus espacios de trabajo (también puede ser por videollamada) y los observa durante una jornada laboral o durante un bloque específico de planificación de tareas.
 
-Durante la observación, toma nota de:
+**Guía de observación utilizada:**
 
-- Qué herramientas usan (apps, agendas físicas, post-its, etc.).
+| **Categoría** | **Preguntas guía** |
+|---------------|-------------------|
+| **Comunicación** | - ¿Qué canales de comunicación utilizan para coordinar tareas? <br> - ¿Cómo se comunican con clientes o colaboradores? <br> - ¿Qué incidencia tiene la comunicación en el resultado final del trabajo? |
+| **Sistema de información** | - ¿Qué herramientas usan para organizar tareas? (apps, agendas físicas, post-its, etc.) <br> - ¿Cuáles son los principales inconvenientes en el manejo de estas herramientas? <br> - ¿Cómo priorizan sus tareas? |
+| **Procesos** | - ¿Qué pasos siguen para planificar su día? <br> - ¿Qué interrupciones o dificultades enfrentan? <br> - ¿Qué patrones de organización se repiten? |
+
+**Registro de observación:**
+
+El observador toma nota de:
+
+- Herramientas usadas (apps, agendas físicas, post-its, etc.).
 - Cómo priorizan sus tareas.
 - Qué interrupciones o dificultades enfrentan.
 - Qué patrones de organización se repiten (ej. agrupar tareas por tipo, anotar ideas en el celular, etc.).
+- Canales de comunicación utilizados (WhatsApp, correo, reuniones).
+- Inconvenientes en el manejo de la información (ej. pérdida de datos, falta de integración).
 
 El observador no interfiere ni hace preguntas en ese momento. Solo registra comportamientos y hábitos de forma natural.
 
-**Resultado práctico**: Se detecta, por ejemplo, que muchos usuarios usan simultáneamente una app digital y una libreta física para recordar tareas, lo que genera confusión. También se observa que anotan ideas o recordatorios mientras trabajan, pero luego olvidan organizarlas.
+**Resultado práctico**: Se detecta, por ejemplo, que muchos usuarios usan simultáneamente una app digital y una libreta física para recordar tareas, lo que genera confusión. También se observa que anotan ideas o recordatorios mientras trabajan, pero luego olvidan organizarlas. En cuanto a la comunicación, se nota que muchos freelancers dependen de WhatsApp para coordinar con clientes, lo que mezcla lo personal con lo profesional.
 
-Gracias a esto, el equipo decide incluir una función rápida de captura de tareas tipo "nota rápida" que se puede ordenar más tarde, y una integración opcional con calendarios físicos mediante códigos QR.
+Gracias a esto, el equipo decide incluir una función rápida de captura de tareas tipo "nota rápida" que se puede ordenar más tarde, y una integración opcional con calendarios físicos mediante códigos QR. También se plantea una sección separada para comunicación profesional dentro de la app.
+
+**Complemento con entrevista:**
+
+Posterior a la observación, el equipo realiza una breve entrevista para profundizar en los hallazgos. Utilizan el siguiente formato:
+
+---
+
+**Formato de entrevista complementaria**
+
+Buenos días y/o tardes:
+
+La presente entrevista es de carácter exclusivamente informativo, la cual se realiza como apoyo al trabajo de investigación para el desarrollo de una aplicación de gestión de tareas. De modo que, las apreciaciones acá señaladas no generan compromiso alguno con el tema tratado.
+
+1. ¿Qué sabe sobre las herramientas de gestión de tareas que utiliza actualmente?
+
+Rta/
+
+2. ¿Cuáles han sido las acciones ejercidas por usted, en pro de fomentar la organización eficiente de sus tareas y proyectos?
+
+Rta/
+
+3. ¿Cuál considera ha sido el mayor inconveniente para la generación de resultados eficientes en la organización de sus tareas?
+
+Rta/
+
+4. ¿Cuál ha sido el apoyo de otras herramientas o personas en pro de lograr una mejora en la organización de sus tareas?
+
+Rta/
+
+5. ¿Cuál considera usted que puede ser la solución a los principales inconvenientes presentados en la organización de sus tareas?
+
+Rta/
+
+6. ¿Cree usted que las herramientas actuales que utiliza se pueden mejorar o se debe contemplar opciones externas?
+
+Rta/
+
+---
+
+Este formato permite contrastar lo observado con lo que los usuarios dicen, validando los hallazgos y obteniendo información más profunda sobre sus necesidades reales.
 
 ---
 
