@@ -22,12 +22,13 @@
    - [Historias de usuario](#historias-de-usuario)
 4. [Requerimientos funcionales y no funcionales](#requerimientos-funcionales-y-no-funcionales)
 5. [Roles en el desarrollo de software](#roles-en-el-desarrollo-de-software)
-6. [Diagramas de flujo de datos (DFD)](#diagramas-de-flujo-de-datos-dfd)
+6. [Diagramas de flujo generales (Flujogramas)](#diagramas-de-flujo-generales-flujogramas)
+7. [Diagramas de flujo de datos (DFD)](#diagramas-de-flujo-de-datos-dfd)
    - [Notación Yourdon‑Coad](#notación-yourdoncoad)
    - [Notación Gane‑Sarson](#notación-ganesarson)
    - [Ejercicios de DFD](#ejercicios-de-dfd)
-7. [Ejemplo de proyecto sencillo: Panadería Estación Paisa](#ejemplo-de-proyecto-sencillo-panadería-estación-paisa)
-8. [UML (Unified Modeling Language)](#uml-unified-modeling-language)
+8. [Ejemplo de proyecto sencillo: Panadería Estación Paisa](#ejemplo-de-proyecto-sencillo-panadería-estación-paisa)
+9. [UML (Unified Modeling Language)](#uml-unified-modeling-language)
 
 ---
 
@@ -422,20 +423,92 @@ En un proyecto de software intervienen diferentes perfiles, cada uno con respons
 
 ---
 
+## Diagramas de flujo generales (Flujogramas)
+
+Un **diagrama de flujo** (o flujograma) es una representación gráfica de los pasos que se siguen para realizar un proceso. Partiendo de una entrada, y después de realizar una serie de acciones, se llega a una salida. Cada paso se apoya en el anterior y sirve de sustento al siguiente.
+
+### Características y ventajas
+
+- Es una representación gráfica de las secuencias de un proceso; presenta información clara, ordenada y concisa.
+- Permite visualizar las frecuencias y relaciones entre las etapas indicadas.
+- Se pueden detectar problemas, desconexiones, pasos de escaso valor añadido, etc.
+- Compara y contrasta el flujo actual del proceso contra el flujo ideal, para identificar oportunidades de mejora.
+- Identifica los lugares y posiciones donde los datos adicionales pueden ser recopilados e investigados.
+- Ayuda a entender el proceso completo de forma rápida y amena.
+
+### Símbolos principales
+
+No es indispensable usar un tipo especial de símbolos, pero existen algunos ampliamente utilizados:
+
+| Símbolo | Representación | Significado |
+|---------|---------------|-------------|
+| Inicio / Fin | `[●]` o `(●)` | Comienzo o final del proceso. En su interior se sitúa la acción o resultado. |
+| Actividad / Tarea | `[   ]` | Tarea o actividad llevada a cabo durante el proceso. Puede tener muchas entradas, pero solo una salida. |
+| Decisión / Bifurcación | `◇` | Punto en que se toma una decisión: sí/no, abierto/cerrado, etc. |
+| Conexión o flecha | `→` | Muestra la dirección y el sentido del flujo del proceso, conectando los símbolos. |
+| Documento | `📄` | Generación o consulta de un documento específico en un punto del proceso. |
+| Información de apoyo | `[ i ]` | Información necesaria para alimentar una actividad (datos para realizarla). |
+| Conexión con otros procesos | `⭕` | Proceso independiente que en algún momento aparece relacionado con el proceso principal. |
+| Envío de datos | `🖨️` | Envía datos a la impresora o a otro dispositivo. |
+| Muestra de datos | `🖥️` | Muestra datos en pantalla (Display). |
+
+### Metodología para crear un diagrama de flujo
+
+Para realizar un diagrama de flujo, se deben seguir los siguientes pasos:
+
+1. **Determinar el marco y los límites del proceso.**
+2. **Determinar los pasos del proceso.** Se realiza una lista con las actividades principales, entradas, salidas y decisiones.
+3. **Dibujar el diagrama de flujo** usando los símbolos adecuados.
+4. **Comprobar el diagrama de flujo** para verificar que sea correcto y completo.
+5. **Usar una plantilla** si se desea mantener consistencia en proyectos similares.
+
+### Reglas según estándar ISO
+
+De acuerdo con el estándar ISO, los símbolos y las flechas deben cumplir ciertas características para ser considerados sintácticamente correctos:
+
+- Los diagramas de flujo deben escribirse de **arriba hacia abajo** y/o de **izquierda a derecha**.
+- Los símbolos se unen con líneas que tienen en la punta una flecha que indica la dirección del flujo.
+- Se deben utilizar solamente líneas de flujo **horizontales o verticales** (nunca diagonales).
+- Se debe evitar el cruce de líneas; si es necesario separar el flujo, se utilizan conectores, pero solo cuando sea estrictamente necesario.
+- No deben quedar líneas de flujo sin conectar.
+- Todo texto escrito dentro de un símbolo debe ser legible, preciso y evitar el uso de muchas palabras.
+- Todos los símbolos pueden tener más de una línea de entrada, a excepción del símbolo final.
+- Solo los símbolos de decisión pueden (y deben) tener más de una línea de flujo de salida.
+
+## Relación con los DFD
+
+Los diagramas de flujo generales (flujogramas) representan la secuencia lógica de un proceso o algoritmo, mientras que los diagramas de flujo de datos (DFD) se enfocan en el movimiento y transformación de los datos dentro de un sistema. Ambos son complementarios: el flujograma muestra el "cómo" se ejecuta un proceso paso a paso, mientras que el DFD muestra el "qué" datos fluyen y cómo se transforman.
+
 ## Diagramas de flujo de datos (DFD)
 
-Los DFD son una herramienta gráfica que representa el flujo de información en un sistema. Muestran cómo los datos entran, salen y se transforman dentro del sistema, identificando procesos, fuentes, destinos y almacenes de datos.
+Los **diagramas de flujo de datos (DFD)** son una herramienta gráfica que representa el flujo de información en un sistema. Muestran cómo los datos entran, salen y se transforman dentro del sistema, identificando procesos, fuentes, destinos y almacenes de datos. A diferencia de los flujogramas generales, los DFD se centran en los datos, no en la secuencia de pasos.
 
 ### Notación Yourdon‑Coad
 
 Esta notación utiliza los siguientes símbolos:
 
-| Símbolo | Representación | Significado |
-|---------|----------------------|-------------|
-| Entidad externa | `[   ]` | Rectángulo con los bordes abiertos, representa una fuente o destino de datos fuera del sistema. |
-| Proceso | `(   )` | Círculo u óvalo, transforma los datos de entrada en salida. |
-| Almacén de datos | `||`  o `══`  | Dos líneas paralelas, representa un depósito de datos (archivo, base de datos). |
-| Flujo de datos | `→`  | Flecha que indica la dirección del movimiento de los datos. |
+| Símbolo | Representación ASCII | Significado |
+|---------|---------------------|-------------|
+| Entidad externa | `[   ]` | Rectángulo con bordes abiertos. Representa una fuente o destino de datos fuera del sistema. |
+| Proceso | `(   )` | Círculo u óvalo. Transforma los datos de entrada en salida. |
+| Almacén de datos | `||` o `══` | Dos líneas paralelas. Representa un depósito de datos (archivo, base de datos). |
+| Flujo de datos | `→` | Flecha que indica la dirección del movimiento de los datos. |
+
+**Ejemplo de DFD con notación Yourdon‑Coad:**
+
+```dfd
+  [ Cliente ] → ( Validar pedido ) → || Pedidos ||
+                      ↓
+                ( Calcular total )
+                      ↓
+  [ Cliente ] ← ( Facturar )
+```
+
+**Descripción:**
+1. El cliente envía un pedido (`[ Cliente ] → ( Validar pedido )`).
+2. El pedido validado se almacena en la base de datos (`→ || Pedidos ||`).
+3. Se calcula el total (`( Calcular total )`).
+4. Se genera la factura y se envía al cliente (`[ Cliente ] ← ( Facturar )`).
 
 **Simulación visual con caracteres:**
 
@@ -446,16 +519,16 @@ Almacén:          || Pedidos ||
 Flujo:            Datos → Proceso
 ```
 
-### Notación Gane‑Sarson
+### Notación Yourdon‑Coad
 
-Esta notación es similar pero con una representación ligeramente distinta:
+Esta notación utiliza los siguientes símbolos:
 
-| Símbolo | Representación | Significado |
-|---------|----------------------|-------------|
-| Entidad externa |  (cuadrado con sombra) | Representa una entidad externa. |
-| Proceso |  (rectángulo con esquinas redondeadas) | Proceso que transforma datos. |
-| Almacén de datos |  (rectángulo abierto por la derecha) | Almacén de datos. |
-| Flujo de datos | `→`  | Flecha que indica el movimiento de los datos. |
+| Símbolo | Representación ASCII | Significado |
+|---------|---------------------|-------------|
+| Entidad externa | `[   ]` | Rectángulo con bordes abiertos. Representa una fuente o destino de datos fuera del sistema. |
+| Proceso | `(   )` | Círculo u óvalo. Transforma los datos de entrada en salida. |
+| Almacén de datos | `||` o `══` | Dos líneas paralelas. Representa un depósito de datos (archivo, base de datos). |
+| Flujo de datos | `→` | Flecha que indica la dirección del movimiento de los datos. |
 
 **Simulación visual con caracteres:**
 
@@ -475,14 +548,77 @@ Almacén:          ┌────────────┐
 Flujo:            Datos → Proceso
 ```
 
+**Ejemplo de DFD con notación Gane‑Sarson:**
+
+```dfd
+    ┌────────────┐     ┌────────────┐     ┌────────────┐
+    │  Cliente   │ →   │  Validar   │ →   │  Pedidos   │
+    └────────────┘     │  pedido    │     └────────────┘
+                      └────────────┘
+                            ↓
+                      ┌────────────┐
+                      │  Calcular  │
+                      │   total    │
+                      └────────────┘
+                            ↓
+  ┌────────────┐     ┌────────────┐
+  │  Cliente   │ ←   │  Facturar  │
+  └────────────┘     └────────────┘
+```
+
+---
+
+### Niveles de DFD
+
+Los DFD se pueden representar en diferentes niveles de detalle:
+
+| Nivel | Descripción |
+|-------|-------------|
+| **DFD de contexto (Nivel 0)** | Muestra el sistema completo como un solo proceso, con sus entradas y salidas principales. |
+| **DFD de Nivel 1** | Descompone el proceso principal en varios procesos más detallados. |
+| **DFD de Nivel 2 (y superiores)** | Descompone cada proceso de nivel 1 en subprocesos más específicos. |
+
 ### Ejercicios de DFD
 
 Practica la elaboración de DFD con los siguientes ejercicios:
 
-1. Hallar el número mayor.
-2. Hallar el área de un círculo.
-3. Hallar el área de un rombo.
-4. Hallar el área de un paralelepípedo.
+#### 1. Hallar el número mayor entre dos números
+
+```dfd
+[ Usuario ] → ( Leer dos números ) → ( Comparar )
+                                          ↓
+                                    ( Mostrar el mayor )
+                                          ↓
+                                    [ Usuario ]
+```
+
+#### 2. Hallar el área de un círculo
+
+```dfd
+[ Usuario ] → ( Leer radio ) → ( Calcular área = π × r² ) → [ Usuario ]
+```
+
+#### 3. Hallar el área de un rombo
+
+```dfd
+[ Usuario ] → ( Leer diagonal mayor y menor ) → ( Calcular área = (D × d) / 2 ) → [ Usuario ]
+```
+
+#### 4. Hallar el área de un paralelepípedo
+
+```dfd
+[ Usuario ] → ( Leer largo, ancho, alto ) → ( Calcular área = 2 × (l×a + l×h + a×h) ) → [ Usuario ]
+```
+
+### DFD vs. Flujograma
+
+| **DFD (Diagrama de Flujo de Datos)** | **Flujograma (Diagrama de Flujo General)** |
+|---------------------------------------|---------------------------------------------|
+| Muestra el flujo de **datos** entre procesos, entidades y almacenes. | Muestra la **secuencia de pasos** de un proceso o algoritmo. |
+| Se enfoca en el **qué** (qué datos se transforman). | Se enfoca en el **cómo** (cómo se ejecuta paso a paso). |
+| Representa la estructura y comportamiento del sistema. | Representa la lógica y secuencia de operaciones. |
+| No muestra decisiones o condiciones (no tiene símbolos de decisión). | Incluye símbolos de decisión (rombos) para condiciones. |
+| Útil para el análisis y diseño de sistemas. | Útil para la programación y descripción de procesos. |
 
 ---
 
