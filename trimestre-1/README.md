@@ -13,8 +13,6 @@ Este directorio contiene los materiales, apuntes y ejercicios prácticos corresp
 - [Instructores y líneas de formación](#instructores-y-líneas-de-formación)
 - [Proyectos y ejercicios destacados](#proyectos-y-ejercicios-destacados-world-skills)
 - [Metodologías, herramientas y conceptos clave](#metodologías-herramientas-y-conceptos-clave)
-- [Recursos y herramientas recomendadas](#recursos-y-herramientas-recomendadas)
-- [Reglamento del aprendiz SENA](#reglamento-del-aprendiz-sena)
 
 ---
 
@@ -65,10 +63,13 @@ trimestre-1/
 │   ├── 19-simon-say/           # Juego de memoria (Simon Says)
 │   └── 20-laravel/             # Introducción a Laravel (PHP)
 ├── 01-elicitacion-requisitos.md   # Técnicas de elicitación de requisitos
-├── 02-unified-modeling-language.md # Fundamentos de UML (Casos de Uso, DFD)
-├── 04-teoria-general-sistemas.md  # Teoría General de Sistemas (TGS)
-├── 05-business-models.md          # Modelos de negocio y soluciones tecnológicas
-├── 06-google-search-operators.md  # Operadores de búsqueda y comandos de Google
+├── 02-unified-modeling-language.md # UML y metodologías de desarrollo
+├── 03-teoria-general-sistemas.md  # Teoría General de Sistemas (TGS)
+├── 04-business-models.md          # Modelos de negocio y soluciones tecnológicas
+├── 05-tics.md                     # Tecnologías de la Información y Comunicación
+├── 06-propuestas-y-presupuestos.md # Propuestas técnicas, económicas y estimación de costos
+├── 07-especificacion-requisitos.md # Especificación de requisitos (IEEE 830)
+├── 08-lineamientos-de-proyecto.md  # Lineamientos para documentación de proyectos
 ├── index.html                     # Página de inicio (ejemplo)
 └── README.md                      # Este archivo
 ```
@@ -79,15 +80,21 @@ trimestre-1/
 
 Los siguientes documentos consolidan los conceptos y metodologías abordadas durante el trimestre:
 
-- **[01-elicitacion-requisitos.md](./01-elicitacion-requisitos.md)** – Técnicas de recolección de requisitos: entrevistas, encuestas, talleres, observación, prototipos e historias de usuario. Incluye ejemplos y análisis de ventajas/desventajas.
+- **[01-elicitacion-requisitos.md](./01-elicitacion-requisitos.md)** – Técnicas de recolección de requisitos: entrevistas, encuestas, talleres, observación, prototipos e historias de usuario. Incluye ejemplos, análisis de ventajas/desventajas, diagramas de flujo y DFD.
 
-- **[02-unified-modeling-language.md](./02-unified-modeling-language.md)** – Introducción a UML: casos de uso, diagramas de flujo de datos (DFD), clasificación de requisitos funcionales y no funcionales, y estructuración de objetivos generales y específicos.
+- **[02-unified-modeling-language.md](./02-unified-modeling-language.md)** – Lenguaje Unificado de Modelado (UML), casos de uso, historias de usuario, metodologías ágiles (Scrum, XP, Kanban), requisitos funcionales y no funcionales, estructura del proyecto formativo y mapas de navegación.
 
-- **[03-teoria-general-sistemas.md](./03-teoria-general-sistemas.md)** – Fundamentos de la Teoría General de Sistemas (TGS): origen, tipos de sistemas, propiedades clave (entropía, homeostasis, sinergia, adaptabilidad), enfoque sistémico y aplicación en el desarrollo de software.
+- **[03-teoria-general-sistemas.md](./03-teoria-general-sistemas.md)** – Fundamentos de la Teoría General de Sistemas (TGS): origen, tipos de sistemas, propiedades clave (entropía, homeostasis, sinergia, adaptabilidad), enfoque sistémico, datos e información, procesos, sistemas de información, ciclo de vida del software, metodologías de desarrollo y Scrum.
 
-- **[04-business-models.md](./04-business-models.md)** – Consolidación de modelos de negocio, ideas de proyecto y soluciones tecnológicas planteadas durante el trimestre, organizadas por sector económico. Incluye proyectos de compañeros y referencias de sustentaciones finales.
+- **[04-business-models.md](./04-business-models.md)** – Consolidación de modelos de negocio, ideas de proyecto y soluciones tecnológicas planteadas durante el trimestre, organizadas por sector económico (agropecuario, salud, textil, logística, comercio, finanzas, educación, automotriz, ganadero, mascotas, ambiental). Incluye proyectos de compañeros y referencias de sustentaciones finales.
 
-- **[05-google-search-operators-and-commands.md](./05-google-search-operators-and-commands.md)** – Operadores de búsqueda y comandos de Google, con ejemplos prácticos, tablas de verdad y lógica booleana. Incluye funciones de calculadora integrada y utilidades.
+- **[05-tics.md](./05-tics.md)** – Tecnologías de la Información y la Comunicación: software (sistema, aplicación, programación), hardware, sistemas operativos, internet, ofimática (Word, Excel, PowerPoint), herramientas colaborativas, evaluación, reportes, análisis informático, ruido, redundancia, entropía, mejora continua, y operadores de búsqueda de Google.
+
+- **[06-propuestas-y-presupuestos.md](./06-propuestas-y-presupuestos.md)** – Propuestas técnicas y económicas: definiciones, diferencias, estructuras, factibilidad, estimación de costos en Excel, análisis de proveedores (7 C, 5 criterios, evaluación, relación), y proceso de pitch y selección de proyectos en ADSO.
+
+- **[07-especificacion-requisitos.md](./07-especificacion-requisitos.md)** – Especificación de requisitos de software según IEEE 830-1998: ingeniería de requisitos, estructura de la plantilla, propósito de cada sección, relación con otros documentos (elicitación, propuestas, pitch), y ejemplo de aplicación práctica.
+
+- **[08-lineamientos-de-proyecto.md](./08-lineamientos-de-proyecto.md)** – Lineamientos para la documentación de proyectos de software: estructura del documento, entregables por fase (Análisis, Desarrollo, Implementación, Verificación), guía de redacción por sección, y recomendaciones finales.
 
 ---
 
@@ -124,11 +131,11 @@ A lo largo del trimestre se han trabajado los siguientes conceptos y herramienta
 
 | Categoría | Elementos |
 |-----------|-----------|
-| **Metodologías de desarrollo** | Scrum, Canvas, Metodologías ágiles, BEM (CSS), Flexbox, CSS Grid |
-| **Conceptos de negocio** | Propuesta técnica vs. propuesta económica, canales de venta, modelo de negocio, fidelización de clientes, pasarelas de pago (PSE, tarjetas) |
-| **Infraestructura y sistemas** | Sistemas operativos (Windows, Linux, ChromeOS, Solaris), discos SSD vs. HDD, periféricos, redes, protocolos de comunicación (HTTP, HTTPS) |
-| **Bases de datos** | MySQL, PostgreSQL, Access, sistemas orientados a objetos |
-| **Entornos de desarrollo** | VS Code, Sublime Text, NetBeans, W3Schools, PSeInt |
+| **Metodologías de desarrollo** | Scrum, XP, Kanban, BEM (CSS), Flexbox, CSS Grid |
+| **Conceptos de negocio** | Propuesta técnica vs. económica, canales de venta, modelo de negocio, fidelización de clientes, pasarelas de pago (PSE, tarjetas), análisis de proveedores |
+| **Infraestructura y sistemas** | Sistemas operativos (Windows, Linux, ChromeOS, Solaris), discos SSD vs. HDD, periféricos, redes, protocolos de comunicación (HTTP, HTTPS), IoT |
+| **Bases de datos** | MySQL, PostgreSQL, Access, sistemas orientados a objetos, diccionario de datos |
+| **Entornos de desarrollo** | VS Code, Sublime Text, NetBeans, W3Schools, PSeInt, DIA |
 | **Competencias WorldSkills** | Preparación en frontend, backend, lógica de programación, y componentes reutilizables |
 
 ---

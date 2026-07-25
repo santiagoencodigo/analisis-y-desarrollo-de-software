@@ -209,11 +209,9 @@ El primer trimestre del programa ADSO incluye una secuencia documental que guía
 
 4. **Especificación de requisitos** – Con base en el levantamiento de información y la propuesta, se documentan todos los requisitos funcionales y no funcionales siguiendo la norma IEEE 830-1998, dando como resultado el archivo [`07-especificacion-requisitos.md`](./07-especificacion-requisitos.md).
 
-5. **Desarrollo y pruebas** – El equipo implementa el sistema según la especificación, realizando pruebas de verificación y validación.
-
-6. **Entrega final** – Se entrega el software funcional, junto con la documentación técnica, manuales de usuario y soporte post-implementación.
-
 > **Nota:** Los documentos mencionados (01, 06 y 07) son **guías conceptuales y metodológicas**. Explican los conceptos, técnicas y estructuras que se deben aplicar en el proyecto formativo.
+>
+> El desarrollo empieza desde el tercer trimestre.
 
 ---
 
