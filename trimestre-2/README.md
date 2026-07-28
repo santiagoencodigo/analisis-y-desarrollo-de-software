@@ -7,6 +7,7 @@ En esta etapa de la formación como Aprendiz en Análisis y Desarrollo de Softwa
 ## Tabla de contenido
 
 - [Estructura del directorio](#estructura-del-directorio-trimestre-2)
+- [Horario de formación](#horario-de-formación)
 - [Documentación técnica del trimestre](#documentación-técnica-del-trimestre)
 - [Experiencias y aprendizajes](#experiencias-y-aprendizajes)
   - [Inglés técnico y cotidiano](#inglés-técnico-y-cotidiano)
@@ -30,6 +31,38 @@ trimestre-2/
 ```
 
 ---
+
+## Horario de formación
+
+El segundo trimestre se desarrolla en jornada matutina, de **6:00 a 12:00**, de lunes a viernes. La distribución de competencias y resultados de aprendizaje es la siguiente:
+
+| **Día** | **Horario** | **Competencia** | **Resultado de Aprendizaje** |
+|---------|-------------|-----------------|------------------------------|
+| **Lunes** | 6:00 - 12:00 | Análisis de la especificación de requisitos del software. | **01** Planear actividades de análisis de acuerdo con la metodología seleccionada. |
+| **Martes** | 6:00 - 12:00 | Análisis de la especificación de requisitos del software. | **03** Desarrollar procesos lógicos a través de la implementación de algoritmos. |
+| **Miércoles** | 6:00 - 9:00 | Comunicación | **03** Relacionar los procesos comunicativos teniendo en cuenta criterios de lógica y racionalidad. <br> **01** Analizar los componentes de la comunicación según sus características, intencionalidad y contexto. <br> **04** Establecer procesos de enriquecimiento lexical y acciones de mejoramiento en el desarrollo de procesos comunicativos según requerimientos del contexto. <br> **02** Argumentar en forma oral y escrita atendiendo las exigencias y particularidades de las diversas situaciones comunicativas mediante los distintos sistemas de representación. |
+| **Miércoles** | 9:00 - 12:00 | Análisis de la especificación de requisitos del software. | **03** Desarrollar procesos lógicos a través de la implementación de algoritmos. |
+| **Jueves** | 6:00 - 9:00 | Inglés | **01** Comprender información sobre situaciones cotidianas y laborales actuales y futuras a través de interacciones sociales de forma oral y escrita. |
+| **Jueves** | 9:00 - 12:00 | Análisis de la especificación de requisitos del software. | **04** Verificar los modelos realizados en la fase de análisis de acuerdo con lo establecido en el informe de requisitos. |
+| **Viernes** | 6:00 - 12:00 | Análisis de la especificación de requisitos del software. | **02** Modelar las funciones del software de acuerdo con el informe de requisitos. |
+
+### Resultados de aprendizaje por competencia
+
+**Competencia: Análisis de la especificación de requisitos del software**
+- **RA01:** Planear actividades de análisis de acuerdo con la metodología seleccionada.
+- **RA02:** Modelar las funciones del software de acuerdo con el informe de requisitos.
+- **RA03:** Desarrollar procesos lógicos a través de la implementación de algoritmos.
+- **RA04:** Verificar los modelos realizados en la fase de análisis de acuerdo con lo establecido en el informe de requisitos.
+
+**Competencia: Comunicación**
+- **RA01:** Analizar los componentes de la comunicación según sus características, intencionalidad y contexto.
+- **RA02:** Argumentar en forma oral y escrita atendiendo las exigencias y particularidades de las diversas situaciones comunicativas.
+- **RA03:** Relacionar los procesos comunicativos teniendo en cuenta criterios de lógica y racionalidad.
+- **RA04:** Establecer procesos de enriquecimiento lexical y acciones de mejoramiento en el desarrollo de procesos comunicativos.
+
+**Competencia: Inglés**
+- **RA01:** Comprender información sobre situaciones cotidianas y laborales actuales y futuras a través de interacciones sociales de forma oral y escrita.
+
 
 ## Documentación técnica del trimestre
 
