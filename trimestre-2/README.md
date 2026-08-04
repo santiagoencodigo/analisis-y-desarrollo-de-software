@@ -1,6 +1,6 @@
 # Segundo Trimestre
 
-En esta etapa de la formación como Aprendiz en Análisis y Desarrollo de Software (ADSO), el enfoque se amplió hacia habilidades comunicativas en inglés y hacia el entendimiento profundo de los requisitos de un proyecto. A continuación, comparto las experiencias y aprendizajes más representativos del trimestre, junto con la documentación técnica que estoy organizando.
+En esta etapa de la formación como Aprendiz en Análisis y Desarrollo de Software (ADSO), el enfoque se amplió hacia habilidades comunicativas en inglés y hacia el entendimiento profundo de los requisitos de un proyecto. A continuación, comparto las experiencias y aprendizajes más representativos del trimestre, junto con la documentación técnica que he organizado.
 
 ---
 
@@ -12,10 +12,6 @@ En esta etapa de la formación como Aprendiz en Análisis y Desarrollo de Softwa
 - [Metodologías y herramientas trabajadas](#metodologías-y-herramientas-trabajadas)
 - [Proyectos y casos prácticos](#proyectos-y-casos-prácticos)
 - [Experiencias y aprendizajes](#experiencias-y-aprendizajes)
-  - [Inglés técnico y cotidiano](#inglés-técnico-y-cotidiano)
-  - [Desarrollo Humano](#desarrollo-humano)
-  - [Taller de requisitos](#taller-de-requisitos)
-  - [Metodologías y técnicas de desarrollo](#metodologías-y-técnicas-de-desarrollo)
 - [Próximos pasos](#próximos-pasos)
 
 ---
@@ -24,6 +20,24 @@ En esta etapa de la formación como Aprendiz en Análisis y Desarrollo de Softwa
 
 ```
 trimestre-2/
+├── 01-pseudocodigo/                # Ejercicios de pseudocódigo con PSeInt
+│   ├── README.md                   # Guía del módulo
+│   ├── 01-pseudocodigo.md          # Ejercicios 1 al 12
+│   ├── 02-pseudocodigo.md          # Ejercicios 13 al 24
+│   ├── 03-pseudocodigo.md          # Ejercicios 25 al 36
+│   ├── 04-pseudocodigo.md          # Ejercicios: Temperaturas, Cajero, Conversor
+│   └── 05-pseudocodigo.md          # Ejercicios: Facturación, Ventas
+├── 02-algoritmia/                  # Fundamentos de programación con Python
+│   ├── README.md                   # Guía del módulo
+│   ├── santiagoencodigo.py         # Menú principal
+│   ├── 01_basicos.py               # Ejercicios básicos (condicionales, ciclos)
+│   ├── 02_listas.py                # Ejercicios de listas
+│   ├── 03_diccionario.py           # Ejercicios de diccionarios
+│   ├── 04_tuplas.py                # Ejercicios de tuplas
+│   ├── 05_conjuntos.py             # Ejercicios de conjuntos
+│   ├── 06_clases.py                # Ejercicios de clases (POO básica)
+│   ├── 07_objetos.py               # Ejercicios de objetos (herencia, polimorfismo)
+│   └── __pycache__/                # Archivos de caché de Python (ignorados por Git)
 ├── assets/                         # Imágenes y diagramas del trimestre
 │   ├── 01-reglas-de-consistencia.png
 │   ├── 02-casos-de-uso.png
@@ -37,16 +51,11 @@ trimestre-2/
 │   ├── regla-consistencia-6.png
 │   ├── regla-consistencia-7.png
 │   └── regla-consistencia-8.png
-├── aprendizaje-python/             # Ejercicios y notas sobre Python
-│   ├── README.md                   # Guía del módulo
-│   ├── santiagoencodigo.py         # Primeros ejercicios en Python
-│   ├── index.html                  # Página de inicio del módulo
-│   └── mockups-operpan-v0.png      # Mockups del proyecto OperPan
-├── 01-verificacion-modelos.md      # Verificación y validación de modelos
-├── 02-ejercicios-pseudocodigo.md   # Ejercicios de pseudocódigo
-├── 03-reglas-de-consistencia.md    # Reglas de consistencia en UML
-├── index.html                      # Página de inicio del trimestre
-└── README.md                       # Este archivo
+├── 01-planear-actividades-analisis.md   # Planear actividades de análisis según metodología
+├── 02-verificacion-modelos.md           # Verificación y validación de modelos
+├── 03-reglas-de-consistencia.md         # Reglas de consistencia en UML (OCL)
+├── index.html                           # Página de inicio del trimestre
+└── README.md                            # Este archivo
 ```
 
 ---
@@ -88,13 +97,15 @@ El segundo trimestre se desarrolla en jornada matutina, de **6:00 a 12:00**, de 
 
 El contenido del segundo trimestre está organizado en los siguientes documentos y módulos:
 
-- **[01-verificacion-modelos.md](./01-verificacion-modelos.md)** – Métodos y técnicas para verificar y validar modelos de software, incluyendo revisiones formales, inspecciones de código, pruebas de modelos y caminos de prueba.
+- **[01-planear-actividades-analisis.md](./01-planear-actividades-analisis.md)** – Planear actividades de análisis de acuerdo con la metodología seleccionada. Incluye ingeniería de software, ciclo de vida, metodologías tradicionales y ágiles (Cascada, RUP, XP, RAD, Scrum), planeación de proyectos, DFD, herramientas (Jira, Trello, PSeInt), y actividad práctica de simulación SCRUM.
 
-- **[02-ejercicios-pseudocodigo.md](./02-ejercicios-pseudocodigo.md)** – Colección de ejercicios de lógica de programación resueltos en pseudocódigo (PSeInt) y su implementación en Python. Incluye estructura secuencial, condicional y cíclica.
+- **[02-verificacion-modelos.md](./02-verificacion-modelos.md)** – Métodos y técnicas para verificar y validar modelos de software, incluyendo revisiones formales, inspecciones de código, pruebas de modelos y caminos de prueba.
 
 - **[03-reglas-de-consistencia.md](./03-reglas-de-consistencia.md)** – Reglas de consistencia entre diagramas de clases, casos de uso e interfaces de usuario, definidas formalmente en OCL (Object Constraint Language). Incluye ejemplos prácticos y referencias al artículo de Zapata y González.
 
-- **[aprendizaje-python/](./aprendizaje-python/README.md)** – Módulo de introducción a Python: sintaxis básica, estructuras de control, funciones, y ejercicios prácticos. Incluye primeros scripts, ejercicios de pseudocódigo y mockups del proyecto OperPan.
+- **[01-pseudocodigo/](./01-pseudocodigo/README.md)** – Módulo de ejercicios de lógica de programación resueltos en pseudocódigo con PSeInt. Contiene 36 ejercicios divididos en 5 archivos, desde condicionales básicos hasta programas completos con menús y validaciones.
+
+- **[02-algoritmia/](./02-algoritmia/README.md)** – Módulo de fundamentos de programación con Python. Contiene un menú principal y 7 módulos con ejercicios organizados por temas: básicos, listas, diccionarios, tuplas, conjuntos, clases y objetos.
 
 ---
 
@@ -207,7 +218,7 @@ El contenido técnico del trimestre está en proceso de organización y expansi�
 
 - Más ejercicios prácticos en Python y pseudocódigo.
 - Documentación detallada sobre verificación de modelos.
-- Diagramas y casos de uso.
+- Diagramas y casos de uso completos del proyecto OperPan.
 - Plantillas y ejemplos de historias de usuario.
 - Material sobre reglas de negocio y su aplicación en proyectos reales.
 

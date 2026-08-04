@@ -1,6 +1,6 @@
 # Ejercicios de Pseudocódigo con PSeInt
 
-Este directorio reúne los ejercicios de lógica de programación desarrollados en **pseudocódigo** utilizando la herramienta educativa **PSeInt**. Los ejercicios fueron elaborados durante el segundo trimestre del tecnólogo en Análisis y Desarrollo de Software (ADSO), como parte del componente de **Pensamiento Lógico y Programación**, bajo la guía del instructor Julio Galvis.
+Este directorio reúne los ejercicios de lógica de programación desarrollados en **pseudocódigo** utilizando la herramienta educativa **PSeInt**. Los ejercicios fueron elaborados durante el segundo trimestre del tecnólogo en Análisis y Desarrollo de Software (ADSO), como parte del componente de **Pensamiento Lógico y Programación**.
 
 El pseudocódigo es una forma de escribir algoritmos utilizando un lenguaje cercano al humano, pero con una estructura similar a la de un programa real. PSeInt es una herramienta gratuita y multiplataforma que permite practicar pseudocódigo en español, ideal para aprender conceptos fundamentales de programación sin preocuparse por la sintaxis de un lenguaje específico.
 
