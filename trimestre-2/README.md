@@ -38,22 +38,9 @@ trimestre-2/
 │   ├── 06_clases.py                # Ejercicios de clases (POO básica)
 │   ├── 07_objetos.py               # Ejercicios de objetos (herencia, polimorfismo)
 │   └── __pycache__/                # Archivos de caché de Python (ignorados por Git)
-├── assets/                         # Imágenes y diagramas del trimestre
-│   ├── 01-reglas-de-consistencia.png
-│   ├── 02-casos-de-uso.png
-│   ├── 03-diagramas-de-clase.png
-│   ├── mockups-operpan-v0.png
-│   ├── regla-consistencia-1.png
-│   ├── regla-consistencia-2.png
-│   ├── regla-consistencia-3.png
-│   ├── regla-consistencia-4.png
-│   ├── regla-consistencia-5.png
-│   ├── regla-consistencia-6.png
-│   ├── regla-consistencia-7.png
-│   └── regla-consistencia-8.png
-├── 01-planear-actividades-analisis.md   # Planear actividades de análisis según metodología
-├── 02-verificacion-modelos.md           # Verificación y validación de modelos
-├── 03-reglas-de-consistencia.md         # Reglas de consistencia en UML (OCL)
+├── 03-planear-actividades-analisis.md   # Planear actividades de análisis según metodología
+├── 04-verificacion-modelos.md           # Verificación y validación de modelos
+├── 05-reglas-de-consistencia.md         # Reglas de consistencia en UML (OCL)
 ├── index.html                           # Página de inicio del trimestre
 └── README.md                            # Este archivo
 ```
@@ -97,11 +84,11 @@ El segundo trimestre se desarrolla en jornada matutina, de **6:00 a 12:00**, de 
 
 El contenido del segundo trimestre está organizado en los siguientes documentos y módulos:
 
-- **[01-planear-actividades-analisis.md](./01-planear-actividades-analisis.md)** – Planear actividades de análisis de acuerdo con la metodología seleccionada. Incluye ingeniería de software, ciclo de vida, metodologías tradicionales y ágiles (Cascada, RUP, XP, RAD, Scrum), planeación de proyectos, DFD, herramientas (Jira, Trello, PSeInt), y actividad práctica de simulación SCRUM.
+- **[03-planear-actividades-analisis.md](./03-planear-actividades-analisis.md)** – Planear actividades de análisis de acuerdo con la metodología seleccionada. Incluye ingeniería de software, ciclo de vida, metodologías tradicionales y ágiles (Cascada, RUP, XP, RAD, Scrum), planeación de proyectos, DFD, herramientas (Jira, Trello, PSeInt), y actividad práctica de simulación SCRUM.
 
-- **[02-verificacion-modelos.md](./02-verificacion-modelos.md)** – Métodos y técnicas para verificar y validar modelos de software, incluyendo revisiones formales, inspecciones de código, pruebas de modelos y caminos de prueba.
+- **[04-verificacion-modelos.md](./04-verificacion-modelos.md)** – Métodos y técnicas para verificar y validar modelos de software, incluyendo reglas de negocio, casos de uso, diagramas de clases, y su relación con la consistencia de modelos.
 
-- **[03-reglas-de-consistencia.md](./03-reglas-de-consistencia.md)** – Reglas de consistencia entre diagramas de clases, casos de uso e interfaces de usuario, definidas formalmente en OCL (Object Constraint Language). Incluye ejemplos prácticos y referencias al artículo de Zapata y González.
+- **[05-reglas-de-consistencia.md](./05-reglas-de-consistencia.md)** – Reglas de consistencia entre diagramas de clases, casos de uso e interfaces de usuario, definidas formalmente en OCL (Object Constraint Language). Incluye ejemplos prácticos y referencias al artículo de Zapata y González.
 
 - **[01-pseudocodigo/](./01-pseudocodigo/README.md)** – Módulo de ejercicios de lógica de programación resueltos en pseudocódigo con PSeInt. Contiene 36 ejercicios divididos en 5 archivos, desde condicionales básicos hasta programas completos con menús y validaciones.
 

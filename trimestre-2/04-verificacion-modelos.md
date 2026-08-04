@@ -3,7 +3,7 @@
 > **Resultado de Aprendizaje (RA04):** Verificar los modelos realizados en la fase de análisis de acuerdo con lo establecido en el informe de requisitos.  
 > **Competencia:** Análisis de la especificación de requisitos de software.
 
-<img src="./assets/00-validacion-modelos.png">
+<img src="../Assets/img/trimestre-2/00-validacion-modelos.png">
 
 *Imagen generada con Gemini - AI*
 
