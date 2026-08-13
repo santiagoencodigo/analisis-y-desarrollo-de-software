@@ -158,8 +158,10 @@ La estimación de costos es fundamental para justificar la viabilidad del proyec
 
 ### 8.1 Gastos del producto
 
-| **Nombre del artículo** | **Descripción** | **Unidades** | **$/Unidad** | **Total** |
-|--------------------------|-----------------|--------------|--------------|-----------|
+A continuación se detallan los gastos mensuales del producto, considerando los recursos necesarios para el desarrollo del sistema durante el periodo estimado del proyecto.
+
+| **Nombre del artículo** | **Descripción** | **Unidades** | **$/Unidad** | **Total mensual** |
+|--------------------------|-----------------|--------------|--------------|-------------------|
 | Editor de código | Software de desarrollo | 1 | $0 | $0 |
 | Internet | Servicio de internet | 1 | $10.000 | $10.000 |
 | Ofimática | Software de documentación | 1 | $0 | $0 |
@@ -172,21 +174,94 @@ La estimación de costos es fundamental para justificar la viabilidad del proyec
 | Lugar de trabajo | Arriendo de espacio | 1 | $10.000 | $10.000 |
 | Base de datos | MySQL | 1 | $0 | $0 |
 | Visitas a la empresa | Transporte | 8 | $6.000 | $48.000 |
-| **Gastos totales del producto** | | | | **$102.000** |
+| **Total gastos mensuales del producto** | | | | **$102.000** |
+| **Gastos imprevistos** | | | | **$1.500.000** |
 
-> Esta estimación puede ser bastante básica, considero que se puede mejorar.
-
-### 8.2 Gastos de mano de obra
-
-| **Nombre de la tarea** | **Descripción** | **Horas** | **$/Hora** | **Total** |
-|------------------------|-----------------|-----------|------------|-----------|
-| Desarrollo de software | Programación | 100 | $7.000 | $700.000 |
-
-### 8.3 Gastos imprevistos
+**Costo total combinado del proyecto:**
 
 | **Concepto** | **Valor** |
 |--------------|-----------|
-| Gastos imprevistos (5-15%) | $1.500.000 |
+| Gastos del producto (12 meses) | $1.224.000 |
+| Gastos imprevistos | $1.500.000 |
+| Gastos de mano de obra | $700.000 |
+| **Costo total combinado** | **$3.424.000** |
+
+> **Nota:** Esta estimación considera un periodo de 12 meses de desarrollo. Los costos pueden variar según las condiciones del mercado y las necesidades específicas del proyecto.
+
+### 8.2 Estimación de esfuerzos por módulos
+
+Para una planificación más precisa, se estima el esfuerzo requerido por cada módulo o componente del sistema. Las horas estimadas corresponden a la complejidad de cada tarea, considerando un nivel de dificultad "Normal".
+
+| **Módulo / Componente** | **Nivel de dificultad** | **Horas estimadas** |
+|-------------------------|-------------------------|---------------------|
+| Crear entidades de base de datos | Normal | 5 |
+| Crear servicios REST | Normal | 8 |
+| Crear UI/UX | Normal | 3 |
+| Programar validaciones | Normal | 5 |
+| Crear sistema | Normal | 12 |
+| **Total módulo de registro** | | **33** |
+
+**Desglose por tareas del módulo:**
+
+| **Tarea** | **Nivel de dificultad** | **Horas estimadas** |
+|-----------|-------------------------|---------------------|
+| Tarea 1 | Normal | 3 |
+| Tarea 2 | Normal | 8 |
+| Tarea 3 | Normal | 8 |
+| Tarea 4 | Normal | 6 |
+| Tarea 5 | Normal | 5 |
+| Tarea 6 | Normal | 3 |
+| Tarea 7 | Normal | 7 |
+| **Total del módulo** | | **40** |
+
+**Resumen total de esfuerzo:**
+
+| **Concepto** | **Horas** |
+|--------------|-----------|
+| Módulo de registro | 33 |
+| Otros módulos | 40 |
+| **Gran total de esfuerzo** | **73** |
+
+### 8.3 Estimación por tipo de esfuerzo
+
+La siguiente tabla muestra la conversión del esfuerzo total en horas a diferentes unidades de tiempo, considerando una jornada laboral de 8 horas diarias y 5 días a la semana.
+
+| **Unidad** | **Valor** |
+|------------|-----------|
+| Horas | 73 |
+| Días (8h/día) | 9.13 |
+| Semanas (5 días) | 1.83 |
+| Meses (4 semanas) | 0.46 |
+
+### 8.4 Agenda y recursos
+
+La siguiente tabla muestra cómo se distribuye el esfuerzo estimado según la cantidad de recursos (desarrolladores) asignados al proyecto.
+
+| **Tiempo / Recurso** | **1 Recurso** | **2 Recursos** | **3 Recursos** | **4 Recursos** |
+|----------------------|---------------|----------------|----------------|----------------|
+| Días | 9.13 | 4.57 | 3.04 | 2.28 |
+| Semanas | 1.83 | 0.91 | 0.61 | 0.46 |
+| Meses | 0.46 | 0.23 | 0.15 | 0.11 |
+
+> **Nota:** La distribución por recursos permite ajustar el cronograma según la disponibilidad del equipo. Agregar más recursos reduce el tiempo total del proyecto, pero debe considerarse el aumento en los costos de mano de obra.
+
+### 8.5 Gastos de mano de obra
+
+| **Nombre de la tarea** | **Descripción** | **Horas** | **$/Hora** | **Total** |
+|------------------------|-----------------|-----------|------------|-----------|
+| Desarrollo de software | Programación y desarrollo del sistema | 73 | $7.000 | $511.000 |
+| **Total mano de obra** | | | | **$511.000** |
+
+### 8.6 Resumen de costos
+
+| **Categoría** | **Valor** |
+|---------------|-----------|
+| Gastos del producto (12 meses) | $1.224.000 |
+| Gastos imprevistos | $1.500.000 |
+| Mano de obra | $511.000 |
+| **Costo total del proyecto** | **$3.235.000** |
+
+> Creo que aun se puede mejorar más esto.
 
 ---
 

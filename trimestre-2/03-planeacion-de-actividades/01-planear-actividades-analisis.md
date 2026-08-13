@@ -363,6 +363,27 @@ El **Diagrama de Gantt** es una herramienta para planificar y programar tareas a
 4. Diseño esquemático y claro.
 5. Mantener actualizada una versión detallada para el ejecutor del proyecto.
 
+El siguiente diagrama de Gantt muestra la planificación temporal de un proyecto, con las actividades organizadas por fases, su duración estimada en días y las fechas de inicio y fin.
+
+| **Actividad** | **Duración (días)** | **Inicio estimado** | **Fin estimado** |
+|---------------|---------------------|---------------------|------------------|
+| Recolección de requerimientos | 31 | 25/08/2025 | 24/09/2025 |
+| Diseño de flujos y casos de uso | 30 | 25/09/2025 | 24/10/2025 |
+| Definición de arquitectura y módulos | 31 | 25/10/2025 | 24/11/2025 |
+| Desarrollo módulo de pedidos | 30 | 25/11/2025 | 24/12/2025 |
+| Desarrollo módulo de facturación | 31 | 25/12/2025 | 24/01/2026 |
+| Desarrollo módulo de cuentas por cobrar | 30 | 25/01/2026 | 23/02/2026 |
+| Desarrollo módulo de usuarios y seguridad | 27 | 24/02/2026 | 22/03/2026 |
+| Desarrollo módulo de reportes | 31 | 23/03/2026 | 22/04/2026 |
+| Interfaz de usuario (Frontend) | 15 | 23/04/2026 | 07/05/2026 |
+| Backend y lógica de negocio | 30 | 23/04/2026 | 22/05/2026 |
+| Integración con sistemas existentes | 15 | 23/05/2026 | 06/06/2026 |
+| Migración de datos clave | 15 | 07/06/2026 | 21/06/2026 |
+| Pruebas funcionales e integración | 15 | 22/06/2026 | 06/07/2026 |
+| Correcciones y ajustes finales | 15 | 07/07/2026 | 21/07/2026 |
+| Capacitación a usuarios | 15 | 22/07/2026 | 05/08/2026 |
+| Despliegue en entorno productivo | 15 | 06/08/2026 | 20/08/2026 |
+
 ---
 
 ## 6. Diagramas de Flujo de Datos (DFD)
