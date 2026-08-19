@@ -1,6 +1,6 @@
 # Planeación de Actividades de Análisis
 
-Este directorio reúne los materiales y apuntes sobre la planeación de análisis de software, metodologías de desarrollo, modelos de ciclo de vida y herramientas asociadas. El contenido está organizado en tres documentos principales que abordan desde los fundamentos de la ingeniería de software hasta la aplicación práctica de metodologías ágiles y tradicionales.
+Este directorio reúne los materiales, apuntes y ejercicios relacionados con la planeación de análisis de software, metodologías de desarrollo, modelos de ciclo de vida y herramientas de gestión. El contenido está organizado en seis documentos principales que abordan desde los fundamentos de la ingeniería de software hasta la aplicación práctica de metodologías ágiles y tradicionales.
 
 ---
 
@@ -8,62 +8,93 @@ Este directorio reúne los materiales y apuntes sobre la planeación de análisi
 
 ```
 03-planeacion-de-actividades/
-├── 01-planear-actividades-analisis.md   # Fundamentos de ingeniería de software, ciclos de vida, metodologías, planeación, DFD y herramientas
-├── 02-planificacion-scrum.md           # Gestión de proyectos con Scrum: roles, eventos, artefactos y aplicación práctica
-├── 03-modelos-ciclo-de-vida-software.md # Modelos de ciclo de vida: cascada, V, iterativo, incremental, espiral, prototipos
-└── README.md                           # Este archivo
+├── 01-planear-actividades-analisis.md        # Fundamentos de ingeniería de software, ciclo de vida, metodologías y planeación
+├── 02-planificacion-scrum.md                # Gestión de proyectos con Scrum: roles, eventos, artefactos y aplicación práctica
+├── 03-modelos-ciclo-de-vida-software.md     # Modelos de ciclo de vida: cascada, V, iterativo, incremental, espiral, prototipos
+├── 04-proceso-unificado-racional.md         # Proceso Unificado Racional (RUP): fases, disciplinas y roles
+├── 05-metodologias-agiles.md                # Manifiesto Ágil, XP, RAD, Scrum, Design Thinking y comparativa
+├── 06-planeacion-proyectos-informaticos.md  # Definición, administración, estructura organizacional y diagrama de Gantt
+└── README.md                                # Este archivo
 ```
 
 ---
 
 ## Resumen de contenidos
 
-### 1. Introducción a la ingeniería de software
-La ingeniería de software es un proceso formal que utiliza métodos para analizar, diseñar, implementar y probar software, garantizando calidad y cumplimiento de objetivos. El software se compone de programas, datos y documentación.
+### `01-planear-actividades-analisis.md`
+Introducción a la ingeniería de software, conceptos de proceso y metodología, componentes del software, etapas del desarrollo (análisis, especificación, diseño, programación, pruebas, mantenimiento), ciclo de vida, modelos de ciclo de vida, la crisis del software (1968), perfiles y roles en proyectos de TI, y referencias a fuentes externas.
 
-### 2. Ciclo de vida del software
-El ciclo de vida comprende las fases desde la concepción hasta el retiro del software. Sus funciones principales son ordenar las fases, establecer criterios de transición, definir entradas y salidas, y planificar actividades. Las fases típicas incluyen análisis, especificación, diseño, desarrollo, pruebas y mantenimiento.
+### `02-planificacion-scrum.md`
+Enfoque detallado en la metodología Scrum: pilares (transparencia, inspección, adaptación), roles (Product Owner, Scrum Master, Development Team, Stakeholders), eventos (Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective), artefactos (Product Backlog, Sprint Backlog, Incremento, Burndown Chart, Scrumboard) y flujo de trabajo.
 
-### 3. Metodologías tradicionales
-- **Cascada (Waterfall):** Proceso lineal y secuencial, con fases rígidas. Ideal para proyectos con requisitos estables. Genera buena documentación pero es inflexible ante cambios.
-- **RUP (Rational Unified Process):** Proceso iterativo e incremental, basado en casos de uso y centrado en la arquitectura. Se divide en cuatro fases: incepción, elaboración, construcción y transición.
+### `03-modelos-ciclo-de-vida-software.md`
+Descripción de los principales modelos de ciclo de vida del software: cascada, V, iterativo, incremental, espiral y prototipos. Incluye ventajas, desventajas, ejemplos de empresas que los utilizan y una tabla comparativa para facilitar la selección según el tipo de proyecto.
 
-### 4. Metodologías ágiles
-Surgen para adaptarse a cambios y priorizar la entrega de valor sobre la documentación exhaustiva. Se basan en el Manifiesto Ágil (2001) y sus 12 principios.
-- **XP (eXtreme Programming):** Enfatiza la comunicación, simplicidad, retroalimentación y coraje. Prácticas como programación en parejas, TDD e integración continua.
-- **RAD (Rapid Application Development):** Desarrollo rápido mediante iteraciones frecuentes y prototipos. Fomenta la reutilización de código y la participación del usuario.
-- **Scrum:** Marco de trabajo ágil con roles (Product Owner, Scrum Master, Development Team), eventos (Sprint, Planning, Daily, Review, Retrospective) y artefactos (Product Backlog, Sprint Backlog, Incremento). Se detalla en el archivo [`02-planificacion-scrum.md`](./02-planificacion-scrum.md).
+### `04-proceso-unificado-racional.md`
+Proceso Unificado Racional (RUP): características como metodología tradicional "pesada", fases (Incepción, Elaboración, Construcción, Transición), disciplinas (Modelado de negocio, Requisitos, Análisis y diseño, Implementación, Pruebas, Gestión de configuración, Gestión de proyectos, Entorno), roles (Analistas, Desarrolladores, Probadores, Otros), ventajas y desventajas.
 
-### 5. Modelos de ciclo de vida
-Los modelos representan diferentes enfoques para organizar el desarrollo. Se describen en el archivo [`03-modelos-ciclo-de-vida-software.md`](./03-modelos-ciclo-de-vida-software.md) e incluyen:
-- **Cascada:** Secuencial y rígido.
-- **V:** Verificación y validación en cada fase.
-- **Iterativo:** Ciclos repetitivos de mejora.
-- **Incremental:** Entregas parciales y funcionales.
-- **Espiral:** Combina cascada e iterativo con análisis de riesgos.
-- **Prototipos:** Validación temprana con usuarios.
+### `05-metodologias-agiles.md`
+Manifiesto Ágil y sus 12 principios, Programación Extrema (XP) con sus valores, prácticas y roles, Desarrollo Rápido de Aplicaciones (RAD) con características, fases y roles, y Design Thinking como metodología complementaria. Incluye una comparativa para seleccionar la metodología adecuada según el proyecto.
 
-### 6. Planeación de proyectos de software
-La planificación busca ordenar las tareas, asignar recursos y cumplir objetivos. Los elementos clave de un proyecto son: cliente, usuario, inicio, término, costo, tiempo, desempeño técnico y jefe de proyecto. Las estructuras organizacionales pueden ser funcional, matricial o proyectada. El Diagrama de Gantt es una herramienta visual para programar y dar seguimiento a las actividades.
+### `06-planeacion-proyectos-informaticos.md`
+Definición de proyectos informáticos, elementos clave (cliente, usuario, inicio, término, costo, tiempo, desempeño técnico, jefe de proyecto), administración de proyectos, organización de equipos (estructuras funcional, matricial y proyectada), ciclo de planificación, plan del proyecto, orden de paquetes de trabajo, diagrama de Gantt y fallas comunes en la planificación.
 
-### 7. Diagramas de Flujo de Datos (DFD)
-Los DFD representan gráficamente el movimiento de datos en un sistema. Sus elementos son: entidades externas, procesos, almacenes de datos y flujos de datos. Se descomponen en niveles (0 a 4) y deben seguir reglas como nombrar procesos con verbos, evitar redes desconectadas y asegurar que cada proceso tenga al menos una entrada y una salida.
+---
 
-### 8. Herramientas para la gestión de proyectos
-- **Jira:** Gestión ágil con tableros Scrum/Kanban, seguimiento de sprints y burndown charts.
-- **Trello:** Tableros visuales con listas y tarjetas, ideal para equipos pequeños.
-- **PSeInt:** Herramienta educativa para pseudocódigo en español, con editor, ejecución paso a paso y generación de diagramas de flujo.
+## Herramientas para la gestión de proyectos
 
-### 9. Actividad práctica: Simulación Scrum
-Se propone una simulación de Scrum con historias de usuario, tablero de tareas (To Do, In Progress, Testing, Done) y un ciclo de trabajo que incluye planificación, ejecución, testing y validación. Cada historia debe tener un checklist de tareas y evidencias (archivos .psc).
+La planeación de actividades de análisis requiere el uso de herramientas que faciliten la organización, seguimiento y control del proyecto. Las principales herramientas abordadas son:
 
-### 10. Glosario
-Incluye definiciones de términos clave como Back-end, Base de Datos, Burndown Chart, DFD, Framework, Front-end, IDE, Incremento, Product Backlog, Scrum, Sprint, UML y User Story.
+| **Herramienta** | **Descripción** |
+|-----------------|-----------------|
+| **Jira** | Herramienta de gestión de proyectos ágil con tableros Scrum/Kanban, seguimiento de sprints, burndown charts y gestión de épicas, historias de usuario y tareas. |
+| **Trello** | Tableros visuales con listas y tarjetas, ideal para equipos pequeños y proyectos sencillos. Permite organizar tareas en columnas (To Do, In Progress, Testing, Done). |
+| **PSeInt** | Herramienta educativa para aprender lógica de programación mediante pseudocódigo en español, con editor, ejecución paso a paso y generación de diagramas de flujo. |
 
-### 11. Referencias
-- Manifiesto Ágil (agilemanifesto.org)
-- Guía de Scrum con Jira (Atlassian)
-- Trello (trello.com)
+### Actividad práctica: Gestión de proyectos con Jira
+
+Como parte de la planeación de actividades de análisis, se propone una actividad práctica para familiarizarse con Jira:
+
+1. **Investigación inicial:** Explorar herramientas de software gratuito para la gestión de proyectos según la metodología seleccionada (Cascada, Espiral, RUP, Scrum, XP).
+2. **Mini tutorial de Jira:** Visualizar un video introductorio y seguir el paso a paso en la plataforma para reconocer sus elementos principales.
+3. **Relación con el proyecto:** Diligenciar un cuadro que relacione los elementos de Jira (Epic, User Story, Task, Sprint) con el proyecto formativo.
+4. **Gestión del proyecto en Jira:** Crear y gestionar el proyecto en Jira, asignando tareas según las fases del ciclo de vida del proyecto.
+
+---
+
+## Ciclo de vida del proyecto y planeación por trimestres
+
+La planeación del proyecto formativo se alinea con las fases del ciclo de vida del software y se distribuye a lo largo de los trimestres de la siguiente manera:
+
+| **Fase del proyecto** | **Descripción** | **Trimestres asociados** |
+|-----------------------|-----------------|--------------------------|
+| **Análisis** | Requerimientos y análisis del sistema | Trimestres 1 y 2 |
+| **Planeación** | Diseño y planificación detallada | Trimestres 2, 3 y 4 |
+| **Ejecución** | Diseño y construcción del software | Trimestres 4, 5 y 6 |
+| **Evaluación** | Construcción final y despliegue | Trimestres 6 y 7 |
+
+> **Nota:** Esta distribución permite que cada fase del proyecto se desarrolle de manera progresiva, asegurando que los entregables sean coherentes con el avance del aprendizaje y las competencias adquiridas en cada trimestre.
+
+---
+
+## Temas clave abordados
+
+- **Ingeniería de software:** Procesos, fases, calidad y buenas prácticas.
+- **Metodologías de desarrollo:** Tradicionales (Cascada, RUP) vs. Ágiles (Scrum, XP, RAD).
+- **Modelos de ciclo de vida:** Características, ventajas, desventajas y cuándo utilizarlos.
+- **Roles en proyectos:** Cliente, gerente, líder, analista, desarrollador, QA, administrador de configuración.
+- **Herramientas de gestión:** Jira, Trello, PSeInt, DRAW.IO, diagramas de Gantt.
+- **Planeación y control:** Estimación de costos, cronogramas, hitos y seguimiento.
+
+---
+
+## Referencias
+
+- Manifiesto Ágil. (2001). *Manifiesto por el Desarrollo Ágil de Software*. Recuperado de https://agilemanifesto.org
+- Atlassian. *Guía de Scrum con Jira*. Recuperado de https://www.atlassian.com/es/agile/scrum
+- Trello. *Gestión de proyectos con tableros*. Recuperado de https://trello.com
+- AWS. *Ciclo de Vida del Software*. Recuperado de https://aws.amazon.com/es/what-is/sdlc/
+
 
 ---
 
