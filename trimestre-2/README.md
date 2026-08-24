@@ -20,29 +20,45 @@ En esta etapa de la formación como Aprendiz en Análisis y Desarrollo de Softwa
 
 ```
 trimestre-2/
-├── 01-pseudocodigo/                # Ejercicios de pseudocódigo con PSeInt
-│   ├── README.md                   # Guía del módulo
-│   ├── 01-pseudocodigo.md          # Ejercicios 1 al 12
-│   ├── 02-pseudocodigo.md          # Ejercicios 13 al 24
-│   ├── 03-pseudocodigo.md          # Ejercicios 25 al 36
-│   ├── 04-pseudocodigo.md          # Ejercicios: Temperaturas, Cajero, Conversor
-│   └── 05-pseudocodigo.md          # Ejercicios: Facturación, Ventas
-├── 02-algoritmia/                  # Fundamentos de programación con Python
-│   ├── README.md                   # Guía del módulo
-│   ├── santiagoencodigo.py         # Menú principal
-│   ├── 01_basicos.py               # Ejercicios básicos (condicionales, ciclos)
-│   ├── 02_listas.py                # Ejercicios de listas
-│   ├── 03_diccionario.py           # Ejercicios de diccionarios
-│   ├── 04_tuplas.py                # Ejercicios de tuplas
-│   ├── 05_conjuntos.py             # Ejercicios de conjuntos
-│   ├── 06_clases.py                # Ejercicios de clases (POO básica)
-│   ├── 07_objetos.py               # Ejercicios de objetos (herencia, polimorfismo)
-│   └── __pycache__/                # Archivos de caché de Python (ignorados por Git)
-├── 03-planear-actividades-analisis.md   # Planear actividades de análisis según metodología
-├── 04-verificacion-modelos.md           # Verificación y validación de modelos
-├── 05-reglas-de-consistencia.md         # Reglas de consistencia en UML (OCL)
-├── index.html                           # Página de inicio del trimestre
-└── README.md                            # Este archivo
+├── 01-pseudocodigo/                      # Ejercicios de pseudocódigo con PSeInt
+│   ├── README.md                         # Guía del módulo
+│   ├── 01-pseudocodigo.md                # Ejercicios 1 al 12
+│   ├── 02-pseudocodigo.md                # Ejercicios 13 al 24
+│   ├── 03-pseudocodigo.md                # Ejercicios 25 al 36
+│   ├── 04-pseudocodigo.md                # Ejercicios: Temperaturas, Cajero, Conversor
+│   └── 05-pseudocodigo.md                # Ejercicios: Facturación, Ventas
+├── 02-algoritmia/                        # Fundamentos de programación con Python
+│   ├── README.md                         # Guía del módulo
+│   ├── santiagoencodigo.py               # Menú principal
+│   ├── 01_basicos.py                     # Ejercicios básicos (condicionales, ciclos)
+│   ├── 02_listas.py                      # Ejercicios de listas
+│   ├── 03_diccionario.py                 # Ejercicios de diccionarios
+│   ├── 04_tuplas.py                      # Ejercicios de tuplas
+│   ├── 05_conjuntos.py                   # Ejercicios de conjuntos
+│   ├── 06_clases.py                      # Ejercicios de clases (POO básica)
+│   ├── 07_objetos.py                     # Ejercicios de objetos (herencia, polimorfismo)
+│   └── __pycache__/                      # Archivos de caché de Python (ignorados por Git)
+├── 03-planeacion-de-actividades/          # Planeación de análisis y metodologías
+│   ├── README.md                         # Guía del módulo
+│   ├── 01-planear-actividades-analisis.md # Fundamentos de ingeniería de software
+│   ├── 02-planificacion-scrum.md         # Gestión de proyectos con Scrum
+│   ├── 03-modelos-ciclo-de-vida-software.md # Modelos de ciclo de vida
+│   ├── 04-proceso-unificado-racional.md  # Proceso Unificado Racional (RUP)
+│   ├── 05-metodologias-agiles.md         # Manifiesto Ágil, XP, RAD, Design Thinking
+│   └── 06-planeacion-proyectos-informaticos.md # Administración de proyectos
+├── 04-verificacion-de-modelos/           # Verificación y validación de modelos
+│   ├── README.md                         # Guía del módulo
+│   ├── assets/                           # Imágenes y diagramas
+│   │   ├── sonrisa-01-caso-de-uso.png    # Diagrama de casos de uso – Agenda
+│   │   └── sonrisa-02-caso-de-uso.png    # Diagrama de casos de uso – Historial
+│   ├── 01-verificacion-modelos.md        # Fundamentos de verificación de modelos
+│   ├── 02-reglas-de-consistencia.md      # Reglas de consistencia en UML (OCL)
+│   ├── 03-modelado-de-funciones.md       # Introducción al modelado de funciones
+│   ├── 04-modelado-de-funciones-caso-clinica-dental.md # Caso práctico: Clínica Dental
+│   ├── 05-recursos.md                    # Recursos complementarios y enlaces
+│   └── 06-plantilla-proyectos.md         # Plantilla para proyectos de software
+├── index.html                            # Página de inicio del trimestre
+└── README.md                             # Este archivo
 ```
 
 ---
@@ -82,17 +98,15 @@ El segundo trimestre se desarrolla en jornada matutina, de **6:00 a 12:00**, de 
 
 ## Documentación técnica del trimestre
 
-El contenido del segundo trimestre está organizado en los siguientes documentos y módulos:
-
-- **[03-planear-actividades-analisis.md](./03-planear-actividades-analisis.md)** – Planear actividades de análisis de acuerdo con la metodología seleccionada. Incluye ingeniería de software, ciclo de vida, metodologías tradicionales y ágiles (Cascada, RUP, XP, RAD, Scrum), planeación de proyectos, DFD, herramientas (Jira, Trello, PSeInt), y actividad práctica de simulación SCRUM.
-
-- **[04-verificacion-modelos.md](./04-verificacion-modelos.md)** – Métodos y técnicas para verificar y validar modelos de software, incluyendo reglas de negocio, casos de uso, diagramas de clases, y su relación con la consistencia de modelos.
-
-- **[05-reglas-de-consistencia.md](./05-reglas-de-consistencia.md)** – Reglas de consistencia entre diagramas de clases, casos de uso e interfaces de usuario, definidas formalmente en OCL (Object Constraint Language). Incluye ejemplos prácticos y referencias al artículo de Zapata y González.
+El contenido del segundo trimestre está organizado en los siguientes módulos y documentos:
 
 - **[01-pseudocodigo/](./01-pseudocodigo/README.md)** – Módulo de ejercicios de lógica de programación resueltos en pseudocódigo con PSeInt. Contiene 36 ejercicios divididos en 5 archivos, desde condicionales básicos hasta programas completos con menús y validaciones.
 
 - **[02-algoritmia/](./02-algoritmia/README.md)** – Módulo de fundamentos de programación con Python. Contiene un menú principal y 7 módulos con ejercicios organizados por temas: básicos, listas, diccionarios, tuplas, conjuntos, clases y objetos.
+
+- **[03-planeacion-de-actividades/](./03-planeacion-de-actividades/README.md)** – Módulo de planeación de actividades de análisis. Incluye fundamentos de ingeniería de software, planificación con Scrum, modelos de ciclo de vida (cascada, V, iterativo, incremental, espiral, prototipos), Proceso Unificado Racional (RUP), metodologías ágiles (XP, RAD, Design Thinking) y administración de proyectos informáticos.
+
+- **[04-verificacion-de-modelos/](./04-verificacion-de-modelos/README.md)** – Módulo de verificación y validación de modelos. Incluye fundamentos de verificación de modelos, reglas de consistencia en UML (OCL), introducción al modelado de funciones, caso práctico de la Clínica Dental Sonrisa Perfecta, recursos complementarios y una plantilla para proyectos de software.
 
 ---
 
