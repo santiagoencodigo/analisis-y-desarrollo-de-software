@@ -2,7 +2,7 @@
 
 > **Objetivo:** Comprender cómo verificar que los diagramas de clases, casos de uso e interfaces de usuario de un proyecto de software sean consistentes entre sí, utilizando reglas formales definidas en OCL (Object Constraint Language).
 
-<img src="../Assets/img/trimestre-2/01-reglas-de-consistencia.png">
+<img src="../../Assets/img/trimestre-2/01-reglas-de-consistencia.png">
 
 *Imagen generada con ChatGPT*
 
@@ -144,13 +144,13 @@ Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:
 
 **Diagrama de Casos de Uso (Vista de alto nivel):**
 
-<img src="../Assets/img/trimestre-2/02-casos-de-uso.png">
+<img src="../../Assets/img/trimestre-2/02-casos-de-uso.png">
 
 *Imagen generada con ChatGPT*
 
 **Diagrama de Clases (Estructura):**
 
-<img src="../Assets/img/trimestre-2/03-diagramas-de-clase.png">
+<img src="../../Assets/img/trimestre-2/03-diagramas-de-clase.png">
 
 *Imagen generada con ChatGPT*
 
@@ -166,7 +166,7 @@ Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:
 
 **Ejemplo:** Caso de uso "Registrar Cliente" → Debe existir una clase "Cliente"
 
-<img src="../Assets/img/trimestre-2/regla-consistencia-1.png">
+<img src="../../Assets/img/trimestre-2/regla-consistencia-1.png">
 
 *Imagen generada con Gemini*
 
@@ -178,7 +178,7 @@ Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:
 
 **Ejemplo:** Caso de uso "Registrar Cliente" → La clase "Cliente" debe tener una operación "registrar()"
 
-<img src="../Assets/img/trimestre-2/regla-consistencia-2.png">
+<img src="../../Assets/img/trimestre-2/regla-consistencia-2.png">
 
 *Imagen generada con Gemini*
 
@@ -192,7 +192,7 @@ Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:
 
 **Ejemplo:** Interfaz "Registrar Cliente" → Debe existir una clase "Cliente"
 
-<img src="../Assets/img/trimestre-2/regla-consistencia-3.png">
+<img src="../../Assets/img/trimestre-2/regla-consistencia-3.png">
 
 *Imagen generada con Gemini*
 
@@ -204,7 +204,7 @@ Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:
 
 **Ejemplo:** Interfaz "Registrar Cliente" → La clase "Cliente" debe tener una operación "registrar()"
 
-<img src="../Assets/img/trimestre-2/regla-consistencia-4.png">
+<img src="../../Assets/img/trimestre-2/regla-consistencia-4.png">
 
 *Imagen generada con Gemini*
 
@@ -216,7 +216,7 @@ Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:
 
 **Ejemplo:** Botón "Registrar" → La clase correspondiente debe tener una operación "registrar()"
 
-<img src="../Assets/img/trimestre-2/regla-consistencia-5.png">
+<img src="../../Assets/img/trimestre-2/regla-consistencia-5.png">
 
 *Imagen generada con Gemini*
 
@@ -228,7 +228,7 @@ Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:
 
 **Ejemplo:** Etiqueta "Cédula" y campo de texto → La clase "Cliente" debe tener un atributo "cédula"
 
-<img src="../Assets/img/trimestre-2/regla-consistencia-6.png">
+<img src="../../Assets/img/trimestre-2/regla-consistencia-6.png">
 
 *Imagen generada con Gemini*
 
@@ -240,7 +240,7 @@ Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:
 
 **Ejemplo:** Interfaz "Registrar Cliente" → Debe existir un caso de uso "Registrar Cliente"
 
-<img src="../Assets/img/trimestre-2/regla-consistencia-7.png">
+<img src="../../Assets/img/trimestre-2/regla-consistencia-7.png">
 
 *Imagen generada con Gemini*
 
@@ -252,7 +252,7 @@ Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:
 
 **Ejemplo:** Botón "Registrar" → Debe existir un caso de uso que contenga el verbo "Registrar"
 
-<img src="../Assets/img/trimestre-2/regla-consistencia-8.png">
+<img src="../../Assets/img/trimestre-2/regla-consistencia-8.png">
 
 *Imagen generada con Gemini*
 
