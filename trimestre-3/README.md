@@ -1,97 +1,95 @@
 # Tercer Trimestre — ADSO
 
+> **Nota:** Este repositorio documenta únicamente los temas técnicos relacionados con el desarrollo de software. Los contenidos de **Inglés** y **Cultura Física**, aunque fueron parte de la formación, no se incluyen en este repositorio por estar fuera del enfoque técnico.
+
+---
+
 ## Tabla de contenido
 
 - [Descripción general](#descripción-general)
-- [Información del trimestre](#información-del-trimestre)
-- [Estructura del repositorio](#estructura-del-repositorio)
+- [Horario de formación](#horario-de-formación)
+- [Estructura del directorio](#estructura-del-directorio-trimestre-3)
 - [Módulos y temas vistos](#módulos-y-temas-vistos)
-  - [Modelado de los artefactos del software — Python](#modelado-de-los-artefactos-del-software--python)
-  - [Modelado de los artefactos del software — JavaScript y POO](#modelado-de-los-artefactos-del-software--javascript-y-poo)
-  - [Investigación](#investigación)
-  - [Modelado de los artefactos del software — Bases de datos](#modelado-de-los-artefactos-del-software--bases-de-datos)
+  - [Algoritmia y fundamentos de Python](#algoritmia-y-fundamentos-de-python)
+  - [JavaScript y Programación Orientada a Objetos](#javascript-y-programación-orientada-a-objetos)
+  - [Investigación y análisis de proyectos](#investigación-y-análisis-de-proyectos)
+  - [Bases de datos y modelado de datos](#bases-de-datos-y-modelado-de-datos)
+- [Próximos pasos](#próximos-pasos)
 - [Reflexión personal](#reflexión-personal)
-- [Notas finales](#notas-finales)
 
 ---
 
 ## Descripción general
 
-Este repositorio agrupa todo el material, ejercicios, scripts y documentación generada durante el **tercer trimestre** del programa de formación **Análisis y Desarrollo de Software (ADSO)** del SENA.
+Este directorio agrupa todo el material, ejercicios, scripts y documentación generada durante el **tercer trimestre** del programa de formación **Análisis y Desarrollo de Software (ADSO)**.
 
 A lo largo de estas semanas se abordaron tres grandes áreas: **programación con Python**, **fundamentos de JavaScript y Programación Orientada a Objetos**, e **introducción a las bases de datos relacionales** con sus respectivos modelos y consultas SQL. Cada una de estas áreas se trabajó de manera práctica y orientada a la construcción de un proyecto formativo.
 
 ---
 
-## Información del trimestre
+## Horario de formación
 
-| Concepto | Detalle |
-|---|---|
-| **Trimestre** | 3 de 7 (9 contando prácticas) |
-| **Programa** | Análisis y Desarrollo de Software |
+El tercer trimestre se desarrolla en jornada matutina, de **6:00 a 12:00**, de lunes a viernes. La distribución de competencias y resultados de aprendizaje es la siguiente:
 
-### Horario semanal
-
-| Día | Horario | Competencia |
-|---|---|---|
-| **Lunes** | 6:00 - 12:00 | Modelado de los artefactos del software |
-| **Martes** | 6:00 - 9:00 | Investigación |
-| **Martes** | 9:00 - 12:00 | Modelado de los artefactos del software |
-| **Miércoles** | 6:00 - 9:00 | Actividad física y hábitos de vida saludable |
-| **Miércoles** | 9:00 - 12:00 | Inglés |
-| **Jueves** | 6:00 - 12:00 | Modelado de los artefactos del software |
-| **Viernes** | 6:00 - 9:00 | Modelado de los artefactos del software |
-| **Viernes** | 9:00 - 12:00 | Modelado de los artefactos del software |
+| **Día** | **Horario** | **Competencia** | **Resultado de Aprendizaje** |
+|---------|-------------|-----------------|------------------------------|
+| **Lunes** | 6:00 - 12:00 | Modelado de los artefactos del software. | **01** Elaborar los artefactos de diseño del software siguiendo las prácticas de la metodología seleccionada. |
+| **Martes** | 6:00 - 9:00 | Investigación | **04** Proponer soluciones a las necesidades del contexto según resultados de la investigación. <br> **01** Analizar el contexto productivo según sus características y necesidades. <br> **03** Argumentar aspectos teóricos del proyecto según referentes nacionales e internacionales. <br> **02** Estructurar el proyecto de acuerdo a criterios de la investigación. |
+| **Martes** | 9:00 - 12:00 | Modelado de los artefactos del software. | **04** Verificar los entregables de la fase de diseño del software de acuerdo con lo establecido en el informe de análisis. |
+| **Miércoles** | 6:00 - 9:00 | Actividad física y hábitos de vida saludable | *(No documentado en este repositorio)* |
+| **Miércoles** | 9:00 - 12:00 | Inglés | *(No documentado en este repositorio)* |
+| **Jueves** | 6:00 - 12:00 | Modelado de los artefactos del software. | **02** Estructurar el modelo de datos del software de acuerdo con las especificaciones del análisis. |
+| **Viernes** | 6:00 - 9:00 | Modelado de los artefactos del software. | **01** Elaborar los artefactos de diseño del software siguiendo las prácticas de la metodología seleccionada. |
+| **Viernes** | 9:00 - 12:00 | Modelado de los artefactos del software. | **02** Estructurar el modelo de datos del software de acuerdo con las especificaciones del análisis. |
 
 ---
 
-## Estructura del repositorio
+## Estructura del directorio `trimestre-3/`
 
 ```
 trimestre-3/
-├── algoritmia/
-│   ├── 1_condicionales.py
-│   ├── 2_operadores.py
-│   ├── 3_listas.py
-│   ├── modulos/
+├── algoritmia/                         # Ejercicios de fundamentos de Python
+│   ├── 1_condicionales.py               # Condicionales
+│   ├── 2_operadores.py                  # Operadores
+│   ├── 3_listas.py                      # Listas
+│   ├── modulos/                         # Módulos reutilizables
 │   │   ├── ejercicios_y_datos.py
 │   │   ├── modulo-datos.py
 │   │   └── modulo-tablas.py
-│   └── modulos-2/
+│   └── modulos-2/                       # Segundo conjunto de módulos
 │       ├── calculadora.py
 │       └── modulo.py
-├── databases/
+├── databases/                           # Bases de datos relacionales
 │   ├── README.md
-│   ├── sintaxis-sql.md
-│   ├── triggers.md
-│   ├── xampp-2.md
-│   └── xampp.md
-├── investigacion/
+│   ├── sintaxis-sql.md                  # Sintaxis básica de SQL
+│   ├── triggers.md                      # Disparadores
+│   ├── xampp.md                         # Guía de XAMPP
+│   └── xampp-2.md
+├── investigacion/                       # Trabajo de investigación y análisis
 │   └── README.md
-├── javascript/
+├── javascript/                          # Ejercicios de JavaScript
 │   ├── index.html
 │   └── main.js
-│   └── README.js
-├── poo/
+├── poo/                                 # Programación Orientada a Objetos
 │   ├── modulo.py
 │   ├── poo-1.py
 │   ├── poo-2.py
 │   ├── usuario.py
 │   └── README.md
-├── prueba-tecnica/
+├── prueba-tecnica/                      # Evaluación práctica
 │   ├── calculadora.png
 │   ├── index.html
 │   └── README.md
-├── python/
+├── python/                              # Scripts varios de Python
 │   └── (archivos y scripts varios)
-└── README.md
+└── README.md                            # Este archivo
 ```
 
 ---
 
 ## Módulos y temas vistos
 
-### Modelado de los artefactos del software — Python
+### Algoritmia y fundamentos de Python
 
 > Clases de los días **lunes** en horario completo (6:00 - 12:00).
 
@@ -116,9 +114,9 @@ En este bloque nos adentramos en el lenguaje Python desde sus bases. Fue un espa
 
 ---
 
-### Modelado de los artefactos del software — JavaScript y POO
+### JavaScript y Programación Orientada a Objetos
 
-> Clases de los días **martes** en el segundo bloque (9:00 - 12:00).
+> Clases de los días **martes** en el segundo bloque (9:00 - 12:00) y parte de los viernes.
 
 Este espacio fue una extensión natural de lo visto en Python, pero ahora orientado a JavaScript y a los principios de la Programación Orientada a Objetos.
 
@@ -138,7 +136,7 @@ Este espacio fue una extensión natural de lo visto en Python, pero ahora orient
 
 ---
 
-### Investigación
+### Investigación y análisis de proyectos
 
 > Clases de los días **martes** en el primer bloque (6:00 - 9:00).
 
@@ -157,7 +155,7 @@ Este módulo fue uno de los que más disfruté. La metodología consistió en tr
 
 ---
 
-### Modelado de los artefactos del software — Bases de datos
+### Bases de datos y modelado de datos
 
 > Clases de los días **jueves** (6:00 - 12:00) y **viernes** (6:00 - 12:00).
 
@@ -186,6 +184,17 @@ Este fue el bloque más extenso y, personalmente, el que más me emocionó. Aqu�
 
 ---
 
+## Próximos pasos
+
+El contenido técnico del trimestre está en proceso de organización y expansión. Próximamente se agregarán:
+
+- Más ejercicios prácticos en Python y JavaScript.
+- Documentación detallada sobre bases de datos y modelado de datos.
+- Diagramas y casos de uso completos del proyecto formativo.
+- Plantillas y ejemplos de historias de usuario y reglas de negocio.
+
+---
+
 ## Reflexión personal
 
 Este trimestre fue un punto de inflexión en mi formación. Pasé de escribir scripts sueltos a entender cómo se construye un proyecto de software desde sus cimientos: **datos, lógica de negocio e investigación**.
@@ -199,15 +208,4 @@ Además, el hecho de trabajar con **XAMPP**, **MySQL Workbench** y **SQL Server*
 
 ---
 
-## Notas finales
-
-En este trimestre **no se incluyeron** en el repositorio los contenidos de:
-
-- **Inglés**: a pesar de su importancia en el sector tecnológico, decidí enfocar el repositorio únicamente en los temas de desarrollo de software.
-- **Cultura Física**: aunque se abordaron temas de acondicionamiento físico, ergonomía y pausas activas, no considero que sea pertinente para un repositorio técnico de programación.
-
-El foco de este repositorio es, y será siempre, el **conocimiento aplicado al desarrollo de software**.
-
----
-
-> **Nota:** Este README forma parte del repositorio personal de seguimiento del programa ADSO. Todo el contenido aquí documentado fue desarrollado durante el tercer trimestre del año 2025.
+> Gracias por leer.
