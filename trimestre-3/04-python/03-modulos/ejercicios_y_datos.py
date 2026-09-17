@@ -1,6 +1,5 @@
 # Fecha: 14/11/2025
 
-# Instructor: William Herreño
 # Aprendiz: Santiago Muñeton Hernandez
 # Programa: Análisis y Desarollo de Software
 
