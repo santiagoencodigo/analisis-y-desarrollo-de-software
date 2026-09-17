@@ -1,10 +1,8 @@
-# Taller Python 
-# Servicio Nacional de Aprendizaje - SENA
+# Taller Python
 
 # Aprendiz: Santiago Muñeton Hernandez
 # Programa: Analisis y Desarrollo de software
 
-# Instructor: William Herreño
 
 
 # Selecciones de ejercicio

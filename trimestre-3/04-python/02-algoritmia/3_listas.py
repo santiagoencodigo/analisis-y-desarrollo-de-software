@@ -89,7 +89,7 @@ elif seleccion_ejercicio == 6:
     Fecha = datetime.datetime.now()
 
     Nombre = "Santiago Muñeton Hernandez"
-    Ficha = "3171608"
+    Ficha = "3000000"
 
     print(f"Hola soy {Nombre} estoy en la ficha {Ficha} y hoy es {Fecha}")
 
