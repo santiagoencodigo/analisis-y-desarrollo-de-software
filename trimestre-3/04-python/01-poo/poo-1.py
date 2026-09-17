@@ -1,8 +1,6 @@
-# Aprendiz: Santiago Muñeton Hernandez
+# Aprendiz: Santiago Muñeton
 
 # Fecha: 21/11/2025
-
-# Instructor: William Herreño
 
 # Temario: Programación Orientada a Objetos (POO)
 
@@ -265,3 +263,8 @@ elif seleccion_temario == 8:
 else:
     print("Este ejercicio no existe.")
 
+# Curioso leer esto el 16/09/2026
+
+# ¿Tu tambien estas leyendo esto?
+
+# Extraño... ¿No?

@@ -1,7 +1,5 @@
 
-# Aprendiz: Santiago Muñeton Hernandez
-# Instructor: William Herreño
-# Ficha: Analisis y Desarrollo de Software
+# Aprendiz: Santiago Muñeton
 # Fecha: 28/11/2025
 
 
@@ -297,4 +295,25 @@ while True:
 
 # Las bases de datos esta sieno muy importante
 
-# > No se puede esperar llegar a quinto trimestre para empezar a escribir el código del proyecto
+# No se puede esperar llegar a quinto trimestre para empezar a escribir el código del proyecto
+
+
+
+
+
+
+
+
+# --------------------
+
+
+
+
+
+
+
+# Curioso leer esto el 16/09/2026
+
+# Entonces empezamos a codificar para el proyecto desde el cuarto trimestre
+
+# A la final mi proyecto termino siendo de DJANGO, entonces dudo mucho que utilicemos docker... No sé, el siguente trimestre (7) lo voy a ver.
