@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trimestre 7 – ADSO | Análisis y Desarrollo de Software</title>
+    <meta name="description" content="Séptimo trimestre del tecnólogo en Análisis y Desarrollo de Software (ADSO). Implantación, construcción y aseguramiento de la calidad del software.">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Font Awesome (para los iconos del footer) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* ============================================== */
+        /* VARIABLES GLOBALES - PALETA TRIMESTRE 7         */
+        /* Inspirada en: logro, cierre, sabiduría          */
+        /* Índigo profundo + Violeta + Ámbar               */
+        /* ============================================== */
+        :root {
+            /* Paleta principal */
+            --color-indigo-deep: #1e1b4b;
+            --color-indigo: #312e81;
+            --color-violet: #7c3aed;
+            --color-violet-light: #a78bfa;
+            --color-amber: #f59e0b;
+            --color-amber-light: #fbbf24;
+            --color-amber-soft: #fef3c7;
+
+            /* Neutros */
+            --color-bg-primary: #f8f7fc;
+            --color-bg-secondary: #ffffff;
+            --color-bg-hero: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+            --color-text-primary: #1e1b4b;
+            --color-text-secondary: #4b5563;
+            --color-text-inverse: #f8f7fc;
+            --color-border: #e5e7eb;
+
+            /* Acentos */
+            --color-accent-blue: #6366f1;
+            --color-accent-amber: #f59e0b;
+            --color-success: #10b981;
+
+            /* Layout */
+            --container-max: 1200px;
+            --container-pad: 1.5rem;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* ============================================== */
+        /* HEADER / NAVBAR                                 */
+        /* ============================================== */
+        .main-header {
+            background-color: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(30, 27, 75, 0.06);
+        }
+
+        .nav-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0.75rem var(--container-pad);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--color-indigo-deep) !important;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo-img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: var(--color-violet);
+            padding: 5px;
+        }
+
+        .nav-link {
+            color: var(--color-text-secondary) !important;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.9rem !important;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--color-violet) !important;
+            background-color: rgba(124, 58, 237, 0.08);
+        }
+
+        .nav-toggle {
+            border: 1px solid var(--color-border);
+        }
+
+        .dropdown-menu {
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 24px rgba(30, 27, 75, 0.12);
+            padding: 0.5rem;
+        }
+
+        .dropdown-item {
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(124, 58, 237, 0.08);
+            color: var(--color-violet);
+        }
+
+        /* ============================================== */
+        /* HERO / ENCABEZADO DEL TRIMESTRE                */
+        /* ============================================== */
+        .hero {
+            background: var(--color-bg-hero);
+            color: var(--color-text-inverse);
+            padding: 4rem var(--container-pad) 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--color-amber-light);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 .highlight {
+            color: var(--color-amber-light);
+        }
+
+        .hero p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(248, 247, 252, 0.85);
+            line-height: 1.7;
+        }
+
+        .hero-dates {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .hero-dates i {
+            color: var(--color-amber-light);
+        }
+
+        /* ============================================== */
+        /* AVISO DE CONSTRUCCIÓN                          */
+        /* ============================================== */
+        .construction-notice {
+            background: linear-gradient(135deg, var(--color-amber-soft) 0%, #fffbeb 100%);
+            border: 2px dashed var(--color-amber);
+            border-radius: var(--border-radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 800px;
+            position: relative;
+            animation: pulse-soft 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.15);
+            }
+            50% {
+                box-shadow: 0 0 0 12px rgba(245, 158, 11, 0);
+            }
+        }
+
+        .construction-notice .bi-cone-striped {
+            font-size: 4rem;
+            color: var(--color-amber);
+            display: block;
+            margin-bottom: 1rem;
+            animation: bounce-soft 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce-soft {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .construction-notice h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-indigo-deep);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .construction-notice p {
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+            margin: 0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .construction-notice .progress-bar-wrapper {
+            margin-top: 1.5rem;
+            background: rgba(245, 158, 11, 0.15);
+            border-radius: 50px;
+            height: 8px;
+            overflow: hidden;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .construction-notice .progress-bar-fill {
+            height: 100%;
+            width: 15%;
+            background: linear-gradient(90deg, var(--color-amber), var(--color-violet));
+            border-radius: 50px;
+            animation: progress-slide 2.5s ease-in-out infinite;
+        }
+
+        @keyframes progress-slide {
+            0% {
+                width: 5%;
+                opacity: 0.6;
+            }
+            50% {
+                width: 25%;
+                opacity: 1;
+            }
+            100% {
+                width: 5%;
+                opacity: 0.6;
+            }
+        }
+
+        /* ============================================== */
+        /* CONTENIDO PRINCIPAL                            */
+        /* ============================================== */
+        .main-content {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 2rem var(--container-pad) 4rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-indigo-deep);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--color-violet);
+        }
+
+        .section-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Tarjetas de competencias */
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .competency-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: 1.75rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .competency-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--color-violet), var(--color-amber));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .competency-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(30, 27, 75, 0.1);
+            border-color: var(--color-violet-light);
+        }
+
+        .competency-card:hover::before {
+            opacity: 1;
+        }
+
+        .competency-card .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .competency-card .card-icon.indigo {
+            background: linear-gradient(135deg, var(--color-indigo), var(--color-violet));
+        }
+
+        .competency-card .card-icon.amber {
+            background: linear-gradient(135deg, var(--color-amber), #f97316);
+        }
+
+        .competency-card .card-icon.violet {
+            background: linear-gradient(135deg, var(--color-violet), #c026d3);
+        }
+
+        .competency-card .card-icon.emerald {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .competency-card .card-icon.rose {
+            background: linear-gradient(135deg, #f43f5e, #e11d48);
+        }
+
+        .competency-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-indigo-deep);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .competency-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ============================================== */
+        /* FOOTER                                          */
+        /* ============================================== */
+        #mapa-de-sitio {
+            background: var(--color-indigo-deep);
+            color: var(--color-text-inverse);
+            margin-top: 4rem;
+        }
+
+        #mapa-de-sitio .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 3rem var(--container-pad) 2rem;
+        }
+
+        #mapa-de-sitio .footer-col h4 {
+            color: var(--color-amber-light);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        #mapa-de-sitio .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #mapa-de-sitio .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        #mapa-de-sitio .footer-links .footer-link {
+            color: rgba(248, 247, 252, 0.7);
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Colores de hover individuales */
+        #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(1) .footer-link:hover { color: #a78bfa; }
+        #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(2) .footer-link:hover { color: #fbbf24; }
+        #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(3) .footer-link:hover { color: #67e8f9; }
+        #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(4) .footer-link:hover { color: #34d399; }
+
+        #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(1) .footer-link:hover { color: #3b82f6; }
+        #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(2) .footer-link:hover { color: #60a5fa; }
+        #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(3) .footer-link:hover { color: #818cf8; }
+        #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(4) .footer-link:hover { color: #a78bfa; }
+        #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(5) .footer-link:hover { color: #c4b5fd; }
+        #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(6) .footer-link:hover { color: #ddd6fe; }
+        #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(7) .footer-link:hover { color: #fbbf24; }
+
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(1) .footer-link:hover { color: #67e8f9; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(2) .footer-link:hover { color: #22d3ee; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(3) .footer-link:hover { color: #06b6d4; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(4) .footer-link:hover { color: #fbbf24; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem var(--container-pad) 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+        }
+
+        .footer-bottom p {
+            color: rgba(248, 247, 252, 0.5);
+            font-size: 0.75rem;
+            margin: 0;
+        }
+
+        .footer-bottom a {
+            color: rgba(248, 247, 252, 0.6);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-amber-light);
+        }
+
+        /* ============================================== */
+        /* RESPONSIVE                                      */
+        /* ============================================== */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem var(--container-pad) 4rem;
+            }
+
+            .construction-notice {
+                padding: 2rem 1.5rem;
+            }
+
+            #mapa-de-sitio .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+                padding: 2rem var(--container-pad) 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem var(--container-pad);
+            }
+        }
+
+        @media (max-width: 480px) {
+            #mapa-de-sitio .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .competency-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN CON BOOTSTRAP              -->
+    <!-- ============================================== -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <!-- Logo -->
+                <a href="#inicio" class="navbar-brand nav-logo" aria-label="Ir al inicio">
+                    <img src="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                        alt="Logo ADSO"
+                        class="nav-logo-img">
+                    ADSO
+                </a>
+
+                <!-- Botón hamburguesa (Bootstrap) -->
+                <button class="navbar-toggler nav-toggle" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menú colapsable -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+
+                        <!-- Dropdown Trimestres con Bootstrap -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#trimestres"
+                            id="trimestresDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../trimestre-7/index.html"><strong>Trimestre 7</strong></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#proyectos">Proyectos</a>
+                        </li>
+
+                        <!-- Mapa de sitio -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="../sitemap.html">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#mapa-de-sitio">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================================== -->
+    <!-- HERO / ENCABEZADO DEL TRIMESTRE                -->
+    <!-- ============================================== -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <span class="hero-badge">
+                <i class="bi bi-mortarboard-fill"></i>
+                Séptimo Trimestre
+            </span>
+            <h1>
+                Análisis y Desarrollo <br>
+                de <span class="highlight">Software</span>
+            </h1>
+            <p>
+                Etapa final de la formación lectiva del tecnólogo. Enfoque en la
+                <strong>implantación</strong>, <strong>construcción</strong> y
+                <strong>aseguramiento de la calidad</strong> del software, junto con
+                el fortalecimiento de competencias transversales como el inglés y la
+                cultura emprendedora.
+            </p>
+            <div class="hero-dates">
+                <i class="bi bi-calendar-event-fill"></i>
+                <span>29 de septiembre de 2026 — 12 de diciembre de 2026</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- CONTENIDO PRINCIPAL                            -->
+    <!-- ============================================== -->
+    <main class="main-content" id="contexto">
+
+        <!-- Aviso de construcción -->
+        <div class="construction-notice">
+            <i class="bi bi-cone-striped"></i>
+            <h2>Se estará trabajando en esto</h2>
+            <p>
+                El contenido de este trimestre se encuentra en proceso de desarrollo.
+                A medida que avance la formación, se irán agregando los materiales,
+                ejercicios y documentación correspondientes.
+            </p>
+            <div class="progress-bar-wrapper">
+                <div class="progress-bar-fill"></div>
+            </div>
+        </div>
+
+        <!-- Competencias del trimestre -->
+        <section id="trimestres" style="margin-top: 3rem;">
+            <h2 class="section-title">
+                <i class="bi bi-award-fill"></i>
+                Competencias del trimestre
+            </h2>
+            <p class="section-subtitle">
+                A continuación se presentan las competencias que se desarrollarán
+                durante el séptimo trimestre.
+            </p>
+
+            <div class="competency-grid">
+
+                <!-- Inglés -->
+                <div class="competency-card">
+                    <div class="card-icon indigo">
+                        <i class="bi bi-translate"></i>
+                    </div>
+                    <h3>Inglés</h3>
+                    <p>
+                        Fortalecimiento de la comunicación oral y escrita en contextos
+                        laborales y cotidianos, aplicada al entorno profesional del
+                        desarrollo de software.
+                    </p>
+                </div>
+
+                <!-- Cultura Emprendedora -->
+                <div class="competency-card">
+                    <div class="card-icon amber">
+                        <i class="bi bi-lightbulb-fill"></i>
+                    </div>
+                    <h3>Cultura Emprendedora y Empresarial</h3>
+                    <p>
+                        Desarrollo de la idea de negocio, caracterización del sector
+                        productivo, estructuración del plan de negocio y valoración de
+                        la propuesta emprendedora.
+                    </p>
+                </div>
+
+                <!-- Implantación del Software -->
+                <div class="competency-card">
+                    <div class="card-icon violet">
+                        <i class="bi bi-rocket-takeoff-fill"></i>
+                    </div>
+                    <h3>Implantación del Software</h3>
+                    <p>
+                        Planificación de actividades de implantación, despliegue del
+                        software conforme a la arquitectura y políticas establecidas,
+                        y documentación del proceso siguiendo estándares de calidad.
+                    </p>
+                </div>
+
+                <!-- Construcción del Software -->
+                <div class="competency-card">
+                    <div class="card-icon emerald">
+                        <i class="bi bi-tools"></i>
+                    </div>
+                    <h3>Construcción del Software</h3>
+                    <p>
+                        Realización de pruebas al software para verificar su
+                        funcionalidad y asegurar que cumple con los requisitos
+                        establecidos.
+                    </p>
+                </div>
+
+                <!-- Buenas Prácticas -->
+                <div class="competency-card">
+                    <div class="card-icon rose">
+                        <i class="bi bi-patch-check-fill"></i>
+                    </div>
+                    <h3>Adopción de Buenas Prácticas</h3>
+                    <p>
+                        Incorporación de actividades de aseguramiento de la calidad,
+                        verificación del software conforme a las prácticas asociadas a
+                        los procesos de desarrollo, y mejora continua a partir de los
+                        resultados de la verificación.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER / MAPA DE SITIO                         -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" id="mapa-de-sitio">
+
+        <!-- Grid de 3 columnas -->
+        <div class="footer-grid">
+            <!-- Columna 1: Navegación -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="#contexto" class="footer-link">Contexto</a></li>
+                    <li><a href="#trimestres" class="footer-link">Competencias</a></li>
+                    <li><a href="#proyectos" class="footer-link">Proyectos</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 2: Trimestres -->
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../trimestre-1/index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                    <li><a href="../trimestre-7/index.html" class="footer-link"><strong>Trimestre 7</strong></a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Recursos -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Barra inferior con créditos -->
+        <div class="footer-bottom">
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+            <p>&copy; 2026 - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
