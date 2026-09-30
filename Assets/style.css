@@ -1044,7 +1044,9 @@ img[src*="github-original"] {
     padding: 1.5rem;
     transition:
         background-color var(--transition),
-        border-color var(--transition);
+        border-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
 }
 
 .quarter-number {
@@ -1073,11 +1075,47 @@ img[src*="github-original"] {
     transition: color var(--transition);
 }
 
-/* Hover trimestres */
+/* ── Iconos de tecnologías por trimestre ─────── */
+.quarter-icons {
+    display: flex;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.quarter-icons i {
+    font-size: 1.2rem;
+    transition: transform var(--transition), filter var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* Estado "en construcción" del trimestre 7 */
+.quarter-card.pending {
+    border-left-color: var(--color-accent-amber);
+    opacity: 0.9;
+    background-image: linear-gradient(
+        135deg,
+        transparent 0%,
+        transparent 95%,
+        rgba(245, 158, 11, 0.06) 100%
+    );
+}
+
+.quarter-card.pending .quarter-number {
+    color: var(--color-accent-amber);
+}
+
+/* ── Hover trimestres ────────────────────────── */
 .quarter-card:hover {
     background-color: var(--color-white);
     border-color: var(--color-accent-blue);
     border-left-color: var(--color-accent-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .quarter-card:hover .quarter-number {
@@ -1087,6 +1125,46 @@ img[src*="github-original"] {
 .quarter-card:hover h3,
 .quarter-card:hover p {
     color: var(--color-bg-primary);
+}
+
+.quarter-card:hover .quarter-icons i {
+    transform: scale(1.18);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+/* ── Responsive trimestres ───────────────────── */
+
+/* Tablet: 2 columnas */
+@media (min-width: 768px) {
+    .quarters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Escritorio: 4 columnas */
+@media (min-width: 1024px) {
+    .quarters-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ── Accesibilidad ───────────────────────────── */
+
+/* Foco visible para teclado */
+.quarter-card:focus-visible {
+    outline: 2px solid var(--color-accent-blue);
+    outline-offset: 3px;
+}
+
+/* Respeta la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    .quarter-card:hover {
+        transform: none;
+    }
+
+    .quarter-card:hover .quarter-icons i {
+        transform: none;
+    }
 }
 
 
