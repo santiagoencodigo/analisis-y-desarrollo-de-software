@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elicitación de Requisitos | Trimestre 1</title>
+    <meta name="description" content="Tema de Elicitación de Requisitos del Trimestre 1 del programa ADSO: fuentes de información, técnicas de recolección, requisitos funcionales y no funcionales, diagramas de flujo, DFD y UML.">
+    <meta name="keywords" content="elicitación de requisitos, ADSO, SENA, requisitos funcionales, requisitos no funcionales, entrevistas, encuestas, Diagrama de flujo, DFD, UML">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="theme-color" content="#111827">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../Assets/style.css">
+
+    <link rel="shortcut icon" href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="icon" href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+
+    <style>
+        :root {
+            --page-bg: #081120;
+            --page-surface: #101a2b;
+            --page-panel: #132039;
+            --page-panel-2: #172a43;
+            --page-text: #edf3ff;
+            --page-muted: #a8b7d0;
+            --page-accent: #4f8cff;
+            --page-accent-2: #f6b93d;
+            --page-border: rgba(168, 183, 208, 0.18);
+            --page-shadow: 0 24px 50px rgba(2, 6, 23, 0.42);
+            --page-radius: 18px;
+        }
+
+        body {
+            background: linear-gradient(180deg, #081120 0%, #0d1729 100%);
+            color: var(--page-text);
+        }
+
+        .page-shell {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 7rem 1.1rem 3rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1.8fr) minmax(260px, 0.8fr);
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .content-article,
+        .page-sidebar {
+            background: rgba(16, 26, 43, 0.88);
+            border: 1px solid var(--page-border);
+            border-radius: var(--page-radius);
+            box-shadow: var(--page-shadow);
+        }
+
+        .content-article {
+            padding: 2.2rem 2rem 2.8rem;
+        }
+
+        .page-sidebar {
+            position: sticky;
+            top: 5.5rem;
+            padding: 1.3rem 1.1rem;
+        }
+
+        .page-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(79, 140, 255, 0.12);
+            border: 1px solid rgba(79, 140, 255, 0.5);
+            border-radius: 999px;
+            color: #dfeafd;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .page-badge .fa-bookmark {
+            color: var(--page-accent-2);
+        }
+
+        .article-head {
+            margin-top: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-head h1 {
+            font-size: clamp(2rem, 3vw, 3rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 0.8rem 0 0.8rem;
+            color: var(--page-text);
+        }
+
+        .meta-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem 1.2rem;
+            padding: 0;
+            list-style: none;
+            color: var(--page-muted);
+            font-size: 0.92rem;
+        }
+
+        .meta-list li {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-list i {
+            color: var(--page-accent-2);
+        }
+
+        .article-toc {
+            background: rgba(19, 32, 57, 0.7);
+            border: 1px solid var(--page-border);
+            border-radius: 16px;
+            padding: 1.1rem 1rem 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .article-toc h2 {
+            font-size: 1.15rem;
+            margin-bottom: 0.8rem;
+            color: var(--page-text);
+        }
+
+        .article-toc ol {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: var(--page-muted);
+            display: grid;
+            gap: 0.35rem;
+        }
+
+        .article-toc a {
+            color: var(--page-muted);
+            transition: color 0.2s ease;
+        }
+
+        .article-toc a:hover {
+            color: var(--page-accent);
+        }
+
+        .article-section {
+            padding-top: 1.4rem;
+            margin-top: 1.2rem;
+            border-top: 1px solid var(--page-border);
+        }
+
+        .article-section:first-of-type {
+            border-top: none;
+        }
+
+        .article-section h2 {
+            font-size: clamp(1.45rem, 2vw, 2rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--page-text);
+        }
+
+        .article-section h3 {
+            font-size: 1.18rem;
+            font-weight: 700;
+            margin: 1.35rem 0 0.7rem;
+            color: #f2f6ff;
+        }
+
+        .article-section h4 {
+            font-size: 1rem;
+            margin: 1rem 0 0.5rem;
+            font-weight: 700;
+            color: #eaf1ff;
+        }
+
+        .article-section p,
+        .article-section li {
+            color: var(--page-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .article-section ul,
+        .article-section ol {
+            padding-left: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-section blockquote {
+            margin: 1.1rem 0;
+            padding: 0.8rem 1rem;
+            border-left: 4px solid var(--page-accent);
+            background: rgba(79, 140, 255, 0.08);
+            color: #dfeafd;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .article-section .info-box {
+            background: rgba(246, 185, 61, 0.08);
+            border: 1px solid rgba(246, 185, 61, 0.32);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+            margin: 1rem 0;
+        }
+
+        .article-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.2rem;
+            overflow: hidden;
+            border-radius: 12px;
+            background: rgba(19, 32, 57, 0.7);
+            border: 1px solid var(--page-border);
+        }
+
+        .article-section th,
+        .article-section td {
+            border: 1px solid var(--page-border);
+            padding: 0.75rem 0.8rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .article-section th {
+            background: rgba(79, 140, 255, 0.12);
+            color: var(--page-text);
+            font-weight: 700;
+        }
+
+        .article-section .example {
+            background: rgba(79, 140, 255, 0.06);
+            border: 1px solid rgba(79, 140, 255, 0.26);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+            margin: 1rem 0;
+        }
+
+        .star-list {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .star-list li {
+            position: relative;
+            padding-left: 1.6rem;
+        }
+
+        .star-list li::before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: var(--page-accent-2);
+        }
+
+        .sidebar-card {
+            background: rgba(19, 32, 57, 0.7);
+            border: 1px solid var(--page-border);
+            border-radius: 14px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-card h3 {
+            font-size: 0.9rem;
+            color: #dfeafd;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .sidebar-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        .sidebar-card li {
+            color: var(--page-muted);
+            line-height: 1.55;
+        }
+
+        .sidebar-card a {
+            color: var(--page-accent);
+        }
+
+        .sidebar-card strong {
+            color: var(--page-text);
+        }
+
+        .page-footer {
+            max-width: 1280px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .footer-wrap {
+            background: rgba(16, 26, 43, 0.9);
+            border: 1px solid var(--page-border);
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            align-items: center;
+            color: var(--page-muted);
+        }
+
+        .footer-wrap a {
+            color: var(--page-accent);
+        }
+
+        @media (max-width: 980px) {
+            .page-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .page-sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .content-article {
+                padding: 1.3rem 1rem 2rem;
+            }
+
+            .footer-wrap {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .meta-list {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="Logo ADSO" class="nav-logo-img">
+                    ADSO
+                </a>
+
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Trimestre 1</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        <article class="content-article">
+            <div class="article-head">
+                <span class="page-badge"><i class="fa-solid fa-bookmark"></i> Trimestre 1</span>
+                <h1>Elicitación de Requisitos</h1>
+                <ul class="meta-list" aria-label="Información del tema">
+                    <li><i class="fa-regular fa-calendar"></i> Fechas: 21 de mayo de 2025 y 1 de julio de 2025</li>
+                    <li><i class="fa-solid fa-user-graduate"></i> Análisis y desarrollo de software</li>
+                    <li><i class="fa-solid fa-toolbox"></i> Técnicas de recolección y análisis</li>
+                </ul>
+            </div>
+
+            <nav class="article-toc" aria-label="Tabla de contenido del documento">
+                <h2>Tabla de contenido</h2>
+                <ol>
+                    <li><a href="#introduccion">Introducción a la elicitación de requisitos</a></li>
+                    <li><a href="#fuentes">Fuentes de la información</a></li>
+                    <li><a href="#tecnicas">Técnicas de recolección de datos</a>
+                        <ol>
+                            <li><a href="#preguntas">Preguntas cerradas y abiertas</a></li>
+                            <li><a href="#entrevista">Entrevista</a></li>
+                            <li><a href="#encuesta">Encuesta y cuestionario</a></li>
+                            <li><a href="#workshop">Taller de trabajo (Workshop)</a></li>
+                            <li><a href="#observacion">Observación</a></li>
+                            <li><a href="#prototipos">Prototipos</a></li>
+                            <li><a href="#historias">Historias de usuario</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#requisitos">Requerimientos funcionales y no funcionales</a></li>
+                    <li><a href="#roles">Roles en el desarrollo de software</a></li>
+                    <li><a href="#flujogramas">Diagramas de flujo generales (Flujogramas)</a></li>
+                    <li><a href="#dfd">Diagramas de flujo de datos (DFD)</a>
+                        <ol>
+                            <li><a href="#yourdon">Notación Yourdon-Coad</a></li>
+                            <li><a href="#gane">Notación Gane-Sarson</a></li>
+                            <li><a href="#ejercicios-dfd">Ejercicios de DFD</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#panaderia">Ejemplo de proyecto sencillo: Panadería Estación Paisa</a></li>
+                    <li><a href="#uml">UML (Unified Modeling Language)</a></li>
+                </ol>
+            </nav>
+
+            <section class="article-section" id="introduccion">
+                <h2>Introducción a la elicitación de requisitos</h2>
+                <p>La <strong>elicitación de requisitos del software</strong> es la base fundamental de todo proyecto de desarrollo. El mundo empresarial se basa en la resolución de problemas, por lo que en el desarrollo de software es necesario definir un <strong>objeto de estudio</strong> para plantear qué se va a hacer y delimitar los tiempos estimados y costos.</p>
+                <p>Para resolver un problema, se debe buscar realmente qué es lo que se espera que solucione. Por ende, se debe hacer un <strong>levantamiento de información</strong> por medio de técnicas de recolección de datos.</p>
+            </section>
+
+            <section class="article-section" id="fuentes">
+                <h2>Fuentes de la información</h2>
+                <p>Es importante saber de dónde proviene la información:</p>
+                <ul>
+                    <li><strong>Fuente primaria:</strong> Información obtenida directamente de la persona involucrada. Ejemplo: cuando alguien da su opinión de lo que observa.</li>
+                    <li><strong>Fuente secundaria:</strong> Información que llega por medio de otra persona. Ejemplo: cuando se presenta una situación y la información llega a través de una anécdota.</li>
+                    <li><strong>Fuente terciaria:</strong> Información que se conoce a partir de dos o más personas. Ejemplo: cuando se requieren varias opiniones de diferentes personas.</li>
+                </ul>
+            </section>
+
+            <section class="article-section" id="tecnicas">
+                <h2>Técnicas de recolección de datos</h2>
+                <p>Las técnicas de recolección de datos son la base principal del proyecto. Existen múltiples técnicas que permiten obtener información desde las fuentes primarias, siendo el cliente quien ofrece la información más confiable y real. Si se obtiene una buena recolección de datos, el proyecto tendrá una base sólida para su construcción.</p>
+
+                <h3 id="preguntas">Preguntas cerradas y abiertas</h3>
+                <ul>
+                    <li><strong>Preguntas cerradas:</strong> ofrecen opciones limitadas y predefinidas (sí/no, opción múltiple, escala). Facilitan el análisis cuantitativo y la tabulación de datos.</li>
+                    <li><strong>Preguntas abiertas:</strong> permiten respuestas propias del encuestado, útiles para explorar opiniones, experiencias y razones de fondo.</li>
+                </ul>
+
+                <h3 id="entrevista">Entrevista</h3>
+                <p>Es una conversación dirigida entre dos o más personas donde una, el entrevistador, formula preguntas para obtener información u opiniones del otro, el entrevistado. Las entrevistas son útiles cuando se necesita información flexible, dinámica y profunda.</p>
+                <div class="info-box">
+                    <strong>Requisitos:</strong> preparación clara, duración definida, registro de información y un enfoque específico.
+                </div>
+                <h4>Ventajas</h4>
+                <ul>
+                    <li>Interpersonales y flexibles.</li>
+                    <li>Permiten aclaración inmediata.</li>
+                    <li>Posibilitan observación directa del lenguaje corporal.</li>
+                </ul>
+                <h4>Desventajas</h4>
+                <ul>
+                    <li>Se requiere mucho tiempo y recursos.</li>
+                    <li>Existe subjetividad y sesgos.</li>
+                    <li>No siempre hay sinceridad completa.</li>
+                </ul>
+
+                <div class="example">
+                    <strong>Ejemplo de entrevista para una app de gestión de tareas:</strong>
+                    <p>Un equipo quiere crear una aplicación enfocada en freelancers. Realiza entrevistas a diseñadores, programadores y redactores para entender sus dificultades con las herramientas actuales.</p>
+                </div>
+
+                <h3 id="encuesta">Encuesta y cuestionario</h3>
+                <p>Una <strong>encuesta</strong> se usa generalmente para recoger datos de muchas personas en forma estructurada y rápida. Un <strong>cuestionario</strong> es la herramienta que contiene las preguntas de la encuesta y puede incluir preguntas abiertas o cerradas.</p>
+                <h4>Encuesta</h4>
+                <ul>
+                    <li>Más útil para obtener datos cuantitativos de gran volumen.</li>
+                    <li>Permite identificar tendencias, porcentajes y frecuencias.</li>
+                </ul>
+                <h4>Cuestionario</h4>
+                <ul>
+                    <li>Útil para profundizar en criterios, actitudes y percepciones.</li>
+                    <li>Puede combinar preguntas cerradas y abiertas.</li>
+                </ul>
+
+                <h3 id="workshop">Taller de trabajo (Workshop)</h3>
+                <p>Un taller es una actividad intensiva donde los participantes reciben información, comparten ideas y desarrollan capacidades en un corto tiempo. A menudo incluye dinámicas de grupo, lluvia de ideas, prototipado y resolución de problemas.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Actividad</th>
+                            <th>Duración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Introducción del proyecto y objetivos del taller</td>
+                            <td>15 min</td>
+                        </tr>
+                        <tr>
+                            <td>Mapa de empatía y perfil de usuario</td>
+                            <td>30 min</td>
+                        </tr>
+                        <tr>
+                            <td>Lluvia de ideas y priorización</td>
+                            <td>60 min</td>
+                        </tr>
+                        <tr>
+                            <td>Prototipado rápido</td>
+                            <td>45 min</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="observacion">Observación</h3>
+                <p>La observación consiste en estudiar el comportamiento real de las personas en su entorno natural o profesional. A través de ella se analizan procesos, necesidades y dificultades sin depender solo de opiniones expresadas verbalmente.</p>
+
+                <h3 id="prototipos">Prototipos</h3>
+                <p>Un prototipo es una representación temprana del software o de una parte de la interfaz. Permite validar ideas antes de invertir mucho tiempo en desarrollo, y ayuda a detectar errores de diseño o de funcionalidad.</p>
+
+                <h3 id="historias">Historias de usuario</h3>
+                <p>Las historias de usuario describen necesidades desde la perspectiva del usuario. Su formato típico es: <em>“Como [usuario], quiero [objetivo], para [beneficio]”</em>.</p>
+                <blockquote>Ejemplo: “Como cliente, quiero registrar una compra online para pagar de forma rápida y segura.”</blockquote>
+            </section>
+
+            <section class="article-section" id="requisitos">
+                <h2>Requerimientos funcionales y no funcionales</h2>
+                <p>Los <strong>requisitos funcionales</strong> describen lo que el sistema debe hacer; los <strong>requisitos no funcionales</strong> describen cómo debe comportarse o qué cualidades debe tener.</p>
+
+                <h3>Requisitos funcionales</h3>
+                <ul class="star-list">
+                    <li>El sistema debe permitir iniciar sesión.</li>
+                    <li>El sistema debe registrar clientes.</li>
+                    <li>El sistema debe guardar ventas.</li>
+                    <li>El sistema debe mostrar reportes.</li>
+                </ul>
+
+                <h3>Requisitos no funcionales</h3>
+                <ul class="star-list">
+                    <li>Debe funcionar en navegadores modernos.</li>
+                    <li>Debe responder en menos de 3 segundos.</li>
+                    <li>Debe ser fácil de usar para usuarios sin experiencia.</li>
+                    <li>Debe proteger la información de usuarios y clientes.</li>
+                </ul>
+            </section>
+
+            <section class="article-section" id="roles">
+                <h2>Roles en el desarrollo de software</h2>
+                <p>En un proyecto de software intervienen varias personas con funciones complementarias. Entre ellos están:</p>
+                <ul>
+                    <li><strong>Cliente:</strong> expresa la necesidad o problema.</li>
+                    <li><strong>Analista:</strong> recoge, comprende y documenta los requisitos.</li>
+                    <li><strong>Diseñador:</strong> estructura la solución y la experiencia de usuario.</li>
+                    <li><strong>Desarrollador:</strong> construye la aplicación o sistema.</li>
+                    <li><strong>Tester o QA:</strong> valida que el sistema funcione correctamente.</li>
+                    <li><strong>Administrador de proyecto:</strong> coordina tiempos, tareas y recursos.</li>
+                </ul>
+            </section>
+
+            <section class="article-section" id="flujogramas">
+                <h2>Diagramas de flujo generales (Flujogramas)</h2>
+                <p>Un diagrama de flujo representa gráficamente los pasos que sigue un proceso. Se utiliza para comprender, analizar y documentar un procedimiento o sistema.</p>
+                <p>Sus símbolos más comunes incluyen:</p>
+                <ul>
+                    <li>Inicio y fin</li>
+                    <li>Proceso</li>
+                    <li>Decisión</li>
+                    <li>Entrada/salida</li>
+                    <li>Conector</li>
+                </ul>
+                <p>Los flujogramas permiten identificar cuellos de botella, rutas repetitivas y decisiones clave dentro del sistema.</p>
+            </section>
+
+            <section class="article-section" id="dfd">
+                <h2>Diagramas de flujo de datos (DFD)</h2>
+                <p>Los diagramas de flujo de datos muestran cómo circulan los datos dentro del sistema, desde las entidades externas hasta los procesos internos y los almacenes de información.</p>
+
+                <h3 id="yourdon">Notación Yourdon-Coad</h3>
+                <p>Se caracteriza por representar procesos, entidades externas, almacenes de datos y flujos de información de forma clara y visual. Es útil cuando se busca explicar relaciones entre componentes del sistema.</p>
+
+                <h3 id="gane">Notación Gane-Sarson</h3>
+                <p>Usa símbolos más estructurados y visualmente definidos para procesos, flujos y datos. Es especialmente apropiada para representar sistemas con lógica más formal o metódica.</p>
+
+                <h3 id="ejercicios-dfd">Ejercicios de DFD</h3>
+                <p>Los ejercicios de DFD permiten practicar la identificación de:</p>
+                <ul>
+                    <li>Entidades externas</li>
+                    <li>Procesos principales</li>
+                    <li>Almacenes de datos</li>
+                    <li>Flujos de información</li>
+                </ul>
+            </section>
+
+            <section class="article-section" id="panaderia">
+                <h2>Ejemplo de proyecto sencillo: Panadería Estación Paisa</h2>
+                <p>Un ejemplo práctico para entender la elicitación de requisitos es una panadería llamada <strong>Estación Paisa</strong>.</p>
+                <p>Se puede plantear el objetivo de desarrollar un sistema para registrar ventas, controlar inventario y generar reportes de producción. Con esta información, el analista puede identificar requisitos funcionales y no funcionales.</p>
+                <div class="example">
+                    <strong>Requisitos funcionales posibles:</strong>
+                    <ul>
+                        <li>Registrar ventas por cliente.</li>
+                        <li>Controlar el inventario de ingredientes.</li>
+                        <li>Generar boletas o facturas.</li>
+                        <li>Mostrar reportes del día.</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <strong>Requisitos no funcionales posibles:</strong>
+                    <ul>
+                        <li>Velocidad de respuesta rápida.</li>
+                        <li>Interfaz amigable para empleados.</li>
+                        <li>Seguridad de los datos.</li>
+                        <li>Compatibilidad con dispositivos de escritorio.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="article-section" id="uml">
+                <h2>UML (Unified Modeling Language)</h2>
+                <p>La UML es un lenguaje estándar para modelar sistemas de software. Permite representar clientes, procesos, datos y relaciones entre elementos mediante diagramas.</p>
+                <p>Algunos de sus diagramas más comunes son:</p>
+                <ul>
+                    <li><strong>Diagramas de caso de uso:</strong> muestran interacciones entre usuarios y sistema.</li>
+                    <li><strong>Diagramas de clases:</strong> describen entidades y relaciones entre objetos.</li>
+                    <li><strong>Diagramas de secuencia:</strong> expresan el flujo temporal de mensajes.</li>
+                </ul>
+                <p>En esta etapa inicial, el objetivo principal es comprender las necesidades reales del usuario y transformar esas necesidades en requisitos claros y verificables.</p>
+            </section>
+        </article>
+
+        <aside class="page-sidebar" aria-label="Información general de la semana temática">
+            <div class="sidebar-card">
+                <h3>Resumen</h3>
+                <ul>
+                    <li><strong>Actividad:</strong> Técnicas de elicitación de requisitos</li>
+                    <li><strong>Área:</strong> Análisis y desarrollo de software</li>
+                    <li><strong>Objetivo:</strong> Levantar necesidades reales del cliente o usuario</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Conceptos clave</h3>
+                <ul>
+                    <li><a href="#fuentes">Fuentes de información</a></li>
+                    <li><a href="#entrevista">Entrevista</a></li>
+                    <li><a href="#encuesta">Encuesta</a></li>
+                    <li><a href="#requisitos">Requisitos funcionales</a></li>
+                    <li><a href="#dfd">DFD</a></li>
+                    <li><a href="#uml">UML</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Enfoque principal</h3>
+                <p>La elicitación de requisitos permite convertir necesidades ambigüas en información estructurada, útil para construir sistemas con mayor precisión, mejor calidad y menos riesgo de error.</p>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="page-footer" id="footer">
+        <div class="footer-wrap">
+            <span>© 2025 - Análisis y Desarrollo de Software</span>
+            <span>Diseñado con <a href="../../index.html">ADSO</a> y documentación técnica.</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
