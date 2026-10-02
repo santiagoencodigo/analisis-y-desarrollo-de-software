@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elicitación de Requisitos | Trimestre 1</title>
-    <meta name="description" content="Tema de Elicitación de Requisitos del Trimestre 1 del programa ADSO: fuentes de información, técnicas de recolección, requisitos funcionales y no funcionales, diagramas de flujo, DFD y UML.">
-    <meta name="keywords" content="elicitación de requisitos, ADSO, SENA, requisitos funcionales, requisitos no funcionales, entrevistas, encuestas, Diagrama de flujo, DFD, UML">
+    <meta name="description" content="Elicitación de requisitos: fuentes de información, técnicas de recolección, requisitos funcionales y no funcionales, diagramas de flujo, DFD y UML.">
+    <meta name="keywords" content="elicitación de requisitos, ADSO, SENA, requisitos funcionales, DFD, UML">
     <meta name="author" content="santiagoencodigo">
-    <meta name="theme-color" content="#111827">
+    <meta name="theme-color" content="#0a0e1a">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../Assets/style.css">
 
@@ -21,649 +21,2022 @@
     <link rel="icon" href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
 
     <style>
+        /* ══════════════════════════════════════════════ */
+        /* 1. VARIABLES GLOBALES                          */
+        /* ══════════════════════════════════════════════ */
         :root {
-            --page-bg: #081120;
-            --page-surface: #101a2b;
-            --page-panel: #132039;
-            --page-panel-2: #172a43;
-            --page-text: #edf3ff;
-            --page-muted: #a8b7d0;
-            --page-accent: #4f8cff;
-            --page-accent-2: #f6b93d;
-            --page-border: rgba(168, 183, 208, 0.18);
-            --page-shadow: 0 24px 50px rgba(2, 6, 23, 0.42);
-            --page-radius: 18px;
+            /* Fondos */
+            --bg-base: #070b17;
+            --bg-surface: #0d1424;
+            --bg-elevated: #131b2e;
+            --bg-card: #161f35;
+            --bg-code: #0a101e;
+
+            /* Texto */
+            --text-primary: #eef2ff;
+            --text-secondary: #a5b4cf;
+            --text-muted: #6b7a99;
+
+            /* Acentos (paleta por sección) */
+            --accent-violet: #8b5cf6;
+            --accent-violet-soft: rgba(139, 92, 246, 0.15);
+            --accent-cyan: #06b6d4;
+            --accent-cyan-soft: rgba(6, 182, 212, 0.15);
+            --accent-amber: #f59e0b;
+            --accent-amber-soft: rgba(245, 158, 11, 0.15);
+            --accent-emerald: #10b981;
+            --accent-emerald-soft: rgba(16, 185, 129, 0.15);
+            --accent-rose: #f43f5e;
+            --accent-rose-soft: rgba(244, 63, 94, 0.15);
+            --accent-blue: #3b82f6;
+
+            /* Bordes */
+            --border: rgba(165, 180, 207, 0.12);
+            --border-strong: rgba(165, 180, 207, 0.24);
+
+            /* Sombras */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
+            --shadow-glow-violet: 0 0 40px rgba(139, 92, 246, 0.25);
+            --shadow-glow-cyan: 0 0 40px rgba(6, 182, 212, 0.2);
+
+            /* Layout */
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-full: 999px;
+
+            /* Transiciones */
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s var(--ease);
+            --transition-slow: all 0.6s var(--ease);
+
+            /* Navbar height */
+            --navbar-h: 68px;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 2. RESET Y BASE                                */
+        /* ══════════════════════════════════════════════ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--navbar-h) + 20px);
+            font-size: 16px;
         }
 
         body {
-            background: linear-gradient(180deg, #081120 0%, #0d1729 100%);
-            color: var(--page-text);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        .page-shell {
-            max-width: 1280px;
+        /* Text selection */
+        ::selection {
+            background: var(--accent-violet);
+            color: white;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent-violet), var(--accent-cyan));
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-violet);
+        }
+
+        a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-violet);
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 3. BARRA DE PROGRESO DE LECTURA                */
+        /* ══════════════════════════════════════════════ */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-violet), var(--accent-cyan), var(--accent-amber));
+            z-index: 9999;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 4. HEADER / NAVBAR                             */
+        /* ══════════════════════════════════════════════ */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--navbar-h);
+            background: rgba(7, 11, 23, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1320px;
             margin: 0 auto;
-            padding: 7rem 1.1rem 3rem;
+            padding: 0 1.25rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--text-primary) !important;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo-img {
+            width: 34px;
+            height: 34px;
+            padding: 5px;
+            /* background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan)); */
+            border-radius: var(--radius-sm);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 0.85rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: var(--navbar-h);
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                background: var(--bg-surface);
+                border-bottom: 1px solid var(--border);
+                padding: 1rem;
+                gap: 0.25rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 5. HERO                                        */
+        /* ══════════════════════════════════════════════ */
+        .hero {
+            position: relative;
+            min-height: 72vh;
+            display: flex;
+            align-items: center;
+            padding: calc(var(--navbar-h) + 4rem) 1.25rem 4rem;
+            overflow: hidden;
+            background: var(--bg-base);
+        }
+
+        /* Orbes de fondo animados */
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-violet);
+            top: -150px;
+            right: -100px;
+            animation: float-orb 18s ease-in-out infinite;
+        }
+
+        .hero::after {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-cyan);
+            bottom: -150px;
+            left: -100px;
+            animation: float-orb 22s ease-in-out infinite reverse;
+        }
+
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 20px) scale(0.95); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1320px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 1rem;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-radius: var(--radius-full);
+            color: #ddd6fe;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            animation: fade-up 0.8s var(--ease) both;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 4.25rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.25rem;
+            animation: fade-up 0.8s 0.15s var(--ease) both;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-cyan) 50%, var(--accent-amber) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient-shift 6s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 1.6vw, 1.15rem);
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin-bottom: 2rem;
+            line-height: 1.75;
+            animation: fade-up 0.8s 0.3s var(--ease) both;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            animation: fade-up 0.8s 0.45s var(--ease) both;
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            backdrop-filter: blur(8px);
+        }
+
+        .hero-chip i {
+            color: var(--accent-amber);
+        }
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Indicador de scroll */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: bounce-down 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator i {
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce-down {
+            0%, 100% { transform: translate(-50%, 0); opacity: 0.5; }
+            50% { transform: translate(-50%, 10px); opacity: 1; }
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 6. LAYOUT PRINCIPAL                            */
+        /* ══════════════════════════════════════════════ */
+        .page-shell {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 3rem 1.25rem 4rem;
             display: grid;
-            grid-template-columns: minmax(0, 1.8fr) minmax(260px, 0.8fr);
-            gap: 2rem;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 3rem;
             align-items: start;
         }
 
-        .content-article,
-        .page-sidebar {
-            background: rgba(16, 26, 43, 0.88);
-            border: 1px solid var(--page-border);
-            border-radius: var(--page-radius);
-            box-shadow: var(--page-shadow);
+        @media (max-width: 1024px) {
+            .page-shell {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
 
+        /* ══════════════════════════════════════════════ */
+        /* 7. ARTÍCULO PRINCIPAL                          */
+        /* ══════════════════════════════════════════════ */
         .content-article {
-            padding: 2.2rem 2rem 2.8rem;
-        }
-
-        .page-sidebar {
-            position: sticky;
-            top: 5.5rem;
-            padding: 1.3rem 1.1rem;
-        }
-
-        .page-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0.8rem;
-            background: rgba(79, 140, 255, 0.12);
-            border: 1px solid rgba(79, 140, 255, 0.5);
-            border-radius: 999px;
-            color: #dfeafd;
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .page-badge .fa-bookmark {
-            color: var(--page-accent-2);
-        }
-
-        .article-head {
-            margin-top: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .article-head h1 {
-            font-size: clamp(2rem, 3vw, 3rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin: 0.8rem 0 0.8rem;
-            color: var(--page-text);
-        }
-
-        .meta-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem 1.2rem;
-            padding: 0;
-            list-style: none;
-            color: var(--page-muted);
-            font-size: 0.92rem;
-        }
-
-        .meta-list li {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .meta-list i {
-            color: var(--page-accent-2);
-        }
-
-        .article-toc {
-            background: rgba(19, 32, 57, 0.7);
-            border: 1px solid var(--page-border);
-            border-radius: 16px;
-            padding: 1.1rem 1rem 0.8rem;
-            margin-bottom: 2rem;
-        }
-
-        .article-toc h2 {
-            font-size: 1.15rem;
-            margin-bottom: 0.8rem;
-            color: var(--page-text);
-        }
-
-        .article-toc ol {
-            margin: 0;
-            padding-left: 1.2rem;
-            color: var(--page-muted);
-            display: grid;
-            gap: 0.35rem;
-        }
-
-        .article-toc a {
-            color: var(--page-muted);
-            transition: color 0.2s ease;
-        }
-
-        .article-toc a:hover {
-            color: var(--page-accent);
+            min-width: 0;
         }
 
         .article-section {
-            padding-top: 1.4rem;
-            margin-top: 1.2rem;
-            border-top: 1px solid var(--page-border);
+            padding: 3.5rem 0;
+            border-top: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
         }
 
         .article-section:first-of-type {
             border-top: none;
+            padding-top: 1rem;
         }
 
-        .article-section h2 {
-            font-size: clamp(1.45rem, 2vw, 2rem);
+        .article-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            margin-bottom: 1.75rem;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            font-size: 1.15rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            color: var(--page-text);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-number.violet { background: linear-gradient(135deg, var(--accent-violet), #6d28d9); }
+        .section-number.cyan   { background: linear-gradient(135deg, var(--accent-cyan), #0891b2); }
+        .section-number.amber  { background: linear-gradient(135deg, var(--accent-amber), #d97706); }
+        .section-number.emerald{ background: linear-gradient(135deg, var(--accent-emerald), #059669); }
+        .section-number.rose   { background: linear-gradient(135deg, var(--accent-rose), #e11d48); }
+        .section-number.blue   { background: linear-gradient(135deg, var(--accent-blue), #1d4ed8); }
+
+        .article-section h2 {
+            font-size: clamp(1.6rem, 2.6vw, 2.25rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
         }
 
         .article-section h3 {
-            font-size: 1.18rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            margin: 1.35rem 0 0.7rem;
-            color: #f2f6ff;
+            margin: 2rem 0 0.85rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
 
         .article-section h4 {
-            font-size: 1rem;
-            margin: 1rem 0 0.5rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            color: #eaf1ff;
+            margin: 1.35rem 0 0.6rem;
+            color: #e2e8f0;
         }
 
-        .article-section p,
-        .article-section li {
-            color: var(--page-muted);
-            font-size: 1rem;
-            line-height: 1.8;
+        .article-section p {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            line-height: 1.85;
+            margin-bottom: 1rem;
         }
 
         .article-section ul,
         .article-section ol {
-            padding-left: 1.2rem;
-            margin-bottom: 1rem;
+            padding-left: 1.4rem;
+            margin-bottom: 1.25rem;
         }
 
-        .article-section blockquote {
-            margin: 1.1rem 0;
-            padding: 0.8rem 1rem;
-            border-left: 4px solid var(--page-accent);
-            background: rgba(79, 140, 255, 0.08);
-            color: #dfeafd;
-            border-radius: 0 12px 12px 0;
+        .article-section li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 0.4rem;
         }
 
-        .article-section .info-box {
-            background: rgba(246, 185, 61, 0.08);
-            border: 1px solid rgba(246, 185, 61, 0.32);
-            border-radius: 14px;
-            padding: 1rem 1.1rem;
-            margin: 1rem 0;
-        }
-
-        .article-section table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0 1.2rem;
-            overflow: hidden;
-            border-radius: 12px;
-            background: rgba(19, 32, 57, 0.7);
-            border: 1px solid var(--page-border);
-        }
-
-        .article-section th,
-        .article-section td {
-            border: 1px solid var(--page-border);
-            padding: 0.75rem 0.8rem;
-            text-align: left;
-            vertical-align: top;
-        }
-
-        .article-section th {
-            background: rgba(79, 140, 255, 0.12);
-            color: var(--page-text);
+        .article-section strong {
+            color: var(--text-primary);
             font-weight: 700;
         }
 
-        .article-section .example {
-            background: rgba(79, 140, 255, 0.06);
-            border: 1px solid rgba(79, 140, 255, 0.26);
-            border-radius: 14px;
-            padding: 1rem 1.1rem;
-            margin: 1rem 0;
+        .article-section blockquote {
+            margin: 1.5rem 0;
+            padding: 1rem 1.25rem;
+            border-left: 4px solid var(--accent-violet);
+            background: var(--accent-violet-soft);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            color: #e9d5ff;
+            font-style: italic;
         }
 
-        .star-list {
-            list-style: none;
-            padding-left: 0;
+        /* ══════════════════════════════════════════════ */
+        /* 8. CARDS DE FUENTES DE INFORMACIÓN             */
+        /* ══════════════════════════════════════════════ */
+        .source-grid {
             display: grid;
-            gap: 0.6rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
         }
 
-        .star-list li {
+        .source-card {
             position: relative;
-            padding-left: 1.6rem;
+            padding: 1.5rem 1.35rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
         }
 
-        .star-list li::before {
-            content: "★";
+        .source-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--card-color, var(--accent-violet));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease);
+        }
+
+        .source-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .source-card:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .source-card .source-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: white;
+            background: var(--card-color, var(--accent-violet));
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .source-card h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .source-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        .source-card .source-example {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed var(--border);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 9. CARDS DE TÉCNICAS                           */
+        /* ══════════════════════════════════════════════ */
+        .technique-card {
+            position: relative;
+            margin: 2rem 0;
+            padding: 2rem 1.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .technique-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--tech-color, var(--accent-violet)) 0%, transparent 70%);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .technique-card:hover {
+            border-color: var(--tech-color, var(--accent-violet));
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .technique-head {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .technique-icon {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-size: 1.5rem;
+            color: white;
+            background: linear-gradient(135deg, var(--tech-color, var(--accent-violet)), color-mix(in srgb, var(--tech-color, var(--accent-violet)) 60%, black));
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .technique-head h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        /* Pros y contras */
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.25rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pros-cons > div {
+            padding: 1rem 1.15rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+        }
+
+        .pros-cons .pros {
+            background: var(--accent-emerald-soft);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .pros-cons .cons {
+            background: var(--accent-rose-soft);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        .pros-cons h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.65rem;
+        }
+
+        .pros-cons .pros h4 { color: #6ee7b7; }
+        .pros-cons .cons h4 { color: #fda4af; }
+
+        .pros-cons ul {
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+
+        .pros-cons li {
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+            line-height: 1.55;
+        }
+
+        /* Ejemplo dentro de la técnica */
+        .example-box {
+            margin-top: 1.25rem;
+            padding: 1.15rem 1.25rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--tech-color, var(--accent-violet));
+            border-radius: var(--radius-md);
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .example-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 10. GRID DE REQUISITOS                         */
+        /* ══════════════════════════════════════════════ */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .req-card {
+            padding: 1.5rem 1.35rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            transition: var(--transition);
+        }
+
+        .req-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .req-card.func {
+            border-top: 3px solid var(--accent-cyan);
+        }
+
+        .req-card.no-func {
+            border-top: 3px solid var(--accent-amber);
+        }
+
+        .req-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .req-card.func h4 i { color: var(--accent-cyan); }
+        .req-card.no-func h4 i { color: var(--accent-amber); }
+
+        .req-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .req-card li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .req-card.func li::before {
+            content: "▸";
             position: absolute;
             left: 0;
-            color: var(--page-accent-2);
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .req-card.no-func li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 11. GRID DE ROLES                              */
+        /* ══════════════════════════════════════════════ */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .role-chip {
+            padding: 1.1rem 1.15rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .role-chip:hover {
+            border-color: var(--accent-violet);
+            transform: translateY(-2px);
+        }
+
+        .role-chip i {
+            font-size: 1.5rem;
+            color: var(--accent-violet);
+            flex-shrink: 0;
+        }
+
+        .role-chip div strong {
+            display: block;
+            font-size: 0.92rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .role-chip div span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 12. TABLA DE SÍMBOLOS                          */
+        /* ══════════════════════════════════════════════ */
+        .symbols-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .symbols-table th {
+            background: var(--bg-elevated);
+            padding: 0.85rem 1rem;
+            text-align: left;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .symbols-table td {
+            padding: 0.85rem 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            vertical-align: top;
+        }
+
+        .symbols-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .symbols-table code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-code);
+            padding: 0.15rem 0.45rem;
+            border-radius: var(--radius-sm);
+            color: var(--accent-cyan);
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 13. BLOQUES DE CÓDIGO (ASCII)                  */
+        /* ══════════════════════════════════════════════ */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            padding: 1.35rem 1.25rem;
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: #a5f3fc;
+            white-space: pre;
+        }
+
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0.5rem;
+            right: 0.75rem;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 14. SECCIÓN EJEMPLO PANADERÍA                  */
+        /* ══════════════════════════════════════════════ */
+        .highlight-card {
+            margin: 1.5rem 0;
+            padding: 1.75rem;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent-violet) 0%, transparent 70%);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .highlight-card h4 {
+            position: relative;
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .highlight-card p {
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 15. SIDEBAR STICKY                             */
+        /* ══════════════════════════════════════════════ */
+        .page-sidebar {
+            position: sticky;
+            top: calc(var(--navbar-h) + 20px);
         }
 
         .sidebar-card {
-            background: rgba(19, 32, 57, 0.7);
-            border: 1px solid var(--page-border);
-            border-radius: 14px;
-            padding: 1rem;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
             margin-bottom: 1rem;
         }
 
         .sidebar-card h3 {
-            font-size: 0.9rem;
-            color: #dfeafd;
-            letter-spacing: 0.08em;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.9rem;
+            font-weight: 700;
         }
 
-        .sidebar-card ul {
+        .sidebar-toc {
             list-style: none;
-            padding-left: 0;
+            padding: 0;
             margin: 0;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-toc li {
+            margin-bottom: 0.15rem;
+        }
+
+        .sidebar-toc a {
+            display: block;
+            padding: 0.4rem 0.7rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            border-left: 2px solid transparent;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            transition: var(--transition);
+            line-height: 1.4;
+        }
+
+        .sidebar-toc a:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .sidebar-toc a.active {
+            color: var(--accent-violet);
+            border-left-color: var(--accent-violet);
+            background: var(--accent-violet-soft);
+            font-weight: 600;
+        }
+
+        .sidebar-stats {
             display: grid;
-            gap: 0.55rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
         }
 
-        .sidebar-card li {
-            color: var(--page-muted);
-            line-height: 1.55;
+        .stat-item {
+            padding: 0.75rem;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            text-align: center;
         }
 
-        .sidebar-card a {
-            color: var(--page-accent);
+        .stat-item strong {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .sidebar-card strong {
-            color: var(--page-text);
+        .stat-item span {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
 
+        /* ══════════════════════════════════════════════ */
+        /* 16. BOTÓN VOLVER ARRIBA                        */
+        /* ══════════════════════════════════════════════ */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 900;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-glow-violet);
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* 17. FOOTER                                     */
+        /* ══════════════════════════════════════════════ */
         .page-footer {
-            max-width: 1280px;
-            margin: 0 auto 2rem;
-            padding: 0 1rem;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 3rem;
+            border-top: 1px solid var(--border);
         }
 
         .footer-wrap {
-            background: rgba(16, 26, 43, 0.9);
-            border: 1px solid var(--page-border);
-            border-radius: 20px;
-            padding: 1.2rem 1.5rem;
             display: flex;
             justify-content: space-between;
-            gap: 1rem;
             align-items: center;
-            color: var(--page-muted);
+            gap: 1rem;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
 
-        .footer-wrap a {
-            color: var(--page-accent);
+        /* ══════════════════════════════════════════════ */
+        /* 18. ACCESIBILIDAD                              */
+        /* ══════════════════════════════════════════════ */
+        :focus-visible {
+            outline: 2px solid var(--accent-cyan);
+            outline-offset: 3px;
+            border-radius: var(--radius-sm);
         }
 
-        @media (max-width: 980px) {
-            .page-shell {
-                grid-template-columns: 1fr;
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
 
-            .page-sidebar {
-                position: static;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .content-article {
-                padding: 1.3rem 1rem 2rem;
-            }
-
-            .footer-wrap {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .meta-list {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
+            .article-section {
+                opacity: 1;
+                transform: none;
             }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- BARRA DE PROGRESO DE LECTURA                   -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- HEADER / NAVBAR                                -->
+    <!-- ══════════════════════════════════════════════ -->
     <header class="main-header" role="banner">
-        <nav class="navbar navbar-expand-md nav-container">
-            <div class="container-fluid px-0">
-                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio">
-                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="Logo ADSO" class="nav-logo-img">
-                    ADSO
-                </a>
+        <nav class="nav-container" aria-label="Navegación principal">
+            <a href="../../index.html" class="nav-logo" aria-label="Ir al inicio">
+                <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="Logo ADSO" class="nav-logo-img">
+                ADSO
+            </a>
 
-                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+                <i class="bi bi-list"></i>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto align-items-md-center">
-                        <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../index.html">Trimestre 1</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../../sitemap.html">Mapa de sitio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
-                    </ul>
-                </div>
-            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../index.html">Trimestre 1</a></li>
+                <li><a href="../../sitemap.html">Mapa de sitio</a></li>
+                <li><a href="#footer">Footer</a></li>
+            </ul>
         </nav>
     </header>
 
-    <main class="page-shell">
-        <article class="content-article">
-            <div class="article-head">
-                <span class="page-badge"><i class="fa-solid fa-bookmark"></i> Trimestre 1</span>
-                <h1>Elicitación de Requisitos</h1>
-                <ul class="meta-list" aria-label="Información del tema">
-                    <li><i class="fa-regular fa-calendar"></i> Fechas: 21 de mayo de 2025 y 1 de julio de 2025</li>
-                    <li><i class="fa-solid fa-user-graduate"></i> Análisis y desarrollo de software</li>
-                    <li><i class="fa-solid fa-toolbox"></i> Técnicas de recolección y análisis</li>
-                </ul>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- HERO                                            -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="hero" aria-label="Encabezado del tema">
+        <div class="hero-content">
+            <span class="hero-badge">
+                <i class="bi bi-bookmark-star-fill"></i>
+                Trimestre 1 · Análisis y Desarrollo de Software
+            </span>
+            <h1>
+                Elicitación de <br>
+                <span class="gradient-text">Requisitos</span>
+            </h1>
+            <p>
+                El proceso fundamental para descubrir, entender y documentar las
+                necesidades reales del cliente. Aprenderás las técnicas de recolección
+                de información, la definición de requisitos funcionales y no funcionales,
+                y las herramientas para modelar el sistema antes de escribir una línea de código.
+            </p>
+            <div class="hero-meta">
+                <span class="hero-chip"><i class="bi bi-calendar-event"></i> 21 may – 01 jul 2025</span>
+                <span class="hero-chip"><i class="bi bi-diagram-3"></i> 7 técnicas de recolección</span>
+                <span class="hero-chip"><i class="bi bi-file-earmark-code"></i> DFD · UML · Flujogramas</span>
             </div>
+        </div>
 
-            <nav class="article-toc" aria-label="Tabla de contenido del documento">
-                <h2>Tabla de contenido</h2>
-                <ol>
-                    <li><a href="#introduccion">Introducción a la elicitación de requisitos</a></li>
-                    <li><a href="#fuentes">Fuentes de la información</a></li>
-                    <li><a href="#tecnicas">Técnicas de recolección de datos</a>
-                        <ol>
-                            <li><a href="#preguntas">Preguntas cerradas y abiertas</a></li>
-                            <li><a href="#entrevista">Entrevista</a></li>
-                            <li><a href="#encuesta">Encuesta y cuestionario</a></li>
-                            <li><a href="#workshop">Taller de trabajo (Workshop)</a></li>
-                            <li><a href="#observacion">Observación</a></li>
-                            <li><a href="#prototipos">Prototipos</a></li>
-                            <li><a href="#historias">Historias de usuario</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#requisitos">Requerimientos funcionales y no funcionales</a></li>
-                    <li><a href="#roles">Roles en el desarrollo de software</a></li>
-                    <li><a href="#flujogramas">Diagramas de flujo generales (Flujogramas)</a></li>
-                    <li><a href="#dfd">Diagramas de flujo de datos (DFD)</a>
-                        <ol>
-                            <li><a href="#yourdon">Notación Yourdon-Coad</a></li>
-                            <li><a href="#gane">Notación Gane-Sarson</a></li>
-                            <li><a href="#ejercicios-dfd">Ejercicios de DFD</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#panaderia">Ejemplo de proyecto sencillo: Panadería Estación Paisa</a></li>
-                    <li><a href="#uml">UML (Unified Modeling Language)</a></li>
-                </ol>
-            </nav>
+        <div class="scroll-indicator" aria-hidden="true">
+            <span>Scroll</span>
+            <i class="bi bi-chevron-double-down"></i>
+        </div>
+    </section>
 
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- CONTENIDO PRINCIPAL                             -->
+    <!-- ══════════════════════════════════════════════ -->
+    <main class="page-shell">
+
+        <article class="content-article">
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 1. INTRODUCCIÓN                        -->
+            <!-- ══════════════════════════════════════ -->
             <section class="article-section" id="introduccion">
-                <h2>Introducción a la elicitación de requisitos</h2>
-                <p>La <strong>elicitación de requisitos del software</strong> es la base fundamental de todo proyecto de desarrollo. El mundo empresarial se basa en la resolución de problemas, por lo que en el desarrollo de software es necesario definir un <strong>objeto de estudio</strong> para plantear qué se va a hacer y delimitar los tiempos estimados y costos.</p>
-                <p>Para resolver un problema, se debe buscar realmente qué es lo que se espera que solucione. Por ende, se debe hacer un <strong>levantamiento de información</strong> por medio de técnicas de recolección de datos.</p>
+                <div class="section-header">
+                    <div class="section-number violet">01</div>
+                    <h2>Introducción a la elicitación de requisitos</h2>
+                </div>
+
+                <p>
+                    La <strong>elicitación de requisitos del software</strong> es la base
+                    fundamental de todo proyecto de desarrollo. El mundo empresarial se
+                    basa en la resolución de problemas, por lo que en el desarrollo de
+                    software es necesario definir un <strong>objeto de estudio</strong>
+                    para plantear qué se va a hacer y delimitar los tiempos estimados y costos.
+                </p>
+                <p>
+                    Para resolver un problema, se debe buscar realmente qué es lo que se
+                    espera que solucione. Por ende, se debe hacer un
+                    <strong>levantamiento de información</strong> por medio de técnicas
+                    de recolección de datos.
+                </p>
             </section>
 
+            <!-- ══════════════════════════════════════ -->
+            <!-- 2. FUENTES DE INFORMACIÓN              -->
+            <!-- ══════════════════════════════════════ -->
             <section class="article-section" id="fuentes">
-                <h2>Fuentes de la información</h2>
-                <p>Es importante saber de dónde proviene la información:</p>
-                <ul>
-                    <li><strong>Fuente primaria:</strong> Información obtenida directamente de la persona involucrada. Ejemplo: cuando alguien da su opinión de lo que observa.</li>
-                    <li><strong>Fuente secundaria:</strong> Información que llega por medio de otra persona. Ejemplo: cuando se presenta una situación y la información llega a través de una anécdota.</li>
-                    <li><strong>Fuente terciaria:</strong> Información que se conoce a partir de dos o más personas. Ejemplo: cuando se requieren varias opiniones de diferentes personas.</li>
-                </ul>
+                <div class="section-header">
+                    <div class="section-number cyan">02</div>
+                    <h2>Fuentes de la información</h2>
+                </div>
+
+                <p>
+                    Antes de recolectar datos, es clave saber de dónde proviene la información.
+                    Existen tres tipos de fuentes según su nivel de cercanía con la persona
+                    o situación que se investiga.
+                </p>
+
+                <div class="source-grid">
+                    <div class="source-card" style="--card-color: var(--accent-violet);">
+                        <div class="source-icon"><i class="bi bi-person-fill"></i></div>
+                        <h4>Fuente primaria</h4>
+                        <p>Información obtenida directamente de la persona involucrada.</p>
+                        <div class="source-example">Ejemplo: cuando alguien da su opinión de lo que observa.</div>
+                    </div>
+
+                    <div class="source-card" style="--card-color: var(--accent-cyan);">
+                        <div class="source-icon"><i class="bi bi-people-fill"></i></div>
+                        <h4>Fuente secundaria</h4>
+                        <p>Información que llega por medio de otra persona.</p>
+                        <div class="source-example">Ejemplo: cuando la información llega a través de una anécdota.</div>
+                    </div>
+
+                    <div class="source-card" style="--card-color: var(--accent-amber);">
+                        <div class="source-icon"><i class="bi bi-people"></i></div>
+                        <h4>Fuente terciaria</h4>
+                        <p>Información que se conoce a partir de dos o más personas.</p>
+                        <div class="source-example">Ejemplo: cuando se requieren varias opiniones de diferentes personas.</div>
+                    </div>
+                </div>
             </section>
 
+            <!-- ══════════════════════════════════════ -->
+            <!-- 3. TÉCNICAS DE RECOLECCIÓN             -->
+            <!-- ══════════════════════════════════════ -->
             <section class="article-section" id="tecnicas">
-                <h2>Técnicas de recolección de datos</h2>
-                <p>Las técnicas de recolección de datos son la base principal del proyecto. Existen múltiples técnicas que permiten obtener información desde las fuentes primarias, siendo el cliente quien ofrece la información más confiable y real. Si se obtiene una buena recolección de datos, el proyecto tendrá una base sólida para su construcción.</p>
-
-                <h3 id="preguntas">Preguntas cerradas y abiertas</h3>
-                <ul>
-                    <li><strong>Preguntas cerradas:</strong> ofrecen opciones limitadas y predefinidas (sí/no, opción múltiple, escala). Facilitan el análisis cuantitativo y la tabulación de datos.</li>
-                    <li><strong>Preguntas abiertas:</strong> permiten respuestas propias del encuestado, útiles para explorar opiniones, experiencias y razones de fondo.</li>
-                </ul>
-
-                <h3 id="entrevista">Entrevista</h3>
-                <p>Es una conversación dirigida entre dos o más personas donde una, el entrevistador, formula preguntas para obtener información u opiniones del otro, el entrevistado. Las entrevistas son útiles cuando se necesita información flexible, dinámica y profunda.</p>
-                <div class="info-box">
-                    <strong>Requisitos:</strong> preparación clara, duración definida, registro de información y un enfoque específico.
-                </div>
-                <h4>Ventajas</h4>
-                <ul>
-                    <li>Interpersonales y flexibles.</li>
-                    <li>Permiten aclaración inmediata.</li>
-                    <li>Posibilitan observación directa del lenguaje corporal.</li>
-                </ul>
-                <h4>Desventajas</h4>
-                <ul>
-                    <li>Se requiere mucho tiempo y recursos.</li>
-                    <li>Existe subjetividad y sesgos.</li>
-                    <li>No siempre hay sinceridad completa.</li>
-                </ul>
-
-                <div class="example">
-                    <strong>Ejemplo de entrevista para una app de gestión de tareas:</strong>
-                    <p>Un equipo quiere crear una aplicación enfocada en freelancers. Realiza entrevistas a diseñadores, programadores y redactores para entender sus dificultades con las herramientas actuales.</p>
+                <div class="section-header">
+                    <div class="section-number amber">03</div>
+                    <h2>Técnicas de recolección de datos</h2>
                 </div>
 
-                <h3 id="encuesta">Encuesta y cuestionario</h3>
-                <p>Una <strong>encuesta</strong> se usa generalmente para recoger datos de muchas personas en forma estructurada y rápida. Un <strong>cuestionario</strong> es la herramienta que contiene las preguntas de la encuesta y puede incluir preguntas abiertas o cerradas.</p>
-                <h4>Encuesta</h4>
-                <ul>
-                    <li>Más útil para obtener datos cuantitativos de gran volumen.</li>
-                    <li>Permite identificar tendencias, porcentajes y frecuencias.</li>
-                </ul>
-                <h4>Cuestionario</h4>
-                <ul>
-                    <li>Útil para profundizar en criterios, actitudes y percepciones.</li>
-                    <li>Puede combinar preguntas cerradas y abiertas.</li>
-                </ul>
+                <p>
+                    Las técnicas de recolección de datos son la base principal del proyecto.
+                    Existen múltiples técnicas que permiten obtener información desde las
+                    fuentes primarias, siendo el cliente quien ofrece la información más
+                    confiable y real.
+                </p>
 
-                <h3 id="workshop">Taller de trabajo (Workshop)</h3>
-                <p>Un taller es una actividad intensiva donde los participantes reciben información, comparten ideas y desarrollan capacidades en un corto tiempo. A menudo incluye dinámicas de grupo, lluvia de ideas, prototipado y resolución de problemas.</p>
-                <table>
+                <!-- Preguntas cerradas y abiertas -->
+                <h3>Preguntas cerradas y abiertas</h3>
+                <div class="requirements-grid">
+                    <div class="req-card func">
+                        <h4><i class="bi bi-check2-square"></i> Preguntas cerradas</h4>
+                        <ul>
+                            <li>Ofrecen opciones limitadas y predefinidas (sí/no, opción múltiple, escala).</li>
+                            <li>Facilitan el análisis cuantitativo.</li>
+                            <li>Permiten la tabulación rápida de datos.</li>
+                        </ul>
+                    </div>
+                    <div class="req-card no-func">
+                        <h4><i class="bi bi-chat-left-text"></i> Preguntas abiertas</h4>
+                        <ul>
+                            <li>Permiten al encuestado responder con sus propias palabras.</li>
+                            <li>Útiles para explorar opiniones y experiencias.</li>
+                            <li>Su análisis es más complejo pero más profundo.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Entrevista -->
+                <div class="technique-card" style="--tech-color: var(--accent-violet);" id="entrevista">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-mic-fill"></i></div>
+                        <h3>Entrevista</h3>
+                    </div>
+                    <p>
+                        Conversación dirigida entre dos o más personas donde el entrevistador
+                        formula preguntas para obtener información u opiniones del entrevistado.
+                        Son útiles cuando se necesita información flexible, dinámica y profunda.
+                    </p>
+
+                    <h4>Tipos de entrevista</h4>
+                    <ul>
+                        <li><strong>No estructurada:</strong> libre y abierta, sin un plan determinado.</li>
+                        <li><strong>Focalizada:</strong> el entrevistador guía la conversación sin desviarse del tema.</li>
+                        <li><strong>Estructurada:</strong> preguntas específicas en un orden específico.</li>
+                        <li><strong>En escalera:</strong> las respuestas guían las siguientes preguntas para explorar motivos subconscientes.</li>
+                    </ul>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4><i class="bi bi-hand-thumbs-up-fill"></i> Ventajas</h4>
+                            <ul>
+                                <li>Interpersonales y flexibles.</li>
+                                <li>Aclaración inmediata de dudas.</li>
+                                <li>Permite observar lenguaje corporal.</li>
+                                <li>Alto nivel de participación del usuario.</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4><i class="bi bi-hand-thumbs-down-fill"></i> Desventajas</h4>
+                            <ul>
+                                <li>Alto consumo de tiempo y recursos.</li>
+                                <li>Riesgo de subjetividad y sesgos.</li>
+                                <li>Posible falta de sinceridad.</li>
+                                <li>Difícil generalización de resultados.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Ejemplo práctico</strong>
+                        Un equipo quiere crear una app para freelancers. Realiza entrevistas
+                        en profundidad con diseñadores, programadores y redactores para entender
+                        cómo organizan su trabajo, qué herramientas usan y qué problemas enfrentan.
+                    </div>
+                </div>
+
+                <!-- Encuesta y cuestionario -->
+                <div class="technique-card" style="--tech-color: var(--accent-cyan);" id="encuesta">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-clipboard2-check-fill"></i></div>
+                        <h3>Encuesta y cuestionario</h3>
+                    </div>
+                    <p>
+                        Una <strong>encuesta</strong> recoge datos de muchas personas en forma
+                        estructurada y rápida. Un <strong>cuestionario</strong> es la herramienta
+                        que contiene las preguntas y puede incluir preguntas abiertas o cerradas.
+                    </p>
+
+                    <div class="requirements-grid">
+                        <div class="req-card func">
+                            <h4><i class="bi bi-bar-chart-fill"></i> Encuesta</h4>
+                            <ul>
+                                <li>Ideal para datos cuantitativos de gran volumen.</li>
+                                <li>Identifica tendencias, porcentajes y frecuencias.</li>
+                                <li>Permite comparar respuestas entre grupos.</li>
+                            </ul>
+                        </div>
+                        <div class="req-card no-func">
+                            <h4><i class="bi bi-journal-text"></i> Cuestionario</h4>
+                            <ul>
+                                <li>Útil para profundizar en criterios y percepciones.</li>
+                                <li>Combina preguntas cerradas y abiertas.</li>
+                                <li>Reduce el sesgo del investigador.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Ejemplo práctico</strong>
+                        El equipo crea un cuestionario online distribuido en redes sociales
+                        para conocer hábitos y preferencias de usuarios antes de diseñar la aplicación.
+                    </div>
+                </div>
+
+                <!-- Taller -->
+                <div class="technique-card" style="--tech-color: var(--accent-amber);" id="workshop">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-people-fill"></i></div>
+                        <h3>Taller de trabajo (Workshop)</h3>
+                    </div>
+                    <p>
+                        Actividad intensiva donde los participantes comparten ideas y desarrollan
+                        capacidades en un corto tiempo. Incluye dinámicas de grupo, lluvia de ideas,
+                        prototipado y resolución de problemas.
+                    </p>
+
+                    <table class="symbols-table">
+                        <thead>
+                            <tr>
+                                <th>Actividad</th>
+                                <th>Duración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Introducción del proyecto y objetivos del taller</td><td>15 min</td></tr>
+                            <tr><td>Mapa de empatía y perfil de usuario</td><td>30 min</td></tr>
+                            <tr><td>Lluvia de ideas y priorización</td><td>60 min</td></tr>
+                            <tr><td>Prototipado rápido</td><td>45 min</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Observación -->
+                <div class="technique-card" style="--tech-color: var(--accent-emerald);" id="observacion">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-eye-fill"></i></div>
+                        <h3>Observación</h3>
+                    </div>
+                    <p>
+                        Estudia el comportamiento real de las personas en su entorno natural o
+                        profesional. Permite analizar procesos, necesidades y dificultades sin
+                        depender solo de opiniones expresadas verbalmente.
+                    </p>
+
+                    <h4>Categorías de observación</h4>
+                    <table class="symbols-table">
+                        <thead>
+                            <tr>
+                                <th>Categoría</th>
+                                <th>Aspectos a observar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Comunicación</strong></td>
+                                <td>Canales usados, comunicación entre áreas, incidencia en el resultado final, casos exitosos.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sistema de información</strong></td>
+                                <td>Procesos seguidos, principales inconvenientes en el manejo del sistema.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Prototipos -->
+                <div class="technique-card" style="--tech-color: var(--accent-blue);" id="prototipos">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-bounding-box-circles"></i></div>
+                        <h3>Prototipos</h3>
+                    </div>
+                    <p>
+                        Representación temprana del software o de una parte de la interfaz.
+                        Permite validar ideas antes de invertir mucho tiempo en desarrollo,
+                        y ayuda a detectar errores de diseño o funcionalidad.
+                    </p>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <h4><i class="bi bi-hand-thumbs-up-fill"></i> Ventajas</h4>
+                            <ul>
+                                <li>El cliente ve el sistema antes de desarrollarlo.</li>
+                                <li>Se detectan confusiones antes de invertir tiempo.</li>
+                                <li>Facilita el entendimiento entre cliente y desarrollador.</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <h4><i class="bi bi-hand-thumbs-down-fill"></i> Desventajas</h4>
+                            <ul>
+                                <li>El cliente puede confundirlo con el producto final.</li>
+                                <li>Crear y modificar prototipos requiere tiempo.</li>
+                                <li>Demasiados cambios pueden retrasar el proyecto.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historias de usuario -->
+                <div class="technique-card" style="--tech-color: var(--accent-rose);" id="historias">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-person-badge-fill"></i></div>
+                        <h3>Historias de usuario</h3>
+                    </div>
+                    <p>
+                        Describen necesidades desde la perspectiva del usuario final.
+                        Se escriben en lenguaje simple y sirven como requisitos funcionales
+                        para el equipo de desarrollo.
+                    </p>
+
+                    <blockquote>
+                        <strong>Formato:</strong> Como [usuario], quiero [objetivo], para [beneficio].
+                    </blockquote>
+
+                    <h4>Ejemplos</h4>
+                    <ul>
+                        <li>Como usuario, quiero <em>crear tareas con título, fecha y prioridad</em> para organizar mis actividades.</li>
+                        <li>Como usuario, quiero <em>editar una tarea existente</em> para actualizar la información.</li>
+                        <li>Como usuario, quiero <em>marcar tareas como completadas</em> para tener control de lo que ya hice.</li>
+                        <li>Como administrador, quiero <em>gestionar múltiples usuarios</em> para supervisar equipos de trabajo.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 4. REQUERIMIENTOS                      -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="requisitos">
+                <div class="section-header">
+                    <div class="section-number emerald">04</div>
+                    <h2>Requerimientos funcionales y no funcionales</h2>
+                </div>
+
+                <p>
+                    Una vez recolectada la información, se debe definir qué necesita el software
+                    para funcionar. Los requisitos se clasifican en funcionales y no funcionales.
+                </p>
+
+                <div class="requirements-grid">
+                    <div class="req-card func">
+                        <h4><i class="bi bi-gear-fill"></i> Requisitos funcionales</h4>
+                        <ul>
+                            <li>El sistema debe permitir iniciar sesión.</li>
+                            <li>El sistema debe registrar clientes.</li>
+                            <li>El sistema debe guardar ventas.</li>
+                            <li>El sistema debe mostrar reportes.</li>
+                        </ul>
+                    </div>
+                    <div class="req-card no-func">
+                        <h4><i class="bi bi-shield-fill-check"></i> Requisitos no funcionales</h4>
+                        <ul>
+                            <li>Debe funcionar en navegadores modernos.</li>
+                            <li>Debe responder en menos de 3 segundos.</li>
+                            <li>Debe ser fácil de usar para usuarios sin experiencia.</li>
+                            <li>Debe proteger la información de usuarios.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 5. ROLES                               -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="roles">
+                <div class="section-header">
+                    <div class="section-number violet">05</div>
+                    <h2>Roles en el desarrollo de software</h2>
+                </div>
+
+                <p>
+                    En un proyecto de software intervienen varias personas con funciones
+                    complementarias. Cada una aporta desde su especialidad.
+                </p>
+
+                <div class="roles-grid">
+                    <div class="role-chip">
+                        <i class="bi bi-person-check-fill"></i>
+                        <div><strong>Cliente</strong><span>Expresa la necesidad o problema.</span></div>
+                    </div>
+                    <div class="role-chip">
+                        <i class="bi bi-clipboard-data-fill"></i>
+                        <div><strong>Analista</strong><span>Recoge y documenta los requisitos.</span></div>
+                    </div>
+                    <div class="role-chip">
+                        <i class="bi bi-palette-fill"></i>
+                        <div><strong>Diseñador</strong><span>Estructura la solución y la experiencia.</span></div>
+                    </div>
+                    <div class="role-chip">
+                        <i class="bi bi-code-slash"></i>
+                        <div><strong>Desarrollador</strong><span>Construye la aplicación o sistema.</span></div>
+                    </div>
+                    <div class="role-chip">
+                        <i class="bi bi-bug-fill"></i>
+                        <div><strong>Tester / QA</strong><span>Valida que el sistema funcione.</span></div>
+                    </div>
+                    <div class="role-chip">
+                        <i class="bi bi-kanban-fill"></i>
+                        <div><strong>Project Manager</strong><span>Coordina tiempos y recursos.</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 6. FLUJOGRAMAS                         -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="flujogramas">
+                <div class="section-header">
+                    <div class="section-number cyan">06</div>
+                    <h2>Diagramas de flujo generales (Flujogramas)</h2>
+                </div>
+
+                <p>
+                    Un diagrama de flujo representa gráficamente los pasos que sigue un
+                    proceso. Se utiliza para comprender, analizar y documentar un procedimiento.
+                </p>
+
+                <h3>Símbolos principales</h3>
+                <table class="symbols-table">
                     <thead>
                         <tr>
-                            <th>Actividad</th>
-                            <th>Duración</th>
+                            <th>Símbolo</th>
+                            <th>Representación</th>
+                            <th>Significado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Introducción del proyecto y objetivos del taller</td>
-                            <td>15 min</td>
-                        </tr>
-                        <tr>
-                            <td>Mapa de empatía y perfil de usuario</td>
-                            <td>30 min</td>
-                        </tr>
-                        <tr>
-                            <td>Lluvia de ideas y priorización</td>
-                            <td>60 min</td>
-                        </tr>
-                        <tr>
-                            <td>Prototipado rápido</td>
-                            <td>45 min</td>
-                        </tr>
+                        <tr><td>Inicio / Fin</td><td><code>[●]</code></td><td>Comienzo o final del proceso.</td></tr>
+                        <tr><td>Actividad</td><td><code>[&nbsp;&nbsp;&nbsp;]</code></td><td>Tarea llevada a cabo durante el proceso.</td></tr>
+                        <tr><td>Decisión</td><td><code>◇</code></td><td>Punto de bifurcación (sí/no).</td></tr>
+                        <tr><td>Conexión</td><td><code>→</code></td><td>Dirección del flujo del proceso.</td></tr>
+                        <tr><td>Documento</td><td><code>📄</code></td><td>Generación o consulta de un documento.</td></tr>
+                        <tr><td>Envío de datos</td><td><code>🖨️</code></td><td>Envía datos a la impresora.</td></tr>
+                        <tr><td>Muestra de datos</td><td><code>🖥️</code></td><td>Muestra datos en pantalla.</td></tr>
                     </tbody>
                 </table>
 
-                <h3 id="observacion">Observación</h3>
-                <p>La observación consiste en estudiar el comportamiento real de las personas en su entorno natural o profesional. A través de ella se analizan procesos, necesidades y dificultades sin depender solo de opiniones expresadas verbalmente.</p>
-
-                <h3 id="prototipos">Prototipos</h3>
-                <p>Un prototipo es una representación temprana del software o de una parte de la interfaz. Permite validar ideas antes de invertir mucho tiempo en desarrollo, y ayuda a detectar errores de diseño o de funcionalidad.</p>
-
-                <h3 id="historias">Historias de usuario</h3>
-                <p>Las historias de usuario describen necesidades desde la perspectiva del usuario. Su formato típico es: <em>“Como [usuario], quiero [objetivo], para [beneficio]”</em>.</p>
-                <blockquote>Ejemplo: “Como cliente, quiero registrar una compra online para pagar de forma rápida y segura.”</blockquote>
-            </section>
-
-            <section class="article-section" id="requisitos">
-                <h2>Requerimientos funcionales y no funcionales</h2>
-                <p>Los <strong>requisitos funcionales</strong> describen lo que el sistema debe hacer; los <strong>requisitos no funcionales</strong> describen cómo debe comportarse o qué cualidades debe tener.</p>
-
-                <h3>Requisitos funcionales</h3>
-                <ul class="star-list">
-                    <li>El sistema debe permitir iniciar sesión.</li>
-                    <li>El sistema debe registrar clientes.</li>
-                    <li>El sistema debe guardar ventas.</li>
-                    <li>El sistema debe mostrar reportes.</li>
-                </ul>
-
-                <h3>Requisitos no funcionales</h3>
-                <ul class="star-list">
-                    <li>Debe funcionar en navegadores modernos.</li>
-                    <li>Debe responder en menos de 3 segundos.</li>
-                    <li>Debe ser fácil de usar para usuarios sin experiencia.</li>
-                    <li>Debe proteger la información de usuarios y clientes.</li>
-                </ul>
-            </section>
-
-            <section class="article-section" id="roles">
-                <h2>Roles en el desarrollo de software</h2>
-                <p>En un proyecto de software intervienen varias personas con funciones complementarias. Entre ellos están:</p>
+                <h3>Reglas según estándar ISO</h3>
                 <ul>
-                    <li><strong>Cliente:</strong> expresa la necesidad o problema.</li>
-                    <li><strong>Analista:</strong> recoge, comprende y documenta los requisitos.</li>
-                    <li><strong>Diseñador:</strong> estructura la solución y la experiencia de usuario.</li>
-                    <li><strong>Desarrollador:</strong> construye la aplicación o sistema.</li>
-                    <li><strong>Tester o QA:</strong> valida que el sistema funcione correctamente.</li>
-                    <li><strong>Administrador de proyecto:</strong> coordina tiempos, tareas y recursos.</li>
+                    <li>Escribir de arriba hacia abajo y/o de izquierda a derecha.</li>
+                    <li>Usar solo líneas horizontales o verticales (nunca diagonales).</li>
+                    <li>Evitar el cruce de líneas.</li>
+                    <li>Solo los símbolos de decisión pueden tener múltiples salidas.</li>
+                    <li>No deben quedar líneas de flujo sin conectar.</li>
                 </ul>
             </section>
 
-            <section class="article-section" id="flujogramas">
-                <h2>Diagramas de flujo generales (Flujogramas)</h2>
-                <p>Un diagrama de flujo representa gráficamente los pasos que sigue un proceso. Se utiliza para comprender, analizar y documentar un procedimiento o sistema.</p>
-                <p>Sus símbolos más comunes incluyen:</p>
-                <ul>
-                    <li>Inicio y fin</li>
-                    <li>Proceso</li>
-                    <li>Decisión</li>
-                    <li>Entrada/salida</li>
-                    <li>Conector</li>
-                </ul>
-                <p>Los flujogramas permiten identificar cuellos de botella, rutas repetitivas y decisiones clave dentro del sistema.</p>
-            </section>
-
+            <!-- ══════════════════════════════════════ -->
+            <!-- 7. DFD                                 -->
+            <!-- ══════════════════════════════════════ -->
             <section class="article-section" id="dfd">
-                <h2>Diagramas de flujo de datos (DFD)</h2>
-                <p>Los diagramas de flujo de datos muestran cómo circulan los datos dentro del sistema, desde las entidades externas hasta los procesos internos y los almacenes de información.</p>
+                <div class="section-header">
+                    <div class="section-number blue">07</div>
+                    <h2>Diagramas de flujo de datos (DFD)</h2>
+                </div>
 
-                <h3 id="yourdon">Notación Yourdon-Coad</h3>
-                <p>Se caracteriza por representar procesos, entidades externas, almacenes de datos y flujos de información de forma clara y visual. Es útil cuando se busca explicar relaciones entre componentes del sistema.</p>
+                <p>
+                    Los DFD muestran cómo circulan los datos dentro del sistema: desde las
+                    entidades externas hasta los procesos internos y los almacenes de información.
+                    A diferencia de los flujogramas, se centran en los datos, no en la secuencia.
+                </p>
 
-                <h3 id="gane">Notación Gane-Sarson</h3>
-                <p>Usa símbolos más estructurados y visualmente definidos para procesos, flujos y datos. Es especialmente apropiada para representar sistemas con lógica más formal o metódica.</p>
+                <h3>Notación Yourdon-Coad</h3>
+                <div class="code-block" data-lang="DFD">  [ Cliente ] → ( Validar pedido ) → || Pedidos ||
+                      ↓
+                ( Calcular total )
+                      ↓
+  [ Cliente ] ← ( Facturar )</div>
 
-                <h3 id="ejercicios-dfd">Ejercicios de DFD</h3>
-                <p>Los ejercicios de DFD permiten practicar la identificación de:</p>
-                <ul>
-                    <li>Entidades externas</li>
-                    <li>Procesos principales</li>
-                    <li>Almacenes de datos</li>
-                    <li>Flujos de información</li>
-                </ul>
+                <h3>Notación Gane-Sarson</h3>
+                <div class="code-block" data-lang="DFD">    ┌────────────┐     ┌────────────┐     ┌────────────┐
+    │  Cliente   │ →   │  Validar   │ →   │  Pedidos   │
+    └────────────┘     │  pedido    │     └────────────┘
+                       └────────────┘
+                             ↓
+                       ┌────────────┐
+                       │  Calcular  │
+                       │   total    │
+                       └────────────┘
+                             ↓
+    ┌────────────┐     ┌────────────┐
+    │  Cliente   │ ←   │  Facturar  │
+    └────────────┘     └────────────┘</div>
+
+                <h3>Niveles de DFD</h3>
+                <table class="symbols-table">
+                    <thead>
+                        <tr>
+                            <th>Nivel</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Nivel 0 (contexto)</td><td>Sistema completo como un solo proceso.</td></tr>
+                        <tr><td>Nivel 1</td><td>Descompone el proceso principal en varios procesos.</td></tr>
+                        <tr><td>Nivel 2 y superiores</td><td>Descompone cada proceso de nivel 1 en subprocesos.</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>DFD vs. Flujograma</h3>
+                <table class="symbols-table">
+                    <thead>
+                        <tr>
+                            <th>DFD</th>
+                            <th>Flujograma</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Muestra el flujo de <strong>datos</strong>.</td><td>Muestra la <strong>secuencia de pasos</strong>.</td></tr>
+                        <tr><td>Se enfoca en el <strong>qué</strong>.</td><td>Se enfoca en el <strong>cómo</strong>.</td></tr>
+                        <tr><td>No tiene símbolos de decisión.</td><td>Incluye rombos para condiciones.</td></tr>
+                        <tr><td>Útil para análisis y diseño.</td><td>Útil para programación y algoritmos.</td></tr>
+                    </tbody>
+                </table>
             </section>
 
+            <!-- ══════════════════════════════════════ -->
+            <!-- 8. EJEMPLO PANADERÍA                   -->
+            <!-- ══════════════════════════════════════ -->
             <section class="article-section" id="panaderia">
-                <h2>Ejemplo de proyecto sencillo: Panadería Estación Paisa</h2>
-                <p>Un ejemplo práctico para entender la elicitación de requisitos es una panadería llamada <strong>Estación Paisa</strong>.</p>
-                <p>Se puede plantear el objetivo de desarrollar un sistema para registrar ventas, controlar inventario y generar reportes de producción. Con esta información, el analista puede identificar requisitos funcionales y no funcionales.</p>
-                <div class="example">
-                    <strong>Requisitos funcionales posibles:</strong>
-                    <ul>
-                        <li>Registrar ventas por cliente.</li>
-                        <li>Controlar el inventario de ingredientes.</li>
-                        <li>Generar boletas o facturas.</li>
-                        <li>Mostrar reportes del día.</li>
-                    </ul>
+                <div class="section-header">
+                    <div class="section-number amber">08</div>
+                    <h2>Ejemplo: Panadería Estación Paisa</h2>
                 </div>
-                <div class="example">
-                    <strong>Requisitos no funcionales posibles:</strong>
-                    <ul>
-                        <li>Velocidad de respuesta rápida.</li>
-                        <li>Interfaz amigable para empleados.</li>
-                        <li>Seguridad de los datos.</li>
-                        <li>Compatibilidad con dispositivos de escritorio.</li>
-                    </ul>
+
+                <div class="highlight-card">
+                    <h4>🎯 Objetivo del proyecto</h4>
+                    <p>
+                        Desarrollar un software para el control del personal en la panadería
+                        <strong>Estación Paisa en Terreros</strong>.
+                    </p>
+                </div>
+
+                <h3>Objetivos específicos</h3>
+                <ul>
+                    <li><strong>Levantamiento de información:</strong> observación directa, entrevistas e historias de usuario.</li>
+                    <li><strong>DFD:</strong> representar el manejo de la información en el software.</li>
+                    <li><strong>UML:</strong> describir la estructura y comportamiento del sistema.</li>
+                    <li><strong>Requerimientos:</strong> definir requisitos funcionales y no funcionales.</li>
+                </ul>
+
+                <div class="requirements-grid">
+                    <div class="req-card func">
+                        <h4><i class="bi bi-list-check"></i> Requisitos funcionales</h4>
+                        <ul>
+                            <li>Registrar ventas por cliente.</li>
+                            <li>Controlar inventario de ingredientes.</li>
+                            <li>Generar boletas o facturas.</li>
+                            <li>Mostrar reportes del día.</li>
+                        </ul>
+                    </div>
+                    <div class="req-card no-func">
+                        <h4><i class="bi bi-speedometer2"></i> Requisitos no funcionales</h4>
+                        <ul>
+                            <li>Velocidad de respuesta rápida.</li>
+                            <li>Interfaz amigable para empleados.</li>
+                            <li>Seguridad de los datos.</li>
+                            <li>Compatibilidad con dispositivos de escritorio.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
+            <!-- ══════════════════════════════════════ -->
+            <!-- 9. UML                                 -->
+            <!-- ══════════════════════════════════════ -->
             <section class="article-section" id="uml">
-                <h2>UML (Unified Modeling Language)</h2>
-                <p>La UML es un lenguaje estándar para modelar sistemas de software. Permite representar clientes, procesos, datos y relaciones entre elementos mediante diagramas.</p>
-                <p>Algunos de sus diagramas más comunes son:</p>
-                <ul>
-                    <li><strong>Diagramas de caso de uso:</strong> muestran interacciones entre usuarios y sistema.</li>
-                    <li><strong>Diagramas de clases:</strong> describen entidades y relaciones entre objetos.</li>
-                    <li><strong>Diagramas de secuencia:</strong> expresan el flujo temporal de mensajes.</li>
-                </ul>
-                <p>En esta etapa inicial, el objetivo principal es comprender las necesidades reales del usuario y transformar esas necesidades en requisitos claros y verificables.</p>
+                <div class="section-header">
+                    <div class="section-number violet">09</div>
+                    <h2>UML (Unified Modeling Language)</h2>
+                </div>
+
+                <p>
+                    La UML es un lenguaje estándar para modelar sistemas de software.
+                    Permite representar clientes, procesos, datos y relaciones entre
+                    elementos mediante diagramas.
+                </p>
+
+                <h3>Diagramas más comunes</h3>
+                <div class="roles-grid">
+                    <div class="role-chip">
+                        <i class="bi bi-diagram-2-fill"></i>
+                        <div><strong>Casos de uso</strong><span>Interacciones entre usuarios y sistema.</span></div>
+                    </div>
+                    <div class="role-chip">
+                        <i class="bi bi-bounding-box"></i>
+                        <div><strong>Clases</strong><span>Entidades y relaciones entre objetos.</span></div>
+                    </div>
+                    <div class="role-chip">
+                        <i class="bi bi-arrow-left-right"></i>
+                        <div><strong>Secuencia</strong><span>Flujo temporal de mensajes.</span></div>
+                    </div>
+                    <div class="role-chip">
+                        <i class="bi bi-activity"></i>
+                        <div><strong>Actividades</strong><span>Flujo de trabajo de un proceso.</span></div>
+                    </div>
+                </div>
+
+                <blockquote>
+                    En esta etapa inicial, el objetivo principal es comprender las necesidades
+                    reales del usuario y transformar esas necesidades en requisitos claros y verificables.
+                </blockquote>
             </section>
+
         </article>
 
-        <aside class="page-sidebar" aria-label="Información general de la semana temática">
+        <!-- ══════════════════════════════════════ -->
+        <!-- SIDEBAR                                -->
+        <!-- ══════════════════════════════════════ -->
+        <aside class="page-sidebar" aria-label="Información de apoyo">
+
             <div class="sidebar-card">
-                <h3>Resumen</h3>
-                <ul>
-                    <li><strong>Actividad:</strong> Técnicas de elicitación de requisitos</li>
-                    <li><strong>Área:</strong> Análisis y desarrollo de software</li>
-                    <li><strong>Objetivo:</strong> Levantar necesidades reales del cliente o usuario</li>
+                <h3>Navegación rápida</h3>
+                <ul class="sidebar-toc" id="sidebarToc">
+                    <li><a href="#introduccion">01 · Introducción</a></li>
+                    <li><a href="#fuentes">02 · Fuentes de información</a></li>
+                    <li><a href="#tecnicas">03 · Técnicas de recolección</a></li>
+                    <li><a href="#entrevista">· Entrevista</a></li>
+                    <li><a href="#encuesta">· Encuesta y cuestionario</a></li>
+                    <li><a href="#workshop">· Taller (Workshop)</a></li>
+                    <li><a href="#observacion">· Observación</a></li>
+                    <li><a href="#prototipos">· Prototipos</a></li>
+                    <li><a href="#historias">· Historias de usuario</a></li>
+                    <li><a href="#requisitos">04 · Requerimientos</a></li>
+                    <li><a href="#roles">05 · Roles</a></li>
+                    <li><a href="#flujogramas">06 · Flujogramas</a></li>
+                    <li><a href="#dfd">07 · DFD</a></li>
+                    <li><a href="#panaderia">08 · Ejemplo práctico</a></li>
+                    <li><a href="#uml">09 · UML</a></li>
                 </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Estadísticas</h3>
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <strong>7</strong>
+                        <span>Técnicas</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>9</strong>
+                        <span>Secciones</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>6</strong>
+                        <span>Roles</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>3</strong>
+                        <span>DFD</span>
+                    </div>
+                </div>
             </div>
 
             <div class="sidebar-card">
                 <h3>Conceptos clave</h3>
-                <ul>
-                    <li><a href="#fuentes">Fuentes de información</a></li>
-                    <li><a href="#entrevista">Entrevista</a></li>
-                    <li><a href="#encuesta">Encuesta</a></li>
-                    <li><a href="#requisitos">Requisitos funcionales</a></li>
-                    <li><a href="#dfd">DFD</a></li>
-                    <li><a href="#uml">UML</a></li>
-                </ul>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">
+                    La elicitación convierte necesidades ambiguas en información
+                    estructurada, permitiendo construir sistemas con mayor precisión
+                    y menos riesgo de error.
+                </p>
             </div>
 
-            <div class="sidebar-card">
-                <h3>Enfoque principal</h3>
-                <p>La elicitación de requisitos permite convertir necesidades ambigüas en información estructurada, útil para construir sistemas con mayor precisión, mejor calidad y menos riesgo de error.</p>
-            </div>
         </aside>
     </main>
 
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- FOOTER                                          -->
+    <!-- ══════════════════════════════════════════════ -->
     <footer class="page-footer" id="footer">
         <div class="footer-wrap">
-            <span>© 2025 - Análisis y Desarrollo de Software</span>
-            <span>Diseñado con <a href="../../index.html">ADSO</a> y documentación técnica.</span>
+            <span>© 2025 · Análisis y Desarrollo de Software</span>
+            <span><a href="http://github.com/santiagoencodigo" target="_blank" rel="noopener noreerrer">santiagoencodigo</a></span>            
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- BOTÓN VOLVER ARRIBA                             -->
+    <!-- ══════════════════════════════════════════════ -->
+    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- JAVASCRIPT                                      -->
+    <!-- ══════════════════════════════════════════════ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* ══════════════════════════════════════════ */
+            /* 1. BARRA DE PROGRESO DE LECTURA            */
+            /* ══════════════════════════════════════════ */
+            const progressBar = document.getElementById('readingProgress');
+
+            const updateProgress = () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                progressBar.style.width = progress + '%';
+            };
+
+            window.addEventListener('scroll', updateProgress, { passive: true });
+            updateProgress();
+
+            /* ══════════════════════════════════════════ */
+            /* 2. ANIMACIONES DE SCROLL (Intersection)     */
+            /* ══════════════════════════════════════════ */
+            const sections = document.querySelectorAll('.article-section');
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -80px 0px'
+            });
+
+            sections.forEach(section => sectionObserver.observe(section));
+
+            /* ══════════════════════════════════════════ */
+            /* 3. SIDEBAR CON SECCIÓN ACTIVA              */
+            /* ══════════════════════════════════════════ */
+            const tocLinks = document.querySelectorAll('#sidebarToc a');
+            const sectionMap = new Map();
+
+            tocLinks.forEach(link => {
+                const id = link.getAttribute('href').substring(1);
+                const target = document.getElementById(id);
+                if (target) {
+                    sectionMap.set(target, link);
+                }
+            });
+
+            const activeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        tocLinks.forEach(l => l.classList.remove('active'));
+                        const activeLink = sectionMap.get(entry.target);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '-30% 0px -60% 0px',
+                threshold: 0
+            });
+
+            sectionMap.forEach((link, section) => activeObserver.observe(section));
+
+            /* ══════════════════════════════════════════ */
+            /* 4. BOTÓN VOLVER ARRIBA                     */
+            /* ══════════════════════════════════════════ */
+            const backToTop = document.getElementById('backToTop');
+
+            const toggleBackToTop = () => {
+                if (window.scrollY > 400) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            };
+
+            window.addEventListener('scroll', toggleBackToTop, { passive: true });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            /* ══════════════════════════════════════════ */
+            /* 5. MENÚ MÓVIL                              */
+            /* ══════════════════════════════════════════ */
+            const navToggle = document.getElementById('navToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            navToggle.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('active');
+                navToggle.setAttribute('aria-expanded', isOpen);
+                navToggle.innerHTML = isOpen
+                    ? '<i class="bi bi-x-lg"></i>'
+                    : '<i class="bi bi-list"></i>';
+            });
+
+            /* ══════════════════════════════════════════ */
+            /* 6. SMOOTH SCROLL CON OFFSET                */
+            /* ══════════════════════════════════════════ */
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    const targetId = anchor.getAttribute('href');
+                    if (targetId === '#' || targetId.length < 2) return;
+
+                    const target = document.querySelector(targetId);
+                    if (!target) return;
+
+                    e.preventDefault();
+                    const offset = 88;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Cerrar menú móvil si está abierto
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        navToggle.setAttribute('aria-expanded', false);
+                        navToggle.innerHTML = '<i class="bi bi-list"></i>';
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>
