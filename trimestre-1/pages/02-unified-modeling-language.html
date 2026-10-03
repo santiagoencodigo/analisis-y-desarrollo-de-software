@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UML y Metodologías de Desarrollo | Trimestre 1</title>
+    <meta name="description" content="UML, ingeniería de requisitos, historias de usuario, Scrum, XP, Kanban, mapas de navegación y estructura del proyecto formativo SENA.">
+    <meta name="keywords" content="UML, Scrum, XP, Kanban, casos de uso, historias de usuario, requisitos funcionales, ADSO, SENA">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="theme-color" content="#081120">
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Font Awesome (solo para footer) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="../../Assets/style.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="icon" href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+
+    <style>
+        /* ══════════════════════════════════════════════ */
+        /* VARIABLES GLOBALES                             */
+        /* ══════════════════════════════════════════════ */
+        :root {
+            --bg-base: #081120;
+            --bg-surface: #0d1729;
+            --bg-elevated: #132039;
+            --bg-card: #16253f;
+            --bg-code: #0a101e;
+
+            --text-primary: #edf3ff;
+            --text-secondary: #a8b7d0;
+            --text-muted: #6b7a99;
+
+            --accent-violet: #8b5cf6;
+            --accent-violet-soft: rgba(139, 92, 246, 0.12);
+            --accent-cyan: #06b6d4;
+            --accent-cyan-soft: rgba(6, 182, 212, 0.12);
+            --accent-amber: #f59e0b;
+            --accent-amber-soft: rgba(245, 158, 11, 0.12);
+            --accent-emerald: #10b981;
+            --accent-emerald-soft: rgba(16, 185, 129, 0.12);
+            --accent-rose: #f43f5e;
+            --accent-rose-soft: rgba(244, 63, 94, 0.12);
+            --accent-blue: #3b82f6;
+            --accent-blue-soft: rgba(59, 130, 246, 0.12);
+
+            --border: rgba(168, 183, 208, 0.14);
+            --border-strong: rgba(168, 183, 208, 0.28);
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
+            --shadow-glow-violet: 0 0 40px rgba(139, 92, 246, 0.25);
+            --shadow-glow-cyan: 0 0 40px rgba(6, 182, 212, 0.2);
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-full: 999px;
+
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s var(--ease);
+            --transition-slow: all 0.6s var(--ease);
+
+            --navbar-h: 68px;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* RESET Y BASE                                   */
+        /* ══════════════════════════════════════════════ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--navbar-h) + 20px);
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: var(--accent-violet);
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent-violet), var(--accent-cyan));
+            border-radius: var(--radius-full);
+        }
+
+        a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-violet);
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* BARRA DE PROGRESO                              */
+        /* ══════════════════════════════════════════════ */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-violet), var(--accent-cyan), var(--accent-amber));
+            z-index: 9999;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* NAVBAR                                         */
+        /* ══════════════════════════════════════════════ */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--navbar-h);
+            background: rgba(8, 17, 32, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--text-primary) !important;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo-img {
+            width: 34px;
+            height: 34px;
+            padding: 5px;
+            /* background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan)); */
+            border-radius: var(--radius-sm);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            list-style: none;
+        }
+
+        .nav-links > li > a,
+        .nav-links .dropdown-toggle {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 0.85rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-links > li > a:hover,
+        .nav-links .dropdown-toggle:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-item {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background: var(--accent-violet-soft);
+            color: var(--accent-violet);
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: var(--navbar-h);
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                background: var(--bg-surface);
+                border-bottom: 1px solid var(--border);
+                padding: 1rem;
+                gap: 0.25rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static !important;
+                transform: none !important;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                padding-left: 1rem;
+            }
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* HERO CON PARTICLE.JS Y GRID                    */
+        /* ══════════════════════════════════════════════ */
+        .hero {
+            position: relative;
+            min-height: 78vh;
+            display: flex;
+            align-items: center;
+            padding: calc(var(--navbar-h) + 4rem) 1.25rem 4rem;
+            overflow: hidden;
+            background: linear-gradient(160deg, #081120 0%, #111c2e 100%);
+        }
+
+        /* Grid pattern del style.css */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 48px 48px;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Radial gradient overlay */
+        .hero-radial {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                ellipse 70% 60% at 65% 35%,
+                rgba(139, 92, 246, 0.08) 0%,
+                transparent 65%
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Partículas */
+        #particles-js {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1320px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 1rem;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-radius: var(--radius-full);
+            color: #ddd6fe;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            animation: fade-up 0.8s var(--ease) both;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 4.25rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.25rem;
+            animation: fade-up 0.8s 0.15s var(--ease) both;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-cyan) 50%, var(--accent-amber) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient-shift 6s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 1.6vw, 1.15rem);
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin-bottom: 2rem;
+            line-height: 1.75;
+            animation: fade-up 0.8s 0.3s var(--ease) both;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            animation: fade-up 0.8s 0.45s var(--ease) both;
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            backdrop-filter: blur(8px);
+        }
+
+        .hero-chip i {
+            color: var(--accent-amber);
+        }
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: bounce-down 2s ease-in-out infinite;
+            z-index: 3;
+        }
+
+        .scroll-indicator i {
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce-down {
+            0%, 100% { transform: translate(-50%, 0); opacity: 0.5; }
+            50% { transform: translate(-50%, 10px); opacity: 1; }
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* LAYOUT PRINCIPAL                               */
+        /* ══════════════════════════════════════════════ */
+        .page-shell {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 3rem 1.25rem 4rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .page-shell {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* ARTÍCULO PRINCIPAL                             */
+        /* ══════════════════════════════════════════════ */
+        .content-article {
+            min-width: 0;
+        }
+
+        .article-section {
+            padding: 3.5rem 0;
+            border-top: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+        }
+
+        .article-section:first-of-type {
+            border-top: none;
+            padding-top: 1rem;
+        }
+
+        .article-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            margin-bottom: 1.75rem;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-number.violet { background: linear-gradient(135deg, var(--accent-violet), #6d28d9); }
+        .section-number.cyan   { background: linear-gradient(135deg, var(--accent-cyan), #0891b2); }
+        .section-number.amber  { background: linear-gradient(135deg, var(--accent-amber), #d97706); }
+        .section-number.emerald{ background: linear-gradient(135deg, var(--accent-emerald), #059669); }
+        .section-number.rose   { background: linear-gradient(135deg, var(--accent-rose), #e11d48); }
+        .section-number.blue   { background: linear-gradient(135deg, var(--accent-blue), #1d4ed8); }
+
+        .article-section h2 {
+            font-size: clamp(1.6rem, 2.6vw, 2.25rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-section h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin: 2rem 0 0.85rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .article-section h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 1.35rem 0 0.6rem;
+            color: #e2e8f0;
+        }
+
+        .article-section p {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            line-height: 1.85;
+            margin-bottom: 1rem;
+        }
+
+        .article-section ul,
+        .article-section ol {
+            padding-left: 1.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .article-section li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 0.4rem;
+        }
+
+        .article-section strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .article-section blockquote {
+            margin: 1.5rem 0;
+            padding: 1rem 1.25rem;
+            border-left: 4px solid var(--accent-violet);
+            background: var(--accent-violet-soft);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            color: #e9d5ff;
+            font-style: italic;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* CARDS DE LINEAMIENTOS                          */
+        /* ══════════════════════════════════════════════ */
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .principle-card {
+            padding: 1.5rem 1.35rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            border-top: 3px solid var(--principle-color, var(--accent-violet));
+            transition: var(--transition);
+        }
+
+        .principle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-strong);
+        }
+
+        .principle-card .principle-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: white;
+            background: var(--principle-color, var(--accent-violet));
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .principle-card h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .principle-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* TÉCNICAS / CARDS GENÉRICOS                     */
+        /* ══════════════════════════════════════════════ */
+        .technique-card {
+            position: relative;
+            margin: 2rem 0;
+            padding: 2rem 1.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .technique-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--tech-color, var(--accent-violet)) 0%, transparent 70%);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .technique-card:hover {
+            border-color: var(--tech-color, var(--accent-violet));
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .technique-head {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .technique-icon {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-size: 1.5rem;
+            color: white;
+            background: linear-gradient(135deg, var(--tech-color, var(--accent-violet)), color-mix(in srgb, var(--tech-color, var(--accent-violet)) 60%, black));
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .technique-head h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* TABLAS                                         */
+        /* ══════════════════════════════════════════════ */
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .data-table th {
+            background: var(--bg-elevated);
+            padding: 0.85rem 1rem;
+            text-align: left;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .data-table td {
+            padding: 0.85rem 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            vertical-align: top;
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* BLOQUES DE CÓDIGO                              */
+        /* ══════════════════════════════════════════════ */
+        .code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            padding: 1.35rem 1.25rem;
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: #a5f3fc;
+            white-space: pre;
+        }
+
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0.5rem;
+            right: 0.75rem;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* INFO BOX                                       */
+        /* ══════════════════════════════════════════════ */
+        .info-box {
+            padding: 1.1rem 1.25rem;
+            background: var(--accent-cyan-soft);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-left: 3px solid var(--accent-cyan);
+            border-radius: var(--radius-md);
+            margin: 1.25rem 0;
+            font-size: 0.92rem;
+            color: #a5f3fc;
+            line-height: 1.7;
+        }
+
+        .info-box strong {
+            color: var(--accent-cyan);
+        }
+
+        .warn-box {
+            padding: 1.1rem 1.25rem;
+            background: var(--accent-amber-soft);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-left: 3px solid var(--accent-amber);
+            border-radius: var(--radius-md);
+            margin: 1.25rem 0;
+            font-size: 0.92rem;
+            color: #fde68a;
+            line-height: 1.7;
+        }
+
+        .warn-box strong {
+            color: var(--accent-amber);
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* GRID DE REQUISITOS                             */
+        /* ══════════════════════════════════════════════ */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .req-card {
+            padding: 1.5rem 1.35rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            transition: var(--transition);
+        }
+
+        .req-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .req-card.func { border-top: 3px solid var(--accent-cyan); }
+        .req-card.no-func { border-top: 3px solid var(--accent-amber); }
+
+        .req-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .req-card.func h4 i { color: var(--accent-cyan); }
+        .req-card.no-func h4 i { color: var(--accent-amber); }
+
+        /* ══════════════════════════════════════════════ */
+        /* SIDEBAR                                        */
+        /* ══════════════════════════════════════════════ */
+        .page-sidebar {
+            position: sticky;
+            top: calc(var(--navbar-h) + 20px);
+        }
+
+        .sidebar-card {
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-card h3 {
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.9rem;
+            font-weight: 700;
+        }
+
+        .sidebar-toc {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-toc li {
+            margin-bottom: 0.15rem;
+        }
+
+        .sidebar-toc a {
+            display: block;
+            padding: 0.4rem 0.7rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            border-left: 2px solid transparent;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            transition: var(--transition);
+            line-height: 1.4;
+        }
+
+        .sidebar-toc a:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .sidebar-toc a.active {
+            color: var(--accent-violet);
+            border-left-color: var(--accent-violet);
+            background: var(--accent-violet-soft);
+            font-weight: 600;
+        }
+
+        .sidebar-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .stat-item {
+            padding: 0.75rem;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            text-align: center;
+        }
+
+        .stat-item strong {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-item span {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* BOTÓN VOLVER ARRIBA                            */
+        /* ══════════════════════════════════════════════ */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 900;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-glow-violet);
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* FOOTER                                         */
+        /* ══════════════════════════════════════════════ */
+        #mapa-de-sitio {
+            background: linear-gradient(160deg, #060b17 0%, #0d1729 100%);
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        #mapa-de-sitio .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 3rem 1.25rem 2rem;
+        }
+
+        #mapa-de-sitio .footer-col h4 {
+            color: var(--accent-amber);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        #mapa-de-sitio .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #mapa-de-sitio .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        #mapa-de-sitio .footer-links .footer-link {
+            color: var(--text-secondary);
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Colores de hover individuales */
+        #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(1) .footer-link:hover { color: #a78bfa; }
+        #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(2) .footer-link:hover { color: #fbbf24; }
+        #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(3) .footer-link:hover { color: #67e8f9; }
+        #mapa-de-sitio .footer-col:nth-child(1) .footer-links li:nth-child(4) .footer-link:hover { color: #34d399; }
+
+        #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(1) .footer-link:hover { color: #3b82f6; }
+        #mapa-de-sitio .footer-col:nth-child(2) .footer-links li:nth-child(2) .footer-link:hover { color: #60a5fa; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(3) .footer-link:hover { color: #818cf8; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(4) .footer-link:hover { color: #a78bfa; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(5) .footer-link:hover { color: #c4b5fd; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(6) .footer-link:hover { color: #ddd6fe; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(7) .footer-link:hover { color: #fbbf24; }
+
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(1) .footer-link:hover { color: #67e8f9; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(2) .footer-link:hover { color: #22d3ee; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(3) .footer-link:hover { color: #06b6d4; }
+        #mapa-de-sitio .footer-col:nth-child(3) .footer-links li:nth-child(4) .footer-link:hover { color: #fbbf24; }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding: 1.5rem 1.25rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin: 0;
+        }
+
+        .footer-bottom strong {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            #mapa-de-sitio .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+                padding: 2rem 1.25rem 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #mapa-de-sitio .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ══════════════════════════════════════════════ */
+        /* ACCESIBILIDAD                                  */
+        /* ══════════════════════════════════════════════ */
+        :focus-visible {
+            outline: 2px solid var(--accent-cyan);
+            outline-offset: 3px;
+            border-radius: var(--radius-sm);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .article-section {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- HEADER / NAVBAR                                -->
+    <!-- ══════════════════════════════════════════════ -->
+    <header class="main-header" role="banner">
+        <nav class="nav-container" aria-label="Navegación principal">
+            <a href="../../index.html" class="nav-logo" aria-label="Ir al inicio">
+                <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="Logo ADSO" class="nav-logo-img">
+                ADSO
+            </a>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html">Inicio</a></li>
+
+                <li class="dropdown">
+                    <button class="dropdown-toggle" id="trimestresDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Trimestres
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                        <li><a class="dropdown-item" href="../../trimestre-1/index.html">Trimestre 1</a></li>
+                        <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                        <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                        <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                        <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                        <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                        <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="../../sitemap.html">Mapa de sitio</a></li>
+                <li><a href="#mapa-de-sitio">Footer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- HERO CON PARTICLE.JS                          -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="hero" id="inicio" aria-label="Encabezado del tema">
+        <div id="particles-js" aria-hidden="true"></div>
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-radial" aria-hidden="true"></div>
+
+        <div class="hero-content">
+            <span class="hero-badge">
+                <i class="bi bi-diagram-3-fill"></i>
+                Trimestre 1 · Análisis y Desarrollo de Software
+            </span>
+            <h1>
+                UML y Metodologías <br>
+                de <span class="gradient-text">Desarrollo</span>
+            </h1>
+            <p>
+                El Lenguaje Unificado de Modelado (UML) es el estándar para especificar, visualizar
+                y documentar sistemas de software. Junto con las metodologías ágiles como Scrum,
+                XP y Kanban, conforman las herramientas esenciales para gestionar el ciclo de vida
+                completo de un proyecto.
+            </p>
+            <div class="hero-meta">
+                <span class="hero-chip"><i class="bi bi-diagram-3"></i> UML · Casos de uso · DFD</span>
+                <span class="hero-chip"><i class="bi bi-arrow-repeat"></i> Scrum · XP · Kanban</span>
+                <span class="hero-chip"><i class="bi bi-file-earmark-text"></i> Historias de usuario</span>
+            </div>
+        </div>
+
+        <div class="scroll-indicator" aria-hidden="true">
+            <span>Scroll</span>
+            <i class="bi bi-chevron-double-down"></i>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- CONTENIDO PRINCIPAL                            -->
+    <!-- ══════════════════════════════════════════════ -->
+    <main class="page-shell">
+
+        <article class="content-article">
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 1. LINEAMIENTOS                        -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="lineamientos">
+                <div class="section-header">
+                    <div class="section-number violet">01</div>
+                    <h2>Lineamientos fundamentales del proyecto formativo</h2>
+                </div>
+
+                <p>
+                    El diseño de un sistema de software educativo o productivo requiere una
+                    delimitación estricta del alcance para garantizar su viabilidad y éxito técnico.
+                </p>
+
+                <div class="principle-grid">
+                    <div class="principle-card" style="--principle-color: var(--accent-violet);">
+                        <div class="principle-icon"><i class="bi bi-bullseye"></i></div>
+                        <h4>Principio de simplicidad</h4>
+                        <p>El proyecto debe ser sencillo y tratar un único tema o línea de negocio centralizada.</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-cyan);">
+                        <div class="principle-icon"><i class="bi bi-diagram-2"></i></div>
+                        <h4>Arquitectura centralizada</h4>
+                        <p>Un buen software se caracteriza por estar centralizado. Abarcar múltiples problemáticas dispersa el desarrollo.</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-amber);">
+                        <div class="principle-icon"><i class="bi bi-list-check"></i></div>
+                        <h4>Módulos base</h4>
+                        <p>Control de personal, control de inventario, gestión de citas. Cada uno representa una línea de negocio.</p>
+                    </div>
+                </div>
+
+                <h3>Formulación del objetivo general</h3>
+                <p>Debe descomponerse en cuatro elementos indispensables:</p>
+
+                <div class="code-block" data-lang="ESTRUCTURA">Objetivo General = Verbo en Infinitivo + Elemento/Objeto + Empresa + Ubicación</div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Elemento</th>
+                            <th>Ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Verbo en infinitivo</td><td>Desarrollar</td></tr>
+                        <tr><td>Elemento o propósito</td><td>control de personal</td></tr>
+                        <tr><td>Empresa o entidad</td><td>panadería La Paisa</td></tr>
+                        <tr><td>Ubicación geográfica</td><td>Soacha</td></tr>
+                    </tbody>
+                </table>
+
+                <blockquote>
+                    <strong>Enunciado integrado:</strong> Desarrollar un software para el control
+                    de personal en la panadería La Paisa en Soacha.
+                </blockquote>
+
+                <h3>Objetivos específicos</h3>
+                <p>Representan el desglose fase por fase de las actividades necesarias:</p>
+                <ul>
+                    <li><strong>Análisis:</strong> identificar, diagnosticar, estudiar.</li>
+                    <li><strong>Diseño:</strong> diseñar, planear, estructurar.</li>
+                    <li><strong>Desarrollo:</strong> desarrollar, construir, programar.</li>
+                    <li><strong>Pruebas:</strong> verificar, probar, validar.</li>
+                    <li><strong>Implantación:</strong> implementar, desplegar.</li>
+                </ul>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 2. INGENIERÍA DE REQUISITOS            -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="ingenieria-requisitos">
+                <div class="section-header">
+                    <div class="section-number cyan">02</div>
+                    <h2>Ingeniería de requisitos</h2>
+                </div>
+
+                <p>
+                    La ingeniería de software abarca la obtención de los requerimientos, el diseño,
+                    la implementación, las pruebas, la instalación, el mantenimiento y la actualización
+                    del sistema. La <strong>ingeniería de requisitos</strong> se enfoca en la definición
+                    de <strong>lo que se desea producir</strong>.
+                </p>
+
+                <div class="requirements-grid">
+                    <div class="req-card func">
+                        <h4><i class="bi bi-search"></i> Elicitar</h4>
+                        <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">
+                            Recolectar las necesidades de los stakeholders.
+                        </p>
+                    </div>
+                    <div class="req-card func">
+                        <h4><i class="bi bi-bar-chart"></i> Analizar</h4>
+                        <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">
+                            Determinar viabilidad y consistencia de los requisitos.
+                        </p>
+                    </div>
+                    <div class="req-card no-func">
+                        <h4><i class="bi bi-pencil-square"></i> Especificar</h4>
+                        <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">
+                            Documentar los requisitos de forma clara.
+                        </p>
+                    </div>
+                    <div class="req-card no-func">
+                        <h4><i class="bi bi-check-circle"></i> Validar</h4>
+                        <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">
+                            Verificar que reflejan lo que el cliente necesita.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong><i class="bi bi-info-circle-fill"></i> Importancia:</strong>
+                    Define qué debe hacer el sistema, alinea expectativas, evita desviaciones
+                    del alcance y permite rastrear cada requisito desde su origen hasta su
+                    implementación.
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 3. UML                                 -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="uml">
+                <div class="section-header">
+                    <div class="section-number amber">03</div>
+                    <h2>Estándar UML</h2>
+                </div>
+
+                <p>
+                    El Lenguaje de Modelado Unificado es la norma internacional para la especificación,
+                    visualización, construcción y documentación de los artefactos de un sistema de software.
+                </p>
+
+                <h3>Componentes esenciales de casos de uso</h3>
+
+                <div class="principle-grid">
+                    <div class="principle-card" style="--principle-color: var(--accent-violet);">
+                        <div class="principle-icon"><i class="bi bi-person-fill"></i></div>
+                        <h4>Actor</h4>
+                        <p>Entidad externa (rol de usuario, sistema externo o tiempo) que interactúa con el sistema. Se representa con un monigote.</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-cyan);">
+                        <div class="principle-icon"><i class="bi bi-circle"></i></div>
+                        <h4>Caso de uso</h4>
+                        <p>Bloque atómico de funcionalidad que aporta valor medible al actor. Se representa con un óvalo.</p>
+                    </div>
+                </div>
+
+                <h3>DFD vs. Casos de uso</h3>
+
+                <div class="code-block" data-lang="DIFERENCIA">DFD ≠ Diagrama de Casos de Uso</div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>DFD (Diagrama de Flujo de Datos)</th>
+                            <th>Caso de Uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Muestra cómo fluyen los datos: entradas, procesos, almacenamientos y salidas.</td>
+                            <td>Muestra la interacción entre actores y sistema desde la perspectiva del usuario.</td>
+                        </tr>
+                        <tr>
+                            <td>Se enfoca en el <strong>qué</strong> datos se transforman.</td>
+                            <td>Se enfoca en el <strong>cómo</strong> interactúa el usuario con el sistema.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Flujo metodológico de ingeniería</h3>
+
+                <div class="code-block" data-lang="FLUJO">+------------------------+      +-------------------+
+|  1. Historias de Usuario | ---> |  2. Requerimientos |
++------------------------+      +-------------------+
+                                          |
+                                          | (Provee Info a)
+                                          v
+                                +-------------------+
+                                |     3. DFD        |
+                                +-------------------+</div>
+
+                <p>
+                    El <strong>cronograma</strong> es el eje transversal que temporaliza la ejecución
+                    de estas tres fases lógicas del desarrollo.
+                </p>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 4. HISTORIAS DE USUARIO                -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="historias-usuario">
+                <div class="section-header">
+                    <div class="section-number emerald">04</div>
+                    <h2>Historias de usuario</h2>
+                </div>
+
+                <p>
+                    Una <strong>historia de usuario</strong> es una descripción corta y simple de una
+                    funcionalidad, escrita desde la perspectiva del usuario final.
+                </p>
+
+                <div class="info-box">
+                    <strong>Sintaxis:</strong><br>
+                    Como &lt;rol&gt; quiero &lt;acción&gt; para poder &lt;beneficio&gt;
+                </div>
+
+                <h3>Estructura completa</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Historia</strong></td><td>Enunciado principal con la sintaxis.</td></tr>
+                        <tr><td><strong>Puntos de historia</strong></td><td>Estimación de complejidad (Planning Poker).</td></tr>
+                        <tr><td><strong>Tareas</strong></td><td>Actividades técnicas necesarias.</td></tr>
+                        <tr><td><strong>Pruebas de aceptación</strong></td><td>Criterios de completitud.</td></tr>
+                        <tr><td><strong>Responsables</strong></td><td>Personas encargadas de la implementación.</td></tr>
+                        <tr><td><strong>Sketch</strong></td><td>Boceto o prototipo de la interfaz.</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Ejemplo: Inicio de sesión</h3>
+
+                <div class="technique-card" style="--tech-color: var(--accent-emerald);">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-box-arrow-in-right"></i></div>
+                        <h3>Como usuario quiero iniciar sesión</h3>
+                    </div>
+
+                    <p><strong>Puntos de historia:</strong> 5</p>
+
+                    <h4>Tareas</h4>
+                    <ol style="padding-left:1.4rem;">
+                        <li>Crear la BD con tablas de usuarios y contraseñas.</li>
+                        <li>Crear el formulario de ingreso al sistema.</li>
+                        <li>Crear la plantilla de inicio de sesión.</li>
+                        <li>Generar la apertura de la BD.</li>
+                        <li>Generar el código de captura de usuario y contraseña.</li>
+                        <li>Generar los mensajes de error.</li>
+                        <li>Generar la llamada a la página principal tras ingreso exitoso.</li>
+                        <li>Validar ingreso por primera vez.</li>
+                        <li>Generar pantalla de cambio de clave.</li>
+                        <li>Guardar la nueva clave en la BD.</li>
+                    </ol>
+
+                    <h4>Pruebas de aceptación</h4>
+                    <ul>
+                        <li>Dejar los dos campos en blanco e intentar iniciar sesión.</li>
+                        <li>Ingresar usuario y contraseña que no existan en la BD.</li>
+                        <li>Ingresar usuario y contraseña válidos.</li>
+                        <li>En el primer ingreso, solicitar cambio de contraseña.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 5. METODOLOGÍAS                        -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="metodologias">
+                <div class="section-header">
+                    <div class="section-number rose">05</div>
+                    <h2>Metodologías de desarrollo de software</h2>
+                </div>
+
+                <!-- SCRUM -->
+                <div class="technique-card" style="--tech-color: var(--accent-violet);" id="scrum">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-arrow-repeat"></i></div>
+                        <h3>Scrum</h3>
+                    </div>
+                    <p>
+                        Marco de trabajo ágil que organiza proyectos complejos en ciclos cortos
+                        llamados <strong>sprints</strong>. Se basa en roles, artefactos y ceremonias.
+                    </p>
+
+                    <h4>Roles</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Rol</th>
+                                <th>Responsabilidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Product Owner</strong></td><td>Define y prioriza el Product Backlog.</td></tr>
+                            <tr><td><strong>Scrum Master</strong></td><td>Facilita el proceso y elimina impedimentos.</td></tr>
+                            <tr><td><strong>Equipo de Desarrollo</strong></td><td>Equipo autoorganizado (3-9 personas).</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Artefactos</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Artefacto</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Product Backlog</strong></td><td>Lista priorizada de requisitos.</td></tr>
+                            <tr><td><strong>Sprint Backlog</strong></td><td>Tareas seleccionadas para el sprint.</td></tr>
+                            <tr><td><strong>Incremento</strong></td><td>Versión funcional y probada del producto.</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Eventos</h4>
+                    <ul>
+                        <li><strong>Sprint Planning:</strong> planificación del sprint.</li>
+                        <li><strong>Daily Scrum:</strong> reunión diaria de 15 minutos.</li>
+                        <li><strong>Sprint Review:</strong> revisión con stakeholders.</li>
+                        <li><strong>Sprint Retrospective:</strong> reflexión y mejora.</li>
+                    </ul>
+                </div>
+
+                <!-- XP -->
+                <div class="technique-card" style="--tech-color: var(--accent-cyan);" id="xp">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-code-slash"></i></div>
+                        <h3>XP (eXtreme Programming)</h3>
+                    </div>
+                    <p>
+                        Metodología ágil que enfatiza la <strong>calidad del código</strong> y la
+                        <strong>respuesta rápida a cambios</strong>.
+                    </p>
+
+                    <h4>Prácticas clave</h4>
+                    <ul>
+                        <li><strong>Programación en parejas:</strong> dos desarrolladores, un código.</li>
+                        <li><strong>TDD (Test-Driven Development):</strong> pruebas antes del código.</li>
+                        <li><strong>Integración continua:</strong> integrar y probar frecuentemente.</li>
+                        <li><strong>Refactorización:</strong> mejorar sin cambiar comportamiento.</li>
+                        <li><strong>Propiedad colectiva:</strong> cualquiera puede modificar el código.</li>
+                    </ul>
+                </div>
+
+                <!-- KANBAN -->
+                <div class="technique-card" style="--tech-color: var(--accent-amber);" id="kanban">
+                    <div class="technique-head">
+                        <div class="technique-icon"><i class="bi bi-kanban-fill"></i></div>
+                        <h3>Kanban</h3>
+                    </div>
+                    <p>
+                        Método para gestionar el trabajo mediante un flujo visual. Visualiza el
+                        trabajo en un tablero que muestra el estado de cada tarea.
+                    </p>
+
+                    <h4>Principios</h4>
+                    <ul>
+                        <li><strong>Visualizar el flujo:</strong> usar un tablero Kanban.</li>
+                        <li><strong>Limitar el trabajo en progreso (WIP):</strong> controlar las tareas en cada estado.</li>
+                        <li><strong>Gestionar el flujo:</strong> eliminar cuellos de botella.</li>
+                        <li><strong>Mejora continua:</strong> optimizar según datos.</li>
+                    </ul>
+
+                    <div class="code-block" data-lang="TABLERO">┌──────────┬──────────────┬──────────┬────────┐
+│  To Do   │  In Progress │  Testing │  Done  │
+├──────────┼──────────────┼──────────┼────────┤
+│  Tarea 3 │   Tarea 2    │ Tarea 1  │        │
+│  Tarea 4 │              │          │        │
+└──────────┴──────────────┴──────────┴────────┘</div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 6. MATRIZ DE METODOLOGÍAS              -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="matriz">
+                <div class="section-header">
+                    <div class="section-number blue">06</div>
+                    <h2>Matriz de metodologías</h2>
+                </div>
+
+                <p>
+                    Estructura de análisis comparativo para documentar las metodologías vistas.
+                </p>
+
+                <h3>Análisis por proyecto</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Proyecto</th>
+                            <th>Metodología</th>
+                            <th>Tecnología</th>
+                            <th>Recolección</th>
+                            <th>Roles</th>
+                            <th>Entregables</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Detalle por metodología</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Metodología</th>
+                            <th>Definición</th>
+                            <th>Fases</th>
+                            <th>Roles</th>
+                            <th>Entregables</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Scrum</strong></td>
+                            <td>Marco ágil iterativo</td>
+                            <td>Sprint, Planning, Daily, Review, Retrospective</td>
+                            <td>PO, SM, Dev Team</td>
+                            <td>Product Backlog, Sprint Backlog, Incremento</td>
+                        </tr>
+                        <tr>
+                            <td><strong>XP</strong></td>
+                            <td>Ágil enfocado en calidad</td>
+                            <td>Iteraciones cortas</td>
+                            <td>Cliente, Programador, Tester, Coach</td>
+                            <td>Código probado, Refactorización</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kanban</strong></td>
+                            <td>Gestión visual del flujo</td>
+                            <td>Flujo continuo</td>
+                            <td>Equipo autoorganizado</td>
+                            <td>Tablero Kanban, Métricas de flujo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 7. MAPAS DE NAVEGACIÓN                 -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="mapas-navegacion">
+                <div class="section-header">
+                    <div class="section-number violet">07</div>
+                    <h2>Mapas de navegación y prototipado</h2>
+                </div>
+
+                <p>
+                    Un <strong>mapa de navegación</strong> es una representación visual que muestra
+                    la estructura y las relaciones entre las diferentes pantallas o vistas de una
+                    aplicación.
+                </p>
+
+                <div class="principle-grid">
+                    <div class="principle-card" style="--principle-color: var(--accent-violet);">
+                        <div class="principle-icon"><i class="bi bi-eye"></i></div>
+                        <h4>Planificación visual</h4>
+                        <p>Visualiza la estructura completa de la interfaz.</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-cyan);">
+                        <div class="principle-icon"><i class="bi bi-shuffle"></i></div>
+                        <h4>Identificación de flujos</h4>
+                        <p>Detecta flujos de usuario complejos o redundantes.</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-amber);">
+                        <div class="principle-icon"><i class="bi bi-chat-dots"></i></div>
+                        <h4>Comunicación</h4>
+                        <p>Facilita el diálogo entre diseñadores, desarrolladores y stakeholders.</p>
+                    </div>
+                </div>
+
+                <h3>Herramientas de prototipado</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Herramienta</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Balsamiq</strong></td><td>Prototipado de baja fidelidad (bocetos/wireframes).</td></tr>
+                        <tr><td><strong>Figma</strong></td><td>Diseño colaborativo y prototipos de alta fidelidad.</td></tr>
+                        <tr><td><strong>Adobe XD</strong></td><td>Herramienta de diseño y prototipado de Adobe.</td></tr>
+                        <tr><td><strong>Sketch</strong></td><td>Diseño de interfaces para Mac.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 8. ESTRUCTURA DEL PROYECTO SENA        -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="estructura-proyecto">
+                <div class="section-header">
+                    <div class="section-number cyan">08</div>
+                    <h2>Estructura del proyecto formativo SENA</h2>
+                </div>
+
+                <p>
+                    El proyecto formativo sigue una estructura definida en el formulario
+                    <strong>GFPI-F-016</strong>.
+                </p>
+
+                <h3>1. Información básica del proyecto</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>1.1 Centro de Formación</strong></td><td>Nombre oficial del Centro SENA.</td></tr>
+                        <tr><td><strong>1.2 Regional</strong></td><td>Regional a la que pertenece el Centro.</td></tr>
+                        <tr><td><strong>1.3 Nombre del proyecto</strong></td><td>"Construcción de..." (evitar verbos en infinitivo).</td></tr>
+                        <tr><td><strong>1.4 Programa de Formación</strong></td><td>Análisis y Desarrollo de Software.</td></tr>
+                        <tr><td><strong>1.5 Tiempo estimado</strong></td><td>Duración en meses.</td></tr>
+                        <tr><td><strong>1.6 Empresas participantes</strong></td><td>Entidades que contribuyen.</td></tr>
+                        <tr><td><strong>1.7 Palabras claves</strong></td><td>Términos técnicos para búsqueda y SEO.</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>2. Estructura del proyecto</h3>
+
+                <div class="info-box">
+                    <strong>2.1 Planteamiento del problema:</strong> describe el problema
+                    identificado y la necesidad que se pretende solucionar.
+                </div>
+
+                <div class="info-box">
+                    <strong>2.2 Justificación:</strong> responde a "¿por qué vale el esfuerzo
+                    realizar el proyecto?". Incluye beneficios cuantitativos y cualitativos.
+                </div>
+
+                <div class="info-box">
+                    <strong>2.3 Objetivo general:</strong> verbo en infinitivo verificable y medible.
+                </div>
+
+                <div class="info-box">
+                    <strong>2.4 Objetivos específicos:</strong> relacionados con cada fase del proyecto.
+                </div>
+
+                <h4>Verbos sugeridos por fase</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Fase</th>
+                            <th>Verbos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Análisis (Diagnóstico)</td><td>Analizar, Diagnosticar, Identificar</td></tr>
+                        <tr><td>Diseño (Planeación)</td><td>Diseñar, Planear, Estructurar</td></tr>
+                        <tr><td>Desarrollo (Ejecución)</td><td>Desarrollar, Construir, Fabricar</td></tr>
+                        <tr><td>Implementación</td><td>Implementar, Montar, Poner en funcionamiento</td></tr>
+                        <tr><td>Evaluación</td><td>Evaluar, Valorar, Verificar</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>5. Equipo que participa en el proyecto</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Documento</th>
+                            <th>Especialidad</th>
+                            <th>Centro</th>
+                            <th>Regional</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 9. REQUISITOS F Y NF                   -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="requisitos">
+                <div class="section-header">
+                    <div class="section-number amber">09</div>
+                    <h2>Requisitos funcionales y no funcionales</h2>
+                </div>
+
+                <p>
+                    La correcta definición de los requerimientos es el paso más importante
+                    para poder modelar y construir un DFD.
+                </p>
+
+                <div class="requirements-grid">
+                    <div class="req-card func">
+                        <h4><i class="bi bi-gear-fill"></i> Requisitos funcionales</h4>
+                        <p style="font-size:0.9rem;color:var(--text-secondary);">
+                            Qué debe hacer el sistema: operaciones, servicios y lógica de negocio.
+                        </p>
+                        <p style="font-size:0.85rem;color:#67e8f9;font-style:italic;margin:0;">
+                            "El sistema debe permitir iniciar sesión con usuario y contraseña."
+                        </p>
+                    </div>
+                    <div class="req-card no-func">
+                        <h4><i class="bi bi-shield-fill-check"></i> Requisitos no funcionales</h4>
+                        <p style="font-size:0.9rem;color:var(--text-secondary);">
+                            Cómo debe comportarse: rendimiento, seguridad, arquitectura, usabilidad.
+                        </p>
+                        <p style="font-size:0.85rem;color:#fcd34d;font-style:italic;margin:0;">
+                            "El inicio de sesión no debe tardar más de 2 segundos."
+                        </p>
+                    </div>
+                </div>
+
+                <h3>Analogía simple</h3>
+
+                <div class="code-block" data-lang="ANALOGÍA">Comprar un auto:
+
+Requisito funcional:    "El auto debe tener frenos."          (Qué hace)
+Requisito no funcional: "Deben detenerlo en <30m a 100km/h."  (Cómo lo hace)</div>
+
+                <h3>Ejemplos en software</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Requisito Funcional</th>
+                            <th>Requisito No Funcional</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>El sistema debe permitir registrar usuarios.</td>
+                            <td>Debe soportar 1.000 usuarios concurrentes.</td>
+                        </tr>
+                        <tr>
+                            <td>El sistema debe generar reportes en PDF.</td>
+                            <td>Los reportes deben generarse en menos de 5 segundos.</td>
+                        </tr>
+                        <tr>
+                            <td>El sistema debe enviar notificaciones por correo.</td>
+                            <td>Deben entregarse con un 99.9% de confiabilidad.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 10. FLUJO METODOLÓGICO                 -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="flujo">
+                <div class="section-header">
+                    <div class="section-number emerald">10</div>
+                    <h2>Flujo metodológico del proyecto</h2>
+                </div>
+
+                <p>Para iniciar el desarrollo del proyecto formativo, se ejecutan secuencialmente:</p>
+
+                <div class="principle-grid">
+                    <div class="principle-card" style="--principle-color: var(--accent-violet);">
+                        <div class="principle-icon">1</div>
+                        <h4>Elicitación de requisitos</h4>
+                        <p>Descubrimiento y recolección de necesidades. Se recopila material real: imágenes, facturas, documentos, videos.</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-cyan);">
+                        <div class="principle-icon">2</div>
+                        <h4>Definición de objetivos</h4>
+                        <p>El objetivo general define el "qué"; los específicos desglosan el "cómo".</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-amber);">
+                        <div class="principle-icon">3</div>
+                        <h4>Especificación</h4>
+                        <p>"La columna vertebral del proyecto": define reglas, restricciones y funciones antes de escribir código.</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-emerald);">
+                        <div class="principle-icon">4</div>
+                        <h4>Casos de uso e historias</h4>
+                        <p>Modelado funcional basado en el comportamiento observado del negocio.</p>
+                    </div>
+                </div>
+
+                <div class="warn-box">
+                    <strong><i class="bi bi-exclamation-triangle-fill"></i> Principio de diseño modular:</strong>
+                    Cada clase o entidad del dominio debe corresponder a un módulo lógico o
+                    componente específico del sistema. Esto garantiza separación de
+                    responsabilidades, alta cohesión y bajo acoplamiento.
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!-- 11. CONCLUSIÓN                         -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="article-section" id="conclusion">
+                <div class="section-header">
+                    <div class="section-number rose">11</div>
+                    <h2>Conclusión y líneas de investigación</h2>
+                </div>
+
+                <h3>Conclusiones</h3>
+                <ul>
+                    <li>UML es el estándar para modelar sistemas de software, proporcionando un lenguaje común.</li>
+                    <li>La ingeniería de requisitos es fundamental para garantizar que el software cumpla con las necesidades.</li>
+                    <li>Las metodologías ágiles (Scrum, XP, Kanban) ofrecen enfoques flexibles y adaptativos.</li>
+                    <li>Las historias de usuario y casos de uso capturan requisitos desde la perspectiva del usuario.</li>
+                    <li>El proyecto formativo SENA sigue una estructura estandarizada que organiza el trabajo desde el problema hasta la implementación.</li>
+                </ul>
+
+                <h3>Líneas de investigación</h3>
+                <div class="principle-grid">
+                    <div class="principle-card" style="--principle-color: var(--accent-violet);">
+                        <div class="principle-icon"><i class="bi bi-diagram-2"></i></div>
+                        <h4>Análisis comparativo</h4>
+                        <p>¿Cómo se complementan DFD y Diagramas de Casos de Uso?</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-cyan);">
+                        <div class="principle-icon"><i class="bi bi-arrow-repeat"></i></div>
+                        <h4>Metodologías ágiles</h4>
+                        <p>Profundizar en la implementación práctica de Scrum, XP y Kanban.</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-amber);">
+                        <div class="principle-icon"><i class="bi bi-vector-pen"></i></div>
+                        <h4>Prototipado</h4>
+                        <p>Explorar Balsamiq, Figma y Adobe XD para wireframes.</p>
+                    </div>
+                    <div class="principle-card" style="--principle-color: var(--accent-emerald);">
+                        <div class="principle-icon"><i class="bi bi-clipboard-check"></i></div>
+                        <h4>Validación de campo</h4>
+                        <p>Refinar instrumentos de recolección antes del diagnóstico.</p>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+
+        <!-- ══════════════════════════════════════ -->
+        <!-- SIDEBAR                                -->
+        <!-- ══════════════════════════════════════ -->
+        <aside class="page-sidebar" aria-label="Información de apoyo">
+
+            <div class="sidebar-card">
+                <h3>Navegación rápida</h3>
+                <ul class="sidebar-toc" id="sidebarToc">
+                    <li><a href="#lineamientos">01 · Lineamientos</a></li>
+                    <li><a href="#ingenieria-requisitos">02 · Ingeniería de requisitos</a></li>
+                    <li><a href="#uml">03 · UML</a></li>
+                    <li><a href="#historias-usuario">04 · Historias de usuario</a></li>
+                    <li><a href="#metodologias">05 · Metodologías</a></li>
+                    <li><a href="#scrum">· Scrum</a></li>
+                    <li><a href="#xp">· XP</a></li>
+                    <li><a href="#kanban">· Kanban</a></li>
+                    <li><a href="#matriz">06 · Matriz</a></li>
+                    <li><a href="#mapas-navegacion">07 · Mapas de navegación</a></li>
+                    <li><a href="#estructura-proyecto">08 · Estructura SENA</a></li>
+                    <li><a href="#requisitos">09 · Requisitos F y NF</a></li>
+                    <li><a href="#flujo">10 · Flujo metodológico</a></li>
+                    <li><a href="#conclusion">11 · Conclusión</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Estadísticas</h3>
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <strong>3</strong>
+                        <span>Metodologías</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>11</strong>
+                        <span>Secciones</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>5</strong>
+                        <span>Fases</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>4</strong>
+                        <span>Herramientas</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Concepto clave</h3>
+                <p style="font-size:0.85rem;color:var(--text-secondary);margin:0;">
+                    UML no es solo un lenguaje gráfico: es el estándar que unifica la
+                    comunicación entre analistas, desarrolladores y clientes para modelar
+                    sistemas complejos antes de construirlos.
+                </p>
+            </div>
+
+        </aside>
+    </main>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- FOOTER / MAPA DE SITIO                        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <footer role="contentinfo" id="mapa-de-sitio">
+
+        <div class="footer-grid">
+            <!-- Columna 1: Navegación -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="../../index.html" class="footer-link">Inicio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                    <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#mapa-de-sitio" class="footer-link">Footer</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 2: Recursos -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Trimestres -->
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../../trimestre-1/index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                    <li><a href="../../trimestre-7/index.html" class="footer-link">Trimestre 7</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+            <p>&copy; 2026 - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* ══════════════════════════════════════════ */
+            /* 1. PARTICLES.JS                            */
+            /* ══════════════════════════════════════════ */
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: {
+                            value: 45,
+                            density: { enable: true, value_area: 900 }
+                        },
+                        color: { value: ['#8b5cf6', '#06b6d4', '#f59e0b'] },
+                        shape: {
+                            type: 'circle',
+                            stroke: { width: 0, color: '#000000' }
+                        },
+                        opacity: {
+                            value: 0.4,
+                            random: true,
+                            anim: { enable: true, speed: 0.8, opacity_min: 0.1, sync: false }
+                        },
+                        size: {
+                            value: 2.5,
+                            random: true,
+                            anim: { enable: false }
+                        },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: '#8b5cf6',
+                            opacity: 0.15,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 1.2,
+                            direction: 'none',
+                            random: true,
+                            straight: false,
+                            out_mode: 'out',
+                            bounce: false
+                        }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: {
+                            onhover: { enable: true, mode: 'grab' },
+                            onclick: { enable: true, mode: 'push' },
+                            resize: true
+                        },
+                        modes: {
+                            grab: { distance: 140, line_linked: { opacity: 0.4 } },
+                            push: { particles_nb: 3 }
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+
+            /* ══════════════════════════════════════════ */
+            /* 2. BARRA DE PROGRESO                       */
+            /* ══════════════════════════════════════════ */
+            const progressBar = document.getElementById('readingProgress');
+
+            const updateProgress = () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                progressBar.style.width = progress + '%';
+            };
+
+            window.addEventListener('scroll', updateProgress, { passive: true });
+            updateProgress();
+
+            /* ══════════════════════════════════════════ */
+            /* 3. ANIMACIONES DE SCROLL                   */
+            /* ══════════════════════════════════════════ */
+            const sections = document.querySelectorAll('.article-section');
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -80px 0px'
+            });
+
+            sections.forEach(section => sectionObserver.observe(section));
+
+            /* ══════════════════════════════════════════ */
+            /* 4. SIDEBAR CON SECCIÓN ACTIVA              */
+            /* ══════════════════════════════════════════ */
+            const tocLinks = document.querySelectorAll('#sidebarToc a');
+            const sectionMap = new Map();
+
+            tocLinks.forEach(link => {
+                const id = link.getAttribute('href').substring(1);
+                const target = document.getElementById(id);
+                if (target) {
+                    sectionMap.set(target, link);
+                }
+            });
+
+            const activeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        tocLinks.forEach(l => l.classList.remove('active'));
+                        const activeLink = sectionMap.get(entry.target);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '-30% 0px -60% 0px',
+                threshold: 0
+            });
+
+            sectionMap.forEach((link, section) => activeObserver.observe(section));
+
+            /* ══════════════════════════════════════════ */
+            /* 5. BOTÓN VOLVER ARRIBA                     */
+            /* ══════════════════════════════════════════ */
+            const backToTop = document.getElementById('backToTop');
+
+            const toggleBackToTop = () => {
+                if (window.scrollY > 400) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            };
+
+            window.addEventListener('scroll', toggleBackToTop, { passive: true });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            /* ══════════════════════════════════════════ */
+            /* 6. MENÚ MÓVIL                              */
+            /* ══════════════════════════════════════════ */
+            const navToggle = document.getElementById('navToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            navToggle.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('active');
+                navToggle.setAttribute('aria-expanded', isOpen);
+                navToggle.innerHTML = isOpen
+                    ? '<i class="bi bi-x-lg"></i>'
+                    : '<i class="bi bi-list"></i>';
+            });
+
+            /* ══════════════════════════════════════════ */
+            /* 7. SMOOTH SCROLL CON OFFSET                */
+            /* ══════════════════════════════════════════ */
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    const targetId = anchor.getAttribute('href');
+                    if (targetId === '#' || targetId.length < 2) return;
+
+                    const target = document.querySelector(targetId);
+                    if (!target) return;
+
+                    e.preventDefault();
+                    const offset = 88;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        navToggle.setAttribute('aria-expanded', false);
+                        navToggle.innerHTML = '<i class="bi bi-list"></i>';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
