@@ -1,0 +1,937 @@
+/* ============================================================
+   TEMPLATE.CSS — Estilos del template editorial para apuntes ADSO
+   ============================================================
+
+   Ubicación esperada:
+       ./Assets/template.css
+
+   Requisitos previos:
+       - Debe cargarse DESPUÉS de ./style.css (usa sus variables CSS)
+       - Se apoya en las variables: --color-bg-primary, --color-bg-secondary,
+         --color-text-primary, --color-text-secondary, --color-accent-blue,
+         --color-accent-amber, --color-border, --color-white,
+         --nav-height, --container-max, --container-pad, --transition
+
+   Convención de clases:
+       Todas las clases del template llevan el prefijo "bm-" para evitar
+       colisiones con otros estilos del proyecto.
+
+   Estructura HTML esperada (resumen):
+       .bm-progress > .bm-progress-bar
+       .bm-hero > .bm-hero-bg, .bm-hero-inner, .bm-hero-meta, .bm-hero-stats
+       .bm-layout > .bm-toc + .bm-content
+           .bm-toc > .bm-toc-inner > .bm-toc-header, .bm-toc-nav > .bm-toc-list
+           .bm-content > .bm-section (varias) con .bm-section-head, .bm-model, etc.
+       .bm-top (botón volver arriba)
+
+   ============================================================ */
+
+
+/* =========================================================
+   1. BARRA DE PROGRESO DE LECTURA
+   ========================================================= */
+
+.bm-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: transparent;
+    z-index: 1100;
+    pointer-events: none;
+}
+
+.bm-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,
+        var(--color-accent-blue) 0%,
+        var(--color-accent-amber) 100%);
+    transition: width 0.08s linear;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}
+
+
+/* =========================================================
+   2. HERO EDITORIAL
+   ========================================================= */
+
+.bm-hero {
+    position: relative;
+    padding: calc(var(--nav-height) + 5.5rem) 0 5rem;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0b1120 0%, #111c2e 100%);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.bm-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bm-hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--color-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+    background-size: 56px 56px;
+    opacity: 0.55;
+    -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, #000 20%, transparent 85%);
+    mask-image: radial-gradient(ellipse 90% 75% at 50% 35%, #000 20%, transparent 85%);
+}
+
+.bm-hero-glow {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 700px;
+    background: radial-gradient(circle at center,
+        rgba(59, 130, 246, 0.10) 0%,
+        transparent 65%);
+    pointer-events: none;
+}
+
+.bm-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+}
+
+.bm-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.04);
+    margin-bottom: 1.75rem;
+}
+
+.bm-hero-eyebrow .bm-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent-amber);
+    box-shadow: 0 0 10px var(--color-accent-amber);
+}
+
+.bm-hero-title {
+    font-size: clamp(2.1rem, 5vw, 3.9rem);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
+    margin-bottom: 1.6rem;
+    max-width: 900px;
+}
+
+.bm-hero-title .gradient-text {
+    display: block;
+}
+
+.bm-hero-lead {
+    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    max-width: 720px;
+    margin-bottom: 2.5rem;
+}
+
+.bm-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2rem;
+}
+
+.bm-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.bm-meta-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    opacity: 0.75;
+}
+
+.bm-meta-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.bm-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 620px;
+}
+
+.bm-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.bm-stat-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-amber));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bm-stat-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+}
+
+
+/* =========================================================
+   3. LAYOUT PRINCIPAL (TOC + CONTENIDO)
+   ========================================================= */
+
+.bm-layout {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 4rem var(--container-pad) 6rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .bm-layout {
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 4.5rem;
+        align-items: start;
+    }
+}
+
+
+/* =========================================================
+   4. TABLA DE CONTENIDO (STICKY)
+   ========================================================= */
+
+.bm-toc {
+    position: relative;
+}
+
+@media (min-width: 1024px) {
+    /* Estira el aside a toda la altura de la fila del grid
+       para que position: sticky del hijo funcione */
+    .bm-toc {
+        align-self: stretch;
+    }
+
+    .bm-toc-inner {
+        position: sticky;
+        top: calc(var(--nav-height) + 2rem);
+        max-height: calc(100vh - var(--nav-height) - 4rem);
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 1rem;
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-border) transparent;
+    }
+
+    .bm-toc-inner::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .bm-toc-inner::-webkit-scrollbar-thumb {
+        background: var(--color-border);
+        border-radius: 2px;
+    }
+
+    .bm-toc-inner::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
+
+.bm-toc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.9rem;
+    margin-bottom: 1.1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.bm-toc-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+}
+
+.bm-toc-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.bm-toc-toggle:hover {
+    color: var(--color-accent-blue);
+    border-color: var(--color-accent-blue);
+}
+
+.bm-toc-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.bm-toc.is-open .bm-toc-toggle i {
+    transform: rotate(180deg);
+}
+
+@media (min-width: 1024px) {
+    .bm-toc-toggle {
+        display: none;
+    }
+
+    .bm-toc-nav {
+        max-height: none !important;
+    }
+}
+
+.bm-toc-nav {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bm-toc.is-open .bm-toc-nav {
+    max-height: 1200px;
+}
+
+.bm-toc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bm-toc-link {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.35;
+    transition:
+        color var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        padding-left 0.25s ease;
+}
+
+.bm-toc-link:hover {
+    color: var(--color-text-primary);
+    background: rgba(148, 163, 184, 0.05);
+}
+
+.bm-toc-link.is-active {
+    color: var(--color-accent-blue);
+    border-left-color: var(--color-accent-blue);
+    background: rgba(59, 130, 246, 0.08);
+    font-weight: 600;
+    padding-left: 0.85rem;
+}
+
+.bm-toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+    letter-spacing: 0.03em;
+    min-width: 20px;
+    transition: color var(--transition), opacity var(--transition);
+}
+
+.bm-toc-link.is-active .bm-toc-num {
+    color: var(--color-accent-blue);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   5. CONTENIDO PRINCIPAL
+   ========================================================= */
+
+.bm-content {
+    min-width: 0;
+    max-width: 780px;
+}
+
+.bm-section {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--color-border);
+    scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+}
+
+.bm-section:first-child {
+    padding-top: 0;
+}
+
+.bm-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.bm-section-head {
+    margin-bottom: 2.5rem;
+}
+
+.bm-section-num {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--color-accent-amber);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 4px;
+    background: rgba(245, 158, 11, 0.05);
+    margin-bottom: 1.1rem;
+}
+
+.bm-section-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: 0.65rem;
+}
+
+.bm-section-sub {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 620px;
+}
+
+/* Párrafos dentro del contenido */
+.bm-content p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
+}
+
+.bm-content strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.bm-content em {
+    color: var(--color-accent-blue);
+    font-style: normal;
+    font-weight: 500;
+}
+
+.bm-content a {
+    color: var(--color-accent-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    transition: all var(--transition);
+}
+
+.bm-content a:hover {
+    border-bottom-color: var(--color-accent-blue);
+}
+
+
+/* =========================================================
+   6. CALLOUTS
+   ========================================================= */
+
+.bm-callout {
+    position: relative;
+    padding: 1.15rem 1.25rem 1.15rem 1.5rem;
+    background: rgba(59, 130, 246, 0.04);
+    border-left: 2px solid var(--color-accent-blue);
+    border-radius: 0 6px 6px 0;
+    margin: 1.5rem 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+}
+
+.bm-callout--amber {
+    background: rgba(245, 158, 11, 0.04);
+    border-left-color: var(--color-accent-amber);
+}
+
+.bm-callout strong {
+    color: var(--color-text-primary);
+}
+
+
+/* =========================================================
+   7. TABLAS RESPONSIVE
+   ========================================================= */
+
+.bm-table-wrap {
+    margin: 1.75rem 0;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--color-bg-secondary);
+}
+
+.bm-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.bm-table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.bm-table thead th {
+    text-align: left;
+    padding: 0.9rem 1.15rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    background: rgba(148, 163, 184, 0.04);
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+}
+
+.bm-table tbody td {
+    padding: 1rem 1.15rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    vertical-align: top;
+}
+
+.bm-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.bm-table tbody tr {
+    transition: background var(--transition);
+}
+
+.bm-table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.035);
+}
+
+.bm-table tbody td:first-child {
+    color: var(--color-text-primary);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   8. CARD DE MODELO / PROYECTO
+   ========================================================= */
+
+.bm-model {
+    position: relative;
+    padding: 1.75rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+    transition: border-color var(--transition), transform var(--transition);
+}
+
+.bm-model:hover {
+    border-color: rgba(59, 130, 246, 0.35);
+}
+
+@media (min-width: 768px) {
+    .bm-model {
+        padding: 2rem 2.25rem;
+    }
+}
+
+.bm-model-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.bm-model-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--color-accent-amber);
+    padding: 0.15rem 0.5rem;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 4px;
+    flex-shrink: 0;
+    line-height: 1.4;
+}
+
+.bm-model-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .bm-model-title {
+        font-size: 1.15rem;
+    }
+}
+
+
+/* =========================================================
+   9. ESPECIFICACIONES (problema / solución / etc.)
+   ========================================================= */
+
+.bm-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+}
+
+.bm-spec {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.bm-spec-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    opacity: 0.75;
+}
+
+.bm-spec-value {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+}
+
+.bm-spec-value strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+/* Bloque destacado: problema / solución */
+.bm-spec--problema .bm-spec-value,
+.bm-spec--solucion .bm-spec-value {
+    position: relative;
+    padding-left: 1rem;
+    border-left: 2px solid;
+    border-radius: 0 4px 4px 0;
+    padding-top: 0.15rem;
+    padding-bottom: 0.15rem;
+}
+
+.bm-spec--problema .bm-spec-label {
+    color: var(--color-accent-amber);
+    opacity: 1;
+}
+
+.bm-spec--problema .bm-spec-value {
+    border-left-color: var(--color-accent-amber);
+}
+
+.bm-spec--solucion .bm-spec-label {
+    color: var(--color-accent-blue);
+    opacity: 1;
+}
+
+.bm-spec--solucion .bm-spec-value {
+    border-left-color: var(--color-accent-blue);
+    color: var(--color-text-primary);
+}
+
+
+/* =========================================================
+   10. CHIPS (tecnologías, actores, etiquetas)
+   ========================================================= */
+
+.bm-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.bm-chip {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.3rem 0.7rem;
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--color-accent-blue);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 999px;
+    transition: all var(--transition);
+    line-height: 1.5;
+}
+
+.bm-chip:hover {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.bm-chip--amber {
+    background: rgba(245, 158, 11, 0.08);
+    color: var(--color-accent-amber);
+    border-color: rgba(245, 158, 11, 0.22);
+}
+
+.bm-chip--amber:hover {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: rgba(245, 158, 11, 0.4);
+}
+
+
+/* =========================================================
+   11. LISTAS
+   ========================================================= */
+
+.bm-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.bm-list li {
+    position: relative;
+    padding: 0.85rem 1rem 0.85rem 2.75rem;
+    background: rgba(148, 163, 184, 0.03);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 0.87rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    transition: all var(--transition);
+}
+
+.bm-list li::before {
+    content: "";
+    position: absolute;
+    left: 1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent-blue);
+}
+
+.bm-list li:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+    background: rgba(59, 130, 246, 0.04);
+}
+
+.bm-list li strong {
+    color: var(--color-text-primary);
+}
+
+
+/* =========================================================
+   12. PLACEHOLDER "EN CONSTRUCCIÓN"
+   ========================================================= */
+
+.bm-pending {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border: 1px dashed var(--color-border);
+    border-radius: 12px;
+    background: rgba(148, 163, 184, 0.02);
+}
+
+.bm-pending-icon {
+    font-size: 1.5rem;
+    color: var(--color-accent-amber);
+    margin-bottom: 0.85rem;
+}
+
+.bm-pending-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.4rem;
+}
+
+.bm-pending-text {
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    max-width: 460px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   13. ANIMACIÓN REVEAL AL SCROLL
+   ========================================================= */
+
+.bm-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.bm-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bm-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+
+/* =========================================================
+   14. BOTÓN VOLVER ARRIBA
+   ========================================================= */
+
+.bm-top {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.bm-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.bm-top:hover {
+    color: var(--color-accent-blue);
+    border-color: var(--color-accent-blue);
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   15. RESPONSIVE AJUSTES FINOS
+   ========================================================= */
+
+@media (max-width: 767px) {
+    .bm-hero {
+        padding: calc(var(--nav-height) + 3rem) 0 3rem;
+    }
+
+    .bm-hero-meta {
+        gap: 1.5rem;
+    }
+
+    .bm-hero-stats {
+        gap: 1rem;
+    }
+
+    .bm-stat-value {
+        font-size: 1.75rem;
+    }
+
+    .bm-layout {
+        padding: 3rem var(--container-pad) 4rem;
+    }
+
+    .bm-model {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .bm-table {
+        min-width: 520px;
+        font-size: 0.8rem;
+    }
+
+    .bm-table thead th,
+    .bm-table tbody td {
+        padding: 0.75rem 0.9rem;
+    }
+}
