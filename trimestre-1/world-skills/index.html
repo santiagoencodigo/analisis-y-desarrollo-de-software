@@ -1,334 +1,972 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Anti-FOUC: aplica el tema guardado antes de pintar -->
+    <script>try{var t=localStorage.getItem('adso-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
     <title>World Skills · Primer Trimestre ADSO | 20 proyectos de aprendizaje</title>
-    <meta name="description" content="Bitácora completa de mis primeros pasos en programación durante WorldSkills. 20 proyectos que documentan mi evolución con HTML, CSS, JavaScript y Laravel.">
-    <link rel="stylesheet" href="style.css">
+    <meta name="description"
+        content="Bitácora completa de mis primeros pasos en programación durante WorldSkills. 20 proyectos que documentan mi evolución con HTML, CSS, JavaScript y Laravel.">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1120">
+
+    <link rel="canonical"
+        href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/trimestre-1/world-skills/">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Estilos del proyecto + template -->
+    <link rel="stylesheet" href="../../Assets/style.css">
+    <link rel="stylesheet" href="../../Assets/templates.css">
 </head>
+
 <body>
 
-<header class="hero">
-    <div class="hero__container">
-        <div class="hero__badge">PRIMER TRIMESTRE · ADSO · WORLD SKILLS 2025</div>
-        <h1 class="hero__title">World Skills<br><span class="hero__subline">Mis primeros proyectos.</span></h1>
-        <p class="hero__description">
-            Junio – Julio 2025. Desde mis primeras líneas de HTML hasta una API REST con Laravel. 
-            Cada carpeta representa una victoria pequeña, un concepto asimilado, una chispa de curiosidad.  
-            <strong>Este es mi archivo académico.</strong>
-        </p>
-        <div class="hero__meta">
-            <span>20 ejercicios en 8 semanas</span>
-            <span>Competencia WorldSkills</span>
-            <span>HTML · CSS · JS · PHP · Laravel</span>
-        </div>
+    <!-- Barra de progreso de lectura -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
     </div>
-</header>
 
-<section class="context">
-    <div class="context__inner">
-        <div class="context__text">
-            <h2>El origen de todo</h2>
-            <p>Durante mi participación en <strong>WorldSkills 2025</strong>, mientras cursaba el primer trimestre de ADSO se realizaron los siguentes 20 proyectos que marcan mi evolución: desde maquetación básica hasta un CRUD completo con Laravel.</p>
-            <p>Cada proyecto tiene su propia historia, su dificultad y su momento “ajá”. Las capturas que ves son testimonios visuales de ese proceso.</p>
-        </div>
-        <div class="timeline">
-            <div class="timeline__node">
-                <span class="timeline__year">Semana 1-2</span>
-                <p>HTML, CSS, Flexbox, Grid, BEM, primeras maquetaciones</p>
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN                            -->
+    <!-- ============================================== -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+
+                <a href="../../index.html" class="navbar-brand nav-logo"
+                    aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                        alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+
+                <button class="navbar-toggler nav-toggle" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#proyectos">Proyectos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../sitemap.html">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-            <div class="timeline__node">
-                <span class="timeline__year">Semana 3-4</span>
-                <p>JavaScript: lógica, DOM, eventos, drag & drop, cronómetros</p>
+        </nav>
+    </header>
+
+    <!-- ============================================== -->
+    <!-- CONTENIDO PRINCIPAL                            -->
+    <!-- ============================================== -->
+    <main>
+
+        <!-- ========================================== -->
+        <!-- HERO                                       -->
+        <!-- ========================================== -->
+        <section id="inicio" class="bm-hero" aria-labelledby="ws-hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
             </div>
-            <div class="timeline__node">
-                <span class="timeline__year">Semana 5-6</span>
-                <p>PHP, formularios, introducción a backend</p>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Primer Trimestre · ADSO · World Skills 2025
+                </span>
+
+                <h1 id="ws-hero-title" class="bm-hero__title">
+                    World Skills
+                    <span class="gradient-text">Mis primeros proyectos.</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Junio – Julio 2025. Desde mis primeras líneas de HTML hasta una API REST con Laravel.
+                    Cada carpeta representa una victoria pequeña, un concepto asimilado, una chispa de curiosidad.
+                    <strong>Este es mi archivo académico.</strong>
+                </p>
+
+                <div class="bm-hero__meta" role="list">
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Periodo</span>
+                        <span class="bm-meta-value">Junio – Julio 2025</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Contexto</span>
+                        <span class="bm-meta-value">Competencia WorldSkills</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Stack</span>
+                        <span class="bm-meta-value">HTML · CSS · JS · PHP · Laravel</span>
+                    </div>
+                </div>
+
+                <div class="bm-hero__stats" aria-label="Resumen del contenido">
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">20</span>
+                        <span class="bm-stat-label">Proyectos</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">8</span>
+                        <span class="bm-stat-label">Semanas</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">5</span>
+                        <span class="bm-stat-label">Tecnologías</span>
+                    </div>
+                </div>
             </div>
-            <div class="timeline__node">
-                <span class="timeline__year">Semana 7-8</span>
-                <p>Laravel, API REST, base de datos SQLite</p>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- CONTEXTO                                   -->
+        <!-- ========================================== -->
+        <section id="contexto" class="bm-section"
+            style="max-width: 1080px; margin: 0 auto; padding: 4rem var(--container-pad) 3rem; border-bottom: none;">
+
+            <header class="bm-section__head bm-reveal">
+                <span class="bm-section__num">01 / CONTEXTO</span>
+                <h2 class="bm-section__title">El origen de todo</h2>
+                <p class="bm-section__sub">
+                    Durante mi participación en <strong>WorldSkills 2025</strong>, mientras cursaba
+                    el primer trimestre de ADSO se realizaron los siguientes 20 proyectos que marcan
+                    mi evolución: desde maquetación básica hasta un CRUD completo con Laravel.
+                </p>
+            </header>
+
+            <div class="bm-callout bm-reveal">
+                Cada proyecto tiene su propia historia, su dificultad y su momento “ajá”.
+                Las capturas que verás son testimonios visuales de ese proceso.
+            </div>
+
+            <ol class="bm-list bm-list--ordered bm-reveal">
+                <li><strong>Semana 1-2:</strong> HTML, CSS, Flexbox, Grid, BEM, primeras maquetaciones</li>
+                <li><strong>Semana 3-4:</strong> JavaScript: lógica, DOM, eventos, drag &amp; drop, cronómetros</li>
+                <li><strong>Semana 5-6:</strong> PHP, formularios, introducción a backend</li>
+                <li><strong>Semana 7-8:</strong> Laravel, API REST, base de datos SQLite</li>
+            </ol>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PROYECTOS                                  -->
+        <!-- ========================================== -->
+        <section id="proyectos" class="projects-section" aria-labelledby="proyectos-heading">
+
+            <div class="projects-header">
+                <h2 id="proyectos-heading" class="projects-title">
+                    Los 20 proyectos
+                </h2>
+                <p class="projects-description">
+                    Cada tarjeta te lleva al código fuente. Haz clic en “Ver proyecto” para explorar
+                    el ejercicio en tu navegador.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+
+                <!-- 01 - Lorem Cards -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/01-lorem-cards.PNG" alt="Vista previa de Lorem Cards" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Lorem Cards</h3>
+                        <p class="project-description">
+                            Mi primer contacto con HTML/CSS: tarjetas de texto de relleno. Aprendí estructura básica y modelos de caja.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → etiquetas semánticas y estilos iniciales
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <a href="01-lorem-cards/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 02 - Social Cards -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/02-social-cards.PNG" alt="Vista previa de Social Cards" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Social Cards</h3>
+                        <p class="project-description">
+                            Tarjetas de perfil de usuario. Practiqué organización con divs y selectores CSS.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → disposición de elementos y sombras
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <a href="02-social-cards/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 03 - Metodología BEM -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/03-metodologia-bem.PNG" alt="Vista previa de Metodología BEM" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Metodología BEM</h3>
+                        <p class="project-description">
+                            Aplicación de la convención Bloque–Elemento–Modificador para nombrar clases CSS.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → código mantenible y legible
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS (BEM)</span>
+                        </div>
+                        <a href="03-metodologia-bem/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 04 - Social Cards Washington -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/04-social-cards-washington.PNG" alt="Vista previa de Social Cards Washington" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Social Cards (W)</h3>
+                        <p class="project-description">
+                            Tarea autónoma: replicar una tarjeta de perfil del instructor. Primer ejercicio sin guía.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → tomar decisiones de diseño por mí mismo
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <a href="04-social-cards-washington/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 05 - Granero -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/05-granero.PNG" alt="Vista previa de Granero" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Granero</h3>
+                        <p class="project-description">
+                            Maquetación básica de un ecommerce: productos, precios, área de login y pedidos.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → estructura de tienda virtual
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <a href="05-granero/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 06 - CSS Grid + Flexbox -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/06-css-grid-flex.PNG" alt="Vista previa de CSS Grid y Flexbox" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">CSS Grid &amp; Flex</h3>
+                        <p class="project-description">
+                            Laboratorio de layouts modernos y animaciones CSS. Primer asombro con keyframes.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → diseño responsivo y movimiento con CSS
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Grid</span>
+                            <span class="tag">Flexbox</span>
+                            <span class="tag">Animaciones</span>
+                        </div>
+                        <a href="06-css-grid-flex/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 07 - Palíndromo -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/07-palindromo.PNG" alt="Vista previa de Palíndromo" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Palíndromo</h3>
+                        <p class="project-description">
+                            Validador de palabras o frases palíndromas. Primer algoritmo con JavaScript.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → manipulación de strings y eventos
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS</span>
+                        </div>
+                        <a href="07-palindromo/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 08 - Login PHP -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/08-login.PNG" alt="Vista previa de Login PHP" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Login PHP</h3>
+                        <p class="project-description">
+                            Primer contacto con PHP: formulario de autenticación básico. Antesala de Laravel.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → procesamiento de formularios en el servidor
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">PHP</span>
+                        </div>
+                        <a href="08-login/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 09 - Pantalla -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/09-pantalla.PNG" alt="Vista previa de Pantalla" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Pantalla</h3>
+                        <p class="project-description">
+                            JavaScript para obtener dimensiones de la ventana y URL actual.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → objetos window, screen, location
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS</span>
+                        </div>
+                        <a href="09-pantalla/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 10 - ClessLab -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/10-clesslab.PNG" alt="Vista previa de ClessLab" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">ClessLab</h3>
+                        <p class="project-description">
+                            Mi primera página web completa hecha por mí solo. Me costó bastante, pero fue mi punto de partida real.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → organización de secciones y formularios
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <a href="10-clesslab/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 11 - Fecha y Hora -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/11-fecha-hora.PNG" alt="Vista previa de Fecha y Hora" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Fecha y Hora</h3>
+                        <p class="project-description">
+                            Reloj y calendario dinámico con JavaScript. Actualización en tiempo real.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → setInterval y formato de fechas
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS (Date)</span>
+                        </div>
+                        <a href="11-fecha-hora/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 12 - Tablas de Multiplicar -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/12-tablas-de-multiplicar.PNG" alt="Vista previa de Tablas de Multiplicar" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Tablas de Multiplicar</h3>
+                        <p class="project-description">
+                            Generador dinámico de tablas del 1 al 30 usando bucles for.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → renderizado dinámico con innerHTML
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS (bucles)</span>
+                        </div>
+                        <a href="12-tablas-de-multiplicar/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 13 - Almacén de Cajas -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/13-almacen-de-cajas.PNG" alt="Vista previa de Almacén de Cajas" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Almacén de Cajas</h3>
+                        <p class="project-description">
+                            Interfaz Drag &amp; Drop nativo. Apareció en la competencia.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → ciclo de eventos de arrastre
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS (drag events)</span>
+                        </div>
+                        <a href="13-almacen-de-cajas/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 14 - Menú Cuadrícula -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/14-menu-cuadricula.PNG" alt="Vista previa de Menú Cuadrícula" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Menú Cuadrícula</h3>
+                        <p class="project-description">
+                            Práctica de Grid y Flexbox para organizar secciones. Aunque no me gustó visualmente, fue muy importante para aprender.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → combinación de Grid y Flexbox
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">CSS Grid</span>
+                            <span class="tag">Flexbox</span>
+                        </div>
+                        <a href="14-menu-cuadricula/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 15 - Cronómetro WorldSkills -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/15-cronometro-world-skills.PNG" alt="Vista previa de Cronómetro WorldSkills" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Cronómetro WorldSkills</h3>
+                        <p class="project-description">
+                            Cronómetro interactivo con PHP y JavaScript. Requiere XAMPP.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → integración frontend-backend
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS</span>
+                            <span class="tag">PHP</span>
+                        </div>
+                        <a href="15-cronometro-world-skills/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 16 - Rompecabezas Módulo A -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/16-rompecabezas-modulo-a.PNG" alt="Vista previa de Rompecabezas WorldSkills" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Rompecabezas Módulo A</h3>
+                        <p class="project-description">
+                            Puzzle con imágenes de WorldSkills usando Drag &amp; Drop. Muy satisfactorio de ver funcionando.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → lógica de ordenamiento y validación
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS (drag &amp; drop)</span>
+                        </div>
+                        <a href="16-rompecabezas-modulo-a/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 17 - Órbita Celestial -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/17-orbita-celestial.PNG" alt="Vista previa de Órbita Celestial" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Órbita Celestial</h3>
+                        <p class="project-description">
+                            Sistema planetario animado solo con HTML y CSS. Apareció en la competencia.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → posicionamiento absoluto y animaciones continuas
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS (keyframes)</span>
+                        </div>
+                        <a href="17-orbita-celestial/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 18 - Interactive Rating Component -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/18-interactive-rating-challenge.PNG" alt="Vista previa de Interactive Rating Component" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Interactive Rating</h3>
+                        <p class="project-description">
+                            Desafío de Frontend Mentor. El instructor Washington nos recomendó la página.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → interpretar requerimientos y manejar estados
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS</span>
+                        </div>
+                        <a href="18-interactive-rating-component/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 19 - Simon Say -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/19-simon-say.PNG" alt="Vista previa de Simon Say" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Simon Say</h3>
+                        <p class="project-description">
+                            Juego de memoria basado en un tutorial. Mi versión personal.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → secuencias, temporizadores y lógica de juego
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS</span>
+                        </div>
+                        <a href="19-simon-say/index.html" class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                            Ver proyecto
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 20 - Laravel -->
+                <article class="project-card bm-reveal">
+                    <div class="card-image-wrapper">
+                        <img src="assets/20-laravel.png" alt="Vista previa de Laravel" loading="lazy" decoding="async">
+                        <div class="image-overlay">
+                            <span class="overlay-icon" aria-hidden="true"><i class="fa-brands fa-laravel"></i></span>
+                            <span class="overlay-text">Ver proyecto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Laravel – Gestión de Estudiantes</h3>
+                        <p class="project-description">
+                            CRUD completo con Laravel 11, API REST y SQLite. El proyecto más completo de backend.
+                        </p>
+                        <p class="project-description" style="font-style: italic; font-size: 0.72rem; color: var(--color-accent-amber);">
+                            → MVC, migraciones, validaciones y consumo de API
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Laravel</span>
+                            <span class="tag">PHP</span>
+                            <span class="tag">SQLite</span>
+                            <span class="tag">API REST</span>
+                        </div>
+                        <a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-1/world-skills/20-laravel"
+                            class="card-button" target="_blank" rel="noopener noreferrer">
+                            <span class="button-icon" aria-hidden="true"><i class="fa-brands fa-github"></i></span>
+                            Ver en GitHub
+                            <span class="button-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER                                         -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <style>
+            #footer .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #footer .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #footer .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #footer .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #footer .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            #footer .footer-links .footer-link:hover {
+                color: var(--color-accent);
+            }
+
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            @media (max-width: 768px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="#contexto" class="footer-link">Contexto</a></li>
+                    <li><a href="#proyectos" class="footer-link">Proyectos</a></li>
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                    <li><a href="../../trimestre-7/index.html" class="footer-link">Trimestre 7</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software"
+                            target="_blank" rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank"
+                            rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
             </div>
         </div>
-    </div>
-</section>
 
-<section class="projects" aria-labelledby="proyectos-heading">
-    <div class="projects__container">
-        <h2 id="proyectos-heading" class="projects__title">Los 20 proyectos</h2>
-        <p class="projects__intro">Cada tarjeta te lleva al código fuente. Haz clic en “Ver Proyecto” para explorar el ejercicio en tu navegador.</p>
-        
-        <div class="cards-grid">
-            <!-- 01 - Lorem Cards -->
-            <article class="card">
-                <div class="card__img"><img src="assets/01-lorem-cards.PNG" alt="Vista previa de Lorem Cards"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Lorem Cards</h3>
-                </div>
-                <p class="card__desc">Mi primer contacto con HTML/CSS: tarjetas de texto de relleno. Aprendí estructura básica y modelos de caja.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span></div>
-                <div class="card__learning">Aprendizaje: etiquetas semánticas y estilos iniciales</div>
-                <a href="01-lorem-cards/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 02 - Social Cards -->
-            <article class="card">
-                <div class="card__img"><img src="assets/02-social-cards.PNG" alt="Vista previa de Social Cards"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Social Cards</h3>
-                </div>
-                <p class="card__desc">Tarjetas de perfil de usuario. Practiqué organización con divs y selectores CSS.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span></div>
-                <div class="card__learning">Aprendizaje: disposición de elementos y sombras</div>
-                <a href="02-social-cards/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 03 - Metodología BEM -->
-            <article class="card">
-                <div class="card__img"><img src="assets/03-metodologia-bem.PNG" alt="Vista previa de Metodología BEM"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Metodología BEM</h3>
-                </div>
-                <p class="card__desc">Aplicación de la convención Bloque–Elemento–Modificador para nombrar clases CSS.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS (BEM)</span></div>
-                <div class="card__learning">Aprendizaje: código mantenible y legible</div>
-                <a href="03-metodologia-bem/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 04 - Social Cards Washington -->
-            <article class="card">
-                <div class="card__img"><img src="assets/04-social-cards-washington.PNG" alt="Vista previa de Social Cards Washington"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Social Cards (W)</h3>
-                </div>
-                <p class="card__desc">Tarea autónoma: replicar una tarjeta de perfil del instructor. Primer ejercicio sin guía.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span></div>
-                <div class="card__learning">Aprendizaje: tomar decisiones de diseño por mí mismo</div>
-                <a href="04-social-cards-washington/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 05 - Granero -->
-            <article class="card">
-                <div class="card__img"><img src="assets/05-granero.PNG" alt="Vista previa de Granero"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Granero</h3>
-                </div>
-                <p class="card__desc">Maquetación básica de un ecommerce: productos, precios, área de login y pedidos.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span></div>
-                <div class="card__learning">Aprendizaje: estructura de tienda virtual</div>
-                <a href="05-granero/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 06 - CSS Grid + Flexbox -->
-            <article class="card">
-                <div class="card__img"><img src="assets/06-css-grid-flex.PNG" alt="Vista previa de CSS Grid y Flexbox"></div>
-                <div class="card__header">
-                    <h3 class="card__title">CSS Grid & Flex</h3>
-                </div>
-                <p class="card__desc">Laboratorio de layouts modernos y animaciones CSS. Primer asombro con keyframes.</p>
-                <div class="card__tech"><span>Grid</span><span>Flexbox</span><span>Animaciones</span></div>
-                <div class="card__learning">Aprendizaje: diseño responsivo y movimiento con CSS</div>
-                <a href="06-css-grid-flex/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 07 - Palíndromo -->
-            <article class="card">
-                <div class="card__img"><img src="assets/07-palindromo.PNG" alt="Vista previa de Palíndromo"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Palíndromo</h3>
-                </div>
-                <p class="card__desc">Validador de palabras o frases palíndromas. Primer algoritmo con JavaScript.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-                <div class="card__learning">Aprendizaje: manipulación de strings y eventos</div>
-                <a href="07-palindromo/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 08 - Login PHP -->
-            <article class="card">
-                <div class="card__img"><img src="assets/08-login.PNG" alt="Vista previa de Login PHP"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Login PHP</h3>
-                </div>
-                <p class="card__desc">Primer contacto con PHP: formulario de autenticación básico. Antesala de Laravel.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>PHP</span></div>
-                <div class="card__learning">Aprendizaje: procesamiento de formularios en el servidor</div>
-                <a href="08-login/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 09 - Pantalla -->
-            <article class="card">
-                <div class="card__img"><img src="assets/09-pantalla.PNG" alt="Vista previa de Pantalla"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Pantalla</h3>
-                </div>
-                <p class="card__desc">JavaScript para obtener dimensiones de la ventana y URL actual.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-                <div class="card__learning">Aprendizaje: objetos window, screen, location</div>
-                <a href="09-pantalla/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 10 - ClessLab -->
-            <article class="card">
-                <div class="card__img"><img src="assets/10-clesslab.PNG" alt="Vista previa de ClessLab"></div>
-                <div class="card__header">
-                    <h3 class="card__title">ClessLab</h3>
-                </div>
-                <p class="card__desc">Mi primera página web completa hecha por mí solo. Me costó bastante, pero fue mi punto de partida real.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span></div>
-                <div class="card__learning">Aprendizaje: organización de secciones y formularios</div>
-                <a href="10-clesslab/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 11 - Fecha y Hora -->
-            <article class="card">
-                <div class="card__img"><img src="assets/11-fecha-hora.PNG" alt="Vista previa de Fecha y Hora"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Fecha y Hora</h3>
-                </div>
-                <p class="card__desc">Reloj y calendario dinámico con JavaScript. Actualización en tiempo real.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>JS (Date)</span></div>
-                <div class="card__learning">Aprendizaje: setInterval y formato de fechas</div>
-                <a href="11-fecha-hora/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 12 - Tablas de Multiplicar -->
-            <article class="card">
-                <div class="card__img"><img src="assets/12-tablas-de-multiplicar.PNG" alt="Vista previa de Tablas de Multiplicar"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Tablas de Multiplicar</h3>
-                </div>
-                <p class="card__desc">Generador dinámico de tablas del 1 al 30 usando bucles for.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>JS (bucles)</span></div>
-                <div class="card__learning">Aprendizaje: renderizado dinámico con innerHTML</div>
-                <a href="12-tablas-de-multiplicar/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 13 - Almacén de Cajas -->
-            <article class="card">
-                <div class="card__img"><img src="assets/13-almacen-de-cajas.PNG" alt="Vista previa de Almacén de Cajas"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Almacén de Cajas</h3>
-                </div>
-                <p class="card__desc">Interfaz Drag & Drop nativo. Apareció en la competencia.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>JS (drag events)</span></div>
-                <div class="card__learning">Aprendizaje: ciclo de eventos de arrastre</div>
-                <a href="13-almacen-de-cajas/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 14 - Menú Cuadrícula -->
-            <article class="card">
-                <div class="card__img"><img src="assets/14-menu-cuadricula.PNG" alt="Vista previa de Menú Cuadrícula"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Menú Cuadrícula</h3>
-                </div>
-                <p class="card__desc">Práctica de Grid y Flexbox para organizar secciones. Aunque no me gustó visualmente, fue muy importante para aprender.</p>
-                <div class="card__tech"><span>CSS Grid</span><span>Flexbox</span></div>
-                <div class="card__learning">Aprendizaje: combinación de Grid y Flexbox</div>
-                <a href="14-menu-cuadricula/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 15 - Cronómetro WorldSkills -->
-            <article class="card">
-                <div class="card__img"><img src="assets/15-cronometro-world-skills.PNG" alt="Vista previa de Cronómetro WorldSkills"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Cronómetro WorldSkills</h3>
-                </div>
-                <p class="card__desc">Cronómetro interactivo con PHP y JavaScript. Requiere XAMPP.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>JS</span><span>PHP</span></div>
-                <div class="card__learning">Aprendizaje: integración frontend-backend</div>
-                <a href="15-cronometro-world-skills/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 16 - Rompecabezas Módulo A -->
-            <article class="card">
-                <div class="card__img"><img src="assets/16-rompecabezas-modulo-a.PNG" alt="Vista previa de Rompecabezas WorldSkills"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Rompecabezas Módulo A</h3>
-                </div>
-                <p class="card__desc">Puzzle con imágenes de WorldSkills usando Drag & Drop. Muy satisfactorio de ver funcionando.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>JS (drag & drop)</span></div>
-                <div class="card__learning">Aprendizaje: lógica de ordenamiento y validación</div>
-                <a href="16-rompecabezas-modulo-a/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 17 - Órbita Celestial -->
-            <article class="card">
-                <div class="card__img"><img src="assets/17-orbita-celestial.PNG" alt="Vista previa de Órbita Celestial"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Órbita Celestial</h3>
-                </div>
-                <p class="card__desc">Sistema planetario animado solo con HTML y CSS. Apareció en la competencia.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS (keyframes)</span></div>
-                <div class="card__learning">Aprendizaje: posicionamiento absoluto y animaciones continuas</div>
-                <a href="17-orbita-celestial/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 18 - Interactive Rating Component -->
-            <article class="card">
-                <div class="card__img"><img src="assets/18-interactive-rating-challenge.PNG" alt="Vista previa de Interactive Rating Component"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Interactive Rating</h3>
-                </div>
-                <p class="card__desc">Desafío de Frontend Mentor. El instructor Washington nos recomendó la página.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-                <div class="card__learning">Aprendizaje: interpretar requerimientos y manejar estados</div>
-                <a href="18-interactive-rating-component/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 19 - Simon Say -->
-            <article class="card">
-                <div class="card__img"><img src="assets/19-simon-say.PNG" alt="Vista previa de Simon Say"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Simon Say</h3>
-                </div>
-                <p class="card__desc">Juego de memoria basado en un tutorial. Mi versión personal.</p>
-                <div class="card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-                <div class="card__learning">Aprendizaje: secuencias, temporizadores y lógica de juego</div>
-                <a href="19-simon-say/index.html" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
-
-            <!-- 20 - Laravel -->
-            <article class="card">
-                <div class="card__img"><img src="assets/20-laravel.png" alt="Vista previa de Laravel"></div>
-                <div class="card__header">
-                    <h3 class="card__title">Laravel - Gestión de Estudiantes</h3>
-                </div>
-                <p class="card__desc">CRUD completo con Laravel 11, API REST y SQLite. El proyecto más completo de backend.</p>
-                <div class="card__tech"><span>Laravel</span><span>PHP</span><span>SQLite</span><span>API REST</span></div>
-                <div class="card__learning">Aprendizaje: MVC, migraciones, validaciones y consumo de API</div>
-                <a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software/tree/main/trimestre-1/world-skills/20-laravel" class="card__btn" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
-            </article>
+        <div class="footer-bottom">
+            <p>Proyecto académico sin fines comerciales · WorldSkills 2025</p>
+            <p>&copy; 2026 - Creado por <strong>santiagoencodigo</strong></p>
         </div>
-    </div>
-</section>
+    </footer>
 
-<footer class="footer">
-    <div class="footer__content">
-        <div class="footer__col">
-            <h4>World Skills · Primer Trimestre ADSO</h4>
-            <p>Cápsula histórica de mi proceso formativo. Este portafolio documenta el momento en que el código dejó de ser abstracto y se convirtió en herramienta de expresión.</p>
-        </div>
-        <div class="footer__col">
-            <h5>Legado técnico</h5>
-            <ul>
-                <li>Descubrimiento: HTML / CSS / JS</li>
-                <li>Lógica estructurada y eventos</li>
-                <li>Diseño con Flexbox, Grid, animaciones</li>
-                <li>Interacciones Drag & Drop</li>
-                <li>Backend con PHP y Laravel</li>
-            </ul>
-        </div>
-        <div class="footer__col">
-            <h5>Contexto</h5>
-            <p>Junio 2025 — WorldSkills Colombia. Primer contacto real con tecnologías web.</p>
-            <span class="footer__sign">ADSO · bitácora de evolución</span>
-        </div>
-    </div>
-    <div class="footer__bottom">
-        <p>Proyecto académico sin fines comerciales · todos los ejercicios forman parte de mi formación integral</p>
-    </div>
-</footer>
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template editorial (apuntes + theme switcher) -->
+    <script src="../../Assets/templates.js"></script>
 
 </body>
+
 </html>
