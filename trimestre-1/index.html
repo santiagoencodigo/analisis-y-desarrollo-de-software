@@ -2,579 +2,93 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ============================================== -->
-    <!-- SEO                                            -->
-    <!-- ============================================== -->
+    <!-- Anti-FOUC -->
+    <script>try{var t=localStorage.getItem('adso-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
     <title>Trimestre 1 · Análisis y Desarrollo de Software SENA</title>
     <meta name="description"
-        content="Proyectos del Trimestre 1 del Tecnólogo ADSO del SENA: elicitación de requisitos, UML, bitácora de aprendizaje y teoría general de sistemas." />
-    <meta name="author" content="santiagoencodigo" />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#06241a" />
+        content="Proyectos del Trimestre 1 del Tecnólogo ADSO del SENA: elicitación de requisitos, UML, bitácora de aprendizaje, teoría general de sistemas y modelos de negocio.">
+    <meta name="keywords" content="ADSO, SENA, trimestre 1, elicitación de requisitos, UML, TGS, modelos de negocio, análisis de software">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1120">
 
     <link rel="canonical"
-        href="https://santiagoencodigo.github.io/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/trimestre-1/" />
+        href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/trimestre-1/">
 
-    <!-- ============================================== -->
-    <!-- OPEN GRAPH                                     -->
-    <!-- ============================================== -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url"
-        content="https://santiagoencodigo.github.io/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/trimestre-1/" />
-    <meta property="og:title" content="Trimestre 1 · Análisis y Desarrollo de Software SENA" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Trimestre 1 · Análisis y Desarrollo de Software SENA">
     <meta property="og:description"
-        content="Proyectos del Trimestre 1 del Tecnólogo en ADSO. Fundamentos de análisis de requisitos, UML y teoría de sistemas." />
-    <meta property="og:image"
-        content="https://raw.githubusercontent.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/main/assets/og-image.jpg" />
-    <meta property="og:image:alt" content="Portada del Trimestre 1 - ADSO SENA" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Guía Completa ADSO" />
-    <meta property="og:locale" content="es_ES" />
+        content="Proyectos del Trimestre 1 del Tecnólogo en ADSO. Fundamentos de análisis de requisitos, UML y teoría de sistemas.">
+    <meta property="og:locale" content="es_ES">
 
-    <!-- ============================================== -->
-    <!-- TWITTER CARD                                   -->
-    <!-- ============================================== -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@santiagoencodigo" />
-    <meta name="twitter:creator" content="@santiagoencode" />
-    <meta name="twitter:title" content="Trimestre 1 · ADSO SENA" />
-    <meta name="twitter:description"
-        content="Proyectos del Trimestre 1 del Tecnólogo en Análisis y Desarrollo de Software." />
-    <meta name="twitter:image"
-        content="https://raw.githubusercontent.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/main/assets/og-image.jpg" />
-    <meta name="twitter:image:alt" content="Portada del Trimestre 1 - ADSO SENA" />
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+        href="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="icon"
+        href="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
 
-    <!-- ============================================== -->
-    <!-- RECURSOS EXTERNOS                              -->
-    <!-- ============================================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
 
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="../Assets/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 
-    <!-- ============================================== -->
-    <!-- FAVICON                                        -->
-    <!-- ============================================== -->
-    <link rel="shortcut icon" href="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
-        type="image/svg+xml" />
-    <link rel="icon" href="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
-        type="image/svg+xml" />
-    <link rel="apple-touch-icon" sizes="180x180"
-        href="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
 
-    <!-- ============================================== -->
-    <!-- DATOS ESTRUCTURADOS                            -->
-    <!-- ============================================== -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "LearningResource",
-            "name": "Trimestre 1 - Análisis y Desarrollo de Software (ADSO)",
-            "description": "Repositorio de proyectos y ejercicios del Trimestre 1 del Tecnólogo en ADSO del SENA.",
-            "author": {
-                "@type": "Person",
-                "name": "santiagoencodigo",
-                "url": "https://github.com/santiagoencodigo"
-            },
-            "provider": {
-                "@type": "Organization",
-                "name": "SENA - Servicio Nacional de Aprendizaje",
-                "url": "https://www.sena.edu.co"
-            },
-            "educationalLevel": "Tecnólogo",
-            "learningResourceType": "Curso",
-            "teaches": [
-                "Elicitación de Requisitos",
-                "Unified Modeling Language (UML)",
-                "Bitácora de Aprendizaje",
-                "Teoría General de Sistemas"
-            ],
-            "inLanguage": "es"
-        }
-    </script>
+    <!-- Estilos del proyecto + template -->
+    <link rel="stylesheet" href="../Assets/style.css">
+    <link rel="stylesheet" href="../Assets/templates.css">
 
-    <!-- ============================================== -->
-    <!-- ESTILOS PROPIOS — Paleta Starbucks             -->
-    <!-- ============================================== -->
+    <!-- Utilidades específicas de esta página -->
     <style>
-        /* ============================================
-           DESIGN SYSTEM
-           ============================================ */
-        :root {
-            --sb-deep:       #06241a;
-            --sb-dark:       #0a2e21;
-            --sb-dark-2:     #0e3a2a;
-            --sb-green:      #00704A;
-            --sb-green-mid:  #1e8c5e;
-            --sb-green-soft: #2ea87a;
-            --sb-green-hi:   #4dd6a3;
-            --sb-cream:      #F1F0EB;
-            --sb-cream-dim:  #c4cec7;
-            --sb-cream-mute: #93a89c;
-            --sb-gold:       #CBA258;
-            --sb-gold-soft:  #e8c98a;
-            --sb-border:     rgba(46, 168, 122, 0.18);
-            --sb-border-hi:  rgba(46, 168, 122, 0.55);
-
-            --sp-1: 0.25rem;
-            --sp-2: 0.5rem;
-            --sp-3: 0.75rem;
-            --sp-4: 1rem;
-            --sp-5: 1.5rem;
-            --sp-6: 2rem;
-            --sp-7: 3rem;
-
-            --r-sm: 8px;
-            --r-md: 12px;
-            --r-lg: 16px;
-            --r-pill: 999px;
-
-            --tx-fast: 0.2s ease;
-            --tx-base: 0.3s ease;
-
-            --container-max: 1200px;
-            --container-pad: 1rem;
-        }
-
-        /* ============================================
-           SKIP LINK
-           ============================================ */
-        .skip-link {
-            position: absolute;
-            top: -100px;
-            left: var(--sp-4);
-            z-index: 1000;
-            padding: var(--sp-3) var(--sp-5);
-            background: var(--sb-green);
-            color: #fff;
-            font-weight: 700;
-            border-radius: var(--r-sm);
-            text-decoration: none;
-            transition: top var(--tx-fast);
-        }
-
-        .skip-link:focus,
-        .skip-link:focus-visible {
-            top: var(--sp-4);
-            outline: 3px solid var(--sb-gold-soft);
-            outline-offset: 2px;
-        }
-
-        /* ============================================
-           FOCUS VISIBLE
-           ============================================ */
-        a:focus-visible,
-        button:focus-visible,
-        .card-button:focus-visible {
-            outline: 3px solid var(--sb-gold-soft);
-            outline-offset: 3px;
-            border-radius: var(--r-sm);
-        }
-
-        /* ============================================
-           PREFERS REDUCED MOTION
-           ============================================ */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-                transform: none !important;
-            }
-        }
-
-        /* ============================================
-           HERO
-           ============================================ */
-        .hero-section {
-            background:
-                radial-gradient(ellipse at 20% 20%, rgba(0, 112, 74, 0.28) 0%, transparent 55%),
-                radial-gradient(ellipse at 80% 80%, rgba(203, 162, 88, 0.10) 0%, transparent 55%),
-                linear-gradient(180deg, #041a12 0%, #06241a 100%);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--sb-green-hi) 0%, var(--sb-gold) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: var(--sb-green-hi);
-        }
-
-        .adso-card {
-            background: linear-gradient(135deg, rgba(10, 46, 33, 0.85) 0%, rgba(6, 36, 26, 0.9) 100%);
-            border: 1px solid var(--sb-border);
-            box-shadow: 0 20px 45px rgba(2, 15, 10, 0.5);
-        }
-
-        .adso-title {
-            color: var(--sb-gold-soft);
-            letter-spacing: 0.03em;
-        }
-
-        .adso-text {
-            color: var(--sb-cream-dim);
-        }
-
-        .stat-number {
-            color: var(--sb-green-soft);
-        }
-
-        .stat-label {
-            color: var(--sb-cream-mute);
-        }
-
-        /* ============================================
-           SECCIÓN PROYECTOS
-           ============================================ */
-        .projects-section {
-            padding: var(--sp-7) 0;
-            background:
-                radial-gradient(ellipse at top, rgba(0, 112, 74, 0.12) 0%, transparent 60%),
-                linear-gradient(180deg, #06241a 0%, #041a12 100%);
-        }
-
-        .projects-header {
-            text-align: center;
-            max-width: 720px;
-            margin: 0 auto var(--sp-6) auto;
-            padding: 0 var(--sp-4);
-        }
-
-        .projects-title {
-            font-size: clamp(1.5rem, 2.6vw, 2rem);
-            font-weight: 800;
-            color: var(--sb-cream);
-            letter-spacing: -0.02em;
-            margin-bottom: var(--sp-3);
-        }
-
-        .projects-title::after {
-            content: "";
-            display: block;
-            width: 52px;
-            height: 3px;
-            margin: 0.75rem auto 0;
-            border-radius: 2px;
-            background: linear-gradient(90deg, var(--sb-green) 0%, var(--sb-gold) 100%);
-        }
-
-        .projects-description {
-            color: var(--sb-cream-dim);
-            margin-top: var(--sp-3);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* ============================================
-           GRID DE PROYECTOS - UNA SOLA COLUMNA COMPACTA
-           ============================================ */
-        .projects-grid {
+        /* ==========================================
+           GRID DE PROYECTOS — responsive auto-adaptable
+           Desktop: 3 columnas · Tablet: 2 · Móvil: 1
+           ========================================== */
+        .q1-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.5rem;
-            max-width: 820px;
-            margin: 0 auto;
-            padding: 0 var(--sp-4);
-        }
-
-        /* ============================================
-           CARD — Patrón compacto de la homepage
-           ============================================ */
-        .project-card {
-            position: relative;
-            background: linear-gradient(135deg, #0c2f22 0%, #08251b 60%, #061c14 100%);
-            border: 1px solid var(--sb-border);
-            border-radius: var(--r-lg);
-            overflow: hidden;
-            box-shadow: 0 12px 30px rgba(2, 15, 10, 0.5);
-            transition: transform var(--tx-base), border-color var(--tx-base), box-shadow var(--tx-base);
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--sb-border-hi);
-            box-shadow:
-                0 20px 40px rgba(0, 40, 25, 0.6),
-                0 0 32px rgba(0, 112, 74, 0.22);
-        }
-
-        /* ----- Imagen de la card: aspecto 16/9, compacta ----- */
-        .card-image-wrapper {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 16 / 9;
-            background-color: #041610;
-        }
-
-        .card-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-            display: block;
-            transition: transform 0.5s ease, opacity 0.3s ease;
-        }
-
-        .project-card:hover .card-image-wrapper img {
-            transform: scale(1.04);
-            opacity: 0.85;
-        }
-
-        /* ----- Overlay al hover ----- */
-        .image-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(6, 36, 26, 0.78);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            opacity: 0;
-            transition: opacity var(--tx-base);
-            pointer-events: none;
-        }
-
-        .project-card:hover .image-overlay {
-            opacity: 1;
-        }
-
-        .overlay-icon {
-            font-size: 1.5rem;
-            color: var(--sb-green-hi);
-            line-height: 1;
-        }
-
-        .overlay-text {
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--sb-cream);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        /* ----- Badge de categoría (esquina superior izq.) ----- */
-        .project-badge {
-            position: absolute;
-            top: 0.7rem;
-            left: 0.7rem;
-            background: linear-gradient(135deg, var(--sb-green) 0%, var(--sb-green-mid) 100%);
-            color: #ffffff;
-            font-size: 0.58rem;
-            font-weight: 700;
-            padding: 3px 9px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            z-index: 2;
-            border-radius: var(--r-sm);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-        }
-
-        /* ----- Contenido de la card ----- */
-        .card-content {
-            padding: 1.25rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-name {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--sb-gold-soft);
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-            transition: color var(--tx-base);
-        }
-
-        .project-description {
-            font-size: 0.82rem;
-            color: var(--sb-cream-dim);
-            line-height: 1.65;
-            margin-bottom: 0.85rem;
-        }
-
-        /* ----- Tags ----- */
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.35rem;
-            margin-bottom: 1rem;
-            list-style: none;
-            padding: 0;
-        }
-
-        .tag {
-            font-size: 0.58rem;
-            font-weight: 700;
-            padding: 3px 8px;
-            background-color: rgba(46, 168, 122, 0.1);
-            color: var(--sb-green-hi);
-            border: 1px solid rgba(46, 168, 122, 0.28);
-            letter-spacing: 0.07em;
-            text-transform: uppercase;
-            border-radius: var(--r-sm);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .tag i {
-            font-size: 0.6rem;
-        }
-
-        /* ----- Botón compacto ----- */
-        .card-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            width: fit-content;
-            padding: 0.55rem 1rem;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--sb-cream);
-            background: transparent;
-            border: 1px solid var(--sb-border);
-            border-radius: var(--r-pill);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all var(--tx-base);
-        }
-
-        .card-button:hover {
-            background: linear-gradient(135deg, var(--sb-green) 0%, var(--sb-green-mid) 100%);
-            border-color: var(--sb-green-soft);
-            color: #ffffff;
-            box-shadow: 0 8px 20px rgba(0, 112, 74, 0.4);
-        }
-
-        .button-icon,
-        .button-arrow {
-            font-style: normal;
-            line-height: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        #mapa-de-sitio {
-            background: linear-gradient(180deg, #041a12 0%, #02110c 100%);
-            border-top: 1px solid var(--sb-border);
-        }
-
-        #mapa-de-sitio .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--sp-6);
             max-width: var(--container-max);
             margin: 0 auto;
-            padding: var(--sp-6) var(--container-pad);
+            padding: 0 var(--container-pad);
         }
 
-        #mapa-de-sitio .footer-col h4 {
-            color: var(--sb-cream);
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-bottom: var(--sp-4);
-            border-bottom: 1px solid rgba(46, 168, 122, 0.22);
-            padding-bottom: var(--sp-2);
+        /* Tablet: 2 columnas */
+        @media (min-width: 640px) {
+            .q1-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        #mapa-de-sitio .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #mapa-de-sitio .footer-links li {
-            margin-bottom: var(--sp-2);
-        }
-
-        #mapa-de-sitio .footer-links .footer-link {
-            color: var(--sb-cream-dim);
-            transition: color var(--tx-base);
-            text-decoration: none;
-            font-size: 0.85rem;
-        }
-
-        #mapa-de-sitio .footer-links .footer-link:hover,
-        #mapa-de-sitio .footer-links .footer-link:focus-visible {
-            color: var(--sb-green-hi);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(46, 168, 122, 0.22);
-            padding: var(--sp-5) var(--container-pad) var(--sp-4);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--sp-2);
-            max-width: var(--container-max);
-            margin: 0 auto;
-        }
-
-        .footer-bottom p {
-            color: var(--sb-cream-mute);
-            font-size: 0.75rem;
-            margin: 0;
-        }
-
-        .footer-bottom strong {
-            color: var(--sb-cream);
-        }
-
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
-        @media (max-width: 768px) {
-            .projects-grid {
-                padding: 0 var(--sp-3);
+        /* Escritorio: 3 columnas */
+        @media (min-width: 1024px) {
+            .q1-grid {
+                grid-template-columns: repeat(3, 1fr);
                 gap: 1.25rem;
             }
-
-            .card-content {
-                padding: 1rem;
-            }
-
-            .project-name {
-                font-size: 0.95rem;
-            }
-
-            #mapa-de-sitio .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: var(--sp-5);
-                padding: var(--sp-5) var(--container-pad);
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-                padding: var(--sp-4) var(--container-pad);
-            }
         }
 
-        @media (max-width: 480px) {
-            #mapa-de-sitio .footer-grid {
-                grid-template-columns: 1fr;
-                gap: var(--sp-5);
+        /* Ultra-wide: sigue en 3 columnas pero con más aire */
+        @media (min-width: 1440px) {
+            .q1-grid {
+                gap: 1.5rem;
             }
         }
     </style>
@@ -582,33 +96,40 @@
 
 <body>
 
-    <!-- Skip link -->
-    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
 
     <!-- ============================================== -->
     <!-- HEADER / NAVEGACIÓN                            -->
     <!-- ============================================== -->
-    <header class="main-header">
-        <nav class="navbar navbar-expand-md nav-container" aria-label="Navegación principal">
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
             <div class="container-fluid px-0">
-                <a href="../index.html#inicio" class="navbar-brand nav-logo">
+
+                <a href="../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
                     <img src="../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
-                        alt="" width="32" height="32" class="nav-logo-img" aria-hidden="true" />
+                        alt="" class="nav-logo-img" aria-hidden="true">
                     ADSO
                 </a>
 
-                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                <button class="navbar-toggler nav-toggle" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
                     aria-label="Abrir menú de navegación">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="../index.html#trimestres"
-                                id="trimestresDropdown" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Trimestres
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
@@ -632,57 +153,69 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="../index.html#mapa-de-sitio">Footer</a>
+                            <a class="nav-link" href="#footer">Footer</a>
                         </li>
                     </ul>
                 </div>
+
             </div>
         </nav>
     </header>
 
-    <!-- ============================================== -->
-    <!-- MAIN                                           -->
-    <!-- ============================================== -->
-    <main id="contenido-principal">
+    <main>
 
         <!-- ========================================== -->
         <!-- HERO                                       -->
         <!-- ========================================== -->
-        <section id="inicio" class="hero-section" aria-labelledby="hero-title">
-            <div class="hero-background" aria-hidden="true">
-                <div class="bg-grid"></div>
-                <div class="bg-matrix"></div>
-                <div class="bg-orb"></div>
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
             </div>
 
-            <div class="hero-container">
-                <h1 id="hero-title" class="hero-title">
-                    <span class="title-line gradient-text">Trimestre 1</span>
-                    <span class="title-line">Análisis y Desarrollo</span>
-                    <span class="title-line">de Software</span>
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Análisis y Desarrollo de Software · SENA
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    <span class="gradient-text">Trimestre 1</span>
+                    Análisis y Desarrollo de Software
                 </h1>
 
-                <p class="hero-description">
+                <p class="bm-hero__lead">
                     Fundamentos del análisis de requisitos, modelado con UML, bitácora de aprendizaje
-                    y teoría general de sistemas. Primeros pasos en el mundo del desarrollo de software.
+                    y teoría general de sistemas. Los primeros pasos en el mundo del desarrollo de software.
                 </p>
 
-                <div class="adso-card">
-                    <h2 class="adso-title">Enfoque del trimestre</h2>
-                    <p class="adso-text">
-                        Se exploran las bases del análisis de software: cómo elicitar requisitos,
-                        documentar con UML, mantener una bitácora de aprendizaje y comprender
-                        los sistemas desde una perspectiva teórica.
-                    </p>
-                    <div class="adso-stats">
-                        <div class="stat">
-                            <span class="stat-number">1</span>
-                            <span class="stat-label">Trimestre</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">4</span>
-                            <span class="stat-label">Recursos</span>
-                        </div>
+                <div class="bm-hero__meta" role="list">
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Programa</span>
+                        <span class="bm-meta-value">Tecnólogo ADSO · SENA</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Enfoque</span>
+                        <span class="bm-meta-value">Análisis · Modelado · Teoría</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Contenido</span>
+                        <span class="bm-meta-value">5 módulos teórico-prácticos</span>
+                    </div>
+                </div>
+
+                <div class="bm-hero__stats" aria-label="Resumen del trimestre">
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">1</span>
+                        <span class="bm-stat-label">Trimestre</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">5</span>
+                        <span class="bm-stat-label">Módulos</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">4</span>
+                        <span class="bm-stat-label">Tecnologías</span>
                     </div>
                 </div>
             </div>
@@ -695,21 +228,21 @@
             <div class="projects-header">
                 <h2 id="proyectos-title" class="projects-title">Recursos · Trimestre 1</h2>
                 <p class="projects-description">
-                    Explora los cuatro módulos teórico-prácticos que componen el primer trimestre
+                    Explora los cinco módulos teórico-prácticos que componen el primer trimestre
                     del Tecnólogo en Análisis y Desarrollo de Software.
                 </p>
             </div>
 
-            <div class="projects-grid">
+            <div class="q1-grid">
 
                 <!-- ============================================ -->
                 <!-- CARD 0: World Skills                        -->
                 <!-- ============================================ -->
-                <article class="project-card" id="card-worldskills">
+                <article class="project-card bm-reveal" id="card-worldskills">
                     <div class="card-image-wrapper">
                         <img src="../Assets/img/homepage/4-worldskills.PNG"
                             alt="Portada del proyecto World Skills" loading="lazy"
-                            decoding="async" />
+                            decoding="async">
                         <div class="image-overlay">
                             <span class="overlay-icon" aria-hidden="true">
                                 <i class="fa-solid fa-trophy"></i>
@@ -744,11 +277,11 @@
                 <!-- ============================================ -->
                 <!-- CARD 1: Elicitación de Requisitos           -->
                 <!-- ============================================ -->
-                <article class="project-card" id="card-elicitacion">
+                <article class="project-card bm-reveal" id="card-elicitacion">
                     <div class="card-image-wrapper">
                         <img src="../Assets/img/trimestre-1/01-elicitacion-requisitos.png"
                             alt="Portada del tema Elicitación de Requisitos" loading="lazy"
-                            decoding="async" />
+                            decoding="async">
                         <div class="image-overlay">
                             <span class="overlay-icon" aria-hidden="true">
                                 <i class="fa-solid fa-file-lines"></i>
@@ -782,11 +315,11 @@
                 <!-- ============================================ -->
                 <!-- CARD 2: UML                                 -->
                 <!-- ============================================ -->
-                <article class="project-card" id="card-uml">
+                <article class="project-card bm-reveal" id="card-uml">
                     <div class="card-image-wrapper">
                         <img src="../Assets/img/trimestre-1/02-unified-modeling-language.png"
                             alt="Portada del tema Unified Modeling Language" loading="lazy"
-                            decoding="async" />
+                            decoding="async">
                         <div class="image-overlay">
                             <span class="overlay-icon" aria-hidden="true">
                                 <i class="fa-solid fa-shapes"></i>
@@ -820,11 +353,11 @@
                 <!-- ============================================ -->
                 <!-- CARD 3: Teoría General de Sistemas          -->
                 <!-- ============================================ -->
-                <article class="project-card" id="card-teoria">
+                <article class="project-card bm-reveal" id="card-teoria">
                     <div class="card-image-wrapper">
                         <img src="../Assets/img/trimestre-1/03-teoria-general-sistemas.png"
                             alt="Portada del tema Teoría General de Sistemas" loading="lazy"
-                            decoding="async" />
+                            decoding="async">
                         <div class="image-overlay">
                             <span class="overlay-icon" aria-hidden="true">
                                 <i class="fa-solid fa-cubes"></i>
@@ -856,13 +389,13 @@
                 </article>
 
                 <!-- ============================================ -->
-                <!-- CARD 4: Modelos de Negocio y Soluciones Tecnológicas -->
+                <!-- CARD 4: Modelos de Negocio                  -->
                 <!-- ============================================ -->
-                <article class="project-card" id="card-business-models">
+                <article class="project-card bm-reveal" id="card-business-models">
                     <div class="card-image-wrapper">
                         <img src="../Assets/img/trimestre-1/04-business-model.png"
                             alt="Portada del tema Modelos de Negocio y Soluciones Tecnológicas" loading="lazy"
-                            decoding="async" />
+                            decoding="async">
                         <div class="image-overlay">
                             <span class="overlay-icon" aria-hidden="true">
                                 <i class="fa-solid fa-briefcase"></i>
@@ -892,24 +425,105 @@
                             </span>
                         </a>
                     </div>
-                </article>        
+                </article>
 
             </div>
         </section>
-
     </main>
 
     <!-- ============================================== -->
-    <!-- FOOTER / MAPA DE SITIO                         -->
+    <!-- FOOTER                                         -->
     <!-- ============================================== -->
-    <footer id="mapa-de-sitio">
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <style>
+            #footer .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #footer .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #footer .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #footer .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #footer .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            #footer .footer-links .footer-link:hover {
+                color: var(--color-accent);
+            }
+
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            @media (max-width: 768px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
         <div class="footer-grid">
             <div class="footer-col">
                 <h4>Navegación</h4>
                 <ul class="footer-links">
-                    <li><a href="../index.html#inicio" class="footer-link">Inicio</a></li>
-                    <li><a href="../index.html#trimestres" class="footer-link">Estructura</a></li>
-                    <li><a href="#proyectos" class="footer-link">Proyectos</a></li>
+                    <li><a href="../index.html" class="footer-link">Inicio ADSO</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                    <li><a href="#proyectos" class="footer-link">Módulos</a></li>
                     <li><a href="../sitemap.html" class="footer-link">Mapa de sitio</a></li>
                 </ul>
             </div>
@@ -932,10 +546,10 @@
                 <ul class="footer-links">
                     <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software"
                             target="_blank" rel="noopener noreferrer" class="footer-link">
-                            <i class="fa-brands fa-github" aria-hidden="true"></i> Repositorio ADSO</a></li>
+                            <i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
                     <li><a href="https://github.com/santiagoencodigo" target="_blank"
                             rel="noopener noreferrer" class="footer-link">
-                            <i class="fa-brands fa-github" aria-hidden="true"></i> santiagoencodigo</a></li>
+                            <i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
                     <li><a href="../sitemap.html" class="footer-link">Mapa de sitio</a></li>
                     <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
                 </ul>
@@ -943,15 +557,21 @@
         </div>
 
         <div class="footer-bottom">
+            <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 1</p>
             <p>Creado por <strong>santiagoencodigo</strong></p>
-            <p>&copy; 2026 - Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- ============================================== -->
-    <!-- SCRIPTS                                        -->
-    <!-- ============================================== -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template editorial (apuntes + theme switcher) -->
+    <script src="../Assets/templates.js"></script>
 
 </body>
 
