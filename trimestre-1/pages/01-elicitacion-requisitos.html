@@ -4,685 +4,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elicitación de Requisitos | Trimestre 1</title>
-    <meta name="description" content="Elicitación de requisitos: fuentes de información, técnicas de recolección, requisitos funcionales y no funcionales, diagramas de flujo, DFD y UML.">
+
+    <!-- Anti-FOUC -->
+    <script>try{var t=localStorage.getItem('adso-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+    <title>Elicitación de Requisitos | Trimestre 1 · ADSO</title>
+    <meta name="description"
+        content="Elicitación de requisitos: fuentes de información, técnicas de recolección, requisitos funcionales y no funcionales, diagramas de flujo, DFD y UML.">
     <meta name="keywords" content="elicitación de requisitos, ADSO, SENA, requisitos funcionales, DFD, UML">
     <meta name="author" content="santiagoencodigo">
-    <meta name="theme-color" content="#0a0e1a">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1120">
 
+    <link rel="canonical"
+        href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/trimestre-1/pages/01-elicitacion-requisitos.html">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Estilos del proyecto + template -->
     <link rel="stylesheet" href="../../Assets/style.css">
+    <link rel="stylesheet" href="../../Assets/templates.css">
 
-    <link rel="shortcut icon" href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
-    <link rel="icon" href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
-
+    <!-- Utilidades específicas de esta página -->
     <style>
-        /* ══════════════════════════════════════════════ */
-        /* 1. VARIABLES GLOBALES                          */
-        /* ══════════════════════════════════════════════ */
-        :root {
-            /* Fondos */
-            --bg-base: #070b17;
-            --bg-surface: #0d1424;
-            --bg-elevated: #131b2e;
-            --bg-card: #161f35;
-            --bg-code: #0a101e;
-
-            /* Texto */
-            --text-primary: #eef2ff;
-            --text-secondary: #a5b4cf;
-            --text-muted: #6b7a99;
-
-            /* Acentos (paleta por sección) */
-            --accent-violet: #8b5cf6;
-            --accent-violet-soft: rgba(139, 92, 246, 0.15);
-            --accent-cyan: #06b6d4;
-            --accent-cyan-soft: rgba(6, 182, 212, 0.15);
-            --accent-amber: #f59e0b;
-            --accent-amber-soft: rgba(245, 158, 11, 0.15);
-            --accent-emerald: #10b981;
-            --accent-emerald-soft: rgba(16, 185, 129, 0.15);
-            --accent-rose: #f43f5e;
-            --accent-rose-soft: rgba(244, 63, 94, 0.15);
-            --accent-blue: #3b82f6;
-
-            /* Bordes */
-            --border: rgba(165, 180, 207, 0.12);
-            --border-strong: rgba(165, 180, 207, 0.24);
-
-            /* Sombras */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
-            --shadow-glow-violet: 0 0 40px rgba(139, 92, 246, 0.25);
-            --shadow-glow-cyan: 0 0 40px rgba(6, 182, 212, 0.2);
-
-            /* Layout */
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 20px;
-            --radius-full: 999px;
-
-            /* Transiciones */
-            --ease: cubic-bezier(0.4, 0, 0.2, 1);
-            --transition: all 0.3s var(--ease);
-            --transition-slow: all 0.6s var(--ease);
-
-            /* Navbar height */
-            --navbar-h: 68px;
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 2. RESET Y BASE                                */
-        /* ══════════════════════════════════════════════ */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: calc(var(--navbar-h) + 20px);
-            font-size: 16px;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg-base);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Text selection */
-        ::selection {
-            background: var(--accent-violet);
-            color: white;
-        }
-
-        /* Scrollbar personalizada */
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-base);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--accent-violet), var(--accent-cyan));
-            border-radius: var(--radius-full);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-violet);
-        }
-
-        a {
-            color: var(--accent-cyan);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        a:hover {
-            color: var(--accent-violet);
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 3. BARRA DE PROGRESO DE LECTURA                */
-        /* ══════════════════════════════════════════════ */
-        .reading-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            width: 0%;
-            background: linear-gradient(90deg, var(--accent-violet), var(--accent-cyan), var(--accent-amber));
-            z-index: 9999;
-            transition: width 0.1s linear;
-            box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 4. HEADER / NAVBAR                             */
-        /* ══════════════════════════════════════════════ */
-        .main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: var(--navbar-h);
-            background: rgba(7, 11, 23, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 0 1.25rem;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-weight: 800;
-            font-size: 1.15rem;
-            color: var(--text-primary) !important;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-logo-img {
-            width: 34px;
-            height: 34px;
-            padding: 5px;
-            /* background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan)); */
-            border-radius: var(--radius-sm);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            font-weight: 500;
-            padding: 0.5rem 0.85rem;
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 0.5rem;
-            border-radius: var(--radius-sm);
-            font-size: 1.4rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: var(--navbar-h);
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                align-items: stretch;
-                background: var(--bg-surface);
-                border-bottom: 1px solid var(--border);
-                padding: 1rem;
-                gap: 0.25rem;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 5. HERO                                        */
-        /* ══════════════════════════════════════════════ */
-        .hero {
-            position: relative;
-            min-height: 72vh;
-            display: flex;
-            align-items: center;
-            padding: calc(var(--navbar-h) + 4rem) 1.25rem 4rem;
-            overflow: hidden;
-            background: var(--bg-base);
-        }
-
-        /* Orbes de fondo animados */
-        .hero::before,
-        .hero::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.4;
-            pointer-events: none;
-        }
-
-        .hero::before {
-            width: 500px;
-            height: 500px;
-            background: var(--accent-violet);
-            top: -150px;
-            right: -100px;
-            animation: float-orb 18s ease-in-out infinite;
-        }
-
-        .hero::after {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-cyan);
-            bottom: -150px;
-            left: -100px;
-            animation: float-orb 22s ease-in-out infinite reverse;
-        }
-
-        @keyframes float-orb {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(40px, -30px) scale(1.1); }
-            66% { transform: translate(-30px, 20px) scale(0.95); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1320px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.45rem 1rem;
-            background: rgba(139, 92, 246, 0.15);
-            border: 1px solid rgba(139, 92, 246, 0.4);
-            border-radius: var(--radius-full);
-            color: #ddd6fe;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            animation: fade-up 0.8s var(--ease) both;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 6vw, 4.25rem);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -0.04em;
-            margin-bottom: 1.25rem;
-            animation: fade-up 0.8s 0.15s var(--ease) both;
-        }
-
-        .hero h1 .gradient-text {
-            background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-cyan) 50%, var(--accent-amber) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% 200%;
-            animation: gradient-shift 6s ease infinite;
-        }
-
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 1.6vw, 1.15rem);
-            color: var(--text-secondary);
-            max-width: 720px;
-            margin-bottom: 2rem;
-            line-height: 1.75;
-            animation: fade-up 0.8s 0.3s var(--ease) both;
-        }
-
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            animation: fade-up 0.8s 0.45s var(--ease) both;
-        }
-
-        .hero-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            backdrop-filter: blur(8px);
-        }
-
-        .hero-chip i {
-            color: var(--accent-amber);
-        }
-
-        @keyframes fade-up {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Indicador de scroll */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            animation: bounce-down 2s ease-in-out infinite;
-        }
-
-        .scroll-indicator i {
-            font-size: 1.5rem;
-        }
-
-        @keyframes bounce-down {
-            0%, 100% { transform: translate(-50%, 0); opacity: 0.5; }
-            50% { transform: translate(-50%, 10px); opacity: 1; }
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 6. LAYOUT PRINCIPAL                            */
-        /* ══════════════════════════════════════════════ */
-        .page-shell {
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 3rem 1.25rem 4rem;
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 280px;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        @media (max-width: 1024px) {
-            .page-shell {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 7. ARTÍCULO PRINCIPAL                          */
-        /* ══════════════════════════════════════════════ */
-        .content-article {
-            min-width: 0;
-        }
-
-        .article-section {
-            padding: 3.5rem 0;
-            border-top: 1px solid var(--border);
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-        }
-
-        .article-section:first-of-type {
-            border-top: none;
-            padding-top: 1rem;
-        }
-
-        .article-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-header {
-            margin-bottom: 1.75rem;
-        }
-
-        .section-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-md);
-            font-size: 1.15rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .section-number.violet { background: linear-gradient(135deg, var(--accent-violet), #6d28d9); }
-        .section-number.cyan   { background: linear-gradient(135deg, var(--accent-cyan), #0891b2); }
-        .section-number.amber  { background: linear-gradient(135deg, var(--accent-amber), #d97706); }
-        .section-number.emerald{ background: linear-gradient(135deg, var(--accent-emerald), #059669); }
-        .section-number.rose   { background: linear-gradient(135deg, var(--accent-rose), #e11d48); }
-        .section-number.blue   { background: linear-gradient(135deg, var(--accent-blue), #1d4ed8); }
-
-        .article-section h2 {
-            font-size: clamp(1.6rem, 2.6vw, 2.25rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-        }
-
-        .article-section h3 {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin: 2rem 0 0.85rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .article-section h4 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin: 1.35rem 0 0.6rem;
-            color: #e2e8f0;
-        }
-
-        .article-section p {
-            color: var(--text-secondary);
-            font-size: 1.02rem;
-            line-height: 1.85;
-            margin-bottom: 1rem;
-        }
-
-        .article-section ul,
-        .article-section ol {
-            padding-left: 1.4rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .article-section li {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 0.4rem;
-        }
-
-        .article-section strong {
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .article-section blockquote {
-            margin: 1.5rem 0;
-            padding: 1rem 1.25rem;
-            border-left: 4px solid var(--accent-violet);
-            background: var(--accent-violet-soft);
-            border-radius: 0 var(--radius-md) var(--radius-md) 0;
-            color: #e9d5ff;
-            font-style: italic;
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 8. CARDS DE FUENTES DE INFORMACIÓN             */
-        /* ══════════════════════════════════════════════ */
-        .source-grid {
+        /* Grids auxiliares (no están en templates.css) */
+        .bm-cards-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.25rem;
+            gap: 1rem;
             margin: 1.5rem 0;
         }
 
-        .source-card {
-            position: relative;
-            padding: 1.5rem 1.35rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .source-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--card-color, var(--accent-violet));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s var(--ease);
-        }
-
-        .source-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .source-card:hover {
-            border-color: var(--border-strong);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .source-card .source-icon {
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-            font-size: 1.35rem;
-            margin-bottom: 1rem;
-            color: white;
-            background: var(--card-color, var(--accent-violet));
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-        }
-
-        .source-card h4 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .source-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin: 0;
-            line-height: 1.65;
-        }
-
-        .source-card .source-example {
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px dashed var(--border);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 9. CARDS DE TÉCNICAS                           */
-        /* ══════════════════════════════════════════════ */
-        .technique-card {
-            position: relative;
-            margin: 2rem 0;
-            padding: 2rem 1.75rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            transition: var(--transition);
-            overflow: hidden;
-        }
-
-        .technique-card::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, var(--tech-color, var(--accent-violet)) 0%, transparent 70%);
-            opacity: 0.08;
-            pointer-events: none;
-        }
-
-        .technique-card:hover {
-            border-color: var(--tech-color, var(--accent-violet));
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .technique-head {
-            display: flex;
-            align-items: center;
+        .bm-cards-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            margin-bottom: 1rem;
+            margin: 1.5rem 0;
         }
 
-        .technique-icon {
-            width: 52px;
-            height: 52px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-            font-size: 1.5rem;
-            color: white;
-            background: linear-gradient(135deg, var(--tech-color, var(--accent-violet)), color-mix(in srgb, var(--tech-color, var(--accent-violet)) 60%, black));
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        @media (max-width: 700px) {
+            .bm-cards-2 { grid-template-columns: 1fr; }
         }
 
-        .technique-head h3 {
-            margin: 0;
-            font-size: 1.4rem;
+        /* Bloque de código / ASCII */
+        .bm-code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            padding: 1.5rem 1.25rem 1.25rem;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.8rem;
+            line-height: 1.55;
+            color: var(--color-accent);
+            white-space: pre;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        .bm-code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0.6rem;
+            right: 0.85rem;
+            font-size: 0.6rem;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            opacity: 0.7;
         }
 
         /* Pros y contras */
-        .pros-cons {
+        .bm-pros-cons {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
@@ -690,1006 +109,803 @@
         }
 
         @media (max-width: 600px) {
-            .pros-cons {
-                grid-template-columns: 1fr;
-            }
+            .bm-pros-cons { grid-template-columns: 1fr; }
         }
 
-        .pros-cons > div {
+        .bm-pros,
+        .bm-cons {
             padding: 1rem 1.15rem;
-            border-radius: var(--radius-md);
-            font-size: 0.9rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
         }
 
-        .pros-cons .pros {
-            background: var(--accent-emerald-soft);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+        .bm-pros {
+            background: rgba(16, 185, 129, 0.06);
+            border-color: rgba(16, 185, 129, 0.3);
         }
 
-        .pros-cons .cons {
-            background: var(--accent-rose-soft);
-            border: 1px solid rgba(244, 63, 94, 0.3);
+        .bm-cons {
+            background: rgba(244, 63, 94, 0.06);
+            border-color: rgba(244, 63, 94, 0.3);
         }
 
-        .pros-cons h4 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
+        .bm-pros h4,
+        .bm-cons h4 {
+            font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            margin-bottom: 0.65rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
         }
 
-        .pros-cons .pros h4 { color: #6ee7b7; }
-        .pros-cons .cons h4 { color: #fda4af; }
+        .bm-pros h4 { color: #10b981; }
+        .bm-cons h4 { color: #f43f5e; }
 
-        .pros-cons ul {
-            margin: 0;
+        .bm-pros ul,
+        .bm-cons ul {
             padding-left: 1.1rem;
-        }
-
-        .pros-cons li {
-            font-size: 0.85rem;
-            margin-bottom: 0.3rem;
-            line-height: 1.55;
-        }
-
-        /* Ejemplo dentro de la técnica */
-        .example-box {
-            margin-top: 1.25rem;
-            padding: 1.15rem 1.25rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--tech-color, var(--accent-violet));
-            border-radius: var(--radius-md);
-            font-size: 0.92rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .example-box strong {
-            color: var(--text-primary);
-            display: block;
-            margin-bottom: 0.4rem;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 10. GRID DE REQUISITOS                         */
-        /* ══════════════════════════════════════════════ */
-        .requirements-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin: 1.5rem 0;
-        }
-
-        @media (max-width: 700px) {
-            .requirements-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .req-card {
-            padding: 1.5rem 1.35rem;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            transition: var(--transition);
-        }
-
-        .req-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .req-card.func {
-            border-top: 3px solid var(--accent-cyan);
-        }
-
-        .req-card.no-func {
-            border-top: 3px solid var(--accent-amber);
-        }
-
-        .req-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .req-card.func h4 i { color: var(--accent-cyan); }
-        .req-card.no-func h4 i { color: var(--accent-amber); }
-
-        .req-card ul {
-            list-style: none;
-            padding: 0;
             margin: 0;
         }
 
-        .req-card li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.6rem;
-            font-size: 0.92rem;
-            line-height: 1.6;
-        }
-
-        .req-card.func li::before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: var(--accent-cyan);
-            font-weight: 700;
-        }
-
-        .req-card.no-func li::before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: var(--accent-amber);
-            font-weight: 700;
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 11. GRID DE ROLES                              */
-        /* ══════════════════════════════════════════════ */
-        .roles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .role-chip {
-            padding: 1.1rem 1.15rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-            transition: var(--transition);
-        }
-
-        .role-chip:hover {
-            border-color: var(--accent-violet);
-            transform: translateY(-2px);
-        }
-
-        .role-chip i {
-            font-size: 1.5rem;
-            color: var(--accent-violet);
-            flex-shrink: 0;
-        }
-
-        .role-chip div strong {
-            display: block;
-            font-size: 0.92rem;
-            margin-bottom: 0.15rem;
-        }
-
-        .role-chip div span {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 12. TABLA DE SÍMBOLOS                          */
-        /* ══════════════════════════════════════════════ */
-        .symbols-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin: 1.5rem 0;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-        }
-
-        .symbols-table th {
-            background: var(--bg-elevated);
-            padding: 0.85rem 1rem;
-            text-align: left;
-            font-size: 0.78rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--accent-amber);
-            font-weight: 700;
-        }
-
-        .symbols-table td {
-            padding: 0.85rem 1rem;
-            border-top: 1px solid var(--border);
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            vertical-align: top;
-        }
-
-        .symbols-table tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .symbols-table code {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--bg-code);
-            padding: 0.15rem 0.45rem;
-            border-radius: var(--radius-sm);
-            color: var(--accent-cyan);
+        .bm-pros li,
+        .bm-cons li {
             font-size: 0.85rem;
-            border: 1px solid var(--border);
+            line-height: 1.6;
+            margin-bottom: 0.35rem;
+            color: var(--color-text-secondary);
         }
 
-        /* ══════════════════════════════════════════════ */
-        /* 13. BLOQUES DE CÓDIGO (ASCII)                  */
-        /* ══════════════════════════════════════════════ */
-        .code-block {
-            position: relative;
-            margin: 1.25rem 0;
-            padding: 1.35rem 1.25rem;
-            background: var(--bg-code);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            overflow-x: auto;
-            font-family: 'JetBrains Mono', 'Courier New', monospace;
-            font-size: 0.82rem;
-            line-height: 1.55;
-            color: #a5f3fc;
-            white-space: pre;
+        /* Widgets del sidebar */
+        .bm-toc-widget {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-border);
         }
 
-        .code-block::before {
-            content: attr(data-lang);
-            position: absolute;
-            top: 0.5rem;
-            right: 0.75rem;
+        .bm-toc-widget h3 {
             font-size: 0.65rem;
-            color: var(--text-muted);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            font-family: 'Inter', sans-serif;
             font-weight: 700;
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 14. SECCIÓN EJEMPLO PANADERÍA                  */
-        /* ══════════════════════════════════════════════ */
-        .highlight-card {
-            margin: 1.5rem 0;
-            padding: 1.75rem;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
-            border: 1px solid rgba(139, 92, 246, 0.25);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight-card::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, var(--accent-violet) 0%, transparent 70%);
-            opacity: 0.15;
-            pointer-events: none;
-        }
-
-        .highlight-card h4 {
-            position: relative;
-            font-size: 1.15rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-        }
-
-        .highlight-card p {
-            position: relative;
-            margin-bottom: 0.5rem;
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 15. SIDEBAR STICKY                             */
-        /* ══════════════════════════════════════════════ */
-        .page-sidebar {
-            position: sticky;
-            top: calc(var(--navbar-h) + 20px);
-        }
-
-        .sidebar-card {
-            padding: 1.25rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
             margin-bottom: 1rem;
         }
 
-        .sidebar-card h3 {
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.9rem;
-            font-weight: 700;
-        }
-
-        .sidebar-toc {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            max-height: 60vh;
-            overflow-y: auto;
-        }
-
-        .sidebar-toc li {
-            margin-bottom: 0.15rem;
-        }
-
-        .sidebar-toc a {
-            display: block;
-            padding: 0.4rem 0.7rem;
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            border-left: 2px solid transparent;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-            transition: var(--transition);
-            line-height: 1.4;
-        }
-
-        .sidebar-toc a:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .sidebar-toc a.active {
-            color: var(--accent-violet);
-            border-left-color: var(--accent-violet);
-            background: var(--accent-violet-soft);
-            font-weight: 600;
-        }
-
-        .sidebar-stats {
+        .bm-toc-widget__stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.5rem;
-            margin-top: 0.5rem;
         }
 
-        .stat-item {
-            padding: 0.75rem;
-            background: var(--bg-elevated);
-            border-radius: var(--radius-sm);
+        .bm-toc-widget__stat {
+            padding: 0.75rem 0.5rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
             text-align: center;
         }
 
-        .stat-item strong {
+        .bm-toc-widget__stat strong {
             display: block;
             font-size: 1.25rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
+            line-height: 1;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .stat-item span {
-            font-size: 0.7rem;
-            color: var(--text-muted);
+        .bm-toc-widget__stat span {
+            display: block;
+            margin-top: 0.3rem;
+            font-size: 0.65rem;
+            color: var(--color-text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.08em;
         }
 
-        /* ══════════════════════════════════════════════ */
-        /* 16. BOTÓN VOLVER ARRIBA                        */
-        /* ══════════════════════════════════════════════ */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            font-size: 1.25rem;
-            cursor: pointer;
-            box-shadow: var(--shadow-lg);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: var(--transition);
-            z-index: 900;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: var(--shadow-glow-violet);
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 17. FOOTER                                     */
-        /* ══════════════════════════════════════════════ */
-        .page-footer {
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 2rem 1.25rem 3rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* ══════════════════════════════════════════════ */
-        /* 18. ACCESIBILIDAD                              */
-        /* ══════════════════════════════════════════════ */
-        :focus-visible {
-            outline: 2px solid var(--accent-cyan);
-            outline-offset: 3px;
-            border-radius: var(--radius-sm);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-
-            .article-section {
-                opacity: 1;
-                transform: none;
-            }
+        /* Iconos inline en títulos y chips */
+        .bm-card__title i,
+        .bm-chip i {
+            margin-right: 0.4rem;
+            font-size: 0.85em;
+            opacity: 0.9;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- BARRA DE PROGRESO DE LECTURA                   -->
-    <!-- ══════════════════════════════════════════════ -->
-    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- HEADER / NAVBAR                                -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN                            -->
+    <!-- ============================================== -->
     <header class="main-header" role="banner">
-        <nav class="nav-container" aria-label="Navegación principal">
-            <a href="../../index.html" class="nav-logo" aria-label="Ir al inicio">
-                <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="Logo ADSO" class="nav-logo-img">
-                ADSO
-            </a>
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
 
-            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
-                <i class="bi bi-list"></i>
-            </button>
+                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                        alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
 
-            <ul class="nav-links" id="navLinks">
-                <li><a href="../../index.html">Inicio</a></li>
-                <li><a href="../index.html">Trimestre 1</a></li>
-                <li><a href="../../sitemap.html">Mapa de sitio</a></li>
-                <li><a href="#footer">Footer</a></li>
-            </ul>
+                <button class="navbar-toggler nav-toggle" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html#proyectos">Proyectos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../sitemap.html">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
         </nav>
     </header>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- HERO                                            -->
-    <!-- ══════════════════════════════════════════════ -->
-    <section class="hero" aria-label="Encabezado del tema">
-        <div class="hero-content">
-            <span class="hero-badge">
-                <i class="bi bi-bookmark-star-fill"></i>
-                Trimestre 1 · Análisis y Desarrollo de Software
-            </span>
-            <h1>
-                Elicitación de <br>
-                <span class="gradient-text">Requisitos</span>
-            </h1>
-            <p>
-                El proceso fundamental para descubrir, entender y documentar las
-                necesidades reales del cliente. Aprenderás las técnicas de recolección
-                de información, la definición de requisitos funcionales y no funcionales,
-                y las herramientas para modelar el sistema antes de escribir una línea de código.
-            </p>
-            <div class="hero-meta">
-                <span class="hero-chip"><i class="bi bi-calendar-event"></i> 21 may – 01 jul 2025</span>
-                <span class="hero-chip"><i class="bi bi-diagram-3"></i> 7 técnicas de recolección</span>
-                <span class="hero-chip"><i class="bi bi-file-earmark-code"></i> DFD · UML · Flujogramas</span>
+    <main>
+
+        <!-- ========================================== -->
+        <!-- HERO                                       -->
+        <!-- ========================================== -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
             </div>
-        </div>
 
-        <div class="scroll-indicator" aria-hidden="true">
-            <span>Scroll</span>
-            <i class="bi bi-chevron-double-down"></i>
-        </div>
-    </section>
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Trimestre 1 · Análisis y Desarrollo de Software
+                </span>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- CONTENIDO PRINCIPAL                             -->
-    <!-- ══════════════════════════════════════════════ -->
-    <main class="page-shell">
+                <h1 id="hero-title" class="bm-hero__title">
+                    Elicitación de
+                    <span class="gradient-text">Requisitos</span>
+                </h1>
 
-        <article class="content-article">
-
-            <!-- ══════════════════════════════════════ -->
-            <!-- 1. INTRODUCCIÓN                        -->
-            <!-- ══════════════════════════════════════ -->
-            <section class="article-section" id="introduccion">
-                <div class="section-header">
-                    <div class="section-number violet">01</div>
-                    <h2>Introducción a la elicitación de requisitos</h2>
-                </div>
-
-                <p>
-                    La <strong>elicitación de requisitos del software</strong> es la base
-                    fundamental de todo proyecto de desarrollo. El mundo empresarial se
-                    basa en la resolución de problemas, por lo que en el desarrollo de
-                    software es necesario definir un <strong>objeto de estudio</strong>
-                    para plantear qué se va a hacer y delimitar los tiempos estimados y costos.
-                </p>
-                <p>
-                    Para resolver un problema, se debe buscar realmente qué es lo que se
-                    espera que solucione. Por ende, se debe hacer un
-                    <strong>levantamiento de información</strong> por medio de técnicas
-                    de recolección de datos.
-                </p>
-            </section>
-
-            <!-- ══════════════════════════════════════ -->
-            <!-- 2. FUENTES DE INFORMACIÓN              -->
-            <!-- ══════════════════════════════════════ -->
-            <section class="article-section" id="fuentes">
-                <div class="section-header">
-                    <div class="section-number cyan">02</div>
-                    <h2>Fuentes de la información</h2>
-                </div>
-
-                <p>
-                    Antes de recolectar datos, es clave saber de dónde proviene la información.
-                    Existen tres tipos de fuentes según su nivel de cercanía con la persona
-                    o situación que se investiga.
+                <p class="bm-hero__lead">
+                    El proceso fundamental para descubrir, entender y documentar las necesidades
+                    reales del cliente. Aprenderás las técnicas de recolección de información,
+                    la definición de requisitos funcionales y no funcionales, y las herramientas
+                    para modelar el sistema antes de escribir una línea de código.
                 </p>
 
-                <div class="source-grid">
-                    <div class="source-card" style="--card-color: var(--accent-violet);">
-                        <div class="source-icon"><i class="bi bi-person-fill"></i></div>
-                        <h4>Fuente primaria</h4>
-                        <p>Información obtenida directamente de la persona involucrada.</p>
-                        <div class="source-example">Ejemplo: cuando alguien da su opinión de lo que observa.</div>
+                <div class="bm-hero__meta" role="list">
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Periodo</span>
+                        <span class="bm-meta-value">21 may – 01 jul 2025</span>
                     </div>
-
-                    <div class="source-card" style="--card-color: var(--accent-cyan);">
-                        <div class="source-icon"><i class="bi bi-people-fill"></i></div>
-                        <h4>Fuente secundaria</h4>
-                        <p>Información que llega por medio de otra persona.</p>
-                        <div class="source-example">Ejemplo: cuando la información llega a través de una anécdota.</div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Técnicas</span>
+                        <span class="bm-meta-value">7 de recolección</span>
                     </div>
-
-                    <div class="source-card" style="--card-color: var(--accent-amber);">
-                        <div class="source-icon"><i class="bi bi-people"></i></div>
-                        <h4>Fuente terciaria</h4>
-                        <p>Información que se conoce a partir de dos o más personas.</p>
-                        <div class="source-example">Ejemplo: cuando se requieren varias opiniones de diferentes personas.</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ══════════════════════════════════════ -->
-            <!-- 3. TÉCNICAS DE RECOLECCIÓN             -->
-            <!-- ══════════════════════════════════════ -->
-            <section class="article-section" id="tecnicas">
-                <div class="section-header">
-                    <div class="section-number amber">03</div>
-                    <h2>Técnicas de recolección de datos</h2>
-                </div>
-
-                <p>
-                    Las técnicas de recolección de datos son la base principal del proyecto.
-                    Existen múltiples técnicas que permiten obtener información desde las
-                    fuentes primarias, siendo el cliente quien ofrece la información más
-                    confiable y real.
-                </p>
-
-                <!-- Preguntas cerradas y abiertas -->
-                <h3>Preguntas cerradas y abiertas</h3>
-                <div class="requirements-grid">
-                    <div class="req-card func">
-                        <h4><i class="bi bi-check2-square"></i> Preguntas cerradas</h4>
-                        <ul>
-                            <li>Ofrecen opciones limitadas y predefinidas (sí/no, opción múltiple, escala).</li>
-                            <li>Facilitan el análisis cuantitativo.</li>
-                            <li>Permiten la tabulación rápida de datos.</li>
-                        </ul>
-                    </div>
-                    <div class="req-card no-func">
-                        <h4><i class="bi bi-chat-left-text"></i> Preguntas abiertas</h4>
-                        <ul>
-                            <li>Permiten al encuestado responder con sus propias palabras.</li>
-                            <li>Útiles para explorar opiniones y experiencias.</li>
-                            <li>Su análisis es más complejo pero más profundo.</li>
-                        </ul>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Modelado</span>
+                        <span class="bm-meta-value">DFD · UML · Flujogramas</span>
                     </div>
                 </div>
 
-                <!-- Entrevista -->
-                <div class="technique-card" style="--tech-color: var(--accent-violet);" id="entrevista">
-                    <div class="technique-head">
-                        <div class="technique-icon"><i class="bi bi-mic-fill"></i></div>
-                        <h3>Entrevista</h3>
+                <div class="bm-hero__stats" aria-label="Resumen del contenido">
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">7</span>
+                        <span class="bm-stat-label">Técnicas</span>
                     </div>
-                    <p>
-                        Conversación dirigida entre dos o más personas donde el entrevistador
-                        formula preguntas para obtener información u opiniones del entrevistado.
-                        Son útiles cuando se necesita información flexible, dinámica y profunda.
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">6</span>
+                        <span class="bm-stat-label">Roles</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">9</span>
+                        <span class="bm-stat-label">Secciones</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- LAYOUT: TOC + CONTENIDO                    -->
+        <!-- ========================================== -->
+        <div class="bm-layout">
+
+            <!-- ---------- TABLA DE CONTENIDO ---------- -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button"
+                            aria-expanded="false" aria-controls="bm-toc-list"
+                            aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#introduccion"><span class="bm-toc__num">01</span>Introducción</a></li>
+                            <li><a class="bm-toc__link" href="#fuentes"><span class="bm-toc__num">02</span>Fuentes de información</a></li>
+                            <li><a class="bm-toc__link" href="#tecnicas"><span class="bm-toc__num">03</span>Técnicas de recolección</a></li>
+                            <li><a class="bm-toc__link" href="#entrevista"><span class="bm-toc__num">·</span>Entrevista</a></li>
+                            <li><a class="bm-toc__link" href="#encuesta"><span class="bm-toc__num">·</span>Encuesta y cuestionario</a></li>
+                            <li><a class="bm-toc__link" href="#workshop"><span class="bm-toc__num">·</span>Taller (Workshop)</a></li>
+                            <li><a class="bm-toc__link" href="#observacion"><span class="bm-toc__num">·</span>Observación</a></li>
+                            <li><a class="bm-toc__link" href="#prototipos"><span class="bm-toc__num">·</span>Prototipos</a></li>
+                            <li><a class="bm-toc__link" href="#historias"><span class="bm-toc__num">·</span>Historias de usuario</a></li>
+                            <li><a class="bm-toc__link" href="#requisitos"><span class="bm-toc__num">04</span>Requerimientos</a></li>
+                            <li><a class="bm-toc__link" href="#roles"><span class="bm-toc__num">05</span>Roles</a></li>
+                            <li><a class="bm-toc__link" href="#flujogramas"><span class="bm-toc__num">06</span>Flujogramas</a></li>
+                            <li><a class="bm-toc__link" href="#dfd"><span class="bm-toc__num">07</span>DFD</a></li>
+                            <li><a class="bm-toc__link" href="#panaderia"><span class="bm-toc__num">08</span>Ejemplo práctico</a></li>
+                            <li><a class="bm-toc__link" href="#uml"><span class="bm-toc__num">09</span>UML</a></li>
+                        </ol>
+                    </nav>
+
+                    <!-- Widget: estadísticas -->
+                    <div class="bm-toc-widget">
+                        <h3>Estadísticas</h3>
+                        <div class="bm-toc-widget__stats">
+                            <div class="bm-toc-widget__stat">
+                                <strong>7</strong>
+                                <span>Técnicas</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>9</strong>
+                                <span>Secciones</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>6</strong>
+                                <span>Roles</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>3</strong>
+                                <span>DFD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ---------- CONTENIDO ---------- -->
+            <article class="bm-content">
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 01 · INTRODUCCIÓN                   -->
+                <!-- ════════════════════════════════════ -->
+                <section id="introduccion" class="bm-section" aria-labelledby="s-intro">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / INTRODUCCIÓN</span>
+                        <h2 id="s-intro" class="bm-section__title">Introducción a la elicitación de requisitos</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        La <strong>elicitación de requisitos del software</strong> es la base fundamental
+                        de todo proyecto de desarrollo. El mundo empresarial se basa en la resolución de
+                        problemas, por lo que en el desarrollo de software es necesario definir un
+                        <strong>objeto de estudio</strong> para plantear qué se va a hacer y delimitar
+                        los tiempos estimados y costos.
                     </p>
 
-                    <h4>Tipos de entrevista</h4>
-                    <ul>
-                        <li><strong>No estructurada:</strong> libre y abierta, sin un plan determinado.</li>
-                        <li><strong>Focalizada:</strong> el entrevistador guía la conversación sin desviarse del tema.</li>
-                        <li><strong>Estructurada:</strong> preguntas específicas en un orden específico.</li>
-                        <li><strong>En escalera:</strong> las respuestas guían las siguientes preguntas para explorar motivos subconscientes.</li>
+                    <p class="bm-reveal">
+                        Para resolver un problema, se debe buscar realmente qué es lo que se espera que
+                        solucione. Por ende, se debe hacer un <strong>levantamiento de información</strong>
+                        por medio de técnicas de recolección de datos.
+                    </p>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 02 · FUENTES DE INFORMACIÓN         -->
+                <!-- ════════════════════════════════════ -->
+                <section id="fuentes" class="bm-section" aria-labelledby="s-fuentes">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / FUENTES</span>
+                        <h2 id="s-fuentes" class="bm-section__title">Fuentes de la información</h2>
+                        <p class="bm-section__sub">
+                            Antes de recolectar datos, es clave saber de dónde proviene la información.
+                            Existen tres tipos de fuentes según su nivel de cercanía con la persona o
+                            situación que se investiga.
+                        </p>
+                    </header>
+
+                    <div class="bm-cards-3">
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title">
+                                    <i class="fa-solid fa-user" style="color: var(--color-accent);"></i>
+                                    Fuente primaria
+                                </h3>
+                            </div>
+                            <p>Información obtenida directamente de la persona involucrada.</p>
+                            <div class="bm-card__footer">
+                                <em>Ejemplo:</em> cuando alguien da su opinión de lo que observa.
+                            </div>
+                        </article>
+
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title">
+                                    <i class="fa-solid fa-people-group" style="color: var(--color-accent);"></i>
+                                    Fuente secundaria
+                                </h3>
+                            </div>
+                            <p>Información que llega por medio de otra persona.</p>
+                            <div class="bm-card__footer">
+                                <em>Ejemplo:</em> cuando la información llega a través de una anécdota.
+                            </div>
+                        </article>
+
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title">
+                                    <i class="fa-solid fa-users" style="color: var(--color-accent);"></i>
+                                    Fuente terciaria
+                                </h3>
+                            </div>
+                            <p>Información que se conoce a partir de dos o más personas.</p>
+                            <div class="bm-card__footer">
+                                <em>Ejemplo:</em> cuando se requieren varias opiniones de diferentes personas.
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 03 · TÉCNICAS DE RECOLECCIÓN        -->
+                <!-- ════════════════════════════════════ -->
+                <section id="tecnicas" class="bm-section" aria-labelledby="s-tecnicas">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / TÉCNICAS</span>
+                        <h2 id="s-tecnicas" class="bm-section__title">Técnicas de recolección de datos</h2>
+                        <p class="bm-section__sub">
+                            Las técnicas de recolección de datos son la base principal del proyecto.
+                            Existen múltiples técnicas que permiten obtener información desde las
+                            fuentes primarias, siendo el cliente quien ofrece la información más
+                            confiable y real.
+                        </p>
+                    </header>
+
+                    <!-- Preguntas cerradas y abiertas -->
+                    <h3 class="bm-reveal">Preguntas cerradas y abiertas</h3>
+                    <div class="bm-cards-2">
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title">
+                                    <i class="fa-solid fa-square-check" style="color: var(--color-accent);"></i>
+                                    Preguntas cerradas
+                                </h3>
+                            </div>
+                            <ul class="bm-list" style="margin-top: 0;">
+                                <li>Ofrecen opciones limitadas y predefinidas (sí/no, opción múltiple, escala).</li>
+                                <li>Facilitan el análisis cuantitativo.</li>
+                                <li>Permiten la tabulación rápida de datos.</li>
+                            </ul>
+                        </article>
+
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title">
+                                    <i class="fa-solid fa-comment-dots" style="color: var(--color-accent-2);"></i>
+                                    Preguntas abiertas
+                                </h3>
+                            </div>
+                            <ul class="bm-list" style="margin-top: 0;">
+                                <li>Permiten al encuestado responder con sus propias palabras.</li>
+                                <li>Útiles para explorar opiniones y experiencias.</li>
+                                <li>Su análisis es más complejo pero más profundo.</li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <!-- Entrevista -->
+                    <article class="bm-card bm-reveal" id="entrevista" style="scroll-margin-top: 100px;">
+                        <div class="bm-card__head">
+                            <span class="bm-card__num">01</span>
+                            <h3 class="bm-card__title">Entrevista</h3>
+                        </div>
+                        <p>
+                            Conversación dirigida entre dos o más personas donde el entrevistador
+                            formula preguntas para obtener información u opiniones del entrevistado.
+                            Son útiles cuando se necesita información flexible, dinámica y profunda.
+                        </p>
+
+                        <h4>Tipos de entrevista</h4>
+                        <ul class="bm-list">
+                            <li><strong>No estructurada:</strong> libre y abierta, sin un plan determinado.</li>
+                            <li><strong>Focalizada:</strong> el entrevistador guía la conversación sin desviarse del tema.</li>
+                            <li><strong>Estructurada:</strong> preguntas específicas en un orden específico.</li>
+                            <li><strong>En escalera:</strong> las respuestas guían las siguientes preguntas para explorar motivos subconscientes.</li>
+                        </ul>
+
+                        <div class="bm-pros-cons">
+                            <div class="bm-pros">
+                                <h4><i class="fa-solid fa-thumbs-up"></i> Ventajas</h4>
+                                <ul>
+                                    <li>Interpersonales y flexibles.</li>
+                                    <li>Aclaración inmediata de dudas.</li>
+                                    <li>Permite observar lenguaje corporal.</li>
+                                    <li>Alto nivel de participación del usuario.</li>
+                                </ul>
+                            </div>
+                            <div class="bm-cons">
+                                <h4><i class="fa-solid fa-thumbs-down"></i> Desventajas</h4>
+                                <ul>
+                                    <li>Alto consumo de tiempo y recursos.</li>
+                                    <li>Riesgo de subjetividad y sesgos.</li>
+                                    <li>Posible falta de sinceridad.</li>
+                                    <li>Difícil generalización de resultados.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bm-callout">
+                            <strong>Ejemplo práctico:</strong> un equipo quiere crear una app para freelancers.
+                            Realiza entrevistas en profundidad con diseñadores, programadores y redactores
+                            para entender cómo organizan su trabajo, qué herramientas usan y qué problemas enfrentan.
+                        </div>
+                    </article>
+
+                    <!-- Encuesta y cuestionario -->
+                    <article class="bm-card bm-reveal" id="encuesta" style="scroll-margin-top: 100px;">
+                        <div class="bm-card__head">
+                            <span class="bm-card__num">02</span>
+                            <h3 class="bm-card__title">Encuesta y cuestionario</h3>
+                        </div>
+                        <p>
+                            Una <strong>encuesta</strong> recoge datos de muchas personas en forma
+                            estructurada y rápida. Un <strong>cuestionario</strong> es la herramienta
+                            que contiene las preguntas y puede incluir preguntas abiertas o cerradas.
+                        </p>
+
+                        <div class="bm-cards-2">
+                            <div class="bm-callout">
+                                <strong>Encuesta</strong>
+                                <ul class="bm-list" style="margin: 0.75rem 0 0;">
+                                    <li>Ideal para datos cuantitativos de gran volumen.</li>
+                                    <li>Identifica tendencias, porcentajes y frecuencias.</li>
+                                    <li>Permite comparar respuestas entre grupos.</li>
+                                </ul>
+                            </div>
+                            <div class="bm-callout bm-callout--amber">
+                                <strong>Cuestionario</strong>
+                                <ul class="bm-list" style="margin: 0.75rem 0 0;">
+                                    <li>Útil para profundizar en criterios y percepciones.</li>
+                                    <li>Combina preguntas cerradas y abiertas.</li>
+                                    <li>Reduce el sesgo del investigador.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bm-callout">
+                            <strong>Ejemplo práctico:</strong> el equipo crea un cuestionario online
+                            distribuido en redes sociales para conocer hábitos y preferencias de usuarios
+                            antes de diseñar la aplicación.
+                        </div>
+                    </article>
+
+                    <!-- Taller -->
+                    <article class="bm-card bm-reveal" id="workshop" style="scroll-margin-top: 100px;">
+                        <div class="bm-card__head">
+                            <span class="bm-card__num">03</span>
+                            <h3 class="bm-card__title">Taller de trabajo (Workshop)</h3>
+                        </div>
+                        <p>
+                            Actividad intensiva donde los participantes comparten ideas y desarrollan
+                            capacidades en un corto tiempo. Incluye dinámicas de grupo, lluvia de ideas,
+                            prototipado y resolución de problemas.
+                        </p>
+
+                        <div class="bm-table-wrap">
+                            <div class="bm-table-scroll">
+                                <table class="bm-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Actividad</th>
+                                            <th scope="col">Duración</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Introducción del proyecto y objetivos del taller</td><td>15 min</td></tr>
+                                        <tr><td>Mapa de empatía y perfil de usuario</td><td>30 min</td></tr>
+                                        <tr><td>Lluvia de ideas y priorización</td><td>60 min</td></tr>
+                                        <tr><td>Prototipado rápido</td><td>45 min</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Observación -->
+                    <article class="bm-card bm-reveal" id="observacion" style="scroll-margin-top: 100px;">
+                        <div class="bm-card__head">
+                            <span class="bm-card__num">04</span>
+                            <h3 class="bm-card__title">Observación</h3>
+                        </div>
+                        <p>
+                            Estudia el comportamiento real de las personas en su entorno natural o
+                            profesional. Permite analizar procesos, necesidades y dificultades sin
+                            depender solo de opiniones expresadas verbalmente.
+                        </p>
+
+                        <h4>Categorías de observación</h4>
+                        <div class="bm-table-wrap">
+                            <div class="bm-table-scroll">
+                                <table class="bm-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Categoría</th>
+                                            <th scope="col">Aspectos a observar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Comunicación</td>
+                                            <td>Canales usados, comunicación entre áreas, incidencia en el resultado final, casos exitosos.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sistema de información</td>
+                                            <td>Procesos seguidos, principales inconvenientes en el manejo del sistema.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Prototipos -->
+                    <article class="bm-card bm-reveal" id="prototipos" style="scroll-margin-top: 100px;">
+                        <div class="bm-card__head">
+                            <span class="bm-card__num">05</span>
+                            <h3 class="bm-card__title">Prototipos</h3>
+                        </div>
+                        <p>
+                            Representación temprana del software o de una parte de la interfaz.
+                            Permite validar ideas antes de invertir mucho tiempo en desarrollo,
+                            y ayuda a detectar errores de diseño o funcionalidad.
+                        </p>
+
+                        <div class="bm-pros-cons">
+                            <div class="bm-pros">
+                                <h4><i class="fa-solid fa-thumbs-up"></i> Ventajas</h4>
+                                <ul>
+                                    <li>El cliente ve el sistema antes de desarrollarlo.</li>
+                                    <li>Se detectan confusiones antes de invertir tiempo.</li>
+                                    <li>Facilita el entendimiento entre cliente y desarrollador.</li>
+                                </ul>
+                            </div>
+                            <div class="bm-cons">
+                                <h4><i class="fa-solid fa-thumbs-down"></i> Desventajas</h4>
+                                <ul>
+                                    <li>El cliente puede confundirlo con el producto final.</li>
+                                    <li>Crear y modificar prototipos requiere tiempo.</li>
+                                    <li>Demasiados cambios pueden retrasar el proyecto.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Historias de usuario -->
+                    <article class="bm-card bm-reveal" id="historias" style="scroll-margin-top: 100px;">
+                        <div class="bm-card__head">
+                            <span class="bm-card__num">06</span>
+                            <h3 class="bm-card__title">Historias de usuario</h3>
+                        </div>
+                        <p>
+                            Describen necesidades desde la perspectiva del usuario final.
+                            Se escriben en lenguaje simple y sirven como requisitos funcionales
+                            para el equipo de desarrollo.
+                        </p>
+
+                        <div class="bm-callout">
+                            <strong>Formato:</strong> Como [usuario], quiero [objetivo], para [beneficio].
+                        </div>
+
+                        <h4>Ejemplos</h4>
+                        <ul class="bm-list">
+                            <li>Como usuario, quiero <em>crear tareas con título, fecha y prioridad</em> para organizar mis actividades.</li>
+                            <li>Como usuario, quiero <em>editar una tarea existente</em> para actualizar la información.</li>
+                            <li>Como usuario, quiero <em>marcar tareas como completadas</em> para tener control de lo que ya hice.</li>
+                            <li>Como administrador, quiero <em>gestionar múltiples usuarios</em> para supervisar equipos de trabajo.</li>
+                        </ul>
+                    </article>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 04 · REQUERIMIENTOS                 -->
+                <!-- ════════════════════════════════════ -->
+                <section id="requisitos" class="bm-section" aria-labelledby="s-req">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / REQUISITOS</span>
+                        <h2 id="s-req" class="bm-section__title">Requerimientos funcionales y no funcionales</h2>
+                        <p class="bm-section__sub">
+                            Una vez recolectada la información, se debe definir qué necesita el software
+                            para funcionar. Los requisitos se clasifican en funcionales y no funcionales.
+                        </p>
+                    </header>
+
+                    <div class="bm-cards-2">
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title">
+                                    <i class="fa-solid fa-gear" style="color: var(--color-accent);"></i>
+                                    Requisitos funcionales
+                                </h3>
+                            </div>
+                            <div class="bm-specs">
+                                <div class="bm-spec bm-spec--blue">
+                                    <div class="bm-spec-value">El sistema debe permitir iniciar sesión.</div>
+                                </div>
+                                <div class="bm-spec bm-spec--blue">
+                                    <div class="bm-spec-value">El sistema debe registrar clientes.</div>
+                                </div>
+                                <div class="bm-spec bm-spec--blue">
+                                    <div class="bm-spec-value">El sistema debe guardar ventas.</div>
+                                </div>
+                                <div class="bm-spec bm-spec--blue">
+                                    <div class="bm-spec-value">El sistema debe mostrar reportes.</div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title">
+                                    <i class="fa-solid fa-shield-halved" style="color: var(--color-accent-2);"></i>
+                                    Requisitos no funcionales
+                                </h3>
+                            </div>
+                            <div class="bm-specs">
+                                <div class="bm-spec bm-spec--amber">
+                                    <div class="bm-spec-value">Debe funcionar en navegadores modernos.</div>
+                                </div>
+                                <div class="bm-spec bm-spec--amber">
+                                    <div class="bm-spec-value">Debe responder en menos de 3 segundos.</div>
+                                </div>
+                                <div class="bm-spec bm-spec--amber">
+                                    <div class="bm-spec-value">Debe ser fácil de usar para usuarios sin experiencia.</div>
+                                </div>
+                                <div class="bm-spec bm-spec--amber">
+                                    <div class="bm-spec-value">Debe proteger la información de usuarios.</div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 05 · ROLES                          -->
+                <!-- ════════════════════════════════════ -->
+                <section id="roles" class="bm-section" aria-labelledby="s-roles">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / ROLES</span>
+                        <h2 id="s-roles" class="bm-section__title">Roles en el desarrollo de software</h2>
+                        <p class="bm-section__sub">
+                            En un proyecto de software intervienen varias personas con funciones
+                            complementarias. Cada una aporta desde su especialidad.
+                        </p>
+                    </header>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Cliente</strong> — Expresa la necesidad o problema.</li>
+                        <li><strong>Analista</strong> — Recoge y documenta los requisitos.</li>
+                        <li><strong>Diseñador</strong> — Estructura la solución y la experiencia.</li>
+                        <li><strong>Desarrollador</strong> — Construye la aplicación o sistema.</li>
+                        <li><strong>Tester / QA</strong> — Valida que el sistema funcione.</li>
+                        <li><strong>Project Manager</strong> — Coordina tiempos y recursos.</li>
                     </ul>
+                </section>
 
-                    <div class="pros-cons">
-                        <div class="pros">
-                            <h4><i class="bi bi-hand-thumbs-up-fill"></i> Ventajas</h4>
-                            <ul>
-                                <li>Interpersonales y flexibles.</li>
-                                <li>Aclaración inmediata de dudas.</li>
-                                <li>Permite observar lenguaje corporal.</li>
-                                <li>Alto nivel de participación del usuario.</li>
-                            </ul>
-                        </div>
-                        <div class="cons">
-                            <h4><i class="bi bi-hand-thumbs-down-fill"></i> Desventajas</h4>
-                            <ul>
-                                <li>Alto consumo de tiempo y recursos.</li>
-                                <li>Riesgo de subjetividad y sesgos.</li>
-                                <li>Posible falta de sinceridad.</li>
-                                <li>Difícil generalización de resultados.</li>
-                            </ul>
-                        </div>
-                    </div>
+                <!-- ════════════════════════════════════ -->
+                <!-- 06 · FLUJOGRAMAS                    -->
+                <!-- ════════════════════════════════════ -->
+                <section id="flujogramas" class="bm-section" aria-labelledby="s-flujo">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">06 / FLUJOGRAMAS</span>
+                        <h2 id="s-flujo" class="bm-section__title">Diagramas de flujo generales (Flujogramas)</h2>
+                        <p class="bm-section__sub">
+                            Un diagrama de flujo representa gráficamente los pasos que sigue un
+                            proceso. Se utiliza para comprender, analizar y documentar un procedimiento.
+                        </p>
+                    </header>
 
-                    <div class="example-box">
-                        <strong>Ejemplo práctico</strong>
-                        Un equipo quiere crear una app para freelancers. Realiza entrevistas
-                        en profundidad con diseñadores, programadores y redactores para entender
-                        cómo organizan su trabajo, qué herramientas usan y qué problemas enfrentan.
-                    </div>
-                </div>
-
-                <!-- Encuesta y cuestionario -->
-                <div class="technique-card" style="--tech-color: var(--accent-cyan);" id="encuesta">
-                    <div class="technique-head">
-                        <div class="technique-icon"><i class="bi bi-clipboard2-check-fill"></i></div>
-                        <h3>Encuesta y cuestionario</h3>
-                    </div>
-                    <p>
-                        Una <strong>encuesta</strong> recoge datos de muchas personas en forma
-                        estructurada y rápida. Un <strong>cuestionario</strong> es la herramienta
-                        que contiene las preguntas y puede incluir preguntas abiertas o cerradas.
-                    </p>
-
-                    <div class="requirements-grid">
-                        <div class="req-card func">
-                            <h4><i class="bi bi-bar-chart-fill"></i> Encuesta</h4>
-                            <ul>
-                                <li>Ideal para datos cuantitativos de gran volumen.</li>
-                                <li>Identifica tendencias, porcentajes y frecuencias.</li>
-                                <li>Permite comparar respuestas entre grupos.</li>
-                            </ul>
-                        </div>
-                        <div class="req-card no-func">
-                            <h4><i class="bi bi-journal-text"></i> Cuestionario</h4>
-                            <ul>
-                                <li>Útil para profundizar en criterios y percepciones.</li>
-                                <li>Combina preguntas cerradas y abiertas.</li>
-                                <li>Reduce el sesgo del investigador.</li>
-                            </ul>
+                    <h3 class="bm-reveal">Símbolos principales</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Símbolo</th>
+                                        <th scope="col">Representación</th>
+                                        <th scope="col">Significado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Inicio / Fin</td><td><code>[●]</code></td><td>Comienzo o final del proceso.</td></tr>
+                                    <tr><td>Actividad</td><td><code>[&nbsp;&nbsp;&nbsp;]</code></td><td>Tarea llevada a cabo durante el proceso.</td></tr>
+                                    <tr><td>Decisión</td><td><code>◇</code></td><td>Punto de bifurcación (sí/no).</td></tr>
+                                    <tr><td>Conexión</td><td><code>→</code></td><td>Dirección del flujo del proceso.</td></tr>
+                                    <tr><td>Documento</td><td><code>📄</code></td><td>Generación o consulta de un documento.</td></tr>
+                                    <tr><td>Envío de datos</td><td><code>🖨️</code></td><td>Envía datos a la impresora.</td></tr>
+                                    <tr><td>Muestra de datos</td><td><code>🖥️</code></td><td>Muestra datos en pantalla.</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="example-box">
-                        <strong>Ejemplo práctico</strong>
-                        El equipo crea un cuestionario online distribuido en redes sociales
-                        para conocer hábitos y preferencias de usuarios antes de diseñar la aplicación.
-                    </div>
-                </div>
-
-                <!-- Taller -->
-                <div class="technique-card" style="--tech-color: var(--accent-amber);" id="workshop">
-                    <div class="technique-head">
-                        <div class="technique-icon"><i class="bi bi-people-fill"></i></div>
-                        <h3>Taller de trabajo (Workshop)</h3>
-                    </div>
-                    <p>
-                        Actividad intensiva donde los participantes comparten ideas y desarrollan
-                        capacidades en un corto tiempo. Incluye dinámicas de grupo, lluvia de ideas,
-                        prototipado y resolución de problemas.
-                    </p>
-
-                    <table class="symbols-table">
-                        <thead>
-                            <tr>
-                                <th>Actividad</th>
-                                <th>Duración</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Introducción del proyecto y objetivos del taller</td><td>15 min</td></tr>
-                            <tr><td>Mapa de empatía y perfil de usuario</td><td>30 min</td></tr>
-                            <tr><td>Lluvia de ideas y priorización</td><td>60 min</td></tr>
-                            <tr><td>Prototipado rápido</td><td>45 min</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Observación -->
-                <div class="technique-card" style="--tech-color: var(--accent-emerald);" id="observacion">
-                    <div class="technique-head">
-                        <div class="technique-icon"><i class="bi bi-eye-fill"></i></div>
-                        <h3>Observación</h3>
-                    </div>
-                    <p>
-                        Estudia el comportamiento real de las personas en su entorno natural o
-                        profesional. Permite analizar procesos, necesidades y dificultades sin
-                        depender solo de opiniones expresadas verbalmente.
-                    </p>
-
-                    <h4>Categorías de observación</h4>
-                    <table class="symbols-table">
-                        <thead>
-                            <tr>
-                                <th>Categoría</th>
-                                <th>Aspectos a observar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Comunicación</strong></td>
-                                <td>Canales usados, comunicación entre áreas, incidencia en el resultado final, casos exitosos.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Sistema de información</strong></td>
-                                <td>Procesos seguidos, principales inconvenientes en el manejo del sistema.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Prototipos -->
-                <div class="technique-card" style="--tech-color: var(--accent-blue);" id="prototipos">
-                    <div class="technique-head">
-                        <div class="technique-icon"><i class="bi bi-bounding-box-circles"></i></div>
-                        <h3>Prototipos</h3>
-                    </div>
-                    <p>
-                        Representación temprana del software o de una parte de la interfaz.
-                        Permite validar ideas antes de invertir mucho tiempo en desarrollo,
-                        y ayuda a detectar errores de diseño o funcionalidad.
-                    </p>
-
-                    <div class="pros-cons">
-                        <div class="pros">
-                            <h4><i class="bi bi-hand-thumbs-up-fill"></i> Ventajas</h4>
-                            <ul>
-                                <li>El cliente ve el sistema antes de desarrollarlo.</li>
-                                <li>Se detectan confusiones antes de invertir tiempo.</li>
-                                <li>Facilita el entendimiento entre cliente y desarrollador.</li>
-                            </ul>
-                        </div>
-                        <div class="cons">
-                            <h4><i class="bi bi-hand-thumbs-down-fill"></i> Desventajas</h4>
-                            <ul>
-                                <li>El cliente puede confundirlo con el producto final.</li>
-                                <li>Crear y modificar prototipos requiere tiempo.</li>
-                                <li>Demasiados cambios pueden retrasar el proyecto.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Historias de usuario -->
-                <div class="technique-card" style="--tech-color: var(--accent-rose);" id="historias">
-                    <div class="technique-head">
-                        <div class="technique-icon"><i class="bi bi-person-badge-fill"></i></div>
-                        <h3>Historias de usuario</h3>
-                    </div>
-                    <p>
-                        Describen necesidades desde la perspectiva del usuario final.
-                        Se escriben en lenguaje simple y sirven como requisitos funcionales
-                        para el equipo de desarrollo.
-                    </p>
-
-                    <blockquote>
-                        <strong>Formato:</strong> Como [usuario], quiero [objetivo], para [beneficio].
-                    </blockquote>
-
-                    <h4>Ejemplos</h4>
-                    <ul>
-                        <li>Como usuario, quiero <em>crear tareas con título, fecha y prioridad</em> para organizar mis actividades.</li>
-                        <li>Como usuario, quiero <em>editar una tarea existente</em> para actualizar la información.</li>
-                        <li>Como usuario, quiero <em>marcar tareas como completadas</em> para tener control de lo que ya hice.</li>
-                        <li>Como administrador, quiero <em>gestionar múltiples usuarios</em> para supervisar equipos de trabajo.</li>
+                    <h3 class="bm-reveal">Reglas según estándar ISO</h3>
+                    <ul class="bm-list bm-reveal">
+                        <li>Escribir de arriba hacia abajo y/o de izquierda a derecha.</li>
+                        <li>Usar solo líneas horizontales o verticales (nunca diagonales).</li>
+                        <li>Evitar el cruce de líneas.</li>
+                        <li>Solo los símbolos de decisión pueden tener múltiples salidas.</li>
+                        <li>No deben quedar líneas de flujo sin conectar.</li>
                     </ul>
-                </div>
-            </section>
+                </section>
 
-            <!-- ══════════════════════════════════════ -->
-            <!-- 4. REQUERIMIENTOS                      -->
-            <!-- ══════════════════════════════════════ -->
-            <section class="article-section" id="requisitos">
-                <div class="section-header">
-                    <div class="section-number emerald">04</div>
-                    <h2>Requerimientos funcionales y no funcionales</h2>
-                </div>
+                <!-- ════════════════════════════════════ -->
+                <!-- 07 · DFD                            -->
+                <!-- ════════════════════════════════════ -->
+                <section id="dfd" class="bm-section" aria-labelledby="s-dfd">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">07 / DFD</span>
+                        <h2 id="s-dfd" class="bm-section__title">Diagramas de flujo de datos (DFD)</h2>
+                        <p class="bm-section__sub">
+                            Los DFD muestran cómo circulan los datos dentro del sistema: desde las
+                            entidades externas hasta los procesos internos y los almacenes de información.
+                            A diferencia de los flujogramas, se centran en los datos, no en la secuencia.
+                        </p>
+                    </header>
 
-                <p>
-                    Una vez recolectada la información, se debe definir qué necesita el software
-                    para funcionar. Los requisitos se clasifican en funcionales y no funcionales.
-                </p>
-
-                <div class="requirements-grid">
-                    <div class="req-card func">
-                        <h4><i class="bi bi-gear-fill"></i> Requisitos funcionales</h4>
-                        <ul>
-                            <li>El sistema debe permitir iniciar sesión.</li>
-                            <li>El sistema debe registrar clientes.</li>
-                            <li>El sistema debe guardar ventas.</li>
-                            <li>El sistema debe mostrar reportes.</li>
-                        </ul>
-                    </div>
-                    <div class="req-card no-func">
-                        <h4><i class="bi bi-shield-fill-check"></i> Requisitos no funcionales</h4>
-                        <ul>
-                            <li>Debe funcionar en navegadores modernos.</li>
-                            <li>Debe responder en menos de 3 segundos.</li>
-                            <li>Debe ser fácil de usar para usuarios sin experiencia.</li>
-                            <li>Debe proteger la información de usuarios.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ══════════════════════════════════════ -->
-            <!-- 5. ROLES                               -->
-            <!-- ══════════════════════════════════════ -->
-            <section class="article-section" id="roles">
-                <div class="section-header">
-                    <div class="section-number violet">05</div>
-                    <h2>Roles en el desarrollo de software</h2>
-                </div>
-
-                <p>
-                    En un proyecto de software intervienen varias personas con funciones
-                    complementarias. Cada una aporta desde su especialidad.
-                </p>
-
-                <div class="roles-grid">
-                    <div class="role-chip">
-                        <i class="bi bi-person-check-fill"></i>
-                        <div><strong>Cliente</strong><span>Expresa la necesidad o problema.</span></div>
-                    </div>
-                    <div class="role-chip">
-                        <i class="bi bi-clipboard-data-fill"></i>
-                        <div><strong>Analista</strong><span>Recoge y documenta los requisitos.</span></div>
-                    </div>
-                    <div class="role-chip">
-                        <i class="bi bi-palette-fill"></i>
-                        <div><strong>Diseñador</strong><span>Estructura la solución y la experiencia.</span></div>
-                    </div>
-                    <div class="role-chip">
-                        <i class="bi bi-code-slash"></i>
-                        <div><strong>Desarrollador</strong><span>Construye la aplicación o sistema.</span></div>
-                    </div>
-                    <div class="role-chip">
-                        <i class="bi bi-bug-fill"></i>
-                        <div><strong>Tester / QA</strong><span>Valida que el sistema funcione.</span></div>
-                    </div>
-                    <div class="role-chip">
-                        <i class="bi bi-kanban-fill"></i>
-                        <div><strong>Project Manager</strong><span>Coordina tiempos y recursos.</span></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ══════════════════════════════════════ -->
-            <!-- 6. FLUJOGRAMAS                         -->
-            <!-- ══════════════════════════════════════ -->
-            <section class="article-section" id="flujogramas">
-                <div class="section-header">
-                    <div class="section-number cyan">06</div>
-                    <h2>Diagramas de flujo generales (Flujogramas)</h2>
-                </div>
-
-                <p>
-                    Un diagrama de flujo representa gráficamente los pasos que sigue un
-                    proceso. Se utiliza para comprender, analizar y documentar un procedimiento.
-                </p>
-
-                <h3>Símbolos principales</h3>
-                <table class="symbols-table">
-                    <thead>
-                        <tr>
-                            <th>Símbolo</th>
-                            <th>Representación</th>
-                            <th>Significado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Inicio / Fin</td><td><code>[●]</code></td><td>Comienzo o final del proceso.</td></tr>
-                        <tr><td>Actividad</td><td><code>[&nbsp;&nbsp;&nbsp;]</code></td><td>Tarea llevada a cabo durante el proceso.</td></tr>
-                        <tr><td>Decisión</td><td><code>◇</code></td><td>Punto de bifurcación (sí/no).</td></tr>
-                        <tr><td>Conexión</td><td><code>→</code></td><td>Dirección del flujo del proceso.</td></tr>
-                        <tr><td>Documento</td><td><code>📄</code></td><td>Generación o consulta de un documento.</td></tr>
-                        <tr><td>Envío de datos</td><td><code>🖨️</code></td><td>Envía datos a la impresora.</td></tr>
-                        <tr><td>Muestra de datos</td><td><code>🖥️</code></td><td>Muestra datos en pantalla.</td></tr>
-                    </tbody>
-                </table>
-
-                <h3>Reglas según estándar ISO</h3>
-                <ul>
-                    <li>Escribir de arriba hacia abajo y/o de izquierda a derecha.</li>
-                    <li>Usar solo líneas horizontales o verticales (nunca diagonales).</li>
-                    <li>Evitar el cruce de líneas.</li>
-                    <li>Solo los símbolos de decisión pueden tener múltiples salidas.</li>
-                    <li>No deben quedar líneas de flujo sin conectar.</li>
-                </ul>
-            </section>
-
-            <!-- ══════════════════════════════════════ -->
-            <!-- 7. DFD                                 -->
-            <!-- ══════════════════════════════════════ -->
-            <section class="article-section" id="dfd">
-                <div class="section-header">
-                    <div class="section-number blue">07</div>
-                    <h2>Diagramas de flujo de datos (DFD)</h2>
-                </div>
-
-                <p>
-                    Los DFD muestran cómo circulan los datos dentro del sistema: desde las
-                    entidades externas hasta los procesos internos y los almacenes de información.
-                    A diferencia de los flujogramas, se centran en los datos, no en la secuencia.
-                </p>
-
-                <h3>Notación Yourdon-Coad</h3>
-                <div class="code-block" data-lang="DFD">  [ Cliente ] → ( Validar pedido ) → || Pedidos ||
+                    <h3 class="bm-reveal">Notación Yourdon-Coad</h3>
+                    <pre class="bm-code-block bm-reveal" data-lang="DFD">  [ Cliente ] → ( Validar pedido ) → || Pedidos ||
                       ↓
                 ( Calcular total )
                       ↓
-  [ Cliente ] ← ( Facturar )</div>
+  [ Cliente ] ← ( Facturar )</pre>
 
-                <h3>Notación Gane-Sarson</h3>
-                <div class="code-block" data-lang="DFD">    ┌────────────┐     ┌────────────┐     ┌────────────┐
+                    <h3 class="bm-reveal">Notación Gane-Sarson</h3>
+                    <pre class="bm-code-block bm-reveal" data-lang="DFD">    ┌────────────┐     ┌────────────┐     ┌────────────┐
     │  Cliente   │ →   │  Validar   │ →   │  Pedidos   │
     └────────────┘     │  pedido    │     └────────────┘
                        └────────────┘
@@ -1701,341 +917,276 @@
                              ↓
     ┌────────────┐     ┌────────────┐
     │  Cliente   │ ←   │  Facturar  │
-    └────────────┘     └────────────┘</div>
+    └────────────┘     └────────────┘</pre>
 
-                <h3>Niveles de DFD</h3>
-                <table class="symbols-table">
-                    <thead>
-                        <tr>
-                            <th>Nivel</th>
-                            <th>Descripción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Nivel 0 (contexto)</td><td>Sistema completo como un solo proceso.</td></tr>
-                        <tr><td>Nivel 1</td><td>Descompone el proceso principal en varios procesos.</td></tr>
-                        <tr><td>Nivel 2 y superiores</td><td>Descompone cada proceso de nivel 1 en subprocesos.</td></tr>
-                    </tbody>
-                </table>
-
-                <h3>DFD vs. Flujograma</h3>
-                <table class="symbols-table">
-                    <thead>
-                        <tr>
-                            <th>DFD</th>
-                            <th>Flujograma</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Muestra el flujo de <strong>datos</strong>.</td><td>Muestra la <strong>secuencia de pasos</strong>.</td></tr>
-                        <tr><td>Se enfoca en el <strong>qué</strong>.</td><td>Se enfoca en el <strong>cómo</strong>.</td></tr>
-                        <tr><td>No tiene símbolos de decisión.</td><td>Incluye rombos para condiciones.</td></tr>
-                        <tr><td>Útil para análisis y diseño.</td><td>Útil para programación y algoritmos.</td></tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <!-- ══════════════════════════════════════ -->
-            <!-- 8. EJEMPLO PANADERÍA                   -->
-            <!-- ══════════════════════════════════════ -->
-            <section class="article-section" id="panaderia">
-                <div class="section-header">
-                    <div class="section-number amber">08</div>
-                    <h2>Ejemplo: Panadería Estación Paisa</h2>
-                </div>
-
-                <div class="highlight-card">
-                    <h4>🎯 Objetivo del proyecto</h4>
-                    <p>
-                        Desarrollar un software para el control del personal en la panadería
-                        <strong>Estación Paisa en Terreros</strong>.
-                    </p>
-                </div>
-
-                <h3>Objetivos específicos</h3>
-                <ul>
-                    <li><strong>Levantamiento de información:</strong> observación directa, entrevistas e historias de usuario.</li>
-                    <li><strong>DFD:</strong> representar el manejo de la información en el software.</li>
-                    <li><strong>UML:</strong> describir la estructura y comportamiento del sistema.</li>
-                    <li><strong>Requerimientos:</strong> definir requisitos funcionales y no funcionales.</li>
-                </ul>
-
-                <div class="requirements-grid">
-                    <div class="req-card func">
-                        <h4><i class="bi bi-list-check"></i> Requisitos funcionales</h4>
-                        <ul>
-                            <li>Registrar ventas por cliente.</li>
-                            <li>Controlar inventario de ingredientes.</li>
-                            <li>Generar boletas o facturas.</li>
-                            <li>Mostrar reportes del día.</li>
-                        </ul>
+                    <h3 class="bm-reveal">Niveles de DFD</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nivel</th>
+                                        <th scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Nivel 0 (contexto)</td><td>Sistema completo como un solo proceso.</td></tr>
+                                    <tr><td>Nivel 1</td><td>Descompone el proceso principal en varios procesos.</td></tr>
+                                    <tr><td>Nivel 2 y superiores</td><td>Descompone cada proceso de nivel 1 en subprocesos.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="req-card no-func">
-                        <h4><i class="bi bi-speedometer2"></i> Requisitos no funcionales</h4>
-                        <ul>
-                            <li>Velocidad de respuesta rápida.</li>
-                            <li>Interfaz amigable para empleados.</li>
-                            <li>Seguridad de los datos.</li>
-                            <li>Compatibilidad con dispositivos de escritorio.</li>
-                        </ul>
+
+                    <h3 class="bm-reveal">DFD vs. Flujograma</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">DFD</th>
+                                        <th scope="col">Flujograma</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Muestra el flujo de <strong>datos</strong>.</td><td>Muestra la <strong>secuencia de pasos</strong>.</td></tr>
+                                    <tr><td>Se enfoca en el <strong>qué</strong>.</td><td>Se enfoca en el <strong>cómo</strong>.</td></tr>
+                                    <tr><td>No tiene símbolos de decisión.</td><td>Incluye rombos para condiciones.</td></tr>
+                                    <tr><td>Útil para análisis y diseño.</td><td>Útil para programación y algoritmos.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- ══════════════════════════════════════ -->
-            <!-- 9. UML                                 -->
-            <!-- ══════════════════════════════════════ -->
-            <section class="article-section" id="uml">
-                <div class="section-header">
-                    <div class="section-number violet">09</div>
-                    <h2>UML (Unified Modeling Language)</h2>
-                </div>
+                <!-- ════════════════════════════════════ -->
+                <!-- 08 · EJEMPLO PANADERÍA              -->
+                <!-- ════════════════════════════════════ -->
+                <section id="panaderia" class="bm-section" aria-labelledby="s-pan">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">08 / EJEMPLO</span>
+                        <h2 id="s-pan" class="bm-section__title">Ejemplo: Panadería Estación Paisa</h2>
+                    </header>
 
-                <p>
-                    La UML es un lenguaje estándar para modelar sistemas de software.
-                    Permite representar clientes, procesos, datos y relaciones entre
-                    elementos mediante diagramas.
-                </p>
-
-                <h3>Diagramas más comunes</h3>
-                <div class="roles-grid">
-                    <div class="role-chip">
-                        <i class="bi bi-diagram-2-fill"></i>
-                        <div><strong>Casos de uso</strong><span>Interacciones entre usuarios y sistema.</span></div>
+                    <div class="bm-callout bm-reveal">
+                        <strong>🎯 Objetivo del proyecto:</strong> desarrollar un software para el control
+                        del personal en la panadería <strong>Estación Paisa en Terreros</strong>.
                     </div>
-                    <div class="role-chip">
-                        <i class="bi bi-bounding-box"></i>
-                        <div><strong>Clases</strong><span>Entidades y relaciones entre objetos.</span></div>
-                    </div>
-                    <div class="role-chip">
-                        <i class="bi bi-arrow-left-right"></i>
-                        <div><strong>Secuencia</strong><span>Flujo temporal de mensajes.</span></div>
-                    </div>
-                    <div class="role-chip">
-                        <i class="bi bi-activity"></i>
-                        <div><strong>Actividades</strong><span>Flujo de trabajo de un proceso.</span></div>
-                    </div>
-                </div>
 
-                <blockquote>
-                    En esta etapa inicial, el objetivo principal es comprender las necesidades
-                    reales del usuario y transformar esas necesidades en requisitos claros y verificables.
-                </blockquote>
-            </section>
+                    <h3 class="bm-reveal">Objetivos específicos</h3>
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Levantamiento de información:</strong> observación directa, entrevistas e historias de usuario.</li>
+                        <li><strong>DFD:</strong> representar el manejo de la información en el software.</li>
+                        <li><strong>UML:</strong> describir la estructura y comportamiento del sistema.</li>
+                        <li><strong>Requerimientos:</strong> definir requisitos funcionales y no funcionales.</li>
+                    </ul>
 
-        </article>
+                    <div class="bm-cards-2">
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title">
+                                    <i class="fa-solid fa-list-check" style="color: var(--color-accent);"></i>
+                                    Requisitos funcionales
+                                </h3>
+                            </div>
+                            <ul class="bm-list" style="margin-top: 0;">
+                                <li>Registrar ventas por cliente.</li>
+                                <li>Controlar inventario de ingredientes.</li>
+                                <li>Generar boletas o facturas.</li>
+                                <li>Mostrar reportes del día.</li>
+                            </ul>
+                        </article>
 
-        <!-- ══════════════════════════════════════ -->
-        <!-- SIDEBAR                                -->
-        <!-- ══════════════════════════════════════ -->
-        <aside class="page-sidebar" aria-label="Información de apoyo">
-
-            <div class="sidebar-card">
-                <h3>Navegación rápida</h3>
-                <ul class="sidebar-toc" id="sidebarToc">
-                    <li><a href="#introduccion">01 · Introducción</a></li>
-                    <li><a href="#fuentes">02 · Fuentes de información</a></li>
-                    <li><a href="#tecnicas">03 · Técnicas de recolección</a></li>
-                    <li><a href="#entrevista">· Entrevista</a></li>
-                    <li><a href="#encuesta">· Encuesta y cuestionario</a></li>
-                    <li><a href="#workshop">· Taller (Workshop)</a></li>
-                    <li><a href="#observacion">· Observación</a></li>
-                    <li><a href="#prototipos">· Prototipos</a></li>
-                    <li><a href="#historias">· Historias de usuario</a></li>
-                    <li><a href="#requisitos">04 · Requerimientos</a></li>
-                    <li><a href="#roles">05 · Roles</a></li>
-                    <li><a href="#flujogramas">06 · Flujogramas</a></li>
-                    <li><a href="#dfd">07 · DFD</a></li>
-                    <li><a href="#panaderia">08 · Ejemplo práctico</a></li>
-                    <li><a href="#uml">09 · UML</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-card">
-                <h3>Estadísticas</h3>
-                <div class="sidebar-stats">
-                    <div class="stat-item">
-                        <strong>7</strong>
-                        <span>Técnicas</span>
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title">
+                                    <i class="fa-solid fa-gauge-high" style="color: var(--color-accent-2);"></i>
+                                    Requisitos no funcionales
+                                </h3>
+                            </div>
+                            <ul class="bm-list" style="margin-top: 0;">
+                                <li>Velocidad de respuesta rápida.</li>
+                                <li>Interfaz amigable para empleados.</li>
+                                <li>Seguridad de los datos.</li>
+                                <li>Compatibilidad con dispositivos de escritorio.</li>
+                            </ul>
+                        </article>
                     </div>
-                    <div class="stat-item">
-                        <strong>9</strong>
-                        <span>Secciones</span>
-                    </div>
-                    <div class="stat-item">
-                        <strong>6</strong>
-                        <span>Roles</span>
-                    </div>
-                    <div class="stat-item">
-                        <strong>3</strong>
-                        <span>DFD</span>
-                    </div>
-                </div>
-            </div>
+                </section>
 
-            <div class="sidebar-card">
-                <h3>Conceptos clave</h3>
-                <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">
-                    La elicitación convierte necesidades ambiguas en información
-                    estructurada, permitiendo construir sistemas con mayor precisión
-                    y menos riesgo de error.
-                </p>
-            </div>
+                <!-- ════════════════════════════════════ -->
+                <!-- 09 · UML                            -->
+                <!-- ════════════════════════════════════ -->
+                <section id="uml" class="bm-section" aria-labelledby="s-uml">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">09 / UML</span>
+                        <h2 id="s-uml" class="bm-section__title">UML (Unified Modeling Language)</h2>
+                        <p class="bm-section__sub">
+                            La UML es un lenguaje estándar para modelar sistemas de software.
+                            Permite representar clientes, procesos, datos y relaciones entre
+                            elementos mediante diagramas.
+                        </p>
+                    </header>
 
-        </aside>
+                    <h3 class="bm-reveal">Diagramas más comunes</h3>
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Casos de uso</strong> — Interacciones entre usuarios y sistema.</li>
+                        <li><strong>Clases</strong> — Entidades y relaciones entre objetos.</li>
+                        <li><strong>Secuencia</strong> — Flujo temporal de mensajes.</li>
+                        <li><strong>Actividades</strong> — Flujo de trabajo de un proceso.</li>
+                    </ul>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        En esta etapa inicial, el objetivo principal es comprender las necesidades
+                        reales del usuario y transformar esas necesidades en requisitos claros y verificables.
+                    </div>
+                </section>
+
+            </article>
+        </div>
     </main>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- FOOTER                                          -->
-    <!-- ══════════════════════════════════════════════ -->
-    <footer class="page-footer" id="footer">
-        <div class="footer-wrap">
-            <span>© 2025 · Análisis y Desarrollo de Software</span>
-            <span><a href="http://github.com/santiagoencodigo" target="_blank" rel="noopener noreerrer">santiagoencodigo</a></span>            
+    <!-- ============================================== -->
+    <!-- FOOTER                                         -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <style>
+            #footer .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #footer .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #footer .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #footer .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #footer .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            #footer .footer-links .footer-link:hover {
+                color: var(--color-accent);
+            }
+
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            @media (max-width: 768px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="#tecnicas" class="footer-link">Técnicas</a></li>
+                    <li><a href="#dfd" class="footer-link">DFD</a></li>
+                    <li><a href="#uml" class="footer-link">UML</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                    <li><a href="../../trimestre-7/index.html" class="footer-link">Trimestre 7</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software"
+                            target="_blank" rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank"
+                            rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 1</p>
+            <p>Creado por <strong>santiagoencodigo</strong></p>
         </div>
     </footer>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- BOTÓN VOLVER ARRIBA                             -->
-    <!-- ══════════════════════════════════════════════ -->
-    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
-        <i class="bi bi-arrow-up"></i>
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
     </button>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- JAVASCRIPT                                      -->
-    <!-- ══════════════════════════════════════════════ -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-            /* ══════════════════════════════════════════ */
-            /* 1. BARRA DE PROGRESO DE LECTURA            */
-            /* ══════════════════════════════════════════ */
-            const progressBar = document.getElementById('readingProgress');
-
-            const updateProgress = () => {
-                const scrollTop = window.scrollY;
-                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-                progressBar.style.width = progress + '%';
-            };
-
-            window.addEventListener('scroll', updateProgress, { passive: true });
-            updateProgress();
-
-            /* ══════════════════════════════════════════ */
-            /* 2. ANIMACIONES DE SCROLL (Intersection)     */
-            /* ══════════════════════════════════════════ */
-            const sections = document.querySelectorAll('.article-section');
-
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        sectionObserver.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -80px 0px'
-            });
-
-            sections.forEach(section => sectionObserver.observe(section));
-
-            /* ══════════════════════════════════════════ */
-            /* 3. SIDEBAR CON SECCIÓN ACTIVA              */
-            /* ══════════════════════════════════════════ */
-            const tocLinks = document.querySelectorAll('#sidebarToc a');
-            const sectionMap = new Map();
-
-            tocLinks.forEach(link => {
-                const id = link.getAttribute('href').substring(1);
-                const target = document.getElementById(id);
-                if (target) {
-                    sectionMap.set(target, link);
-                }
-            });
-
-            const activeObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        tocLinks.forEach(l => l.classList.remove('active'));
-                        const activeLink = sectionMap.get(entry.target);
-                        if (activeLink) {
-                            activeLink.classList.add('active');
-                        }
-                    }
-                });
-            }, {
-                rootMargin: '-30% 0px -60% 0px',
-                threshold: 0
-            });
-
-            sectionMap.forEach((link, section) => activeObserver.observe(section));
-
-            /* ══════════════════════════════════════════ */
-            /* 4. BOTÓN VOLVER ARRIBA                     */
-            /* ══════════════════════════════════════════ */
-            const backToTop = document.getElementById('backToTop');
-
-            const toggleBackToTop = () => {
-                if (window.scrollY > 400) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            };
-
-            window.addEventListener('scroll', toggleBackToTop, { passive: true });
-
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            /* ══════════════════════════════════════════ */
-            /* 5. MENÚ MÓVIL                              */
-            /* ══════════════════════════════════════════ */
-            const navToggle = document.getElementById('navToggle');
-            const navLinks = document.getElementById('navLinks');
-
-            navToggle.addEventListener('click', () => {
-                const isOpen = navLinks.classList.toggle('active');
-                navToggle.setAttribute('aria-expanded', isOpen);
-                navToggle.innerHTML = isOpen
-                    ? '<i class="bi bi-x-lg"></i>'
-                    : '<i class="bi bi-list"></i>';
-            });
-
-            /* ══════════════════════════════════════════ */
-            /* 6. SMOOTH SCROLL CON OFFSET                */
-            /* ══════════════════════════════════════════ */
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', (e) => {
-                    const targetId = anchor.getAttribute('href');
-                    if (targetId === '#' || targetId.length < 2) return;
-
-                    const target = document.querySelector(targetId);
-                    if (!target) return;
-
-                    e.preventDefault();
-                    const offset = 88;
-                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-
-                    // Cerrar menú móvil si está abierto
-                    if (navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                        navToggle.setAttribute('aria-expanded', false);
-                        navToggle.innerHTML = '<i class="bi bi-list"></i>';
-                    }
-                });
-            });
-        });
-    </script>
+    <!-- Template editorial (apuntes + theme switcher) -->
+    <script src="../../Assets/templates.js"></script>
 
 </body>
 
