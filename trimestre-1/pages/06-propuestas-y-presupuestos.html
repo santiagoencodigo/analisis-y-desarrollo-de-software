@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Anti-FOUC -->
+    <script>try{var t=localStorage.getItem('adso-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+    <title>Propuestas Técnicas y Económicas · Trimestre 1 · ADSO</title>
+    <meta name="description"
+        content="Propuestas técnicas y económicas en proyectos de software: estructura, factibilidad, estimación de costos en Excel, pitch de proyectos y análisis de proveedores (7 C, criterios y métricas).">
+    <meta name="keywords" content="propuesta técnica, propuesta económica, estimación de costos, factibilidad, pitch, proveedores, ADSO, SENA">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1120">
+
+    <link rel="canonical"
+        href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/trimestre-1/pages/06-propuestas-y-presupuestos.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Propuestas Técnicas y Económicas | ADSO">
+    <meta property="og:description"
+        content="Estructura de propuestas, factibilidad, estimación de costos, pitch y análisis de proveedores.">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Estilos del proyecto + template -->
+    <link rel="stylesheet" href="../../Assets/style.css">
+    <link rel="stylesheet" href="../../Assets/templates.css">
+
+    <!-- Utilidades específicas de esta página -->
+    <style>
+        .bm-cards-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .bm-cards-2 { grid-template-columns: 1fr; }
+        }
+
+        .bm-principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .bm-principle-card {
+            position: relative;
+            padding: 1.5rem 1.35rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-top: 3px solid var(--principle-color, var(--color-accent));
+            border-radius: 12px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .bm-principle-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--principle-color, var(--color-accent));
+        }
+
+        .bm-principle-card .bm-principle-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: white;
+            background: var(--principle-color, var(--color-accent));
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .bm-principle-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-primary);
+        }
+
+        .bm-principle-card p {
+            font-size: 0.88rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        .bm-code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            padding: 1.5rem 1.25rem 1.25rem;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.8rem;
+            line-height: 1.55;
+            color: var(--color-accent);
+            white-space: pre;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        .bm-code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0.6rem;
+            right: 0.85rem;
+            font-size: 0.6rem;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            opacity: 0.7;
+        }
+
+        .bm-toc-widget {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .bm-toc-widget h3 {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .bm-toc-widget__stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .bm-toc-widget__stat {
+            padding: 0.75rem 0.5rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .bm-toc-widget__stat strong {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bm-toc-widget__stat span {
+            display: block;
+            margin-top: 0.3rem;
+            font-size: 0.65rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN                            -->
+    <!-- ============================================== -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+
+                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                        alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+
+                <button class="navbar-toggler nav-toggle" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html#proyectos">Proyectos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../sitemap.html">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ========================================== -->
+        <!-- HERO                                       -->
+        <!-- ========================================== -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Trimestre 1 · Análisis y Desarrollo de Software
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Propuestas técnicas,
+                    <span class="gradient-text">económicas y estimación</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Documento que consolida los conceptos fundamentales para la elaboración
+                    de propuestas técnicas y económicas, la estimación de costos, el análisis
+                    de proveedores y el proceso de pitch y selección de proyectos en el marco
+                    del programa ADSO.
+                </p>
+
+                <div class="bm-hero__meta" role="list">
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Enfoque</span>
+                        <span class="bm-meta-value">Propuestas · Costos · Proveedores</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Programa</span>
+                        <span class="bm-meta-value">ADSO · SENA</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Proyecto ejemplo</span>
+                        <span class="bm-meta-value">$42.220.000 COP</span>
+                    </div>
+                </div>
+
+                <div class="bm-hero__stats" aria-label="Resumen del contenido">
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">8</span>
+                        <span class="bm-stat-label">Secciones</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">7</span>
+                        <span class="bm-stat-label">C de proveedores</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">5</span>
+                        <span class="bm-stat-label">Criterios clave</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- LAYOUT: TOC + CONTENIDO                    -->
+        <!-- ========================================== -->
+        <div class="bm-layout">
+
+            <!-- ---------- TABLA DE CONTENIDO ---------- -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button"
+                            aria-expanded="false" aria-controls="bm-toc-list"
+                            aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#definicion"><span class="bm-toc__num">01</span>Definición</a></li>
+                            <li><a class="bm-toc__link" href="#diferencias"><span class="bm-toc__num">02</span>Diferencias técnica vs económica</a></li>
+                            <li><a class="bm-toc__link" href="#estructura-tecnica"><span class="bm-toc__num">03</span>Estructura propuesta técnica</a></li>
+                            <li><a class="bm-toc__link" href="#estructura-economica"><span class="bm-toc__num">04</span>Estructura propuesta económica</a></li>
+                            <li><a class="bm-toc__link" href="#factibilidad"><span class="bm-toc__num">05</span>Factibilidad técnica y económica</a></li>
+                            <li><a class="bm-toc__link" href="#costos"><span class="bm-toc__num">06</span>Estimación de costos en Excel</a></li>
+                            <li><a class="bm-toc__link" href="#pitch"><span class="bm-toc__num">07</span>Pitch y selección de proyectos</a></li>
+                            <li><a class="bm-toc__link" href="#proveedores"><span class="bm-toc__num">08</span>Análisis de proveedores</a></li>
+                        </ol>
+                    </nav>
+
+                    <div class="bm-toc-widget">
+                        <h3>Estadísticas</h3>
+                        <div class="bm-toc-widget__stats">
+                            <div class="bm-toc-widget__stat">
+                                <strong>8</strong>
+                                <span>Secciones</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>7</strong>
+                                <span>C proveedores</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>5</strong>
+                                <span>Criterios</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>$42M</strong>
+                                <span>Costo total</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ---------- CONTENIDO ---------- -->
+            <article class="bm-content">
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 01 · DEFINICIÓN                     -->
+                <!-- ════════════════════════════════════ -->
+                <section id="definicion" class="bm-section" aria-labelledby="s-def">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / DEFINICIÓN</span>
+                        <h2 id="s-def" class="bm-section__title">Definición de propuesta técnica y económica</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">Propuesta técnica</h3>
+
+                    <p class="bm-reveal">
+                        Es el documento en el que se explica <strong>cómo se va a ejecutar el proyecto
+                        o servicio solicitado</strong>. Detalla aspectos como:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Metodología de trabajo.</li>
+                        <li>Cronograma de actividades.</li>
+                        <li>Especificaciones técnicas de los productos o servicios ofrecidos.</li>
+                        <li>Experiencia del proponente (empresa o persona).</li>
+                        <li>Equipo de trabajo y sus roles.</li>
+                        <li>Calidad de los materiales o procesos.</li>
+                        <li>Cumplimiento de normas técnicas o legales.</li>
+                    </ul>
+
+                    <div class="bm-callout bm-reveal">
+                        Su propósito es <strong>demostrar la capacidad técnica</strong> para ejecutar el proyecto.
+                    </div>
+
+                    <h3 class="bm-reveal">Propuesta económica</h3>
+
+                    <p class="bm-reveal">
+                        Es el documento en el que se presenta <strong>el valor monetario del proyecto
+                        o servicio</strong>. Incluye:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Presupuesto detallado.</li>
+                        <li>Costos directos e indirectos.</li>
+                        <li>Valor por unidades.</li>
+                        <li>Impuestos.</li>
+                        <li>Forma y plazos de pago.</li>
+                        <li>Tiempos de entrega.</li>
+                    </ul>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        Su objetivo es <strong>indicar cuánto va a costar</strong> realizar el proyecto
+                        o prestar el servicio.
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 02 · DIFERENCIAS                    -->
+                <!-- ════════════════════════════════════ -->
+                <section id="diferencias" class="bm-section" aria-labelledby="s-dif">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / DIFERENCIAS</span>
+                        <h2 id="s-dif" class="bm-section__title">Diferencias entre propuesta técnica y económica</h2>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Propuesta técnica</th>
+                                        <th scope="col">Propuesta económica</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Propósito:</strong> Demostrar la capacidad técnica para ejecutar un proyecto o servicio.</td>
+                                        <td><strong>Propósito:</strong> Estimar y justificar los costos del proyecto o servicio propuesto.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Objetivo:</strong> Garantizar que se cuenta con los conocimientos, recursos y metodología adecuados.</td>
+                                        <td><strong>Objetivo:</strong> Asegurar que los costos estén bien definidos, sean competitivos y viables.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Describe:</strong> Cómo se desarrollará técnicamente el proyecto, paso a paso.</td>
+                                        <td><strong>Describe:</strong> El presupuesto total, desglosado por actividades, recursos y tiempos.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Busca:</strong> Metodología, cronograma, personal técnico, herramientas, actividades específicas.</td>
+                                        <td><strong>Busca:</strong> Costos directos e indirectos, precios unitarios, impuestos, forma de pago, utilidad.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Debe contener:</strong> Portada, carta de presentación, tabla de contenido, introducción, objetivos, alcance, metodología, cronograma, recursos técnicos y humanos, experiencia del proponente.</td>
+                                        <td><strong>Debe contener:</strong> Valor total de la propuesta, costo global en números y letras, moneda de cotización, desglose de costos (mano de obra, materiales, equipos, utilidades, impuestos), forma y condiciones de pago.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 03 · ESTRUCTURA PROPUESTA TÉCNICA   -->
+                <!-- ════════════════════════════════════ -->
+                <section id="estructura-tecnica" class="bm-section" aria-labelledby="s-est">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / ESTRUCTURA</span>
+                        <h2 id="s-est" class="bm-section__title">Estructura de una propuesta técnica</h2>
+                        <p class="bm-section__sub">
+                            Una propuesta técnica completa suele incluir los siguientes apartados:
+                        </p>
+                    </header>
+
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li><strong>Portada</strong> (nombre del proyecto, empresa, fecha, autores).</li>
+                        <li><strong>Carta de presentación</strong> (dirigida al cliente).</li>
+                        <li><strong>Tabla de contenido</strong> (índice).</li>
+                        <li><strong>Introducción</strong> (contexto y propósito).</li>
+                        <li><strong>Planteamiento del problema</strong> (necesidad que se va a resolver).</li>
+                        <li><strong>Objetivos</strong> (general y específicos).</li>
+                        <li><strong>Justificación</strong> (por qué es importante el proyecto).</li>
+                        <li><strong>Alcance</strong> (qué incluye y qué no).</li>
+                        <li><strong>Metodología de trabajo</strong> (cómo se va a desarrollar).</li>
+                        <li><strong>Cronograma de actividades</strong> (hitos y fechas).</li>
+                        <li><strong>Recursos técnicos y humanos</strong> (equipo, herramientas, infraestructura).</li>
+                        <li><strong>Experiencia del proponente</strong> (antecedentes, casos de éxito).</li>
+                        <li><strong>Impactos esperados</strong> (económico, tecnológico, social, ambiental).</li>
+                        <li><strong>Conclusión</strong> (resumen y valor agregado).</li>
+                    </ol>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 04 · ESTRUCTURA PROPUESTA ECONÓMICA -->
+                <!-- ════════════════════════════════════ -->
+                <section id="estructura-economica" class="bm-section" aria-labelledby="s-eco">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / ESTRUCTURA</span>
+                        <h2 id="s-eco" class="bm-section__title">Estructura de una propuesta económica</h2>
+                        <p class="bm-section__sub">
+                            Una propuesta económica debe detallar:
+                        </p>
+                    </header>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Costo total del proyecto</strong> (en números y letras).</li>
+                        <li><strong>Moneda de cotización</strong>.</li>
+                        <li><strong>Desglose de costos:</strong>
+                            <ul style="padding-left: 1.25rem; margin-top: 0.5rem;">
+                                <li>Mano de obra (horas, tarifas, total).</li>
+                                <li>Materiales y equipos.</li>
+                                <li>Licencias de software.</li>
+                                <li>Gastos generales (internet, electricidad, oficina).</li>
+                                <li>Impuestos.</li>
+                                <li>Utilidad o margen de ganancia.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Forma de pago</strong> (porcentajes en hitos, anticipos, etc.).</li>
+                        <li><strong>Validez de la propuesta</strong> (plazo de vigencia).</li>
+                        <li><strong>Costos de servicios opcionales</strong> (soporte, mantenimiento, capacitación extra).</li>
+                    </ul>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 05 · FACTIBILIDAD                   -->
+                <!-- ════════════════════════════════════ -->
+                <section id="factibilidad" class="bm-section" aria-labelledby="s-fact">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / FACTIBILIDAD</span>
+                        <h2 id="s-fact" class="bm-section__title">Factibilidad técnica y económica</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">Factibilidad técnica</h3>
+                    <p class="bm-reveal">
+                        Analiza si el proyecto puede llevarse a cabo con los recursos, conocimientos,
+                        equipos y personal disponibles. Evalúa que exista la capacidad operativa y
+                        tecnológica necesaria para ejecutarlo con éxito.
+                    </p>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Preguntas clave:</strong>
+                        <ul style="padding-left: 1.25rem; margin: 0.75rem 0 0;">
+                            <li>¿Tenemos el personal con las habilidades requeridas?</li>
+                            <li>¿Contamos con las herramientas y tecnologías necesarias?</li>
+                            <li>¿El cronograma es realista con los recursos disponibles?</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="bm-reveal">Factibilidad económica</h3>
+                    <p class="bm-reveal">
+                        Evalúa si el proyecto es financieramente viable, es decir, si los costos de
+                        inversión y operación se compensan con los ingresos o beneficios esperados.
+                        Asegura que la iniciativa sea rentable y sostenible a lo largo del tiempo.
+                    </p>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        <strong>Preguntas clave:</strong>
+                        <ul style="padding-left: 1.25rem; margin: 0.75rem 0 0;">
+                            <li>¿El proyecto genera retorno de inversión (ROI)?</li>
+                            <li>¿Los costos estimados están dentro del presupuesto disponible?</li>
+                            <li>¿Existen riesgos financieros que puedan afectar la viabilidad?</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 06 · ESTIMACIÓN DE COSTOS           -->
+                <!-- ════════════════════════════════════ -->
+                <section id="costos" class="bm-section" aria-labelledby="s-cost">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">06 / COSTOS</span>
+                        <h2 id="s-cost" class="bm-section__title">Estimación de costos en Excel</h2>
+                        <p class="bm-section__sub">
+                            Durante el trimestre, se trabajó con hojas de cálculo para estimar los costos
+                            de proyectos de software. Ejemplo basado en un proyecto real de desarrollo web
+                            con tecnologías como <strong>HTML, CSS, JavaScript, Python y Django</strong>,
+                            con un equipo de <strong>5 personas</strong> (Project Manager, Backend Developer,
+                            Frontend Developer, Database Administrator, QA/Tester).
+                        </p>
+                    </header>
+
+                    <h3 class="bm-reveal">Hardware y software</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Recurso</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Costo unitario</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Laptop (alta gama)</td><td>Equipo para desarrollo y pruebas</td><td>5</td><td>$3.500.000</td><td>$17.500.000</td></tr>
+                                    <tr><td>Monitor adicional</td><td>Productividad</td><td>5</td><td>$800.000</td><td>$4.000.000</td></tr>
+                                    <tr><td>Licencia SO</td><td>Windows 11 Pro</td><td>5</td><td>$200.000</td><td>$1.000.000</td></tr>
+                                    <tr><td>Colaboración</td><td>Jira, Slack (plan básico)</td><td>1</td><td>$50.000/mes</td><td>$150.000 (3 meses)</td></tr>
+                                    <tr><td>Entorno de desarrollo</td><td>VS Code, PyCharm Community</td><td>5</td><td>$0</td><td>$0</td></tr>
+                                    <tr><td>Diseño</td><td>Figma (plan gratuito)</td><td>5</td><td>$0</td><td>$0</td></tr>
+                                    <tr><td><strong>Total hardware y software</strong></td><td></td><td></td><td></td><td><strong>$22.650.000</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">Infraestructura y servicios</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Concepto</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Costo unitario</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Hosting (3 meses)</td><td>Servidor en la nube (AWS / Azure)</td><td>3 meses</td><td>$150.000</td><td>$450.000</td></tr>
+                                    <tr><td>Dominio personalizado</td><td>.com o .co</td><td>1 año</td><td>$60.000</td><td>$60.000</td></tr>
+                                    <tr><td>BD (Django + PostgreSQL)</td><td>Incluido en hosting</td><td>—</td><td>$0</td><td>$0</td></tr>
+                                    <tr><td>Internet (3 meses)</td><td>Plan de alta velocidad</td><td>3 meses</td><td>$100.000</td><td>$300.000</td></tr>
+                                    <tr><td>Electricidad (3 meses)</td><td>Consumo estimado</td><td>3 meses</td><td>$80.000</td><td>$240.000</td></tr>
+                                    <tr><td>Oficina (opcional)</td><td>Espacio de trabajo compartido</td><td>1 mes</td><td>$200.000</td><td>$600.000</td></tr>
+                                    <tr><td><strong>Total infraestructura y servicios</strong></td><td></td><td></td><td></td><td><strong>$1.650.000</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">Mano de obra (por rol)</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Rol</th>
+                                        <th scope="col">Horas estimadas</th>
+                                        <th scope="col">Costo por hora</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Project Manager</td><td>120</td><td>$25.000</td><td>$3.000.000</td></tr>
+                                    <tr><td>Backend Developer (Python/Django)</td><td>200</td><td>$30.000</td><td>$6.000.000</td></tr>
+                                    <tr><td>Frontend Developer (HTML/CSS/JS)</td><td>160</td><td>$28.000</td><td>$4.480.000</td></tr>
+                                    <tr><td>Database Administrator</td><td>80</td><td>$28.000</td><td>$2.240.000</td></tr>
+                                    <tr><td>QA / Tester</td><td>100</td><td>$22.000</td><td>$2.200.000</td></tr>
+                                    <tr><td><strong>Total mano de obra</strong></td><td><strong>660 horas</strong></td><td></td><td><strong>$17.920.000</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">Resumen de costos totales</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Categoría</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Hardware y software</td><td>$22.650.000</td></tr>
+                                    <tr><td>Infraestructura y servicios</td><td>$1.650.000</td></tr>
+                                    <tr><td>Mano de obra</td><td>$17.920.000</td></tr>
+                                    <tr><td><strong>Costo total del proyecto</strong></td><td><strong>$42.220.000</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        <strong>Utilidad de estas tablas:</strong> una estimación de costos detallada
+                        permite justificar el presupuesto ante el cliente, identificar áreas de
+                        optimización, calcular el costo por módulo o fase, y prever imprevistos.
+                        En el entorno real, estas hojas de cálculo se entregan como parte de la
+                        propuesta económica y sirven de base para la negociación y el control
+                        financiero del proyecto.
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 07 · PITCH                          -->
+                <!-- ════════════════════════════════════ -->
+                <section id="pitch" class="bm-section" aria-labelledby="s-pitch">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">07 / PITCH</span>
+                        <h2 id="s-pitch" class="bm-section__title">Proceso de pitch y selección de proyectos en ADSO</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        Durante el primer trimestre, una vez conformados los grupos definitivos de
+                        trabajo (con los que se desarrollaría el proyecto a lo largo de todo el
+                        tecnólogo), se realizó una actividad de <strong>pitch</strong> para definir
+                        el proyecto formativo de cada grupo.
+                    </p>
+
+                    <h3 class="bm-reveal">Dinámica</h3>
+                    <p class="bm-reveal">
+                        Cada grupo debía preparar, en muy poco tiempo, una presentación breve (pitch)
+                        de <strong>dos propuestas de proyecto</strong> diferentes. El objetivo era
+                        evaluar la viabilidad, el impacto y la pertinencia de cada idea, y finalmente
+                        decidir cuál se desarrollaría durante los trimestres siguientes.
+                    </p>
+
+                    <h3 class="bm-reveal">Mi experiencia: dos proyectos posibles</h3>
+                    <p class="bm-reveal">
+                        En mi grupo (<strong>Cla$$ Lab</strong>), las dos propuestas iniciales fueron:
+                    </p>
+
+                    <div class="bm-cards-2">
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <span class="bm-card__num">01</span>
+                                <h3 class="bm-card__title">OperPan</h3>
+                            </div>
+                            <p>Sistema de gestión de personal para panaderías y pequeños comercios.</p>
+                        </article>
+
+                        <article class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <span class="bm-card__num">02</span>
+                                <h3 class="bm-card__title">Bienestar / BienStar</h3>
+                            </div>
+                            <p>Plataforma integral para digitalizar los servicios del área de Bienestar del SENA.</p>
+                        </article>
+                    </div>
+
+                    <div class="bm-callout bm-reveal">
+                        Finalmente, se aprobó <strong>OperPan</strong> por considerarse más viable
+                        en términos de alcance y recursos disponibles en ese momento.
+                    </div>
+
+                    <h3 class="bm-reveal">Estructura del pitch para BienStar</h3>
+                    <p class="bm-reveal">
+                        La presentación del pitch siguió una estructura clara y efectiva, que fue
+                        común para todos los grupos:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Presentación del grupo desarrollador</strong> (quiénes somos, nuestras habilidades).</li>
+                        <li><strong>Presentación de la necesidad que cubre</strong> (problema real que se va a resolver).</li>
+                        <li><strong>A quién va dirigido el proyecto</strong> (público objetivo, usuarios).</li>
+                        <li><strong>Por qué tiene potencial</strong> (valor agregado, diferenciación).</li>
+                        <li><strong>Etapas del proyecto</strong> (fases de desarrollo).</li>
+                        <li><strong>Viabilidad del sistema</strong> (factibilidad técnica y económica).</li>
+                        <li><strong>Costos estimados</strong> (aproximación inicial).</li>
+                        <li><strong>Hitos y cronograma</strong> (entregables clave).</li>
+                        <li><strong>Conclusión y cierre</strong> (mensaje final).</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">Entregables asociados</h3>
+                    <p class="bm-reveal">
+                        Para cada proyecto (y de forma similar para todos los grupos), se generaron
+                        los siguientes entregables:
+                    </p>
+
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li><strong>Excel de estimación de costos</strong> (hoja de cálculo con costos detallados, como el ejemplo de la sección anterior).</li>
+                        <li><strong>Propuesta técnica</strong> (documento formal con la estructura descrita en la sección 3).</li>
+                        <li><strong>Presentación del pitch</strong> (diapositivas para la exposición oral).</li>
+                    </ol>
+
+                    <p class="bm-reveal">
+                        Este proceso permitió a los equipos aprender a estructurar ideas, justificar
+                        su viabilidad y comunicarlas de manera efectiva, habilidades fundamentales
+                        para el ejercicio profesional.
+                    </p>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 08 · PROVEEDORES                    -->
+                <!-- ════════════════════════════════════ -->
+                <section id="proveedores" class="bm-section" aria-labelledby="s-prov">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">08 / PROVEEDORES</span>
+                        <h2 id="s-prov" class="bm-section__title">Análisis y selección de proveedores</h2>
+                        <p class="bm-section__sub">
+                            La selección de proveedores es un proceso crítico en cualquier proyecto.
+                            Una buena elección garantiza calidad, cumplimiento y relación a largo plazo.
+                        </p>
+                    </header>
+
+                    <h3 class="bm-reveal">8.1 · Las 7 C de la evaluación de proveedores</h3>
+
+                    <div class="bm-principle-grid">
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #8b5cf6;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-award"></i></div>
+                            <h4>1. Calidad</h4>
+                            <p>No solo se refiere al producto final, sino a la consistencia, cumplimiento de estándares, tasas de defectos y atención al cliente. Incluye la experiencia completa, desde la comunicación hasta la capacidad de mejora continua.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #a855f7;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+                            <h4>2. Costo</h4>
+                            <p>No se limita al precio de compra. Incluye transporte, almacenamiento, mantenimiento, garantías, descuentos y costos ocultos. La clave es la <strong>relación calidad-precio</strong> y el impacto económico total a largo plazo.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #c084fc;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-brain"></i></div>
+                            <h4>3. Conocimiento</h4>
+                            <p>Se evalúa la experiencia y capacidad del proveedor para aportar valor, innovar y ofrecer soluciones prácticas. No se mide por antigüedad sino por la aplicación del conocimiento.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #06b6d4;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-link"></i></div>
+                            <h4>4. Conectividad</h4>
+                            <p>Mide la agilidad y efectividad de la comunicación. Un proveedor debe ser ágil, cercano y capaz de adaptarse a cambios. Los proveedores pequeños suelen superar a los grandes en este aspecto.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #10b981;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-chart-line"></i></div>
+                            <h4>5. Crecimiento</h4>
+                            <p>Un proveedor que no crece se convierte en un cuello de botella. Se evalúa mediante indicadores económicos, reputacionales, colaborativos, operativos y de contribución.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #f59e0b;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                            <h4>6. Contribución</h4>
+                            <p>Hoy en día, la sostenibilidad, equidad y responsabilidad social son exigencias. Un proveedor que contribuye positivamente es un socio coherente con los valores y la visión de la empresa.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #f43f5e;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-file-shield"></i></div>
+                            <h4>7. Cumplimiento</h4>
+                            <p>Se verifica que el proveedor cumpla con todos los requisitos legales, registros, certificaciones y permisos. Esto mitiga riesgos y asegura que no se trata de una "empresa de papel".</p>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">8.2 · Cinco criterios clave para evaluar proveedores</h3>
+
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li><strong>Análisis de costos y estructura de precios:</strong> desglosar costos (materias primas, mano de obra, logística) y compararlos con benchmarks del mercado.</li>
+                        <li><strong>Cumplimiento de estándares de calidad y certificaciones:</strong> verificar adhesión a normas como ISO 9001, evaluando tasas de defectos y consistencia.</li>
+                        <li><strong>Capacidad y desempeño operativo:</strong> cuantificar capacidad de producción, OEE, porcentaje de entregas a tiempo (OTD) y flexibilidad.</li>
+                        <li><strong>Gestión de riesgos operativos y logísticos:</strong> analizar índice de retrasos, tiempo medio de resolución (MTTR) y planes de continuidad (BCP).</li>
+                        <li><strong>Innovación y mejora tecnológica:</strong> evaluar inversión en I+D, adopción de tecnologías avanzadas (automatización, IoT, ERP) y mejoras continuas.</li>
+                    </ol>
+
+                    <h3 class="bm-reveal">8.3 · Análisis de proveedores: concepto y proceso</h3>
+
+                    <div class="bm-callout bm-reveal">
+                        El <strong>análisis de proveedores</strong> es un proceso que permite evaluar,
+                        comparar y seleccionar a los proveedores más adecuados con base en criterios
+                        como precio, calidad, reputación, confiabilidad, tiempos de entrega, servicio,
+                        cumplimiento normativo y estabilidad financiera.
+                    </div>
+
+                    <h4 class="bm-reveal">Etapas del proceso</h4>
+
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li><strong>Definir criterios de evaluación:</strong> establecer los aspectos clave y ponderarlos según su importancia.</li>
+                        <li><strong>Recopilar información:</strong> reunir datos financieros, certificaciones, referencias, historial de cumplimiento y KPIs.</li>
+                        <li><strong>Evaluar y comparar:</strong> usar matrices de evaluación o puntuaciones ponderadas.</li>
+                        <li><strong>Tomar decisiones:</strong> elegir al proveedor que ofrezca mayor valor estratégico.</li>
+                        <li><strong>Comunicar y dar retroalimentación:</strong> compartir resultados con los proveedores para fortalecer la relación.</li>
+                        <li><strong>Monitorear y reevaluar:</strong> la evaluación debe ser continua y periódica.</li>
+                    </ol>
+
+                    <h3 class="bm-reveal">8.4 · Cómo medir la calidad de los proveedores</h3>
+
+                    <p class="bm-reveal">
+                        La calidad se mide mediante criterios de desempeño y sistemas de gestión de
+                        la calidad (SGC).
+                    </p>
+
+                    <h4 class="bm-reveal">Criterios generales</h4>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Calidad del producto o servicio:</strong> verificación de especificaciones y certificaciones.</li>
+                        <li><strong>Cumplimiento de plazos:</strong> impacto en la continuidad operativa.</li>
+                        <li><strong>Costo y competitividad:</strong> relación costo-beneficio.</li>
+                        <li><strong>Capacidad de respuesta:</strong> rapidez y efectividad ante problemas.</li>
+                        <li><strong>Estabilidad financiera:</strong> salud financiera para evitar interrupciones.</li>
+                        <li><strong>Sostenibilidad y responsabilidad social:</strong> aspectos ambientales, éticos y legales.</li>
+                        <li><strong>Historial y referencias:</strong> desempeño anterior y reputación.</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">Métricas clave</h4>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Defectos por millón de oportunidades (DPMO).</strong></li>
+                        <li><strong>Porcentaje de piezas defectuosas.</strong></li>
+                        <li><strong>Tiempo de entrega promedio.</strong></li>
+                        <li><strong>Tiempo de ciclo.</strong></li>
+                        <li><strong>Resultados de inspecciones.</strong></li>
+                    </ul>
+
+                    <h4 class="bm-reveal">Métodos prácticos</h4>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Auditorías regulares.</li>
+                        <li>Sistemas de puntuación.</li>
+                        <li>Software de gestión (SAP, Oracle).</li>
+                        <li>Análisis de datos (Six Sigma).</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">8.5 · Cómo saber si un proveedor es bueno</h3>
+
+                    <p class="bm-reveal">
+                        Para elegir un buen proveedor de software, se deben considerar:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Valor económico:</strong> buscar el software más apropiado para el tamaño de la empresa.</li>
+                        <li><strong>Experiencia en el sector:</strong> conocimiento profundo del sector y años de experiencia.</li>
+                        <li><strong>Capacidad de soporte:</strong> fiabilidad en el servicio postventa.</li>
+                        <li><strong>Referencias de clientes:</strong> verificar que sean de tamaño y sector similares.</li>
+                        <li><strong>Importación de datos:</strong> disposición para ayudar en la migración de datos del antiguo sistema.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">8.6 · Comparación de productos</h3>
+
+                    <p class="bm-reveal">
+                        Para comparar productos, se deben:
+                    </p>
+
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li><strong>Definir el propósito:</strong> ¿Cuál es más económico? ¿Mejor calidad? ¿Más funciones?</li>
+                        <li><strong>Seleccionar productos del mismo tipo.</strong></li>
+                        <li><strong>Identificar criterios de comparación:</strong> precio, marca, calidad, funciones, durabilidad, garantía, opiniones, servicio, disponibilidad.</li>
+                        <li><strong>Organizar la información en tablas o listas.</strong></li>
+                        <li><strong>Analizar y concluir</strong> basándose en las necesidades.</li>
+                    </ol>
+
+                    <h3 class="bm-reveal">8.7 · Relación con proveedores</h3>
+
+                    <p class="bm-reveal">
+                        Una buena relación con proveedores se basa en tres pilares:
+                    </p>
+
+                    <div class="bm-principle-grid">
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #8b5cf6;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+                            <h4>Compatibilidad</h4>
+                            <p>Desde la compatibilidad entre empresas hasta la intrapersonal y entre equipos de trabajo.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #06b6d4;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-handshake"></i></div>
+                            <h4>Confianza</h4>
+                            <p>Factor crítico que se construye con tiempo, cumplimiento y comunicación. Se busca el enfoque <strong>win-win</strong>.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #10b981;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-eye"></i></div>
+                            <h4>Transparencia</h4>
+                            <p>Proporciona una relación orientada a objetivos y visibilidad de las limitaciones.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="bm-reveal">Beneficios de una buena relación</h4>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Reducción de costos.</li>
+                        <li>Innovación conjunta.</li>
+                        <li>Calidad constante.</li>
+                        <li>Rápida resolución de problemas.</li>
+                        <li>Menor riesgo en la cadena de suministro.</li>
+                        <li>Mayor eficiencia operativa.</li>
+                        <li>Satisfacción del cliente y crecimiento del negocio.</li>
+                    </ul>
+                </section>
+
+                <!-- Cierre -->
+                <section class="bm-section" style="border-bottom: none;">
+                    <div class="bm-callout bm-callout--amber bm-reveal" style="text-align: center; font-style: italic;">
+                        Este documento forma parte del material de apoyo del primer trimestre de ADSO
+                        y está diseñado para servir como referencia sobre propuestas, estimación de
+                        costos, pitches y gestión de proveedores.
+                    </div>
+
+                    <p class="bm-reveal" style="text-align:center; font-style:italic; opacity:0.75; margin-top:1rem;">
+                        Gracias por leer.
+                    </p>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER                                         -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <style>
+            #footer .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #footer .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #footer .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #footer .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #footer .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            #footer .footer-links .footer-link:hover {
+                color: var(--color-accent);
+            }
+
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            @media (max-width: 768px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="#costos" class="footer-link">Estimación de costos</a></li>
+                    <li><a href="#proveedores" class="footer-link">Proveedores</a></li>
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                    <li><a href="../../trimestre-7/index.html" class="footer-link">Trimestre 7</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software"
+                            target="_blank" rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank"
+                            rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 1</p>
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template editorial (apuntes + theme switcher) -->
+    <script src="../../Assets/templates.js"></script>
+
+</body>
+
+</html>
