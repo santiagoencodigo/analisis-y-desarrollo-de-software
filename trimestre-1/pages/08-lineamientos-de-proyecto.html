@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Anti-FOUC -->
+    <script>try{var t=localStorage.getItem('adso-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+    <title>Lineamientos para la documentación de proyectos | Trimestre 1 · ADSO</title>
+    <meta name="description"
+        content="Lineamientos para la redacción y presentación de la documentación de un proyecto de software: estructura del documento, entregables por fase, guías por sección, análisis, desarrollo, implementación y verificación.">
+    <meta name="keywords" content="documentación de proyectos, lineamientos, software, IEEE, ADSO, SENA, fases de proyecto">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1120">
+
+    <link rel="canonical"
+        href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/trimestre-1/pages/08-lineamientos-de-proyecto.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Lineamientos para la documentación de proyectos | ADSO">
+    <meta property="og:description"
+        content="Estructura, entregables por fase y guías de redacción para la documentación de proyectos de software.">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Estilos del proyecto + template -->
+    <link rel="stylesheet" href="../../Assets/style.css">
+    <link rel="stylesheet" href="../../Assets/templates.css">
+
+    <!-- Utilidades específicas de esta página -->
+    <style>
+        .bm-cards-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .bm-cards-2 { grid-template-columns: 1fr; }
+        }
+
+        .bm-principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .bm-principle-card {
+            position: relative;
+            padding: 1.5rem 1.35rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-top: 3px solid var(--principle-color, var(--color-accent));
+            border-radius: 12px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .bm-principle-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--principle-color, var(--color-accent));
+        }
+
+        .bm-principle-card .bm-principle-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: white;
+            background: var(--principle-color, var(--color-accent));
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .bm-principle-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-primary);
+        }
+
+        .bm-principle-card p {
+            font-size: 0.88rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        .bm-code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            padding: 1.5rem 1.25rem 1.25rem;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.78rem;
+            line-height: 1.55;
+            color: var(--color-accent);
+            white-space: pre;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        .bm-code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0.6rem;
+            right: 0.85rem;
+            font-size: 0.6rem;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            opacity: 0.7;
+        }
+
+        .bm-toc-widget {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .bm-toc-widget h3 {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .bm-toc-widget__stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .bm-toc-widget__stat {
+            padding: 0.75rem 0.5rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .bm-toc-widget__stat strong {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bm-toc-widget__stat span {
+            display: block;
+            margin-top: 0.3rem;
+            font-size: 0.65rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* Caso de uso: bloque completo con múltiples tablas */
+        .bm-usecase {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .bm-usecase h5 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin: 1.25rem 0 0.75rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .bm-usecase h5:first-child { margin-top: 0; }
+
+        .bm-usecase table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .bm-usecase table th,
+        .bm-usecase table td {
+            padding: 0.6rem 0.75rem;
+            border: 1px solid var(--color-border);
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.55;
+        }
+
+        .bm-usecase table th {
+            background: rgba(var(--color-text-secondary-rgb), 0.05);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            font-size: 0.78rem;
+        }
+
+        .bm-usecase table td {
+            color: var(--color-text-secondary);
+        }
+
+        .bm-usecase table code {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.78rem;
+            background: rgba(var(--color-accent-rgb), 0.08);
+            color: var(--color-accent);
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN                            -->
+    <!-- ============================================== -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+
+                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                        alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+
+                <button class="navbar-toggler nav-toggle" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html#proyectos">Proyectos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../sitemap.html">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ========================================== -->
+        <!-- HERO                                       -->
+        <!-- ========================================== -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Trimestre 1 · Análisis y Desarrollo de Software
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Lineamientos para la
+                    <span class="gradient-text">documentación de proyectos</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Documento que consolida los lineamientos para la redacción y presentación
+                    de la documentación de un proyecto de software, basado en estándares y
+                    buenas prácticas de la industria. Incluye estructura del documento,
+                    entregables por fase y guías para cada sección del proyecto.
+                </p>
+
+                <div class="bm-hero__meta" role="list">
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Aplicación</span>
+                        <span class="bm-meta-value">Todo el tecnólogo</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Fases</span>
+                        <span class="bm-meta-value">Análisis · Desarrollo · Implementación · Verificación</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Programa</span>
+                        <span class="bm-meta-value">ADSO · SENA</span>
+                    </div>
+                </div>
+
+                <div class="bm-hero__stats" aria-label="Resumen del contenido">
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">9</span>
+                        <span class="bm-stat-label">Secciones</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">4</span>
+                        <span class="bm-stat-label">Fases</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">8</span>
+                        <span class="bm-stat-label">Guías de sección</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- LAYOUT: TOC + CONTENIDO                    -->
+        <!-- ========================================== -->
+        <div class="bm-layout">
+
+            <!-- ---------- TABLA DE CONTENIDO ---------- -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button"
+                            aria-expanded="false" aria-controls="bm-toc-list"
+                            aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#estructura"><span class="bm-toc__num">01</span>Estructura del documento</a></li>
+                            <li><a class="bm-toc__link" href="#entregables"><span class="bm-toc__num">02</span>Entregables por fase</a></li>
+                            <li><a class="bm-toc__link" href="#guia"><span class="bm-toc__num">03</span>Guía de redacción</a></li>
+                            <li><a class="bm-toc__link" href="#fase-analisis"><span class="bm-toc__num">04</span>Fase 1 · Análisis</a></li>
+                            <li><a class="bm-toc__link" href="#fase-desarrollo"><span class="bm-toc__num">05</span>Fase 2 · Desarrollo</a></li>
+                            <li><a class="bm-toc__link" href="#fase-implementacion"><span class="bm-toc__num">06</span>Fase 3 · Implementación</a></li>
+                            <li><a class="bm-toc__link" href="#fase-verificacion"><span class="bm-toc__num">07</span>Fase 4 · Verificación</a></li>
+                            <li><a class="bm-toc__link" href="#anexos"><span class="bm-toc__num">08</span>Anexos</a></li>
+                            <li><a class="bm-toc__link" href="#recomendaciones"><span class="bm-toc__num">09</span>Recomendaciones finales</a></li>
+                        </ol>
+                    </nav>
+
+                    <div class="bm-toc-widget">
+                        <h3>Estadísticas</h3>
+                        <div class="bm-toc-widget__stats">
+                            <div class="bm-toc-widget__stat">
+                                <strong>9</strong>
+                                <span>Secciones</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>4</strong>
+                                <span>Fases</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>8</strong>
+                                <span>Guías</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>2</strong>
+                                <span>Flujos CU</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ---------- CONTENIDO ---------- -->
+            <article class="bm-content">
+
+                <!-- Nota introductoria -->
+                <div class="bm-callout bm-reveal" style="margin-bottom: 2rem;">
+                    <p style="margin: 0 0 0.75rem;">
+                        <strong>Nota de contexto:</strong> esto se nos presentó en primer trimestre,
+                        pero es algo que se va desarrollando desde el inicio de formación hasta
+                        finalizar.
+                    </p>
+                    <p style="margin: 0; font-style: italic;">
+                        Esta es mi interpretación personal de la documentación de un proyecto de software.
+                    </p>
+                </div>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 01 · ESTRUCTURA DEL DOCUMENTO       -->
+                <!-- ════════════════════════════════════ -->
+                <section id="estructura" class="bm-section" aria-labelledby="s-est">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / ESTRUCTURA</span>
+                        <h2 id="s-est" class="bm-section__title">Estructura del documento de proyecto</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        El documento final debe incluir las cuatro fases del proyecto:
+                        <strong>Análisis, Desarrollo, Implementación y Verificación</strong>.
+                        Las evidencias entregadas en cada revisión deben ser acordes a la fase
+                        en la que se encuentre el proyecto.
+                    </p>
+
+                    <h3 class="bm-reveal">Estructura completa del documento</h3>
+
+                    <pre class="bm-code-block bm-reveal" data-lang="ESTRUCTURA">- Portada
+- Tabla de contenido
+- Lista de figuras
+- Lista de tablas
+- Lista de anexos
+- Introducción
+- Objetivos
+  - Objetivo General
+  - Objetivos Específicos
+- Planteamiento del Problema
+- Justificación
+- Alcance
+- Impactos
+- Cronograma por fases
+
+## 1. FASE 1 ANÁLISIS
+1.1 Levantamiento de Información
+  1.1.1 Métodos utilizados
+  1.1.2 Análisis del levantamiento de información
+  1.1.3 Estimación de costos y presupuesto
+1.2 Módulos a desarrollar
+1.3 Requisitos Funcionales y No funcionales
+
+## 2. FASE 2 DESARROLLO
+2.1 Diagramas y Documentación de Casos de Uso de Alto Nivel
+2.2 Diagrama de Clases
+2.3 Diseño de interfaz gráfica del SI (formularios)
+2.4 Mapa de navegación
+
+## 3. FASE 3 IMPLEMENTACIÓN
+3.1 Modelo Entidad Relación
+3.2 Código BD Script
+3.3 Diccionario de Datos
+3.4 Modelo relacional generado del gestor de la base de datos
+
+## 4. FASE 4 VERIFICACIÓN
+4.1 Manual de usuario
+4.2 Planificar y desplegar el software Construido
+4.3 Testing del software</pre>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 02 · ENTREGABLES POR FASE           -->
+                <!-- ════════════════════════════════════ -->
+                <section id="entregables" class="bm-section" aria-labelledby="s-ent">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / ENTREGABLES</span>
+                        <h2 id="s-ent" class="bm-section__title">Entregables por fase del proyecto</h2>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Fase</th>
+                                        <th scope="col">Entregables</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ANÁLISIS</td>
+                                        <td>
+                                            Documento de proyecto que incluya:<br>
+                                            — Propuesta de proyecto (Introducción, Objetivos, Problema, Justificación, Alcance, Impactos).<br>
+                                            — Cronograma<br>
+                                            — Levantamiento de Información (Métodos, análisis y anexos)<br>
+                                            — Módulos a desarrollar<br>
+                                            — Requisitos Funcionales y No Funcionales
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>DESARROLLO</td>
+                                        <td>
+                                            Documento de proyecto que incluya la fase de análisis completa y con las correcciones aplicadas; adicionalmente:<br>
+                                            — Diagramas de Casos de Uso de alto nivel con su respectiva Documentación<br>
+                                            — Diagrama de Clases<br>
+                                            — Diseño de Interfaz Gráfica (Formularios)<br>
+                                            — Mapa de Navegación.<br>
+                                            <em>Los diagramas deben anexarse como imagen en el documento de proyecto.</em>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>IMPLEMENTACIÓN</td>
+                                        <td>
+                                            Documento de proyecto que incluya la fase de análisis y desarrollo completa y con las correcciones aplicadas; adicionalmente:<br>
+                                            — Script de Base de Datos y Diccionario de datos.<br>
+                                            — Proyecto de aplicación desarrollado en el lenguaje definido para el proyecto:<br>
+                                            &nbsp;&nbsp;• Interfaz amigable y acorde con las necesidades del cliente y su imagen corporativa.<br>
+                                            &nbsp;&nbsp;• Navegabilidad adecuada y acorde con los privilegios de usuario establecida en los diagramas de caso de uso.<br>
+                                            &nbsp;&nbsp;• Diseño de formularios con buen y variado uso de controles, herramientas y propiedades del lenguaje.<br>
+                                            &nbsp;&nbsp;• Desarrollo de la matriz CRUD.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>VERIFICACIÓN</td>
+                                        <td>
+                                            Documento de proyecto que incluya la fase de análisis, desarrollo e implementación completa y con las correcciones aplicadas.<br>
+                                            — Proyecto de aplicación desarrollado (por proyectos):<br>
+                                            &nbsp;&nbsp;• Implementación de CRUD con procedimientos almacenados para los módulos 100% funcional.<br>
+                                            &nbsp;&nbsp;• Validación de campos, campos calculados, control de errores y excepciones<br>
+                                            &nbsp;&nbsp;• Login de usuario y privilegios de usuario mínimo para 2 roles<br>
+                                            &nbsp;&nbsp;• Manual de usuario
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 03 · GUÍA DE REDACCIÓN              -->
+                <!-- ════════════════════════════════════ -->
+                <section id="guia" class="bm-section" aria-labelledby="s-guia">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / GUÍA</span>
+                        <h2 id="s-guia" class="bm-section__title">Guía de redacción por sección</h2>
+                    </header>
+
+                    <!-- 3.1 Portada -->
+                    <h3 class="bm-reveal">3.1 · Portada</h3>
+                    <p class="bm-reveal">
+                        La portada debe incluir el <strong>título del proyecto</strong>, que debe describir:
+                    </p>
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>QUÉ</strong> se va a hacer</li>
+                        <li><strong>PARA QUÉ</strong></li>
+                        <li><strong>EN DÓNDE</strong></li>
+                    </ul>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Ejemplo de título:</strong>
+                        <em>"Sistema de Información para la Gestión de Facturación e Inventario
+                        en la Comercializadora 'La Rebaja'"</em>
+                    </div>
+
+                    <p class="bm-reveal"><strong>Contenido de la portada:</strong></p>
+
+                    <pre class="bm-code-block bm-reveal" data-lang="PORTADA">Título del Proyecto
+
+Nombre del Autor
+Nombre del Tutor o Supervisor
+
+Centro o Institución (si aplica)
+Programa de Formación
+Código y Número de Ficha (si aplica)
+Ciudad, Fecha</pre>
+
+                    <!-- 3.2 Introducción -->
+                    <h3 class="bm-reveal">3.2 · Introducción</h3>
+                    <p class="bm-reveal">
+                        Presenta el contexto del proyecto, el problema identificado y la solución
+                        propuesta. Debe ser clara y concisa, estableciendo el propósito del documento.
+                    </p>
+
+                    <!-- 3.3 Objetivos -->
+                    <h3 class="bm-reveal">3.3 · Objetivos</h3>
+
+                    <h4 class="bm-reveal">Objetivo General</h4>
+                    <p class="bm-reveal">
+                        Redactado con un <strong>verbo en infinitivo</strong> que se pueda verificar
+                        y medir. Debe responder directamente al problema identificado.
+                    </p>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Ejemplo:</strong>
+                        <em>"Desarrollar un software de aplicación apoyado en el uso de dispositivos
+                        móviles como medio de interacción con el usuario, que permita gestionar las
+                        cotizaciones de los aparatos requeridos por los clientes en la Compañía
+                        Interamericana de Refrigeración Inc. S.A."</em>
+                    </div>
+
+                    <h4 class="bm-reveal">Objetivos Específicos</h4>
+                    <p class="bm-reveal">
+                        Relacionados con cada fase del proyecto. Deben usar verbos en infinitivo
+                        que correspondan a las fases del ciclo de vida del software:
+                    </p>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Fase del Proyecto</th>
+                                        <th scope="col">Verbos sugeridos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Análisis</td><td>Analizar, Diagnosticar, Identificar, Estudiar</td></tr>
+                                    <tr><td>Diseño</td><td>Diseñar, Planear, Estructurar, Esquematizar</td></tr>
+                                    <tr><td>Desarrollo</td><td>Desarrollar, Construir, Fabricar, Programar</td></tr>
+                                    <tr><td>Implementación</td><td>Implementar, Montar, Poner en funcionamiento, Instalar</td></tr>
+                                    <tr><td>Evaluación</td><td>Evaluar, Valorar, Verificar, Comprobar</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 3.4 Planteamiento del problema -->
+                    <h3 class="bm-reveal">3.4 · Planteamiento del problema</h3>
+                    <p class="bm-reveal">
+                        Describe la situación actual que motiva el proyecto, identificando las
+                        dificultades o necesidades que se pretenden solucionar. Debe incluir:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Contexto del problema.</li>
+                        <li>Situación actual y sus deficiencias.</li>
+                        <li>Consecuencias de no resolver el problema.</li>
+                        <li>Pregunta de investigación que guía el proyecto.</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">Estructura sugerida</h4>
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li>Contexto del problema.</li>
+                        <li>Descripción detallada de los inconvenientes identificados.</li>
+                        <li>Consecuencias derivadas de la situación actual.</li>
+                        <li>Pregunta que orienta la solución.</li>
+                    </ol>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Ejemplo:</strong>
+                        <em>"El subgerente es el encargado de coordinar el proceso de importación de
+                        las distintas referencias de productos que se venden en la comercializadora,
+                        pero deben ser autorizadas por el gerente de la compañía. En este proceso se
+                        han presentado múltiples inconvenientes puesto que la información de todas
+                        las importaciones se encuentra consignada en un archivo de Excel, el cual
+                        solo se encuentra en el computador del subgerente para evitar inconvenientes
+                        con las versiones del mismo, pero que representa un problema cuando el
+                        computador se infecta con virus o se corta el servicio eléctrico en el local,
+                        generando pérdida de información parcial o total."</em>
+                    </div>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        <strong>Pregunta de investigación:</strong>
+                        <em>"¿Será posible que con la implementación del Sistema de Información para
+                        la Gestión de Facturación puedan optimizarse los procesos administrativos
+                        al interior de la empresa?"</em>
+                    </div>
+
+                    <!-- 3.5 Justificación -->
+                    <h3 class="bm-reveal">3.5 · Justificación</h3>
+                    <p class="bm-reveal">
+                        Explica <strong>por qué</strong> se desarrollará el proyecto y
+                        <strong>cómo</strong> se realizará. Debe incluir razones de peso y coherentes
+                        con el problema planteado. Argumentos sólidos y sustentados, con beneficios
+                        esperados.
+                    </p>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Ejemplo:</strong>
+                        <em>"En vista de las graves problemáticas de seguridad y pérdida de
+                        información que se han presentado en el proceso de compras a cargo del
+                        subgerente, se hace necesario garantizar que la información de las
+                        importaciones se maneje en un sistema de información con una base de datos
+                        relacional en único servidor accesible vía intranet, sobre la cual se
+                        generarían copias de seguridad semanalmente y mensualmente. Por su parte en
+                        el proceso de ventas, se necesitaría implementar un módulo de facturación
+                        donde los precios de los productos se consulten directamente desde la base
+                        de datos, evitando de esta forma problemas de digitación y facilitando a su
+                        vez la auditoría por parte del gerente..."</em>
+                    </div>
+
+                    <!-- 3.6 Alcance -->
+                    <h3 class="bm-reveal">3.6 · Alcance</h3>
+                    <p class="bm-reveal">
+                        Define los <strong>límites del proyecto</strong>:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Hasta dónde se va a realizar.</li>
+                        <li>Restricciones existentes.</li>
+                        <li>Productos o resultados concretos del proyecto.</li>
+                    </ul>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Ejemplo:</strong>
+                        <em>"El siguiente proyecto tiene como finalidad desarrollar un sistema de
+                        información para la gestión de facturación e inventario. Donde se tendrán
+                        presentes las fases de desarrollo, distribuidas en: Fase de Análisis de la
+                        información, el cual se emplean métodos como entrevista, encuestas, método
+                        de observación, técnicas audiovisuales, sesión en grupo, con el fin de
+                        concluir aquellas falencias encontradas para posterior organización en el
+                        desarrollo. En la fase de planeación se estimarán tiempos de trabajo, el
+                        cual permitirá al programador y diseñador concertar con el cliente fechas y
+                        actividades..."</em>
+                    </div>
+
+                    <!-- 3.7 Impactos -->
+                    <h3 class="bm-reveal">3.7 · Impactos</h3>
+                    <p class="bm-reveal">
+                        Se desarrollan teniendo en cuenta los siguientes ámbitos:
+                    </p>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Tipo de Impacto</th>
+                                        <th scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Económico</td>
+                                        <td>Efectos en términos de dinero, producción de bienes o empleo que genera el proyecto.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tecnológico</td>
+                                        <td>Efectos en la generación de cambios en el área de tecnología asociada.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Social</td>
+                                        <td>Efectos sobre la comunidad asociada al proyecto.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ambiental</td>
+                                        <td>Efectos que produce la ejecución del proyecto sobre el medio ambiente.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 3.8 Cronograma -->
+                    <h3 class="bm-reveal">3.8 · Cronograma por fases</h3>
+                    <p class="bm-reveal">
+                        Debe incluir las fases del proyecto con sus respectivas actividades.
+                        Cada actividad debe tener asignado un responsable. Mínimo 4 actividades
+                        por fase.
+                    </p>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 04 · FASE 1 ANÁLISIS                -->
+                <!-- ════════════════════════════════════ -->
+                <section id="fase-analisis" class="bm-section" aria-labelledby="s-f1">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / FASE 1</span>
+                        <h2 id="s-f1" class="bm-section__title">Fase 1 · Análisis</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">4.1 · Levantamiento de información</h3>
+
+                    <h4 class="bm-reveal">4.1.1 Métodos utilizados</h4>
+                    <ul class="bm-list bm-reveal">
+                        <li>Mínimo 2 métodos de recolección de datos.</li>
+                        <li>Justificar la elección de cada método.</li>
+                    </ul>
+
+                    <p class="bm-reveal"><strong>Métodos comunes:</strong></p>
+                    <ul class="bm-list bm-reveal">
+                        <li>Entrevista</li>
+                        <li>Encuesta</li>
+                        <li>Observación</li>
+                        <li>Cuestionario</li>
+                        <li>Talleres (Workshops)</li>
+                        <li>Historias de usuario</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">4.1.2 Análisis del levantamiento de información</h4>
+                    <ul class="bm-list bm-reveal">
+                        <li>Un análisis por cada método utilizado.</li>
+                        <li>Describir qué se pudo obtener con la aplicación de cada método.</li>
+                        <li>Hallazgos clave y su relevancia para el proyecto.</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">4.1.3 Estimación de costos y presupuesto</h4>
+                    <ul class="bm-list bm-reveal">
+                        <li>Desglose de costos directos e indirectos.</li>
+                        <li>Recursos necesarios para el desarrollo.</li>
+                        <li>Presupuesto estimado del proyecto.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">4.2 · Módulos a desarrollar</h3>
+                    <p class="bm-reveal">
+                        Describir brevemente cada módulo que conformará el sistema de información.
+                    </p>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Ejemplo de módulos:</strong>
+                        <ul style="padding-left: 1.25rem; margin: 0.75rem 0 0;">
+                            <li>Módulo de Inicio de Sesión</li>
+                            <li>Módulo de Gestión de Empleados</li>
+                            <li>Módulo de Facturación</li>
+                            <li>Módulo de Inventario</li>
+                            <li>Módulo de Reportes</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="bm-reveal">4.3 · Requisitos funcionales y no funcionales</h3>
+
+                    <h4 class="bm-reveal">Requisitos funcionales</h4>
+                    <p class="bm-reveal">
+                        Definen <strong>qué</strong> debe hacer el sistema.
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Código: <code>RQF###</code> (iniciando en 001)</li>
+                        <li>Nombre del requisito</li>
+                        <li>Tipo de Usuario</li>
+                        <li>Prioridad: Alta/Esencial, Media/Deseado, Baja/Opcional</li>
+                        <li>Descripción detallada</li>
+                    </ul>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 30%;"><strong>Código Requisito</strong></td>
+                                        <td>RQF001</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nombre</strong></td>
+                                        <td>Inicio de Sesión</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tipo de Usuario</strong></td>
+                                        <td>---</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Prioridad</strong></td>
+                                        <td>Alta/Esencial</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descripción</strong></td>
+                                        <td>El sistema de información permitirá el acceso de los usuarios al sistema previa validación de un usuario y contraseña y le mostrará las acciones a efectuar según su rol.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 30%;"><strong>Código Requisito</strong></td>
+                                        <td>RQF002</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nombre</strong></td>
+                                        <td>Gestionar Información Empleado</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tipo de Usuario</strong></td>
+                                        <td>Gerente y SubGerente</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Prioridad</strong></td>
+                                        <td>Alta/Esencial</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descripción</strong></td>
+                                        <td>El sistema deberá permitir al Gerente y SubGerente registrar, consultar, modificar o inactivar la información de los empleados como: Número de identificación, apellidos, nombres, dirección, teléfono, cargo.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h4 class="bm-reveal">Requisitos no funcionales</h4>
+                    <p class="bm-reveal">
+                        Definen <strong>cómo</strong> debe comportarse el sistema. Se solicitan a
+                        nivel de <strong>Hardware, Diseño (Colores y Fuentes)</strong>.
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Código: <code>RQNF###</code> (iniciando en 001)</li>
+                        <li>Nombre del requisito</li>
+                        <li>Descripción detallada</li>
+                    </ul>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 30%;"><strong>Código Requisito</strong></td>
+                                        <td>RQNF001</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nombre</strong></td>
+                                        <td>Especificaciones Mínimas de Hardware y Software</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descripción</strong></td>
+                                        <td>Tener acceso a uno o más computadores: Mínimo 2 GB RAM, Sistema Operativo Windows 7 o superior, con las herramientas y programas necesarios para llevar a cabo el aplicativo y la base de datos.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 30%;"><strong>Código Requisito</strong></td>
+                                        <td>RQNF002</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nombre</strong></td>
+                                        <td>Conectividad</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descripción</strong></td>
+                                        <td>La empresa debe contar con una red LAN que le permitirá conectar sus terminales de trabajo al servidor de una forma más adecuada para hacer uso del aplicativo.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 30%;"><strong>Código Requisito</strong></td>
+                                        <td>RQNF003</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nombre</strong></td>
+                                        <td>Diseño e Imagen</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descripción</strong></td>
+                                        <td>El aplicativo debe hacer uso de colores y fuentes que faciliten la adecuada visualización por parte del usuario y sean acordes con la imagen corporativa de la empresa.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 05 · FASE 2 DESARROLLO              -->
+                <!-- ════════════════════════════════════ -->
+                <section id="fase-desarrollo" class="bm-section" aria-labelledby="s-f2">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / FASE 2</span>
+                        <h2 id="s-f2" class="bm-section__title">Fase 2 · Desarrollo</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">5.1 · Diagramas y documentación de casos de uso</h3>
+
+                    <p class="bm-reveal"><strong>Lineamientos:</strong></p>
+                    <ul class="bm-list bm-reveal">
+                        <li>Trabajar con <strong>UML 2.5</strong>.</li>
+                        <li>Casos de Uso de <strong>Alto Nivel</strong>.</li>
+                        <li>Identificar cada caso de uso con <code>CU###</code>.</li>
+                        <li>Exportar la imagen del diagrama (no pantallazo).</li>
+                        <li>Colocar el diagrama con su respectivo título de figura.</li>
+                        <li>Adjuntar la <strong>documentación de casos de uso</strong> con su respectivo título de tabla.</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">Ejemplo de formato de documentación de caso de uso</h4>
+
+                    <div class="bm-usecase bm-reveal">
+                        <h5>1. Identificación de caso de uso</h5>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 25%;"><strong>1.1 Id Caso</strong></td>
+                                    <td>CUD 002</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>1.2 Nombre</strong></td>
+                                    <td>Registrar Empleado</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h5>2. Histórico de caso de uso</h5>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 25%;"><strong>2.1 Autor</strong></td>
+                                    <td>Juan Pérez</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2.2 Fecha Creación</strong></td>
+                                    <td>30/03/2017</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2.3 Última Actualización</strong></td>
+                                    <td>30/03/2017</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2.4 Actualizado por</strong></td>
+                                    <td>Juan Pérez</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2.5 Versión</strong></td>
+                                    <td>1.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h5>3. Definición de un caso de uso</h5>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 25%;"><strong>3.1 DESCRIPCIÓN</strong></td>
+                                    <td>Permite el registro de información de un nuevo empleado</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3.2 ACTORES</strong></td>
+                                    <td>Gerente, Subgerente, Vendedor</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3.3 PRECONDICIONES</strong></td>
+                                    <td>El usuario debe estar autenticado en el sistema CU 001</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h5>Flujo normal</h5>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 12%;">Paso</th>
+                                    <th>Actor</th>
+                                    <th>Sistema</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Usuario da clic en el menú principal en Gestión de Empleados</td>
+                                    <td>Despliega una ventana con los servicios (Registrar Empleado, Consultar empleado, Actualizar Empleado, Inactivar Empleado)</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Selecciona mediante un clic el ítem Registrar Empleados</td>
+                                    <td>Muestra un formulario con la casilla activa para búsqueda de empleado por nombre y documento.</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Usuario diligencia datos y da clic en buscar.</td>
+                                    <td>Muestra formulario lista de coincidencias, si no hay se puede proceder con la creación del empleado.</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Selecciona Registrar</td>
+                                    <td>Muestra formulario de empleado, con los campos en blanco para registro de información</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Diligencia información solicitada del formulario y da clic en registrar</td>
+                                    <td>Genera mensaje donde informa la creación exitosa del empleado.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h5>Flujo alternativo <em>(si existe otra forma de acceder al caso de uso)</em></h5>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 12%;">Paso</th>
+                                    <th>Actor</th>
+                                    <th>Sistema</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>&nbsp;</td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+
+                        <h5>Flujo excepcional</h5>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 12%;">Paso</th>
+                                    <th>Actor</th>
+                                    <th>Sistema</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>4.a</td>
+                                    <td></td>
+                                    <td>Muestra mensaje "Empleado ya se encuentra registrado" y muestra los datos encontrados.</td>
+                                </tr>
+                                <tr>
+                                    <td>5.a</td>
+                                    <td>Usuario no llena completos los datos del formulario</td>
+                                    <td>El sistema muestra mensaje "Faltan campos por diligenciar, por favor completar"</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h5>Pos condiciones</h5>
+                        <p style="font-size: 0.88rem; color: var(--color-text-secondary); margin: 0;">
+                            Sistema genera confirmación de empleado registrado con éxito.
+                        </p>
+
+                        <h5>Frecuencia</h5>
+                        <ul class="bm-chips" style="margin: 0;">
+                            <li class="bm-chip">Alta</li>
+                            <li class="bm-chip">Media</li>
+                            <li class="bm-chip">Baja</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="bm-reveal">5.2 · Diagrama de clases</h3>
+
+                    <p class="bm-reveal"><strong>Lineamientos:</strong></p>
+                    <ul class="bm-list bm-reveal">
+                        <li>Usar herramienta de modelado (DIA, Lucidchart, draw.io).</li>
+                        <li>Exportar la imagen del diagrama (no pantallazo).</li>
+                        <li>Debe apreciarse <strong>visibilidad</strong> y <strong>multiplicidad</strong>.</li>
+                        <li>Colocar el título de figura correspondiente.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">5.3 · Diseño de interfaz gráfica del sistema de información</h3>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Pantallazos de formularios.</li>
+                        <li>Visual acorde con casos de uso planteados.</li>
+                        <li>Se sugiere el uso de <strong>mockups</strong> para el diseño de interfaces.</li>
+                    </ul>
+
+                    <p class="bm-reveal"><strong>Herramientas de mockups:</strong></p>
+                    <ul class="bm-list bm-reveal">
+                        <li>Balsamiq</li>
+                        <li>Figma</li>
+                        <li>Adobe XD</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">5.4 · Mapa de navegación</h3>
+                    <p class="bm-reveal">
+                        Representación visual de la estructura y navegabilidad del sistema.
+                        Debe mostrar:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Pantallas del sistema.</li>
+                        <li>Relaciones y flujos de navegación entre pantallas.</li>
+                        <li>Accesos según roles de usuario.</li>
+                    </ul>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 06 · FASE 3 IMPLEMENTACIÓN          -->
+                <!-- ════════════════════════════════════ -->
+                <section id="fase-implementacion" class="bm-section" aria-labelledby="s-f3">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">06 / FASE 3</span>
+                        <h2 id="s-f3" class="bm-section__title">Fase 3 · Implementación</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">6.1 · Modelo entidad-relación (MER)</h3>
+
+                    <p class="bm-reveal"><strong>Lineamientos:</strong></p>
+                    <ul class="bm-list bm-reveal">
+                        <li>Usar herramienta de modelado.</li>
+                        <li>Exportar la imagen del diagrama (no pantallazo).</li>
+                        <li>Colocar el título de figura correspondiente.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">6.2 · Código de base de datos (Script)</h3>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Script completo de creación de la base de datos.</li>
+                        <li>Incluye tablas, relaciones, restricciones y datos iniciales.</li>
+                        <li>Debe ser generado desde el gestor de base de datos.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">6.3 · Diccionario de datos</h3>
+                    <p class="bm-reveal">
+                        Documentación detallada de cada tabla de la base de datos, incluyendo:
+                    </p>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 25%;"><strong>Nombre Tabla</strong></td>
+                                        <td>Usuario</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fecha</strong></td>
+                                        <td>25/03/2017</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descripción</strong></td>
+                                        <td>Tabla que contiene los datos de un usuario del sistema.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Campo</th>
+                                        <th scope="col">Tipo de Dato</th>
+                                        <th scope="col">Tamaño</th>
+                                        <th scope="col">Restricción</th>
+                                        <th scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Id_usuario</td><td>BigInt</td><td>—</td><td>Primary Key</td><td>Número de identificación del usuario.</td></tr>
+                                    <tr><td>Nombre_usuario</td><td>Varchar</td><td>50</td><td>No</td><td>Nombre del usuario.</td></tr>
+                                    <tr><td>Correo_usuario</td><td>Varchar</td><td>50</td><td>No</td><td>Correo electrónico en que se encuentra el usuario.</td></tr>
+                                    <tr><td>Fecha_nacimiento</td><td>Date</td><td>—</td><td>No</td><td>Fecha nacimiento del usuario</td></tr>
+                                    <tr><td>Edad_usuario</td><td>Int</td><td>—</td><td>No</td><td>Edad actual usuario</td></tr>
+                                    <tr><td>Telefono_Usuario</td><td>Varchar</td><td>12</td><td>No</td><td>Teléfono del usuario</td></tr>
+                                    <tr><td>Cargo</td><td>Varchar</td><td>30</td><td>No</td><td>Cargo del usuario en la empresa</td></tr>
+                                    <tr><td>Nombre_usuario</td><td>Varchar</td><td>30</td><td>Unique</td><td>Nombre del usuario, único</td></tr>
+                                    <tr><td>Clave_usuario</td><td>Varchar</td><td>20</td><td>No</td><td>Clave del usuario</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">6.4 · Modelo relacional</h3>
+
+                    <p class="bm-reveal"><strong>Lineamientos:</strong></p>
+                    <ul class="bm-list bm-reveal">
+                        <li>Generado desde el gestor de base de datos.</li>
+                        <li>Exportar la imagen del diagrama (no pantallazo).</li>
+                        <li>Colocar el título de figura correspondiente.</li>
+                    </ul>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 07 · FASE 4 VERIFICACIÓN            -->
+                <!-- ════════════════════════════════════ -->
+                <section id="fase-verificacion" class="bm-section" aria-labelledby="s-f4">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">07 / FASE 4</span>
+                        <h2 id="s-f4" class="bm-section__title">Fase 4 · Verificación</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">7.1 · Manual de usuario</h3>
+                    <p class="bm-reveal">
+                        Documento que guía al usuario final en el uso del sistema. Debe incluir:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Introducción al sistema.</li>
+                        <li>Requisitos de instalación.</li>
+                        <li>Guía paso a paso de las funcionalidades principales.</li>
+                        <li>Capturas de pantalla y descripciones.</li>
+                        <li>Solución de problemas comunes.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">7.2 · Planificación y despliegue</h3>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Plan de despliegue.</li>
+                        <li>Configuración del entorno de producción.</li>
+                        <li>Instalación y puesta en funcionamiento.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">7.3 · Testing del software</h3>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Validación de implementación de CRUD con procedimientos almacenados.</li>
+                        <li>Verificación de módulos 100% funcionales.</li>
+                        <li>Validación de campos y campos calculados.</li>
+                        <li>Control de errores y excepciones.</li>
+                        <li>Login de usuario y privilegios mínimo para 2 roles.</li>
+                    </ul>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 08 · ANEXOS                         -->
+                <!-- ════════════════════════════════════ -->
+                <section id="anexos" class="bm-section" aria-labelledby="s-anex">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">08 / ANEXOS</span>
+                        <h2 id="s-anex" class="bm-section__title">Anexos</h2>
+                        <p class="bm-section__sub">
+                            Incluye el proceso completo de análisis y recolección de información:
+                        </p>
+                    </header>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Listas de chequeo</strong> utilizadas.</li>
+                        <li><strong>Encuestas y entrevistas</strong> aplicadas.</li>
+                        <li><strong>Fotos</strong> del proceso de observación.</li>
+                        <li><strong>Formatos</strong> (facturas, nóminas, plantillas, etc.).</li>
+                        <li><strong>Tabulación</strong> en caso de aplicar encuestas o cuestionarios.</li>
+                    </ul>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 09 · RECOMENDACIONES FINALES        -->
+                <!-- ════════════════════════════════════ -->
+                <section id="recomendaciones" class="bm-section" aria-labelledby="s-rec">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">09 / CIERRE</span>
+                        <h2 id="s-rec" class="bm-section__title">Recomendaciones finales</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">Redacción en tercera persona o forma impersonal</h3>
+
+                    <div class="bm-cards-2">
+                        <div class="bm-callout bm-callout--amber bm-reveal" style="border-left-color: #f43f5e; background: rgba(244, 63, 94, 0.06); margin: 0;">
+                            <strong style="color: #f43f5e;">Evitar</strong>
+                            <ul style="padding-left: 1.25rem; margin: 0.75rem 0 0;">
+                                <li>"En nuestro proyecto..."</li>
+                                <li>"Nuestros clientes se sentirán satisfechos..."</li>
+                            </ul>
+                        </div>
+
+                        <div class="bm-callout bm-reveal" style="border-left-color: #10b981; background: rgba(16, 185, 129, 0.06); margin: 0;">
+                            <strong style="color: #10b981;">Usar</strong>
+                            <ul style="padding-left: 1.25rem; margin: 0.75rem 0 0;">
+                                <li>"En el proyecto..."</li>
+                                <li>"Los clientes se sentirán satisfechos..."</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">Otras recomendaciones</h3>
+
+                    <div class="bm-principle-grid">
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #8b5cf6;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-volume-high"></i></div>
+                            <h4>Revisión en voz alta</h4>
+                            <p>Leer lo escrito en voz alta ayuda a mejorar la redacción, puntuación y claridad de las ideas.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #06b6d4;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+                            <h4>Referencias bibliográficas</h4>
+                            <p>Incluir referencias con formato estandarizado (APA, IEEE, según corresponda).</p>
+                        </div>
+                    </div>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal" style="text-align: center; font-style: italic; margin-top: 2rem;">
+                        Este documento forma parte del material de apoyo del primer trimestre de ADSO
+                        y está diseñado para servir como referencia sobre los lineamientos de
+                        documentación de proyectos de software.
+                    </div>
+
+                    <p class="bm-reveal" style="text-align:center; font-style:italic; opacity:0.75; margin-top:1rem;">
+                        Gracias por leer.
+                    </p>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER                                         -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <style>
+            #footer .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #footer .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #footer .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #footer .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #footer .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            #footer .footer-links .footer-link:hover {
+                color: var(--color-accent);
+            }
+
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            @media (max-width: 768px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="#estructura" class="footer-link">Estructura</a></li>
+                    <li><a href="#recomendaciones" class="footer-link">Recomendaciones</a></li>
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                    <li><a href="../../trimestre-7/index.html" class="footer-link">Trimestre 7</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software"
+                            target="_blank" rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank"
+                            rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 1</p>
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template editorial (apuntes + theme switcher) -->
+    <script src="../../Assets/templates.js"></script>
+
+</body>
+
+</html>
