@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Anti-FOUC -->
+    <script>try{var t=localStorage.getItem('adso-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+    <title>Especificación de Requisitos de Software | Trimestre 1 · ADSO</title>
+    <meta name="description"
+        content="Especificación de requisitos de software (ERS): ingeniería de requisitos, norma IEEE 830-1998, estructura de la plantilla, ejemplo práctico y flujo de trabajo documental en el programa ADSO.">
+    <meta name="keywords" content="especificación de requisitos, ERS, IEEE 830, ingeniería de requisitos, plantilla, ADSO, SENA">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1120">
+
+    <link rel="canonical"
+        href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/trimestre-1/pages/07-especificacion-requisitos.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Especificación de Requisitos de Software | ADSO">
+    <meta property="og:description"
+        content="ERS según IEEE 830-1998: ingeniería de requisitos, plantilla y flujo documental del primer trimestre ADSO.">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Estilos del proyecto + template -->
+    <link rel="stylesheet" href="../../Assets/style.css">
+    <link rel="stylesheet" href="../../Assets/templates.css">
+
+    <!-- Utilidades específicas de esta página -->
+    <style>
+        .bm-cards-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .bm-cards-2 { grid-template-columns: 1fr; }
+        }
+
+        .bm-principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .bm-principle-card {
+            position: relative;
+            padding: 1.5rem 1.35rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-top: 3px solid var(--principle-color, var(--color-accent));
+            border-radius: 12px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .bm-principle-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--principle-color, var(--color-accent));
+        }
+
+        .bm-principle-card .bm-principle-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: white;
+            background: var(--principle-color, var(--color-accent));
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .bm-principle-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-primary);
+        }
+
+        .bm-principle-card p {
+            font-size: 0.88rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        .bm-code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            padding: 1.5rem 1.25rem 1.25rem;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.8rem;
+            line-height: 1.55;
+            color: var(--color-accent);
+            white-space: pre;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        .bm-code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0.6rem;
+            right: 0.85rem;
+            font-size: 0.6rem;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            opacity: 0.7;
+        }
+
+        .bm-toc-widget {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .bm-toc-widget h3 {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .bm-toc-widget__stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .bm-toc-widget__stat {
+            padding: 0.75rem 0.5rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .bm-toc-widget__stat strong {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bm-toc-widget__stat span {
+            display: block;
+            margin-top: 0.3rem;
+            font-size: 0.65rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN                            -->
+    <!-- ============================================== -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+
+                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                        alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+
+                <button class="navbar-toggler nav-toggle" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html#proyectos">Proyectos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../sitemap.html">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ========================================== -->
+        <!-- HERO                                       -->
+        <!-- ========================================== -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Trimestre 1 · Análisis y Desarrollo de Software
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Especificación de
+                    <span class="gradient-text">Requisitos de Software</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Documento que explica el proceso de especificación de requisitos de software,
+                    su importancia, la norma IEEE 830-1998, y cómo se aplicó en el primer trimestre
+                    del programa ADSO para definir los requisitos del proyecto formativo.
+                </p>
+
+                <div class="bm-hero__meta" role="list">
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Estándar</span>
+                        <span class="bm-meta-value">IEEE 830-1998</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Enfoque</span>
+                        <span class="bm-meta-value">Ingeniería de requisitos</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Programa</span>
+                        <span class="bm-meta-value">ADSO · SENA</span>
+                    </div>
+                </div>
+
+                <div class="bm-hero__stats" aria-label="Resumen del contenido">
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">8</span>
+                        <span class="bm-stat-label">Secciones</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">6</span>
+                        <span class="bm-stat-label">Características ERS</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">5</span>
+                        <span class="bm-stat-label">Fases de ingeniería</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- LAYOUT: TOC + CONTENIDO                    -->
+        <!-- ========================================== -->
+        <div class="bm-layout">
+
+            <!-- ---------- TABLA DE CONTENIDO ---------- -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button"
+                            aria-expanded="false" aria-controls="bm-toc-list"
+                            aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#introduccion"><span class="bm-toc__num">01</span>Introducción</a></li>
+                            <li><a class="bm-toc__link" href="#ingenieria"><span class="bm-toc__num">02</span>Ingeniería de requisitos</a></li>
+                            <li><a class="bm-toc__link" href="#relacion"><span class="bm-toc__num">03</span>Relación con otros documentos</a></li>
+                            <li><a class="bm-toc__link" href="#ieee"><span class="bm-toc__num">04</span>IEEE y norma 830-1998</a></li>
+                            <li><a class="bm-toc__link" href="#plantilla"><span class="bm-toc__num">05</span>Estructura plantilla IEEE 830</a></li>
+                            <li><a class="bm-toc__link" href="#ejemplo"><span class="bm-toc__num">06</span>Ejemplo práctico</a></li>
+                            <li><a class="bm-toc__link" href="#flujo"><span class="bm-toc__num">07</span>Flujo documental</a></li>
+                            <li><a class="bm-toc__link" href="#conclusion"><span class="bm-toc__num">08</span>Conclusión</a></li>
+                        </ol>
+                    </nav>
+
+                    <div class="bm-toc-widget">
+                        <h3>Estadísticas</h3>
+                        <div class="bm-toc-widget__stats">
+                            <div class="bm-toc-widget__stat">
+                                <strong>8</strong>
+                                <span>Secciones</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>6</strong>
+                                <span>Características</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>5</strong>
+                                <span>Fases</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>4</strong>
+                                <span>Pasos flujo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ---------- CONTENIDO ---------- -->
+            <article class="bm-content">
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 01 · INTRODUCCIÓN                   -->
+                <!-- ════════════════════════════════════ -->
+                <section id="introduccion" class="bm-section" aria-labelledby="s-intro">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / INTRODUCCIÓN</span>
+                        <h2 id="s-intro" class="bm-section__title">Introducción a la especificación de requisitos</h2>
+                    </header>
+
+                    <div class="bm-callout bm-reveal">
+                        La <strong>especificación de requisitos de software</strong> (ERS) es un documento
+                        formal que describe de manera completa y detallada todas las funcionalidades,
+                        restricciones y atributos de calidad que debe cumplir un sistema de software.
+                        Su propósito es establecer un <strong>contrato técnico</strong> entre los
+                        stakeholders (clientes, usuarios, desarrolladores) que sirva como base para el
+                        diseño, desarrollo, pruebas y validación del producto.
+                    </div>
+
+                    <h3 class="bm-reveal">Importancia de la especificación de requisitos</h3>
+
+                    <div class="bm-principle-grid">
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #8b5cf6;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+                            <h4>Base para diseño</h4>
+                            <p>Define qué debe hacer el sistema, no cómo hacerlo, lo que permite a los desarrolladores enfocarse en la solución técnica.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #a855f7;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-comments"></i></div>
+                            <h4>Comunicación efectiva</h4>
+                            <p>Alinea las expectativas de los clientes y los equipos de desarrollo, reduciendo malentendidos.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #c084fc;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-compress-arrows-alt"></i></div>
+                            <h4>Gestión del alcance</h4>
+                            <p>Evita la corrupción del alcance (scope creep) al establecer límites claros.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #06b6d4;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-route"></i></div>
+                            <h4>Trazabilidad</h4>
+                            <p>Permite rastrear cada requisito desde su origen hasta su implementación y pruebas.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #10b981;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-check-double"></i></div>
+                            <h4>Base para validación</h4>
+                            <p>Sirve como criterio para verificar que el sistema cumple con lo solicitado.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 02 · INGENIERÍA DE REQUISITOS       -->
+                <!-- ════════════════════════════════════ -->
+                <section id="ingenieria" class="bm-section" aria-labelledby="s-ing">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / INGENIERÍA</span>
+                        <h2 id="s-ing" class="bm-section__title">Ingeniería de requisitos</h2>
+                        <p class="bm-section__sub">
+                            La <strong>ingeniería de requisitos</strong> es la disciplina que abarca
+                            todas las actividades relacionadas con la identificación, análisis,
+                            documentación y gestión de los requisitos de un sistema. Incluye las
+                            siguientes fases:
+                        </p>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Fase</th>
+                                        <th scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Elicitación</td>
+                                        <td>Recopilación de necesidades de los stakeholders mediante entrevistas, encuestas, observación, talleres, etc. (ver <a href="./01-elicitacion-requisitos.html">01-elicitacion-requisitos</a>).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Análisis</td>
+                                        <td>Evaluación de los requisitos para determinar su viabilidad, consistencia, completitud y prioridad.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Especificación</td>
+                                        <td>Documentación formal de los requisitos en un documento estructurado (la ERS).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Validación</td>
+                                        <td>Verificación de que los requisitos reflejan realmente las necesidades del cliente y son comprensibles.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gestión de cambios</td>
+                                        <td>Control de modificaciones en los requisitos a lo largo del ciclo de vida del proyecto.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bm-callout bm-reveal">
+                        La <strong>especificación</strong> es el corazón de este proceso, ya que
+                        convierte las necesidades difusas en requisitos concretos, medibles y
+                        verificables.
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 03 · RELACIÓN CON OTROS DOCUMENTOS  -->
+                <!-- ════════════════════════════════════ -->
+                <section id="relacion" class="bm-section" aria-labelledby="s-rel">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / RELACIÓN</span>
+                        <h2 id="s-rel" class="bm-section__title">Relación con otros documentos del proyecto</h2>
+                        <p class="bm-section__sub">
+                            La especificación de requisitos no es un documento aislado; se conecta
+                            con otros artefactos del proyecto en un flujo lógico:
+                        </p>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Documento</th>
+                                        <th scope="col">Relación con la ERS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="./01-elicitacion-requisitos.html">01-elicitacion-requisitos</a></td>
+                                        <td>Proporciona las técnicas y métodos utilizados para recolectar la información que alimenta la ERS.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Propuesta técnica</td>
+                                        <td>Describe cómo se va a construir el sistema (metodología, cronograma, recursos). La ERS define el qué; la propuesta técnica define el cómo.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Propuesta económica</td>
+                                        <td>Establece los costos y condiciones de pago. Se basa en la ERS para estimar el esfuerzo y los recursos necesarios.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pitch del proyecto</td>
+                                        <td>Resumen ejecutivo del proyecto para presentación. La ERS es la versión detallada de las ideas presentadas en el pitch.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Plan de pruebas</td>
+                                        <td>Se deriva de la ERS, ya que cada requisito funcional y no funcional debe ser verificado mediante casos de prueba.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p class="bm-reveal">
+                        En el primer trimestre de ADSO, los grupos de trabajo elaboraron la ERS
+                        después de haber definido el proyecto (pitch) y haber realizado el
+                        levantamiento de información, y antes de iniciar el desarrollo.
+                    </p>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 04 · IEEE Y NORMA 830-1998          -->
+                <!-- ════════════════════════════════════ -->
+                <section id="ieee" class="bm-section" aria-labelledby="s-ieee">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / IEEE</span>
+                        <h2 id="s-ieee" class="bm-section__title">IEEE y la norma 830-1998</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">¿Qué es IEEE?</h3>
+
+                    <p class="bm-reveal">
+                        El <strong>Institute of Electrical and Electronics Engineers</strong> (IEEE)
+                        es una organización profesional internacional dedicada al avance de la
+                        tecnología en áreas como electrónica, telecomunicaciones, informática e
+                        ingeniería. Es una de las principales entidades que desarrollan estándares
+                        técnicos a nivel mundial.
+                    </p>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Sitio web oficial:</strong>
+                        <a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer">https://www.ieee.org/</a>
+                    </div>
+
+                    <h3 class="bm-reveal">Norma IEEE 830-1998</h3>
+
+                    <p class="bm-reveal">
+                        La <strong>IEEE Std 830-1998</strong> es una guía para la elaboración de
+                        especificaciones de requisitos de software. Fue publicada en 1998 y ha sido
+                        ampliamente utilizada como referencia en la industria del software. Aunque
+                        ha sido reemplazada por versiones más recientes (como la IEEE 29148), el
+                        estándar 830 sigue siendo una base fundamental para la estructura y contenido
+                        de una ERS.
+                    </p>
+
+                    <h4 class="bm-reveal">Propósitos de la norma</h4>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Proporcionar un formato estandarizado para documentar requisitos.</li>
+                        <li>Establecer un lenguaje común entre clientes y desarrolladores.</li>
+                        <li>Asegurar que los requisitos sean completos, consistentes, verificables y trazables.</li>
+                        <li>Servir como referencia para la validación y aceptación del sistema.</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">Características de una buena ERS según IEEE 830</h4>
+
+                    <div class="bm-principle-grid">
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #8b5cf6;">
+                            <div class="bm-principle-icon"><strong>1</strong></div>
+                            <h4>Correcta</h4>
+                            <p>Cada requisito debe reflejar fielmente una necesidad del cliente.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #a855f7;">
+                            <div class="bm-principle-icon"><strong>2</strong></div>
+                            <h4>Completa</h4>
+                            <p>Debe incluir todos los requisitos funcionales y no funcionales.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #c084fc;">
+                            <div class="bm-principle-icon"><strong>3</strong></div>
+                            <h4>Consistente</h4>
+                            <p>No debe haber contradicciones entre requisitos.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #06b6d4;">
+                            <div class="bm-principle-icon"><strong>4</strong></div>
+                            <h4>Verificable</h4>
+                            <p>Cada requisito debe ser comprobable mediante pruebas.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #10b981;">
+                            <div class="bm-principle-icon"><strong>5</strong></div>
+                            <h4>Trazable</h4>
+                            <p>Debe ser posible rastrear cada requisito a su origen y a su implementación.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #f59e0b;">
+                            <div class="bm-principle-icon"><strong>6</strong></div>
+                            <h4>Modificable</h4>
+                            <p>Debe permitir cambios sin afectar la estructura global.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 05 · ESTRUCTURA PLANTILLA           -->
+                <!-- ════════════════════════════════════ -->
+                <section id="plantilla" class="bm-section" aria-labelledby="s-plan">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / PLANTILLA</span>
+                        <h2 id="s-plan" class="bm-section__title">Estructura de la plantilla IEEE 830</h2>
+                        <p class="bm-section__sub">
+                            Durante el primer trimestre, se utilizó una plantilla basada en la
+                            IEEE 830-1998 para elaborar la ERS de cada proyecto. A continuación,
+                            se explica cada sección y su propósito.
+                        </p>
+                    </header>
+
+                    <h3 class="bm-reveal">5.1 · Introducción</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sección</th>
+                                        <th scope="col">Propósito</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Propósito</td>
+                                        <td>Explica el objetivo del documento y la audiencia a la que va dirigido (clientes, desarrolladores, testers, etc.).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alcance</td>
+                                        <td>Define los límites del sistema, identificando el producto a desarrollar y su relación con otros sistemas.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Personal involucrado</td>
+                                        <td>Lista las personas que participan en el proyecto, con sus roles, responsabilidades y datos de contacto.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Definiciones, acrónimos y abreviaturas</td>
+                                        <td>Glosario de términos técnicos y siglas utilizadas en el documento.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Referencias</td>
+                                        <td>Lista de documentos relacionados (propuesta técnica, manuales, estándares, etc.).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Resumen</td>
+                                        <td>Descripción breve del contenido del documento y su organización.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">5.2 · Descripción general</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sección</th>
+                                        <th scope="col">Propósito</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Perspectiva del producto</td>
+                                        <td>Indica si el sistema es independiente o parte de un sistema mayor. Diagrama de contexto si es necesario.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Funcionalidad del producto</td>
+                                        <td>Resumen de alto nivel de las principales funcionalidades que el sistema debe ofrecer.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Características de los usuarios</td>
+                                        <td>Perfil de los usuarios del sistema (formación, habilidades, actividades que realizan).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Restricciones</td>
+                                        <td>Limitaciones en el diseño y desarrollo (lenguajes, hardware, normativas, presupuesto).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Suposiciones y dependencias</td>
+                                        <td>Factores que se dan por sentados (ej. disponibilidad de un sistema operativo) y que podrían afectar los requisitos si cambian.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Evolución previsible del sistema</td>
+                                        <td>Mejoras futuras que se prevén implementar más adelante.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">5.3 · Requisitos específicos</h3>
+                    <p class="bm-reveal">
+                        Esta es la sección más extensa y crítica. Contiene la lista detallada de
+                        todos los requisitos.
+                    </p>
+
+                    <h4 class="bm-reveal">5.3.1 · Requisitos comunes de los interfaces</h4>
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Interfaces de usuario:</strong> definición de la interacción con el usuario (pantallas, navegación, estilos).</li>
+                        <li><strong>Interfaces de hardware:</strong> características lógicas para la comunicación con hardware externo.</li>
+                        <li><strong>Interfaces de software:</strong> integración con otros productos de software (APIs, sistemas externos).</li>
+                        <li><strong>Interfaces de comunicación:</strong> protocolos de comunicación con otros sistemas.</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">5.3.2 · Requisitos funcionales</h4>
+                    <p class="bm-reveal">
+                        Cada requisito funcional describe una acción o proceso que el sistema
+                        debe realizar. Se documenta mediante una tabla con los siguientes campos:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Número de requisito:</strong> identificador único (ej. RF.1).</li>
+                        <li><strong>Nombre de requisito:</strong> título descriptivo.</li>
+                        <li><strong>Tipo:</strong> requisito o restricción.</li>
+                        <li><strong>Fuente del requisito:</strong> origen de la necesidad (cliente, entrevista, observación).</li>
+                        <li><strong>Prioridad del requisito:</strong> Alta/Esencial, Media/Deseado, Baja/Opcional.</li>
+                    </ul>
+
+                    <p class="bm-reveal">
+                        Luego se describe el requisito en texto claro, detallando entradas,
+                        procesamiento, salidas y condiciones.
+                    </p>
+
+                    <h4 class="bm-reveal">5.3.3 · Requisitos no funcionales</h4>
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Rendimiento:</strong> carga esperada, tiempos de respuesta, número de usuarios concurrentes.</li>
+                        <li><strong>Seguridad:</strong> mecanismos de autenticación, cifrado, control de acceso, logs.</li>
+                        <li><strong>Fiabilidad:</strong> tiempo entre fallos, porcentaje de disponibilidad.</li>
+                        <li><strong>Disponibilidad:</strong> tiempo en que el sistema debe estar operativo (ej. 99.9%).</li>
+                        <li><strong>Mantenibilidad:</strong> facilidad para realizar cambios, actualizaciones, correcciones.</li>
+                        <li><strong>Portabilidad:</strong> capacidad de trasladarse a otras plataformas u entornos.</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">5.3.4 · Otros requisitos</h4>
+                    <p class="bm-reveal">
+                        Aquí se incluyen requisitos que no encajan en las categorías anteriores,
+                        como legales, culturales o políticos.
+                    </p>
+
+                    <h3 class="bm-reveal">5.4 · Apéndices</h3>
+                    <p class="bm-reveal">
+                        Sección opcional para información complementaria que no forma parte del
+                        cuerpo principal de la ERS (ej. diagramas adicionales, cuestionarios,
+                        actas de reuniones).
+                    </p>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 06 · EJEMPLO PRÁCTICO               -->
+                <!-- ════════════════════════════════════ -->
+                <section id="ejemplo" class="bm-section" aria-labelledby="s-ej">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">06 / EJEMPLO</span>
+                        <h2 id="s-ej" class="bm-section__title">Ejemplo de aplicación de la plantilla IEEE 830</h2>
+                        <p class="bm-section__sub">
+                            Para ilustrar cómo se aplica la plantilla IEEE 830 en un contexto
+                            formativo, se presenta un ejemplo genérico basado en un sistema de
+                            gestión de personal para una pequeña empresa.
+                        </p>
+                    </header>
+
+                    <h3 class="bm-reveal">Contexto del ejemplo</h3>
+                    <p class="bm-reveal">
+                        Un grupo de trabajo definió como proyecto formativo un sistema para
+                        optimizar la gestión de horarios, asistencia y tareas de empleados en un
+                        comercio local. Tras el proceso de pitch y selección, se procedió a
+                        elaborar la ERS siguiendo la plantilla IEEE 830.
+                    </p>
+
+                    <h3 class="bm-reveal">Estructura aplicada</h3>
+                    <p class="bm-reveal">
+                        El documento de ERS siguió fielmente la plantilla IEEE 830, con las
+                        siguientes secciones:
+                    </p>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sección</th>
+                                        <th scope="col">Contenido del ejemplo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Introducción</td>
+                                        <td>Propósito (optimizar gestión de personal), alcance (módulos de usuarios, horarios, tareas, reportes), personal involucrado, definiciones (SGP, KPI, ERS), referencias (propuesta técnica, IEEE).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Descripción general</td>
+                                        <td>Perspectiva: sistema independiente. Funcionalidades: automatización de turnos, control de asistencia, asignación de tareas, reportes. Usuarios: gerencia, administración, personal operativo. Restricciones: idioma español, límite de usuarios simultáneos. Suposiciones: infraestructura en la nube, navegador compatible. Evolución: futura integración con nómina e inventario.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Requisitos específicos</td>
+                                        <td>Se definieron requisitos funcionales (ej. planificación de turnos, registro de asistencia, asignación de tareas y reportes automáticos), cada uno con su tabla de prioridad y fuente. Requisitos no funcionales (rendimiento, seguridad, fiabilidad, disponibilidad, mantenibilidad, portabilidad).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Apéndices</td>
+                                        <td>Documentos internos como levantamiento de información, resumen de propuesta técnica, etc.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">Propósito de la ERS en el proyecto formativo</h3>
+                    <p class="bm-reveal">
+                        La ERS permite a los desarrolladores:
+                    </p>
+
+                    <div class="bm-principle-grid">
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #8b5cf6;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-file-contract"></i></div>
+                            <h4>Contrato claro</h4>
+                            <p>Establecer un contrato claro con el cliente sobre lo que se va a desarrollar.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #a855f7;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-sort"></i></div>
+                            <h4>Priorizar</h4>
+                            <p>Priorizar funcionalidades (esenciales vs. deseables).</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #c084fc;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <h4>Identificar riesgos</h4>
+                            <p>Identificar riesgos y restricciones desde el inicio.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #06b6d4;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-code"></i></div>
+                            <h4>Servir de base</h4>
+                            <p>Servir de base para el diseño, la codificación y las pruebas.</p>
+                        </div>
+                    </div>
+
+                    <div class="bm-callout bm-reveal">
+                        Este documento es un entregable clave antes de iniciar la fase de desarrollo,
+                        asegurando que todos los involucrados compartan la misma visión del sistema.
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 07 · FLUJO DOCUMENTAL               -->
+                <!-- ════════════════════════════════════ -->
+                <section id="flujo" class="bm-section" aria-labelledby="s-flujo">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">07 / FLUJO</span>
+                        <h2 id="s-flujo" class="bm-section__title">Flujo de trabajo documental en el primer trimestre</h2>
+                        <p class="bm-section__sub">
+                            El primer trimestre del programa ADSO incluye una secuencia documental
+                            que guía a los grupos desde la idea inicial hasta la definición detallada
+                            de su proyecto formativo. A continuación, se muestra el flujo típico en
+                            pasos secuenciales:
+                        </p>
+                    </header>
+
+                    <div class="bm-principle-grid">
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #8b5cf6;">
+                            <div class="bm-principle-icon"><strong>1</strong></div>
+                            <h4>Pitch y selección</h4>
+                            <p>Cada grupo presenta dos propuestas de proyecto y elige una como proyecto definitivo.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #a855f7;">
+                            <div class="bm-principle-icon"><strong>2</strong></div>
+                            <h4>Levantamiento de información</h4>
+                            <p>Se aplican técnicas de elicitación (entrevistas, observación, encuestas) para recolectar las necesidades del cliente. Los conceptos se documentan en <a href="./01-elicitacion-requisitos.html">01-elicitacion-requisitos</a>.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #c084fc;">
+                            <div class="bm-principle-icon"><strong>3</strong></div>
+                            <h4>Propuesta técnica y económica</h4>
+                            <p>Con la información recopilada, se define cómo se va a desarrollar el proyecto, con qué recursos, en qué plazo y a qué costo. Se consolida en <a href="./06-propuestas-y-presupuestos.html">06-propuestas-y-presupuestos</a>.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #06b6d4;">
+                            <div class="bm-principle-icon"><strong>4</strong></div>
+                            <h4>Especificación de requisitos</h4>
+                            <p>Con base en el levantamiento de información y la propuesta, se documentan todos los requisitos funcionales y no funcionales siguiendo la norma IEEE 830-1998.</p>
+                        </div>
+                    </div>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        <strong>Nota:</strong> los documentos mencionados (01, 06 y 07) son
+                        <strong>guías conceptuales y metodológicas</strong>. Explican los conceptos,
+                        técnicas y estructuras que se deben aplicar en el proyecto formativo.
+                        El desarrollo empieza desde el tercer trimestre.
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 08 · CONCLUSIÓN                     -->
+                <!-- ════════════════════════════════════ -->
+                <section id="conclusion" class="bm-section" aria-labelledby="s-conc">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">08 / CIERRE</span>
+                        <h2 id="s-conc" class="bm-section__title">Conclusión</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        La <strong>especificación de requisitos de software</strong> es un documento
+                        fundamental en el ciclo de vida del software. Siguiendo estándares como la
+                        <strong>IEEE 830-1998</strong>, se garantiza que los requisitos sean completos,
+                        consistentes, verificables y trazables. En el primer trimestre de ADSO, los
+                        grupos de trabajo aprenden a aplicar esta metodología para definir sus
+                        proyectos, estableciendo una base sólida para el desarrollo posterior.
+                    </p>
+
+                    <p class="bm-reveal">
+                        La relación entre la ERS, el levantamiento de información, las propuestas
+                        técnicas/económicas y el pitch muestra cómo la documentación no es un fin en
+                        sí mismo, sino una herramienta para asegurar que el producto final cumpla con
+                        las expectativas del cliente y los objetivos del proyecto.
+                    </p>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal" style="text-align: center; font-style: italic; margin-top: 2rem;">
+                        Este documento forma parte del material de apoyo del primer trimestre de ADSO
+                        y está diseñado para servir como referencia sobre especificación de requisitos
+                        y su aplicación práctica.
+                    </div>
+
+                    <p class="bm-reveal" style="text-align:center; font-style:italic; opacity:0.75; margin-top:1rem;">
+                        Gracias por leer.
+                    </p>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER                                         -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <style>
+            #footer .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #footer .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #footer .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #footer .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #footer .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            #footer .footer-links .footer-link:hover {
+                color: var(--color-accent);
+            }
+
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            @media (max-width: 768px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="#ingenieria" class="footer-link">Ingeniería de requisitos</a></li>
+                    <li><a href="#plantilla" class="footer-link">Plantilla IEEE 830</a></li>
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                    <li><a href="../../trimestre-7/index.html" class="footer-link">Trimestre 7</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software"
+                            target="_blank" rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank"
+                            rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 1</p>
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template editorial (apuntes + theme switcher) -->
+    <script src="../../Assets/templates.js"></script>
+
+</body>
+
+</html>
