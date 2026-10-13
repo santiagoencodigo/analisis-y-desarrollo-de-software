@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Anti-FOUC -->
+    <script>try{var t=localStorage.getItem('adso-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+    <title>Tecnologías de la Información y la Comunicación (TIC) | Trimestre 1 · ADSO</title>
+    <meta name="description"
+        content="Apuntes sobre Tecnologías de la Información y la Comunicación (TIC): software, hardware, sistemas operativos, internet, ofimática, herramientas colaborativas, evaluación, optimización y operadores de búsqueda de Google.">
+    <meta name="keywords" content="TIC, software, hardware, sistemas operativos, internet, ofimática, operadores de búsqueda, ADSO, SENA">
+    <meta name="author" content="santiagoencodigo">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1120">
+
+    <link rel="canonical"
+        href="https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/trimestre-1/pages/05-tics.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Tecnologías de la Información y la Comunicación (TIC) | ADSO">
+    <meta property="og:description"
+        content="Apuntes sobre TIC: software, hardware, sistemas operativos, internet, ofimática y operadores de búsqueda.">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="icon"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Estilos del proyecto + template -->
+    <link rel="stylesheet" href="../../Assets/style.css">
+    <link rel="stylesheet" href="../../Assets/templates.css">
+
+    <!-- Utilidades específicas de esta página -->
+    <style>
+        .bm-cards-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .bm-cards-2 { grid-template-columns: 1fr; }
+        }
+
+        .bm-principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .bm-principle-card {
+            position: relative;
+            padding: 1.5rem 1.35rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-top: 3px solid var(--principle-color, var(--color-accent));
+            border-radius: 12px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .bm-principle-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--principle-color, var(--color-accent));
+        }
+
+        .bm-principle-card .bm-principle-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: white;
+            background: var(--principle-color, var(--color-accent));
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .bm-principle-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-primary);
+        }
+
+        .bm-principle-card p {
+            font-size: 0.88rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        .bm-code-block {
+            position: relative;
+            margin: 1.25rem 0;
+            padding: 1.5rem 1.25rem 1.25rem;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.8rem;
+            line-height: 1.55;
+            color: var(--color-accent);
+            white-space: pre;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        .bm-code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0.6rem;
+            right: 0.85rem;
+            font-size: 0.6rem;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            opacity: 0.7;
+        }
+
+        .bm-toc-widget {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .bm-toc-widget h3 {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .bm-toc-widget__stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .bm-toc-widget__stat {
+            padding: 0.75rem 0.5rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .bm-toc-widget__stat strong {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bm-toc-widget__stat span {
+            display: block;
+            margin-top: 0.3rem;
+            font-size: 0.65rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN                            -->
+    <!-- ============================================== -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+
+                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+                        alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+
+                <button class="navbar-toggler nav-toggle" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Trimestres
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html#proyectos">Proyectos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../sitemap.html">Mapa de sitio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Footer</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ========================================== -->
+        <!-- HERO                                       -->
+        <!-- ========================================== -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Trimestre 1 · Análisis y Desarrollo de Software
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Tecnologías de la Información
+                    <span class="gradient-text">y la Comunicación</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Documento que consolida los conceptos fundamentales de las TIC: software,
+                    hardware, sistemas operativos, internet, ofimática, herramientas colaborativas,
+                    evaluación y optimización. Incluye además una guía completa de operadores de
+                    búsqueda y comandos de Google.
+                </p>
+
+                <div class="bm-hero__meta" role="list">
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Sesión de referencia</span>
+                        <span class="bm-meta-value">11 de junio de 2025</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Enfoque</span>
+                        <span class="bm-meta-value">TIC · Ofimática · Búsqueda</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Programa</span>
+                        <span class="bm-meta-value">ADSO · SENA</span>
+                    </div>
+                </div>
+
+                <div class="bm-hero__stats" aria-label="Resumen del contenido">
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">11</span>
+                        <span class="bm-stat-label">Secciones</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">3</span>
+                        <span class="bm-stat-label">Tipos de software</span>
+                    </div>
+                    <div class="bm-stat">
+                        <span class="bm-stat-value">30+</span>
+                        <span class="bm-stat-label">Operadores Google</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- LAYOUT: TOC + CONTENIDO                    -->
+        <!-- ========================================== -->
+        <div class="bm-layout">
+
+            <!-- ---------- TABLA DE CONTENIDO ---------- -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button"
+                            aria-expanded="false" aria-controls="bm-toc-list"
+                            aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#rap"><span class="bm-toc__num">01</span>Resultados de aprendizaje</a></li>
+                            <li><a class="bm-toc__link" href="#intro"><span class="bm-toc__num">02</span>Introducción a las TIC</a></li>
+                            <li><a class="bm-toc__link" href="#software"><span class="bm-toc__num">03</span>Software</a></li>
+                            <li><a class="bm-toc__link" href="#hardware"><span class="bm-toc__num">04</span>Hardware</a></li>
+                            <li><a class="bm-toc__link" href="#so"><span class="bm-toc__num">05</span>Sistemas operativos</a></li>
+                            <li><a class="bm-toc__link" href="#internet"><span class="bm-toc__num">06</span>Internet</a></li>
+                            <li><a class="bm-toc__link" href="#ofimatica"><span class="bm-toc__num">07</span>Ofimática</a></li>
+                            <li><a class="bm-toc__link" href="#colaborativo"><span class="bm-toc__num">08</span>Trabajo colaborativo</a></li>
+                            <li><a class="bm-toc__link" href="#evaluacion"><span class="bm-toc__num">09</span>Evaluación y reportes</a></li>
+                            <li><a class="bm-toc__link" href="#operadores"><span class="bm-toc__num">10</span>Operadores de búsqueda</a></li>
+                            <li><a class="bm-toc__link" href="#diagnostico"><span class="bm-toc__num">11</span>Diagnóstico de conocimientos</a></li>
+                        </ol>
+                    </nav>
+
+                    <div class="bm-toc-widget">
+                        <h3>Estadísticas</h3>
+                        <div class="bm-toc-widget__stats">
+                            <div class="bm-toc-widget__stat">
+                                <strong>11</strong>
+                                <span>Secciones</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>3</strong>
+                                <span>SW tipos</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>30+</strong>
+                                <span>Operadores</span>
+                            </div>
+                            <div class="bm-toc-widget__stat">
+                                <strong>15</strong>
+                                <span>Preguntas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ---------- CONTENIDO ---------- -->
+            <article class="bm-content">
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 01 · RAP                            -->
+                <!-- ════════════════════════════════════ -->
+                <section id="rap" class="bm-section" aria-labelledby="s-rap">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / APRENDIZAJE</span>
+                        <h2 id="s-rap" class="bm-section__title">Resultados de aprendizaje</h2>
+                        <p class="bm-section__sub">
+                            Los resultados de aprendizaje (RAP) para esta competencia son:
+                        </p>
+                    </header>
+
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li><strong>Alistar herramientas de tecnologías de la información y la comunicación (TIC)</strong>, de acuerdo con las necesidades de procesamiento de información y comunicación.</li>
+                        <li><strong>Aplicar funcionalidades de herramientas y servicios TIC</strong>, de acuerdo con manuales de uso, procedimientos establecidos y buenas prácticas.</li>
+                        <li><strong>Evaluar los resultados</strong>, de acuerdo con los requerimientos.</li>
+                        <li><strong>Optimizar los resultados</strong>, de acuerdo con la verificación.</li>
+                    </ol>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 02 · INTRODUCCIÓN A LAS TIC         -->
+                <!-- ════════════════════════════════════ -->
+                <section id="intro" class="bm-section" aria-labelledby="s-intro">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / INTRODUCCIÓN</span>
+                        <h2 id="s-intro" class="bm-section__title">Introducción a las TIC</h2>
+                    </header>
+
+                    <div class="bm-callout bm-reveal">
+                        Las <strong>Tecnologías de la Información y la Comunicación (TIC)</strong> son
+                        "el conjunto de recursos, herramientas y programas utilizados para procesar,
+                        administrar y compartir información" <em>(Cabero, 2007)</em>.
+                    </div>
+
+                    <p class="bm-reveal">
+                        La sociedad ha avanzado a pasos agigantados en tecnología, ciencia y otras
+                        áreas del conocimiento. La informática se encarga del estudio del hardware,
+                        las redes de datos y el software necesario para tratar la información de
+                        manera automática, convirtiéndose en un factor primordial para la gestión
+                        de información y datos en formato digital.
+                    </p>
+
+                    <p class="bm-reveal">
+                        El conocimiento y apropiación de las herramientas TIC es indispensable para
+                        cualquier ámbito de la sociedad, no solo por la inmersión digital actual sino
+                        por su constante evolución. El dominio de estas herramientas permite mejorar
+                        la productividad a través de procesadores de texto, hojas electrónicas,
+                        presentaciones ejecutivas, bases de datos, y el conocimiento del ciberespacio
+                        y herramientas colaborativas.
+                    </p>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 03 · SOFTWARE                       -->
+                <!-- ════════════════════════════════════ -->
+                <section id="software" class="bm-section" aria-labelledby="s-sw">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / SOFTWARE</span>
+                        <h2 id="s-sw" class="bm-section__title">Software</h2>
+                    </header>
+
+                    <div class="bm-callout bm-reveal">
+                        El <strong>software</strong> se define como "el conjunto de componentes lógicos
+                        que hacen posible la realización de tareas específicas" <em>(Carmona Romera, 2017)</em>.
+                        En el campo de las TIC se encuentran diferentes tipos de software de acuerdo
+                        con la función que realizan.
+                    </div>
+
+                    <h3 class="bm-reveal">3.1 · Software de sistema</h3>
+                    <div class="bm-callout bm-reveal">
+                        El <strong>software de sistema</strong> está constituido por los programas que
+                        se encargan del control y administración de los recursos de cómputo y los que
+                        permiten la interacción entre los usuarios y los sistemas de aplicación o el
+                        hardware <em>(Gómez de Silva Garza &amp; Ania Briseño, 2008)</em>.
+                    </div>
+
+                    <p class="bm-reveal">
+                        <strong>Ejemplos:</strong> sistemas operativos (Windows, Linux, Android, iOS),
+                        traductores (compiladores, intérpretes y ensambladores).
+                    </p>
+
+                    <h3 class="bm-reveal">3.2 · Software de aplicación</h3>
+                    <div class="bm-callout bm-reveal">
+                        El <strong>software de aplicación</strong> son los programas que permiten a
+                        una computadora realizar actividades específicas de procesamiento de información
+                        y ofrecer una funcionalidad a los usuarios finales
+                        <em>(Gómez de Silva Garza &amp; Ania Briseño, 2008)</em>.
+                    </div>
+
+                    <p class="bm-reveal">
+                        <strong>Ejemplos:</strong> procesadores de texto (Word), hojas de cálculo
+                        (Excel), presentaciones ejecutivas (PowerPoint), antivirus (McAfee, Avast).
+                    </p>
+
+                    <h3 class="bm-reveal">3.3 · Software de programación</h3>
+                    <p class="bm-reveal">
+                        El <strong>software de programación</strong> permite a determinados usuarios
+                        la comunicación con la máquina o dispositivo para el desarrollo de aplicaciones
+                        que facilitan el manejo de la información y la toma de decisiones. También se
+                        denominan lenguajes de programación.
+                    </p>
+
+                    <p class="bm-reveal">
+                        Los lenguajes de programación se clasifican en tres niveles: <strong>bajo</strong>
+                        (lenguaje de máquina, utilizado para software de sistema), <strong>medio</strong>
+                        y <strong>alto</strong> (utilizado por programadores para aplicaciones comerciales
+                        o científicas). El software de programación se presenta a través de
+                        <strong>Entornos Integrados de Desarrollo (IDE)</strong> como NetBeans, Eclipse,
+                        Visual Studio, Sublime Text, Brackets, Atom, etc.
+                    </p>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 04 · HARDWARE                       -->
+                <!-- ════════════════════════════════════ -->
+                <section id="hardware" class="bm-section" aria-labelledby="s-hw">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / HARDWARE</span>
+                        <h2 id="s-hw" class="bm-section__title">Hardware y recursos del ordenador</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        Los <strong>recursos del sistema informático</strong> incluyen:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>CPU (microprocesador):</strong> maneja los programas en ejecución y las instrucciones a ejecutar.</li>
+                        <li><strong>Memoria principal (RAM):</strong> de lectura y escritura, gestiona su ocupación y asignación para cada proceso.</li>
+                        <li><strong>Dispositivos de almacenamiento secundario:</strong> discos duros (HDD), discos sólidos (SSD), discos ópticos (CD, DVD), etc.</li>
+                        <li><strong>GPU y memoria de video:</strong> procesamiento gráfico.</li>
+                        <li><strong>Periféricos:</strong> dispositivos de entrada y salida.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">4.1 · Periféricos</h3>
+                    <p class="bm-reveal">
+                        Los <strong>periféricos</strong> son dispositivos externos al computador que
+                        permiten la interacción con el sistema.
+                    </p>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Ejemplos</th>
+                                        <th scope="col">Función</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Entrada</td>
+                                        <td>Teclado, ratón, escáner, micrófono, cámara web</td>
+                                        <td>Introducen datos al sistema.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Salida</td>
+                                        <td>Monitor, impresora, altavoces</td>
+                                        <td>Muestran o entregan información del sistema.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mixtos</td>
+                                        <td>Pantalla táctil, impresora multifunción</td>
+                                        <td>Permiten entrada y salida de datos.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 05 · SISTEMAS OPERATIVOS            -->
+                <!-- ════════════════════════════════════ -->
+                <section id="so" class="bm-section" aria-labelledby="s-so">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / SISTEMAS OPERATIVOS</span>
+                        <h2 id="s-so" class="bm-section__title">Sistemas operativos</h2>
+                    </header>
+
+                    <div class="bm-callout bm-reveal">
+                        Los <strong>sistemas operativos</strong> son el corazón de los dispositivos
+                        informáticos: "realizan la gestión del hardware del equipo informático y la
+                        supervisión de la ejecución de los programas" <em>(Valentín López, 2015, p. 32)</em>.
+                    </div>
+
+                    <h3 class="bm-reveal">Funciones principales</h3>
+
+                    <h4 class="bm-reveal">1. Gestionar los recursos del ordenador</h4>
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>CPU:</strong> manejo de programas en ejecución e instrucciones.</li>
+                        <li><strong>Memoria RAM:</strong> asignación y ocupación por proceso.</li>
+                        <li><strong>Almacenamiento secundario:</strong> control de archivos.</li>
+                        <li><strong>Periféricos:</strong> teclado, ratón, monitor, impresora, sistemas de telecomunicaciones.</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">2. Gestionar los procesos en ejecución</h4>
+                    <ul class="bm-list bm-reveal">
+                        <li>Crear, mantener, detener o finalizar procesos.</li>
+                        <li>Asignar recursos (CPU, RAM) y planificar tareas.</li>
+                        <li>Detectar y controlar conflictos (ej. escritura en misma posición de memoria).</li>
+                    </ul>
+
+                    <h4 class="bm-reveal">3. Controlar la seguridad del sistema</h4>
+                    <ul class="bm-list bm-reveal">
+                        <li>Verificar que todos los sistemas funcionen correctamente.</li>
+                    </ul>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        <strong>Ejemplos de sistemas operativos:</strong> Windows, Linux (más de 100
+                        distribuciones), ChromeOS, macOS, Android, iOS, Solaris, UNIX.
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 06 · INTERNET                       -->
+                <!-- ════════════════════════════════════ -->
+                <section id="internet" class="bm-section" aria-labelledby="s-internet">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">06 / INTERNET</span>
+                        <h2 id="s-internet" class="bm-section__title">Internet</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">6.1 · Origen de internet</h3>
+                    <div class="bm-callout bm-reveal">
+                        El internet "comienza a finales de los años 60 en Estados Unidos y se relaciona
+                        con un proyecto desarrollado por la Agencia de Proyectos de Investigación
+                        Avanzados (ARPA) y el Departamento de Defensa estadounidense, que definieron
+                        el protocolo TCP/IP con la finalidad de conectar ordenadores para facilitar
+                        trabajos sobre investigación" <em>(Valentín López, 2015)</em>.
+                    </div>
+
+                    <h3 class="bm-reveal">6.2 · ¿Qué es internet?</h3>
+                    <div class="bm-callout bm-reveal">
+                        Internet son "ordenadores conectados entre sí a través de redes o sistemas de
+                        comunicación que interconectan distintos tipos de dispositivos, con la finalidad
+                        de compartir información y ofrecer distintos servicios tales como correo
+                        electrónico, transferencia de ficheros vía FTP o acceso a la World Wide Web"
+                        <em>(Valentín López, 2015)</em>.
+                    </div>
+
+                    <h3 class="bm-reveal">6.3 · Motores de búsqueda</h3>
+                    <p class="bm-reveal">
+                        Los <strong>motores de búsqueda</strong> (o buscadores) son programas informáticos
+                        para la búsqueda de información en el ciberespacio. Entre los más populares:
+                        Netscape (1994) y Google (1998). También existen buscadores como Bing y Yahoo.
+                    </p>
+
+                    <h3 class="bm-reveal">6.4 · Redes sociales</h3>
+                    <p class="bm-reveal">
+                        Las <strong>redes sociales</strong> (o páginas sociales) son plataformas que
+                        permiten el desarrollo del concepto de aldea virtual, facilitando la interacción
+                        y el intercambio de información entre usuarios. Ejemplos: MySpace, Friendster,
+                        Facebook, Instagram, Twitter/X, LinkedIn.
+                    </p>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 07 · OFIMÁTICA                      -->
+                <!-- ════════════════════════════════════ -->
+                <section id="ofimatica" class="bm-section" aria-labelledby="s-ofi">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">07 / OFIMÁTICA</span>
+                        <h2 id="s-ofi" class="bm-section__title">Ofimática</h2>
+                    </header>
+
+                    <div class="bm-callout bm-reveal">
+                        La <strong>ofimática</strong> es "el conjunto de herramientas informáticas que
+                        se utilizan para optimizar, automatizar y mejorar los procedimientos de oficina"
+                        <em>(Rama, 2009)</em>. Su objetivo es agilizar y automatizar procesos para
+                        mejorar la productividad y competitividad.
+                    </div>
+
+                    <p class="bm-reveal">
+                        Las herramientas ofimáticas más usadas incluyen procesadores de texto, hojas
+                        de cálculo, presentaciones ejecutivas y gestores de bases de datos, tanto bajo
+                        licencia (Microsoft Office) como de uso libre (LibreOffice, OpenOffice).
+                    </p>
+
+                    <h3 class="bm-reveal">7.1 · Procesador de texto (Word) – Evidencia 1</h3>
+                    <div class="bm-callout bm-reveal">
+                        Se realizó un documento en <strong>Microsoft Word</strong> aplicando las
+                        <strong>Normas APA</strong>, que incluía:
+                    </div>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Portada con formato APA.</li>
+                        <li>Tabla de contenido automática.</li>
+                        <li>Tabla de figuras.</li>
+                        <li>Inserción de figuras y tablas con formato adecuado.</li>
+                        <li>Citaciones y referencias bibliográficas según el estándar APA.</li>
+                        <li>El tema fue libre, con el objetivo de aprender el manejo avanzado del procesador de texto para la elaboración de documentos técnicos y académicos.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">7.2 · Hoja de cálculo (Excel) – Evidencia 2</h3>
+                    <div class="bm-callout bm-reveal">
+                        Se utilizó <strong>Microsoft Excel</strong> para realizar un análisis de datos,
+                        aplicando:
+                    </div>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Fórmulas y funciones (suma, promedio, condicionales, etc.).</li>
+                        <li>Personalización de celdas, filas y columnas.</li>
+                        <li>Creación de tablas y gráficos estadísticos.</li>
+                        <li>Análisis de gastos mensuales (gráfica de barras con datos de enero a diciembre).</li>
+                        <li>Se practicaron herramientas como análisis de varianzas, coeficiente de correlación, estadística descriptiva, suavización exponencial, análisis de regresión e histogramas.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">7.3 · Presentaciones (PowerPoint) – Evidencia 3</h3>
+                    <div class="bm-callout bm-reveal">
+                        Se realizó una <strong>video presentación</strong> en <strong>Microsoft
+                        PowerPoint</strong> sobre uno mismo, que incluía:
+                    </div>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Texto, imágenes y elementos multimedia.</li>
+                        <li>Transiciones y animaciones.</li>
+                        <li>Uso de plantillas y diseño visual.</li>
+                        <li>El video fue subido de forma privada a YouTube para su compartición y evaluación.</li>
+                    </ul>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 08 · TRABAJO COLABORATIVO           -->
+                <!-- ════════════════════════════════════ -->
+                <section id="colaborativo" class="bm-section" aria-labelledby="s-col">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">08 / COLABORACIÓN</span>
+                        <h2 id="s-col" class="bm-section__title">Herramientas de trabajo colaborativo</h2>
+                    </header>
+
+                    <div class="bm-callout bm-reveal">
+                        Las <strong>herramientas de trabajo colaborativo</strong> son soluciones
+                        informáticas para apoyar el trabajo en grupo de varios usuarios. Incorporan
+                        funciones para publicar documentos en espacios compartidos, enviar correos
+                        electrónicos, participar en foros de discusión, mantener listas de contactos,
+                        agendas compartidas, etc. <em>(Eíto-Brun, 2014, p. 49)</em>.
+                    </div>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        <strong>Ejemplos:</strong> Google Drive, OneDrive, Figma, Trello, Slack,
+                        Microsoft Teams.
+                    </div>
+
+                    <p class="bm-reveal">
+                        Estas herramientas permiten la gestión de documentos y contenidos circunscritos
+                        al grupo de usuarios que necesitan compartir esa información, facilitando la
+                        comunicación, la organización de tareas y la edición conjunta de documentos
+                        en tiempo real o de forma asincrónica.
+                    </p>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 09 · EVALUACIÓN Y REPORTES          -->
+                <!-- ════════════════════════════════════ -->
+                <section id="evaluacion" class="bm-section" aria-labelledby="s-eval">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">09 / EVALUACIÓN</span>
+                        <h2 id="s-eval" class="bm-section__title">Evaluación, reportes y análisis informático</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        La <strong>evaluación</strong> es una de las etapas fundamentales en el desarrollo
+                        de proyectos porque permite identificar, cuantificar y valorar el impacto de los
+                        resultados, bajo el criterio de costo y beneficio. Las herramientas informáticas
+                        se convierten en un apoyo fundamental en esta etapa, generando estadísticas e
+                        informes que facilitan la toma de decisiones.
+                    </p>
+
+                    <h3 class="bm-reveal">9.1 · Reportes</h3>
+                    <p class="bm-reveal">
+                        Un <strong>reporte</strong> es un documento (impreso, digital, audiovisual, etc.)
+                        que tiene como objetivo presentar información, normalmente compilada y estadística,
+                        que contextualice una situación o el resultado de un proyecto. Las herramientas
+                        ofimáticas facilitan la elaboración de textos, presentaciones con elementos
+                        multimediales, cuadros con fórmulas y gráficos estadísticos.
+                    </p>
+
+                    <h3 class="bm-reveal">9.2 · Análisis informático</h3>
+                    <p class="bm-reveal">
+                        El <strong>análisis informático</strong> se realiza a través de herramientas
+                        como Excel, que permiten procesos estadísticos como:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Análisis de varianzas.</li>
+                        <li>Coeficiente de correlación.</li>
+                        <li>Estadística descriptiva.</li>
+                        <li>Suavización exponencial.</li>
+                        <li>Análisis de regresión.</li>
+                        <li>Histogramas.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">9.3 · Ruido, redundancia y entropía</h3>
+
+                    <div class="bm-principle-grid">
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #f43f5e;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-volume-high"></i></div>
+                            <h4>Ruido</h4>
+                            <p>Todo aquello que interfiere en una adecuada comunicación; no solo sonidos, sino cualquier distracción que impida la correcta transmisión de información.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #f59e0b;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-clone"></i></div>
+                            <h4>Redundancia</h4>
+                            <p>Duplicidad en el sistema. Los sistemas con redundancia repiten datos o hardware crítico para asegurarlos ante posibles fallos. Sin embargo, debe definirse claramente para evitar duplicidades innecesarias que generen inconsistencias.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #8b5cf6;">
+                            <div class="bm-principle-icon"><i class="fa-solid fa-chart-line"></i></div>
+                            <h4>Entropía</h4>
+                            <p>Magnitud termodinámica que mide la parte de la energía no utilizable para realizar trabajo. En sistemas informáticos, hace referencia a fallas o inconvenientes que afectan el funcionamiento del sistema (ej. fallas en máquinas, insumos de mala calidad, personal no capacitado).</p>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">9.4 · Mejora continua y optimización</h3>
+
+                    <div class="bm-callout bm-reveal">
+                        La <strong>mejora continua</strong> es una técnica de gestión de procesos de
+                        negocio centrada en revisar los procesos para identificar problemas (obstáculos,
+                        retrasos) y resolverlos, logrando mayor eficiencia y productividad.
+                    </div>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        La <strong>optimización</strong> busca reducir costos, mejorar la calidad del
+                        producto, minimizar la variabilidad del proceso, ajustar la respuesta de la
+                        variable en estudio a un valor objetivo, y obtener productos más robustos
+                        <em>(Vergara, 2005, p. 202)</em>.
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 10 · OPERADORES DE BÚSQUEDA         -->
+                <!-- ════════════════════════════════════ -->
+                <section id="operadores" class="bm-section" aria-labelledby="s-op">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">10 / BÚSQUEDA</span>
+                        <h2 id="s-op" class="bm-section__title">Operadores de búsqueda y comandos de Google</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">10.1 · Introducción</h3>
+                    <p class="bm-reveal">
+                        Los <strong>buscadores</strong> (como Google) permiten descubrir e investigar
+                        información en la web. Para obtener resultados precisos, es necesario utilizar
+                        <strong>operadores de búsqueda</strong> y <strong>comandos</strong> que refinan
+                        la consulta.
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Operadores:</strong> símbolos o palabras clave que modifican la búsqueda (ej. <code>AND</code>, <code>OR</code>, <code>-</code>).</li>
+                        <li><strong>Comandos:</strong> instrucciones directas que ejecutan una acción específica (ej. <code>define:</code>, <code>site:</code>, <code>weather:</code>).</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">10.2 · Tabla de operadores</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Operador</th>
+                                        <th scope="col">Ejemplo</th>
+                                        <th scope="col">Qué hace</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>OR</code></td><td><code>Pelota OR palo OR paso</code></td><td>Muestra resultados que contengan <strong>cualquiera</strong> de las palabras.</td></tr>
+                                    <tr><td><code>AND</code></td><td><code>Xataka AND Basics</code></td><td>Busca páginas que incluyan <strong>ambos</strong> términos.</td></tr>
+                                    <tr><td><code>" "</code></td><td><code>"Xataka Basics"</code></td><td>Muestra el <strong>término exacto</strong> entre comillas.</td></tr>
+                                    <tr><td><code>-</code></td><td><code>Xataka -Basics</code></td><td>Excluye la palabra después del signo menos.</td></tr>
+                                    <tr><td><code>*</code></td><td><code>"Liga de * femenino"</code></td><td>Comodín que coincide con cualquier palabra.</td></tr>
+                                    <tr><td><code>..</code></td><td><code>Móvil 200..500 euros</code></td><td>Intervalo numérico.</td></tr>
+                                    <tr><td><code>{ }</code></td><td><code>{redes sociales" OR "plataformas sociales"} -Twitter</code></td><td>Combina operadores.</td></tr>
+                                    <tr><td><code>AROUND(N)</code></td><td><code>Trucos AROUND(3) Instagram</code></td><td>Palabras con máximo N términos entre ellas.</td></tr>
+                                    <tr><td><code>define:</code></td><td><code>define:tramp</code></td><td>Muestra definiciones.</td></tr>
+                                    <tr><td><code>site:</code></td><td><code>Smartphone site:www.xataka.com</code></td><td>Limita a un sitio web específico.</td></tr>
+                                    <tr><td><code>info:</code></td><td><code>info:www.xataka.com</code></td><td>Información sobre una página web.</td></tr>
+                                    <tr><td><code>related:</code></td><td><code>related:www.xataka.com</code></td><td>Páginas similares a la URL.</td></tr>
+                                    <tr><td><code>link:</code></td><td><code>Teléfonos link:www.xataka.com</code></td><td>Páginas que enlazan a la URL.</td></tr>
+                                    <tr><td><code>cache:</code></td><td><code>cache:www.xataka.com</code></td><td>Versión en caché de la página.</td></tr>
+                                    <tr><td><code>filetype:</code></td><td><code>filetype:pdf presupuestos 2019</code></td><td>Busca archivos con formato específico.</td></tr>
+                                    <tr><td><code>allintext:</code> / <code>intext:</code></td><td><code>allintext:moviles baratos</code></td><td>Términos en el texto.</td></tr>
+                                    <tr><td><code>allintitle:</code> / <code>intitle:</code></td><td><code>allintitle:precio y disponibilidad</code></td><td>Términos en el título.</td></tr>
+                                    <tr><td><code>inurl:</code> / <code>allinurl:</code></td><td><code>inurl:apple iphone</code></td><td>Términos en la URL.</td></tr>
+                                    <tr><td><code>allinanchor:</code> / <code>inanchor:</code></td><td><code>allinanchor:moviles baratos</code></td><td>Términos en el texto ancla de enlaces.</td></tr>
+                                    <tr><td><code>stocks:</code></td><td><code>stocks:Facebook</code></td><td>Estado actual en bolsa.</td></tr>
+                                    <tr><td><code>weather:</code></td><td><code>weather:Valencia,es</code></td><td>Pronóstico del tiempo.</td></tr>
+                                    <tr><td><code>time:</code></td><td><code>time:Nueva York</code></td><td>Hora actual.</td></tr>
+                                    <tr><td><code>movie:</code></td><td><code>movie:Reservoir Dogs</code></td><td>Información de una película.</td></tr>
+                                    <tr><td><code>@</code></td><td><code>@Xataka</code></td><td>Etiquetas sociales (Twitter).</td></tr>
+                                    <tr><td><code>#</code></td><td><code>#Xataka</code></td><td>Hashtags en redes sociales.</td></tr>
+                                    <tr><td><code>$</code></td><td><code>iPhone 500$</code></td><td>Precios en dólares.</td></tr>
+                                    <tr><td><code>€</code></td><td><code>iPhone 500€</code></td><td>Precios en euros.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">10.3 · Comandos adicionales (calculadora y utilidades)</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Comando / Símbolo</th>
+                                        <th scope="col">Ejemplo</th>
+                                        <th scope="col">Qué hace</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></td><td><code>3*4</code></td><td>Operaciones aritméticas básicas.</td></tr>
+                                    <tr><td><code>**</code></td><td><code>3**4</code></td><td>Potencia.</td></tr>
+                                    <tr><td><code>% de</code></td><td><code>21% de 900</code></td><td>Porcentaje.</td></tr>
+                                    <tr><td><code>lg()</code></td><td><code>lg(28)</code></td><td>Logaritmo en base 2.</td></tr>
+                                    <tr><td><code>log()</code></td><td><code>log(200)</code></td><td>Logaritmo en base 10.</td></tr>
+                                    <tr><td><code>ln()</code></td><td><code>ln(24)</code></td><td>Logaritmo neperiano.</td></tr>
+                                    <tr><td><code>!</code></td><td><code>5!</code></td><td>Factorial.</td></tr>
+                                    <tr><td><code>sqrt()</code></td><td><code>sqrt(16)</code></td><td>Raíz cuadrada.</td></tr>
+                                    <tr><td><code>nth root of</code></td><td><code>3th root of 27</code></td><td>Raíz n-ésima.</td></tr>
+                                    <tr><td><code>sin()</code>, <code>cos()</code>, <code>tan()</code>, <code>sec()</code></td><td><code>cos(0)</code></td><td>Funciones trigonométricas.</td></tr>
+                                    <tr><td><code>convertir</code></td><td><code>300 dólares en euros</code></td><td>Conversión de unidades.</td></tr>
+                                    <tr><td><code>map:</code></td><td><code>map:Castellón</code></td><td>Mapas de ubicación.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">10.4 · Comandos vs. Operadores</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Comandos</th>
+                                        <th scope="col">Operadores</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Instrucciones directas con acción específica (ej. <code>define:</code>, <code>site:</code>).</td>
+                                        <td>Símbolos o palabras que modifican la consulta (ej. <code>AND</code>, <code>-</code>).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Suelen ir seguidos de dos puntos (<code>:</code>) y un valor.</td>
+                                        <td>Se colocan entre términos de búsqueda.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p class="bm-reveal">Ambos se pueden combinar:</p>
+
+                    <pre class="bm-code-block bm-reveal" data-lang="GOOGLE">site:edu "machine learning" filetype:pdf -"deep learning"</pre>
+
+                    <h3 class="bm-reveal">10.5 · Tablas de verdad y lógica booleana</h3>
+                    <p class="bm-reveal">
+                        Los operadores de búsqueda se basan en la <strong>lógica booleana</strong>:
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>AND</strong> → intersección (ambas condiciones).</li>
+                        <li><strong>OR</strong> → unión (al menos una condición).</li>
+                        <li><strong>NOT</strong> (representado por <code>-</code>) → exclusión.</li>
+                    </ul>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">A</th>
+                                        <th scope="col">B</th>
+                                        <th scope="col">A AND B</th>
+                                        <th scope="col">A OR B</th>
+                                        <th scope="col">NOT A</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Verdad</td><td>Verdad</td><td>Verdad</td><td>Verdad</td><td>Falso</td></tr>
+                                    <tr><td>Verdad</td><td>Falso</td><td>Falso</td><td>Verdad</td><td>Falso</td></tr>
+                                    <tr><td>Falso</td><td>Verdad</td><td>Falso</td><td>Verdad</td><td>Verdad</td></tr>
+                                    <tr><td>Falso</td><td>Falso</td><td>Falso</td><td>Falso</td><td>Verdad</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ════════════════════════════════════ -->
+                <!-- 11 · DIAGNÓSTICO                    -->
+                <!-- ════════════════════════════════════ -->
+                <section id="diagnostico" class="bm-section" aria-labelledby="s-diag">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">11 / DIAGNÓSTICO</span>
+                        <h2 id="s-diag" class="bm-section__title">Diagnóstico de conocimientos</h2>
+                        <p class="bm-section__sub">
+                            Como actividad de diagnóstico, se plantearon las siguientes preguntas para
+                            ubicar el conocimiento previo de los aprendices:
+                        </p>
+                    </header>
+
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li>¿Qué es tecnología?</li>
+                        <li>¿Qué es herramienta?</li>
+                        <li>¿Qué son las tecnologías de la información y la comunicación (TIC)?</li>
+                        <li>¿Qué es hardware?</li>
+                        <li>Define ordenador o computadora.</li>
+                        <li>Define periféricos.</li>
+                        <li>Realiza una lista de periféricos, indicando su función.</li>
+                        <li>¿Qué es Internet?</li>
+                        <li>¿Qué servicios podemos encontrar en Internet?</li>
+                        <li>¿Qué es una red de datos?</li>
+                        <li>¿Qué es software?</li>
+                        <li>¿Qué tipos de software existen?</li>
+                        <li>¿Qué es ofimática?</li>
+                        <li>¿Qué son las redes sociales?</li>
+                        <li>Lista redes sociales.</li>
+                    </ol>
+
+                    <h3 class="bm-reveal">Dinámica de trabajo en grupo</h3>
+                    <p class="bm-reveal">
+                        Los aprendices respondieron las preguntas en equipo, siguiendo tres pasos:
+                    </p>
+
+                    <div class="bm-principle-grid">
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #8b5cf6;">
+                            <div class="bm-principle-icon"><strong>1</strong></div>
+                            <h4>Opinión inicial</h4>
+                            <p>Lo que cada integrante opina sobre el concepto.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #06b6d4;">
+                            <div class="bm-principle-icon"><strong>2</strong></div>
+                            <h4>Respuesta investigada</h4>
+                            <p>Búsqueda y consenso de una definición técnica fundamentada.</p>
+                        </div>
+                        <div class="bm-principle-card bm-reveal" style="--principle-color: #f59e0b;">
+                            <div class="bm-principle-icon"><strong>3</strong></div>
+                            <h4>Análisis de desviación</h4>
+                            <p>Comparación entre la opinión inicial y la respuesta investigada para identificar brechas de conocimiento y áreas de mejora.</p>
+                        </div>
+                    </div>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        No respondo las preguntas, sino que menciono cómo fue la metodología para
+                        resolver este trabajo ya que me llamó la atención... Muchas veces no comparamos
+                        nuestros conocimientos con la información que encontramos de internet.
+                    </div>
+
+                    <p class="bm-reveal" style="text-align:center; font-style:italic; opacity:0.75; margin-top:2rem;">
+                        Gracias por leer.
+                    </p>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER                                         -->
+    <!-- ============================================== -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <style>
+            #footer .footer-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+                padding: 2rem var(--container-pad);
+            }
+
+            #footer .footer-col h4 {
+                color: var(--color-text-primary);
+                font-size: 0.85rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--color-border);
+                padding-bottom: 0.5rem;
+            }
+
+            #footer .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #footer .footer-links li {
+                margin-bottom: 0.5rem;
+            }
+
+            #footer .footer-links .footer-link {
+                color: var(--color-text-secondary);
+                transition: color 0.3s ease;
+                text-decoration: none;
+                font-size: 0.8rem;
+            }
+
+            #footer .footer-links .footer-link:hover {
+                color: var(--color-accent);
+            }
+
+            .footer-bottom {
+                border-top: 1px solid var(--color-border);
+                padding: 1.5rem var(--container-pad) 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                max-width: var(--container-max);
+                margin: 0 auto;
+            }
+
+            .footer-bottom p {
+                color: var(--color-text-secondary);
+                font-size: 0.75rem;
+                margin: 0;
+            }
+
+            @media (max-width: 768px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    padding: 1.5rem var(--container-pad);
+                }
+
+                .footer-bottom {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 1rem var(--container-pad);
+                }
+            }
+
+            @media (max-width: 480px) {
+                #footer .footer-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="#software" class="footer-link">Software</a></li>
+                    <li><a href="#operadores" class="footer-link">Operadores</a></li>
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Trimestres</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html" class="footer-link">Trimestre 1</a></li>
+                    <li><a href="../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../trimestre-3/index.html" class="footer-link">Trimestre 3</a></li>
+                    <li><a href="../../trimestre-4/index.html" class="footer-link">Trimestre 4</a></li>
+                    <li><a href="../../trimestre-5/index.html" class="footer-link">Trimestre 5</a></li>
+                    <li><a href="../../trimestre-6/index.html" class="footer-link">Trimestre 6</a></li>
+                    <li><a href="../../trimestre-7/index.html" class="footer-link">Trimestre 7</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software"
+                            target="_blank" rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> Repositorio ADSO</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank"
+                            rel="noopener noreferrer" class="footer-link">
+                            <i class="fa-brands fa-github"></i> santiagoencodigo</a></li>
+                    <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                    <li><a href="#inicio" class="footer-link">Volver arriba</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 1</p>
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template editorial (apuntes + theme switcher) -->
+    <script src="../../Assets/templates.js"></script>
+
+</body>
+
+</html>
