@@ -4,11 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios 1-12 · Pseudocódigo · Trimestre 2</title>
-    <meta name="description" content="Ejercicios de lógica de programación en PSeInt con simulación interactiva paso a paso.">
+    <title>Pseudocódigo · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Aprende lógica de programación, pseudocódigo y PSeInt. Explora 41 ejercicios con simulador interactivo paso a paso.">
+    <meta name="author" content="santiagoencodigo">
 
     <!-- Anti-FOUC para el tema -->
-    <script>try{var t=localStorage.getItem('adso-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+    <script>
+        try {
+            var t = localStorage.getItem('adso-theme');
+            if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { }
+    </script>
 
     <!-- Fuentes y librerías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +28,7 @@
     <link rel="stylesheet" href="../../Assets/style.css">
     <link rel="stylesheet" href="../../Assets/templates.css">
     
-    <!-- Estilos específicos de esta página -->
+    <!-- Estilos específicos de esta página (se crearán en la siguiente fase) -->
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -33,7 +39,9 @@
         <div class="bm-progress-bar"></div>
     </div>
 
-    <!-- HEADER / NAVEGACIÓN -->
+    <!-- ============================================== -->
+    <!-- HEADER / NAVEGACIÓN                            -->
+    <!-- ============================================== -->
     <header class="main-header" role="banner">
         <nav class="navbar navbar-expand-md nav-container">
             <div class="container-fluid px-0">
@@ -47,6 +55,8 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-md-center">
                         <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#teoria">Teoría</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#ejercicios">Ejercicios</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
                             <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
@@ -60,8 +70,8 @@
                                 <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="../../index.html#proyectos">Proyectos</a></li>
                         <li class="nav-item"><a class="nav-link" href="../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
                     </ul>
                 </div>
             </div>
@@ -69,69 +79,152 @@
     </header>
 
     <main>
-        <!-- HERO -->
-        <section id="inicio" class="pseudo-hero">
-            <div class="container">
+        <!-- ========================================== -->
+        <!-- HERO                                       -->
+        <!-- ========================================== -->
+        <section id="inicio" class="pseudo-hero" aria-labelledby="hero-title">
+            <div class="container text-center">
                 <div class="mb-3">
                     <span class="badge rounded-pill badge-hero">
-                        <i class="fa-solid fa-code me-2"></i>Trimestre 2 · Parte 1
+                        <i class="fa-solid fa-code me-2"></i>Trimestre 2 · Pensamiento Lógico
                     </span>
                 </div>
-                <h1 class="pseudo-hero__title">
+                <h1 id="hero-title" class="pseudo-hero__title">
                     Ejercicios de <span class="gradient-text">Pseudocódigo</span>
                 </h1>
-                <p class="pseudo-hero__subtitle">
-                    Una colección de 12 ejercicios básicos de lógica de programación resueltos en PSeInt.
-                    Explora cada tarjeta para ver el código completo y ejecutar una simulación interactiva paso a paso.
+                <p class="pseudo-hero__subtitle mx-auto">
+                    Domina la lógica de programación antes de escribir una sola línea de código real.
+                    Aprende los conceptos, filtra los 41 ejercicios y ejecuta simulaciones paso a paso en tiempo real.
                 </p>
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <span class="badge badge-stats"><i class="fa-solid fa-layer-group me-2"></i>12 Ejercicios</span>
+                <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+                    <span class="badge badge-stats"><i class="fa-solid fa-layer-group me-2"></i>41 Ejercicios</span>
                     <span class="badge badge-stats"><i class="fa-solid fa-code me-2"></i>PSeInt</span>
                     <span class="badge badge-stats"><i class="fa-solid fa-play me-2"></i>Simulación</span>
                 </div>
             </div>
         </section>
 
-        <!-- GRID DE EJERCICIOS -->
-        <section id="ejercicios">
-            <div class="exercise-grid" id="exerciseGrid">
-                <!-- Spinner de carga -->
-                <div class="text-center w-100 py-5" style="grid-column: 1 / -1;">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Cargando ejercicios...</span>
+        <!-- ========================================== -->
+        <!-- TEORÍA: CARRUSEL 3D                        -->
+        <!-- ========================================== -->
+        <section id="teoria" class="theory-section" aria-labelledby="teoria-title">
+            <div class="container text-center">
+                <h2 id="teoria-title" class="section-title">¿Qué es el Pseudocódigo?</h2>
+                <p class="section-description mx-auto mb-5">
+                    Antes de programar en Python, Java o C++, necesitas entender la lógica. 
+                    Desliza o pasa el cursor sobre las tarjetas para descubrir los 3 pilares fundamentales.
+                </p>
+            </div>
+
+            <!-- Contenedor del Carrusel 3D (El CSS hará la magia aquí) -->
+            <div class="carousel-3d-container">
+                <div class="carousel-3d-inner">
+                    
+                    <!-- Tarjeta 1: LLP -->
+                    <article class="theory-card" aria-labelledby="card-llp-title">
+                        <div class="theory-card__icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3 id="card-llp-title" class="theory-card__title">Lógica de Programación (LLP)</h3>
+                        <p class="theory-card__text">
+                            Es la base del pensamiento computacional. Consiste en desarrollar la capacidad de resolver problemas de forma estructurada y algorítmica, utilizando variables, condiciones y ciclos, sin importar el lenguaje de programación final.
+                        </p>
+                    </article>
+
+                    <!-- Tarjeta 2: Pseudocódigo -->
+                    <article class="theory-card" aria-labelledby="card-pseudo-title">
+                        <div class="theory-card__icon"><i class="fa-solid fa-pen-nib"></i></div>
+                        <h3 id="card-pseudo-title" class="theory-card__title">El Pseudocódigo</h3>
+                        <p class="theory-card__text">
+                            Es un lenguaje intermedio entre el humano y la máquina. No se ejecuta en una computadora real, pero sirve para planificar la lógica de un programa. Es independiente del lenguaje (lo que escribes aquí, luego se traduce fácilmente a Python o Java).
+                        </p>
+                        <div class="theory-card__code-snippet">
+                            <code>Si numero > 10 Entonces<br>&nbsp;&nbsp;Escribir "Es mayor"<br>FinSi</code>
+                        </div>
+                    </article>
+
+                    <!-- Tarjeta 3: PSeInt -->
+                    <article class="theory-card" aria-labelledby="card-pseint-title">
+                        <div class="theory-card__icon"><i class="fa-solid fa-laptop-code"></i></div>
+                        <h3 id="card-pseint-title" class="theory-card__title">PSeInt</h3>
+                        <p class="theory-card__text">
+                            Es el software gratuito que usamos en clase. Permite escribir pseudocódigo en español, ejecutarlo, ver los resultados en consola e incluso generar diagramas de flujo automáticamente para entender cómo funciona el algoritmo.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- FILTROS Y BÚSQUEDA                         -->
+        <!-- ========================================== -->
+        <section id="filtros" class="filters-section" aria-labelledby="filtros-title">
+            <div class="container">
+                <h2 id="filtros-title" class="section-title text-center mb-4">Explora los Ejercicios</h2>
+                
+                <div class="filters-container">
+                    <!-- Buscador -->
+                    <div class="search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                        <input type="search" id="searchInput" class="search-input" placeholder="Buscar por nombre del ejercicio..." aria-label="Buscar ejercicios por nombre">
                     </div>
-                    <p class="mt-2 text-muted">Cargando ejercicios...</p>
+
+                    <!-- Botones de Filtro -->
+                    <div class="filter-group" role="group" aria-label="Filtrar ejercicios por categoría">
+                        <button type="button" class="filter-btn active" data-filter="todos">Todos</button>
+                        <button type="button" class="filter-btn" data-filter="condicionales">Condicionales</button>
+                        <button type="button" class="filter-btn" data-filter="ciclos">Ciclos</button>
+                        <button type="button" class="filter-btn" data-filter="operaciones">Operaciones</button>
+                        <button type="button" class="filter-btn" data-filter="integradores">Integradores</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- GRID DE EJERCICIOS                         -->
+        <!-- ========================================== -->
+        <section id="ejercicios" class="exercises-section" aria-labelledby="ejercicios-title">
+            <div class="container">
+                <h2 id="ejercicios-title" class="visually-hidden">Lista de Ejercicios</h2>
+                
+                <div class="exercise-grid" id="exerciseGrid">
+                    <!-- Spinner de carga (el JS lo eliminará al renderizar) -->
+                    <div class="loading-spinner" id="loadingSpinner" style="grid-column: 1 / -1;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando ejercicios...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Cargando los 41 ejercicios...</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- ============================================== -->
+    <!-- FOOTER                                         -->
+    <!-- ============================================== -->
     <footer role="contentinfo" id="footer" class="bg-hero">
         <div class="footer-grid">
             <div class="footer-col">
                 <h4>Navegación</h4>
                 <ul class="footer-links">
                     <li><a href="#inicio" class="footer-link">Inicio</a></li>
-                    <li><a href="../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="#teoria" class="footer-link">Teoría</a></li>
+                    <li><a href="#ejercicios" class="footer-link">Ejercicios</a></li>
                     <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
-                <h4>Recursos</h4>
-                <ul class="footer-links">
-                    <li><a href="http://pseint.sourceforge.net/" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-solid fa-link me-2"></i>PSeInt Oficial</a></li>
-                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
-                </ul>
+                <div class="footer-col">
+                    <h4>Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="http://pseint.sourceforge.net/" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-solid fa-link me-2"></i>PSeInt Oficial</a></li>
+                        <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
+                    </ul>
+
+                    <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
+                    <p>Creado por <strong>santiagoencodigo</strong></p>
+                </div>            
             </div>
-            <div class="footer-col">
-                <h4>Créditos</h4>
-                <p class="small text-secondary">Ejercicios propuestos por el instructor Julio Galvis durante la formación en ADSO.</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
-            <p>Creado por <strong>santiagoencodigo</strong></p>
         </div>
     </footer>
 
@@ -140,7 +233,9 @@
         <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
     </button>
 
-    <!-- MODAL PARA EJERCICIOS -->
+    <!-- ============================================== -->
+    <!-- MODAL PARA EJERCICIOS                          -->
+    <!-- ============================================== -->
     <div class="modal fade" id="exerciseModal" tabindex="-1" aria-labelledby="exerciseModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -172,11 +267,13 @@
         </div>
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- ============================================== -->
+    <!-- SCRIPTS                                        -->
+    <!-- ============================================== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../Assets/templates.js"></script>
     
-    <!-- Script principal de la página -->
+    <!-- Script principal de la página (se creará en la siguiente fase) -->
     <script type="module" src="./main.js"></script>
 </body>
 
