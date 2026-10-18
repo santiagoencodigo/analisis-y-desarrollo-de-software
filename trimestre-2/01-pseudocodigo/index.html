@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios 1-12 · Pseudocódigo · Trimestre 2</title>
+    <meta name="description" content="Ejercicios de lógica de programación en PSeInt con simulación interactiva paso a paso.">
+
+    <!-- Anti-FOUC para el tema -->
+    <script>try{var t=localStorage.getItem('adso-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto (Rutas relativas ajustadas) -->
+    <link rel="stylesheet" href="../../Assets/style.css">
+    <link rel="stylesheet" href="../../Assets/templates.css">
+    
+    <!-- Estilos específicos de esta página -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../index.html#proyectos">Proyectos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../sitemap.html">Mapa de sitio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="pseudo-hero">
+            <div class="container">
+                <div class="mb-3">
+                    <span class="badge rounded-pill badge-hero">
+                        <i class="fa-solid fa-code me-2"></i>Trimestre 2 · Parte 1
+                    </span>
+                </div>
+                <h1 class="pseudo-hero__title">
+                    Ejercicios de <span class="gradient-text">Pseudocódigo</span>
+                </h1>
+                <p class="pseudo-hero__subtitle">
+                    Una colección de 12 ejercicios básicos de lógica de programación resueltos en PSeInt.
+                    Explora cada tarjeta para ver el código completo y ejecutar una simulación interactiva paso a paso.
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <span class="badge badge-stats"><i class="fa-solid fa-layer-group me-2"></i>12 Ejercicios</span>
+                    <span class="badge badge-stats"><i class="fa-solid fa-code me-2"></i>PSeInt</span>
+                    <span class="badge badge-stats"><i class="fa-solid fa-play me-2"></i>Simulación</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRID DE EJERCICIOS -->
+        <section id="ejercicios">
+            <div class="exercise-grid" id="exerciseGrid">
+                <!-- Spinner de carga -->
+                <div class="text-center w-100 py-5" style="grid-column: 1 / -1;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando ejercicios...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Cargando ejercicios...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="http://pseint.sourceforge.net/" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-solid fa-link me-2"></i>PSeInt Oficial</a></li>
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Créditos</h4>
+                <p class="small text-secondary">Ejercicios propuestos por el instructor Julio Galvis durante la formación en ADSO.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- MODAL PARA EJERCICIOS -->
+    <div class="modal fade" id="exerciseModal" tabindex="-1" aria-labelledby="exerciseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exerciseModalLabel">Ejercicio</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalDescription" class="text-secondary mb-4"></p>
+
+                    <h5><i class="fa-solid fa-code me-2"></i>Pseudocódigo completo</h5>
+                    <div class="code-block" id="modalCode"></div>
+
+                    <h5><i class="fa-solid fa-terminal me-2"></i>Simulación paso a paso</h5>
+                    <div class="sim-terminal" id="simTerminal">
+                        <div class="sim-line">Presiona "Iniciar simulación" para comenzar.</div>
+                    </div>
+                    <div class="sim-controls">
+                        <button id="simStartBtn" class="btn-sm"><i class="fa-solid fa-play"></i> Iniciar</button>
+                        <button id="simPauseBtn" class="btn-sm" disabled><i class="fa-solid fa-pause"></i> Pausar</button>
+                        <button id="simResetBtn" class="btn-sm"><i class="fa-solid fa-rotate-left"></i> Reiniciar</button>
+                        <div class="speed-control">
+                            <label for="simSpeed">Velocidad:</label>
+                            <input type="range" id="simSpeed" min="200" max="2000" value="800" step="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../Assets/templates.js"></script>
+    
+    <!-- Script principal de la página -->
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
