@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmia y Datos · Python · Trimestre 2</title>
+    <meta name="description" content="Explora 106 ejercicios de Python: desde lógica básica hasta POO. Un laboratorio interactivo de algoritmia.">
+
+    <!-- Anti-FOUC para el tema -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="../../Assets/style.css">
+    <link rel="stylesheet" href="../../Assets/templates.css">
+    
+    <!-- Estilos específicos de esta página -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="python-theme">
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#timeline">Módulos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#ejercicios">Ejercicios</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="inicio" class="py-hero">
+            <div class="py-hero__bg">
+                <div class="py-code-rain"></div>
+            </div>
+            <div class="container py-hero__content">
+                <span class="py-badge"><i class="fa-brands fa-python me-2"></i>Python Laboratory</span>
+                <h1 class="py-hero__title">
+                    Algoritmia y <br>
+                    <span class="gradient-text">Estructuras de Datos</span>
+                </h1>
+                <p class="py-hero__subtitle">
+                    Un recorrido progresivo por más de 100 ejercicios de Python. 
+                    Desde la lógica básica hasta el polimorfismo y la herencia.
+                </p>
+                <div class="py-hero__stats">
+                    <div class="py-stat">
+                        <span class="py-stat__value">7</span>
+                        <span class="py-stat__label">Módulos</span>
+                    </div>
+                    <div class="py-stat">
+                        <span class="py-stat__value">106</span>
+                        <span class="py-stat__label">Ejercicios</span>
+                    </div>
+                    <div class="py-stat">
+                        <span class="py-stat__value">POO</span>
+                        <span class="py-stat__label">Incluido</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIMELINE DE MÓDULOS -->
+        <section id="timeline" class="py-timeline-section">
+            <div class="container text-center mb-5">
+                <h2 class="section-title">Ruta de Aprendizaje</h2>
+                <p class="section-description">Haz clic en cada módulo para explorar su código fuente.</p>
+            </div>
+
+            <div class="py-timeline-wrapper">
+                <div class="py-timeline-line"></div>
+                <div class="py-timeline" id="timelineContainer">
+                    <!-- El JS inyectará los módulos aquí -->
+                </div>
+            </div>
+        </section>
+
+        <!-- FILTROS Y EJERCICIOS -->
+        <section id="ejercicios" class="py-exercises-section">
+            <div class="container">
+                <div class="py-filters-header text-center">
+                    <h2 class="section-title">Explora los Ejercicios</h2>
+                    <p class="section-description">Filtra por categoría o busca por nombre del algoritmo.</p>
+                </div>
+
+                <div class="py-filters-container">
+                    <div class="py-search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass py-search-icon"></i>
+                        <input type="search" id="searchInput" class="py-search-input" placeholder="Buscar ejercicio...">
+                    </div>
+                    <div class="py-filter-group" id="filterContainer">
+                        <!-- Los botones se generan dinámicamente o se dejan estáticos -->
+                        <button class="py-filter-btn active" data-filter="todos">Todos</button>
+                        <button class="py-filter-btn" data-filter="basicos">Básicos</button>
+                        <button class="py-filter-btn" data-filter="listas">Listas</button>
+                        <button class="py-filter-btn" data-filter="diccionarios">Diccionarios</button>
+                        <button class="py-filter-btn" data-filter="tuplas">Tuplas</button>
+                        <button class="py-filter-btn" data-filter="conjuntos">Conjuntos</button>
+                        <button class="py-filter-btn" data-filter="clases">Clases</button>
+                        <button class="py-filter-btn" data-filter="objetos">Objetos</button>
+                    </div>
+                </div>
+
+                <div class="py-grid" id="exercisesGrid">
+                    <div class="text-center w-100 py-5" id="loadingSpinner" style="grid-column: 1 / -1;">
+                        <div class="spinner-border text-warning" role="status"></div>
+                        <p class="mt-2 text-muted">Cargando ejercicios...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER REDISEÑADO -->
+    <footer id="footer" class="py-footer">
+        <div class="py-footer-grid">
+            <div class="py-footer-col">
+                <div class="py-footer-brand">
+                    <i class="fa-brands fa-python"></i> Algoritmia
+                </div>
+                <p class="py-footer-text">
+                    Un laboratorio interactivo para dominar la lógica de programación y las estructuras de datos en Python. Diseñado para el programa ADSO.
+                </p>
+            </div>
+            <div class="py-footer-col">
+                <h4 class="py-footer-title">Navegación</h4>
+                <ul class="py-footer-links">
+                    <li><a href="#inicio"><i class="fa-solid fa-chevron-right me-2"></i>Inicio</a></li>
+                    <li><a href="#timeline"><i class="fa-solid fa-chevron-right me-2"></i>Módulos</a></li>
+                    <li><a href="#ejercicios"><i class="fa-solid fa-chevron-right me-2"></i>Ejercicios</a></li>
+                    <li><a href="../../sitemap.html"><i class="fa-solid fa-chevron-right me-2"></i>Mapa del sitio</a></li>
+                </ul>
+            </div>
+            <div class="py-footer-col">
+                <h4 class="py-footer-title">Recursos</h4>
+                <ul class="py-footer-links">
+                    <li><a href="https://pynative.com" target="_blank"><i class="fa-solid fa-link me-2"></i>PyNative</a></li>
+                    <li><a href="https://docs.python.org/3/" target="_blank"><i class="fa-solid fa-link me-2"></i>Python Docs</a></li>
+                    <li><a href="https://github.com/santiagoencodigo" target="_blank"><i class="fa-brands fa-github me-2"></i>GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="py-footer-bottom">
+            <p>&copy; 2025 · ADSO · Trimestre 2</p>
+            <p>Creado con <i class="fa-solid fa-heart text-danger"></i> por <strong>santiagoencodigo</strong></p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE CÓDIGO Y TERMINAL -->
+    <div class="modal fade" id="codeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content py-modal">
+                <div class="modal-header py-modal-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-brands fa-python text-warning fs-4"></i>
+                        <h5 class="modal-title" id="modalTitle">Código</h5>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body py-modal-body">
+                    <p id="modalDescription" class="py-modal-desc"></p>
+                    
+                    <div class="py-modal-tabs">
+                        <button class="py-tab-btn active" id="tabCodeBtn"><i class="fa-solid fa-code me-2"></i>Código Python</button>
+                        <button class="py-tab-btn" id="tabSimBtn"><i class="fa-solid fa-terminal me-2"></i>Simulación</button>
+                    </div>
+
+                    <!-- Pestaña de Código -->
+                    <div class="py-tab-content active" id="tabCodeContent">
+                        <div class="py-code-block">
+                            <pre><code id="modalCode"></code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña de Simulación -->
+                    <div class="py-tab-content" id="tabSimContent">
+                        <div class="py-terminal-wrapper">
+                            <div class="py-terminal-header">
+                                <span class="py-term-dot red"></span>
+                                <span class="py-term-dot yellow"></span>
+                                <span class="py-term-dot green"></span>
+                                <span class="py-term-title">Terminal</span>
+                            </div>
+                            <div class="py-terminal-body" id="terminalOutput">
+                                <div class="py-term-line text-muted">> Esperando ejecución...</div>
+                            </div>
+                        </div>
+                        <div class="py-terminal-controls">
+                            <button id="runSimBtn" class="py-btn py-btn-run"><i class="fa-solid fa-play me-2"></i>Ejecutar Simulación</button>
+                            <button id="clearSimBtn" class="py-btn py-btn-clear"><i class="fa-solid fa-trash me-2"></i>Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../Assets/templates.js"></script>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
