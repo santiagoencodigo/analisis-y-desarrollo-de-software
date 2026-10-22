@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Planeación de Actividades · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Materiales, apuntes y ejercicios sobre planeación de análisis de software, metodologías ágiles (Scrum, XP), modelos de ciclo de vida y herramientas como Jira y Trello.">
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="../../Assets/style.css">
+    <link rel="stylesheet" href="../../Assets/templates.css">
+    
+    <!-- Estilos específicos de esta página -->
+    <style>
+        /* ==========================================
+           ANIMACIÓN DE FONDO CONSTANTE (Independiente del scroll y del mouse)
+           ========================================== */
+        .bg-fixed-animation {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none; /* No interactúa con el cursor */
+            background-color: var(--color-bg-primary);
+            background-image: 
+                linear-gradient(rgba(var(--color-accent-rgb), 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(var(--color-accent-rgb), 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: pan-grid 30s linear infinite;
+        }
+
+        /* Sutil resplandor que se mueve */
+        .bg-fixed-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(var(--color-accent-rgb), 0.08), transparent 60%);
+            animation: float-glow 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes pan-grid {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        @keyframes float-glow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10%, 10%); }
+        }
+
+        /* ==========================================
+           HERO Y ESTRUCTURA
+           ========================================== */
+        .planning-hero {
+            padding: 8rem 1rem 5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .planning-hero__title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--color-text-primary);
+        }
+
+        .planning-hero__desc {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           SECCIONES GENERALES
+           ========================================== */
+        .section-pad {
+            padding: 5rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title-wrapper {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-main-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--color-text-primary);
+        }
+
+        /* ==========================================
+           GRID DE DOCUMENTOS (CARDS)
+           ========================================== */
+        .planning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+        }
+
+        .planning-card {
+            background: rgba(var(--color-bg-secondary-rgb, 26, 35, 50), 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .planning-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .planning-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(var(--color-accent-rgb), 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(var(--color-accent-rgb), 0.1);
+            background: var(--color-bg-secondary);
+        }
+
+        .planning-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .planning-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(var(--color-accent-rgb), 0.1);
+            color: var(--color-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .planning-card:hover .planning-icon {
+            background: var(--color-accent);
+            color: var(--color-white);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .planning-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .planning-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .planning-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: gap 0.3s ease;
+        }
+
+        .planning-card:hover .planning-link {
+            gap: 0.8rem;
+        }
+
+        /* ==========================================
+           TIMELINE DE TRIMESTRES (Fases)
+           ========================================== */
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 50%;
+            width: 2px;
+            background: var(--color-border);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: calc(50% + 2rem);
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: calc(50% + 2rem);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 1.5rem;
+            left: 50%;
+            width: 16px; height: 16px;
+            background: var(--color-accent);
+            border: 4px solid var(--color-bg-primary);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 0 0 10px var(--color-accent);
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            background: var(--color-accent-2);
+            box-shadow: 0 0 10px var(--color-accent-2);
+        }
+
+        .timeline-content {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 350px;
+            position: relative;
+        }
+
+        .timeline-phase {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-phase {
+            color: var(--color-accent-2);
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-trims {
+            display: inline-block;
+            background: rgba(var(--color-accent-rgb), 0.1);
+            color: var(--color-text-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* ==========================================
+           HERRAMIENTAS
+           ========================================== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-icon.jira { color: #0052CC; }
+        .tool-icon.trello { color: #0079BF; }
+        .tool-icon.pseint { color: var(--color-accent-2); }
+
+        .tool-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .tool-desc {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline-container::before { left: 20px; }
+            .timeline-item { justify-content: flex-start !important; padding-right: 0 !important; padding-left: 3rem !important; }
+            .timeline-dot { left: 20px !important; transform: translateX(-50%); }
+            .timeline-content { max-width: 100%; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Fondo Animado Constante -->
+    <div class="bg-fixed-animation" aria-hidden="true"></div>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#documentos">Documentos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#fases">Fases</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="planning-hero">
+            <div class="container">
+                <span class="badge rounded-pill mb-3" style="background: rgba(var(--color-accent-rgb), 0.1); color: var(--color-accent); border: 1px solid var(--color-accent); padding: 0.6rem 1.2rem;">
+                    <i class="fa-solid fa-calendar-check me-2"></i>Gestión y Metodologías
+                </span>
+                <h1 class="planning-hero__title">
+                    Planeación de <br> <span class="gradient-text">Actividades de Análisis</span>
+                </h1>
+                <p class="planning-hero__desc">
+                    Explora los conceptos fundamentales para planificar proyectos informáticos, 
+                    desde la ingeniería de software y los modelos de ciclo de vida, hasta la 
+                    implementación de metodologías ágiles como Scrum, XP y RUP.
+                </p>
+            </div>
+        </section>
+
+        <!-- GRID DE DOCUMENTOS -->
+        <section id="documentos" class="section-pad">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-subtitle">Material de Estudio</h2>
+                    <h3 class="section-main-title">Documentos de Planeación</h3>
+                </div>
+                
+                <div class="planning-grid">
+                    <!-- Card 1 -->
+                    <a href="./pages/01-planear-actividades-analisis.html" class="planning-card">
+                        <div class="planning-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                        <h2 class="planning-title">01 · Planear Actividades de Análisis</h2>
+                        <p class="planning-desc">Fundamentos de ingeniería de software, componentes, etapas del desarrollo, la crisis del software y perfiles en proyectos de TI.</p>
+                        <div class="planning-link">Explorar <i class="fa-solid fa-arrow-right"></i></div>
+                    </a>
+
+                    <!-- Card 2 -->
+                    <a href="./pages/02-planificacion-scrum.html" class="planning-card">
+                        <div class="planning-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+                        <h2 class="planning-title">02 · Planificación Scrum</h2>
+                        <p class="planning-desc">Pilares, roles (PO, SM, Dev Team), eventos (Sprint, Daily) y artefactos (Product Backlog, Incremento) del marco Scrum.</p>
+                        <div class="planning-link">Explorar <i class="fa-solid fa-arrow-right"></i></div>
+                    </a>
+
+                    <!-- Card 3 -->
+                    <a href="./pages/03-modelos-ciclo-de-vida-software.html" class="planning-card">
+                        <div class="planning-icon"><i class="fa-solid fa-arrows-left-right-to-line"></i></div>
+                        <h2 class="planning-title">03 · Modelos de Ciclo de Vida</h2>
+                        <p class="planning-desc">Análisis de modelos: Cascada, V, Iterativo, Incremental, Espiral y Prototipos. Ventajas, desventajas y cuándo utilizarlos.</p>
+                        <div class="planning-link">Explorar <i class="fa-solid fa-arrow-right"></i></div>
+                    </a>
+
+                    <!-- Card 4 -->
+                    <a href="./pages/04-proceso-unificado-racional.html" class="planning-card">
+                        <div class="planning-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                        <h2 class="planning-title">04 · Proceso Unificado (RUP)</h2>
+                        <p class="planning-desc">Fases (Incepción, Elaboración, Construcción, Transición), disciplinas y roles de la metodología tradicional pesada RUP.</p>
+                        <div class="planning-link">Explorar <i class="fa-solid fa-arrow-right"></i></div>
+                    </a>
+
+                    <!-- Card 5 -->
+                    <a href="./pages/05-metodologias-agiles.html" class="planning-card">
+                        <div class="planning-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <h2 class="planning-title">05 · Metodologías Ágiles</h2>
+                        <p class="planning-desc">Manifiesto Ágil, Programación Extrema (XP), RAD y Design Thinking. Comparativa para seleccionar la mejor opción.</p>
+                        <div class="planning-link">Explorar <i class="fa-solid fa-arrow-right"></i></div>
+                    </a>
+
+                    <!-- Card 6 -->
+                    <a href="./pages/06-planeacion-proyectos-informaticos.html" class="planning-card">
+                        <div class="planning-icon"><i class="fa-solid fa-chart-gantt"></i></div>
+                        <h2 class="planning-title">06 · Planeación de Proyectos</h2>
+                        <p class="planning-desc">Elementos del proyecto, administración, estructuras organizacionales, ciclo de planificación y diagramas de Gantt.</p>
+                        <div class="planning-link">Explorar <i class="fa-solid fa-arrow-right"></i></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FASES Y TRIMESTRES -->
+        <section id="fases" class="section-pad" style="background: rgba(0,0,0,0.2); border-top: 1px solid var(--color-border);">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-subtitle">Distribución del Proyecto</h2>
+                    <h3 class="section-main-title">Ciclo de Vida y Trimestres</h3>
+                </div>
+
+                <div class="timeline-container">
+                    <!-- Fase 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Análisis</div>
+                            <p class="timeline-desc">Requerimientos y análisis del sistema.</p>
+                            <span class="timeline-trims">Trimestres 1 y 2</span>
+                        </div>
+                    </div>
+
+                    <!-- Fase 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Planeación</div>
+                            <p class="timeline-desc">Diseño y planificación detallada.</p>
+                            <span class="timeline-trims">Trimestres 2, 3 y 4</span>
+                        </div>
+                    </div>
+
+                    <!-- Fase 3 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Ejecución</div>
+                            <p class="timeline-desc">Diseño y construcción del software.</p>
+                            <span class="timeline-trims">Trimestres 4, 5 y 6</span>
+                        </div>
+                    </div>
+
+                    <!-- Fase 4 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Evaluación</div>
+                            <p class="timeline-desc">Construcción final y despliegue.</p>
+                            <span class="timeline-trims">Trimestres 6 y 7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        
+    </main>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="#documentos" class="footer-link">Documentos</a></li>
+                    <li><a href="#fases" class="footer-link">Fases del Proyecto</a></li>
+                    <li><a href="../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://agilemanifesto.org" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-solid fa-link me-2"></i>Manifiesto Ágil</a></li>
+                    <li><a href="https://www.atlassian.com/es/agile/scrum" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-solid fa-link me-2"></i>Guía de Scrum</a></li>
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
+                <p>Creado por <strong>santiagoencodigo</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../Assets/templates.js"></script>
+
+</body>
+
+</html>
