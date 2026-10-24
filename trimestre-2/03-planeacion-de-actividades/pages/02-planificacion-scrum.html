@@ -1,12 +1,489 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planeación de metodologías para proyectos de software</title>
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <title>Planificación Scrum · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Guía completa de Scrum: pilares, roles, eventos y artefactos para la gestión ágil de proyectos de software.">
+    <meta name="author" content="santiagoencodigo">
+
+    <!-- Favicon y SEO -->
+    <link rel="shortcut icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+    
+    <!-- Estilos específicos de esta página -->
+    <style>
+        /* Estilos para el nuevo Footer de 3 columnas */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 2.5rem var(--container-pad);
+        }
+
+        .footer-col h4 {
+            color: var(--color-text-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links .footer-link {
+            color: var(--color-text-secondary);
+            transition: color 0.3s ease;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .footer-links .footer-link:hover {
+            color: var(--color-accent);
+        }
+
+        .footer-bottom-text {
+            color: var(--color-text-secondary);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom-text strong {
+            color: var(--color-text-primary);
+        }
+
+        /* Responsive Footer */
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tarjetas de Roles */
+        .role-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .role-card:hover {
+            transform: translateX(5px);
+            border-color: var(--color-accent-2);
+        }
+        .role-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .role-card p {
+            font-size: 0.88rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Planeación de metodologías para proyectos de software</h1>
-    <p>Pendiente para trabajar!</p>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../index.html#proyectos">Proyectos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Metodología Ágil
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Planificación <br>
+                    <span class="gradient-text">Scrum</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Un marco de trabajo ágil que permite abordar problemas complejos 
+                    y entregar productos de valor de forma iterativa e incremental. 
+                    Conoce sus pilares, roles, eventos y artefactos.
+                </p>
+
+                <div class="bm-hero__meta" role="list">
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Enfoque</span>
+                        <span class="bm-meta-value">Iterativo e Incremental</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Ciclo</span>
+                        <span class="bm-meta-value">Sprints (1-4 semanas)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT -->
+        <div class="bm-layout">
+            
+            <!-- TOC -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button" aria-expanded="false" aria-controls="bm-toc-list" aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#pilares"><span class="bm-toc__num">01</span>Pilares de Scrum</a></li>
+                            <li><a class="bm-toc__link" href="#roles"><span class="bm-toc__num">02</span>Roles</a></li>
+                            <li><a class="bm-toc__link" href="#eventos"><span class="bm-toc__num">03</span>Eventos</a></li>
+                            <li><a class="bm-toc__link" href="#artefactos"><span class="bm-toc__num">04</span>Artefactos</a></li>
+                            <li><a class="bm-toc__link" href="#flujo"><span class="bm-toc__num">05</span>Flujo de Trabajo</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO -->
+            <article class="bm-content">
+
+                <!-- 1. PILARES -->
+                <section id="pilares" class="bm-section" aria-labelledby="s-pilares">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / FILOSOFÍA</span>
+                        <h2 id="s-pilares" class="bm-section__title">Pilares de Scrum</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        Scrum se sustenta en tres pilares fundamentales que garantizan 
+                        la transparencia y la mejora continua del equipo.
+                    </p>
+
+                    <div class="bm-cards-2">
+                        <div class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title"><i class="fa-solid fa-eye text-accent me-2"></i>Transparencia</h3>
+                            </div>
+                            <p class="text-secondary m-0">Los aspectos significativos del proceso deben ser visibles para quienes son responsables del resultado.</p>
+                        </div>
+                        <div class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title"><i class="fa-solid fa-magnifying-glass text-accent me-2"></i>Inspección</h3>
+                            </div>
+                            <p class="text-secondary m-0">Los usuarios de Scrum deben inspeccionar frecuentemente los artefactos y el progreso hacia los objetivos.</p>
+                        </div>
+                        <div class="bm-card bm-reveal">
+                            <div class="bm-card__head">
+                                <h3 class="bm-card__title"><i class="fa-solid fa-wrench text-accent me-2"></i>Adaptación</h3>
+                            </div>
+                            <p class="text-secondary m-0">Si la inspección revela desviaciones, el proceso o los elementos producidos deben ajustarse lo antes posible.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. ROLES -->
+                <section id="roles" class="bm-section" aria-labelledby="s-roles">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / EQUIPO</span>
+                        <h2 id="s-roles" class="bm-section__title">Roles en Scrum</h2>
+                    </header>
+
+                    <div class="role-card bm-reveal">
+                        <h4>Product Owner (Dueño del Producto)</h4>
+                        <p>Responsable de maximizar el valor del producto. Es el único que gestiona y prioriza el <em>Product Backlog</em>.</p>
+                    </div>
+                    <div class="role-card bm-reveal">
+                        <h4>Scrum Master</h4>
+                        <p>Facilitador del marco de trabajo. Se asegura de que Scrum se entienda y se aplique correctamente, eliminando impedimentos.</p>
+                    </div>
+                    <div class="role-card bm-reveal">
+                        <h4>Development Team (Equipo de Desarrollo)</h4>
+                        <p>Grupo autoorganizado y multifuncional (3-9 personas) encargado de entregar un incremento de producto "Terminado" al final de cada Sprint.</p>
+                    </div>
+                    <div class="role-card bm-reveal" style="border-left-color: var(--color-text-secondary);">
+                        <h4>Stakeholders (Interesados)</h4>
+                        <p>Personas externas al equipo pero con interés en el proyecto (clientes, gerentes, usuarios finales) que participan activamente en las revisiones.</p>
+                    </div>
+                </section>
+
+                <!-- 3. EVENTOS -->
+                <section id="eventos" class="bm-section" aria-labelledby="s-eventos">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / CEREMONIAS</span>
+                        <h2 id="s-eventos" class="bm-section__title">Eventos o Ceremonias</h2>
+                    </header>
+
+                    <p class="bm-reveal">Los eventos de Scrum crean regularidad y minimizan la necesidad de reuniones no definidas.</p>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Evento</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Duración</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>El Sprint</td>
+                                        <td>El corazón de Scrum. Un período de tiempo fijo donde se crea un incremento de producto.</td>
+                                        <td>1 a 4 semanas</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sprint Planning</td>
+                                        <td>Reunión para definir qué se entregará en el Sprint y cómo se logrará.</td>
+                                        <td>Máx. 8 horas</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Daily Scrum</td>
+                                        <td>Reunión diaria para sincronizar actividades y planificar las próximas 24 horas.</td>
+                                        <td>15 minutos</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sprint Review</td>
+                                        <td>Al final del Sprint, el equipo muestra el incremento a los Stakeholders.</td>
+                                        <td>Máx. 4 horas</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sprint Retrospective</td>
+                                        <td>Reunión interna del equipo para inspeccionarse a sí mismo y crear un plan de mejoras.</td>
+                                        <td>Máx. 3 horas</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. ARTEFACTOS -->
+                <section id="artefactos" class="bm-section" aria-labelledby="s-art">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / ENTREGABLES</span>
+                        <h2 id="s-art" class="bm-section__title">Artefactos de Scrum</h2>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Artefacto</th>
+                                        <th scope="col">Propósito</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Product Backlog</td>
+                                        <td>Lista ordenada de todo lo que se sabe que es necesario en el producto. Es dinámica y la gestiona el Product Owner.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sprint Backlog</td>
+                                        <td>Subconjunto de elementos del Product Backlog seleccionados para el Sprint, más un plan para entregarlos.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Incremento</td>
+                                        <td>La suma de todos los elementos del Product Backlog completados durante un Sprint. Debe estar en condiciones de ser utilizado.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Burndown Chart</td>
+                                        <td>Gráfico que muestra el trabajo restante en el Sprint en función del tiempo.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Scrumboard</td>
+                                        <td>Tablero visual (To Do, In Progress, Done) para monitorear el flujo de trabajo del equipo.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. FLUJO DE TRABAJO -->
+                <section id="flujo" class="bm-section" aria-labelledby="s-flujo" style="border-bottom: none;">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / CICLO</span>
+                        <h2 id="s-flujo" class="bm-section__title">Flujo de Trabajo en un Sprint</h2>
+                    </header>
+
+                    <div class="bm-callout bm-reveal">
+                        El ciclo se repite continuamente, buscando siempre entregar valor al cliente 
+                        y mejorar la eficiencia del equipo.
+                    </div>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>1. Planificación:</strong> Se selecciona el trabajo del Product Backlog.</li>
+                        <li><strong>2. Ejecución:</strong> El equipo trabaja en las tareas del Sprint Backlog.</li>
+                        <li><strong>3. Seguimiento:</strong> Reuniones diarias (Daily) para actualizar el tablero.</li>
+                        <li><strong>4. Revisión:</strong> Entrega del incremento y retroalimentación del cliente.</li>
+                        <li><strong>5. Mejora:</strong> Retrospectiva para ajustar el proceso para el próximo ciclo.</li>
+                    </ul>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- FOOTER REDISEÑADO (3 COLUMNAS) -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <div class="footer-grid">
+            <!-- Col 1 -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="../index.html" class="footer-link">Planeación</a></li>
+                    <li><a href="../../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 2 -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://scrumguides.org/" target="_blank" rel="noopener noreferrer" class="footer-link">
+                        <i class="fa-solid fa-link me-2"></i>Guía Oficial de Scrum</a></li>
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link">
+                        <i class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Antiguo Footer Bottom -->
+            <div class="footer-col">
+                <h4>Créditos</h4>
+                <p class="footer-bottom-text">© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
+                <p class="footer-bottom-text">Creado por <strong>santiagoencodigo</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+    
+    <!-- Script de animaciones con Motion -->
+    <script type="module">
+        import { inView, animate, stagger } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animar las tarjetas de roles
+            const roleCards = document.querySelectorAll('.role-card');
+            roleCards.forEach((card, index) => {
+                inView(card, () => {
+                    animate(card, { opacity: [0, 1], x: [-20, 0] }, { 
+                        delay: (index % 3) * 0.1, 
+                        duration: 0.5, 
+                        ease: "easeOut" 
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+
+            // Animar las tablas fila por fila
+            const tableRows = document.querySelectorAll('.bm-table tbody tr');
+            tableRows.forEach((row, index) => {
+                inView(row, () => {
+                    animate(row, { opacity: [0, 1], y: [15, 0] }, { 
+                        delay: (index % 5) * 0.05, 
+                        duration: 0.4,
+                        ease: "easeOut"
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+        });
+    </script>
 </body>
+
 </html>
