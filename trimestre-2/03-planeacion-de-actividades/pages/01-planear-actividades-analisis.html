@@ -1,12 +1,517 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planear actividades de análisis de acuerdo con la metodología seleccionada</title>
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <title>Planear Actividades de Análisis · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Fundamentos de ingeniería de software, ciclo de vida, metodologías y planeación de análisis. Apuntes del tecnólogo ADSO.">
+    <meta name="author" content="santiagoencodigo">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+    
+    <!-- Estilos específicos de esta página -->
+    <style>
+        /* Diagrama de Proceso Animado */
+        .process-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .process-node {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+            position: relative;
+            z-index: 2;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .process-node:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-5px);
+        }
+
+        .process-arrow {
+            flex-shrink: 0;
+            color: var(--color-accent);
+            font-size: 1.5rem;
+        }
+
+        /* Flecha de retroalimentación curvada */
+        .feedback-arrow {
+            position: relative;
+            height: 40px;
+            margin-top: -10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feedback-arrow i {
+            color: var(--color-accent-2);
+            font-size: 1.2rem;
+            transform: rotate(180deg);
+        }
+
+        .feedback-arrow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: dashed 2px var(--color-accent-2);
+            opacity: 0.5;
+        }
+
+        /* Estilos para tablas animadas */
+        .bm-table tbody tr {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .bm-table tbody tr.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Planear actividades de análisis de acuerdo con la metodología seleccionada</h1>
-    <p>Pendiente para trabajar!</p>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../index.html#proyectos">Proyectos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Competencia: Evaluar requisitos de software
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Planear Actividades <br>
+                    <span class="gradient-text">de Análisis</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Guía completa sobre los conceptos fundamentales de la ingeniería de software, 
+                    el ciclo de vida, las metodologías de desarrollo y los perfiles que intervienen 
+                    en la construcción de soluciones tecnológicas de calidad.
+                </p>
+
+                <div class="bm-hero__meta" role="list">
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Resultado de Aprendizaje</span>
+                        <span class="bm-meta-value">Planear actividades de análisis</span>
+                    </div>
+                    <div class="bm-meta-item" role="listitem">
+                        <span class="bm-meta-label">Enfoque</span>
+                        <span class="bm-meta-value">Procesos · Metodologías · Roles</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT CON TOC Y CONTENIDO -->
+        <div class="bm-layout">
+            
+            <!-- TABLA DE CONTENIDO -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button" aria-expanded="false" aria-controls="bm-toc-list" aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#conceptos"><span class="bm-toc__num">01</span>Conceptos Fundamentales</a></li>
+                            <li><a class="bm-toc__link" href="#ingenieria"><span class="bm-toc__num">02</span>Ingeniería de Software</a></li>
+                            <li><a class="bm-toc__link" href="#ciclo-vida"><span class="bm-toc__num">03</span>Ciclo de Vida</a></li>
+                            <li><a class="bm-toc__link" href="#crisis"><span class="bm-toc__num">04</span>Crisis del Software</a></li>
+                            <li><a class="bm-toc__link" href="#roles"><span class="bm-toc__num">05</span>Perfiles y Roles</a></li>
+                            <li><a class="bm-toc__link" href="#referencias"><span class="bm-toc__num">06</span>Referencias</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <article class="bm-content">
+
+                <!-- 1. CONCEPTOS FUNDAMENTALES -->
+                <section id="conceptos" class="bm-section" aria-labelledby="s-conceptos">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / CONCEPTOS</span>
+                        <h2 id="s-conceptos" class="bm-section__title">Conceptos Fundamentales</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">1.1 ¿Qué es un proceso?</h3>
+                    <p class="bm-reveal">
+                        Un <strong>proceso</strong> es una secuencia de pasos o actividades organizadas que transforman 
+                        un conjunto de entradas en salidas con valor agregado. En el desarrollo de software, 
+                        representa el flujo de trabajo que convierte las necesidades del cliente en un producto funcional.
+                    </p>
+
+                    <!-- Diagrama animado del Proceso -->
+                    <div class="process-diagram" id="process-diagram">
+                        <div class="process-node">
+                            <strong>Proveedor</strong><br><small class="text-secondary">Entradas</small>
+                        </div>
+                        <div class="process-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="process-node">
+                            <strong>Proceso</strong><br><small class="text-secondary">Transformar</small>
+                        </div>
+                        <div class="process-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="process-node">
+                            <strong>Cliente</strong><br><small class="text-secondary">Salidas</small>
+                        </div>
+                    </div>
+                    <!-- Flecha de retroalimentación -->
+                    <div class="feedback-arrow" aria-hidden="true">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </div>
+
+                    <h3 class="bm-reveal mt-4">1.2 ¿Qué es una metodología?</h3>
+                    <p class="bm-reveal">
+                        Una <strong>metodología de desarrollo</strong> es un conjunto de procedimientos, técnicas y herramientas 
+                        que guían la construcción de software. Proporciona un marco para planificar, organizar y controlar 
+                        las actividades, asegurando la calidad, el tiempo y el costo.
+                    </p>
+
+                    <h3 class="bm-reveal">1.3 El software y sus componentes</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Componente</th>
+                                        <th scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Programas (instrucciones)</td><td>Instrucciones que el computador ejecuta para proporcionar la funcionalidad.</td></tr>
+                                    <tr><td>Datos</td><td>Información que los programas procesan, manipulan y almacenan.</td></tr>
+                                    <tr><td>Documentos</td><td>Manuales y especificaciones que explican el uso y operación del software.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. INGENIERÍA DE SOFTWARE -->
+                <section id="ingenieria" class="bm-section" aria-labelledby="s-ing">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / INGENIERÍA</span>
+                        <h2 id="s-ing" class="bm-section__title">Ingeniería de Software</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        Es un proceso formal que incorpora métodos bien definidos para el análisis, diseño, 
+                        implementación y pruebas del software. Su objetivo es construir productos de alta calidad 
+                        dentro de los plazos y presupuestos establecidos.
+                    </p>
+
+                    <h3 class="bm-reveal">2.2 Etapas de la Ingeniería de Software</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Etapa</th>
+                                        <th scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Análisis de requisitos</td><td>Extraer y validar los requisitos, detectando fallos o ambigüedades.</td></tr>
+                                    <tr><td>Especificación</td><td>Describir detalladamente el software de forma rigurosa y estable.</td></tr>
+                                    <tr><td>Diseño y arquitectura</td><td>Determinar el funcionamiento general y el modelo orientado a objetos.</td></tr>
+                                    <tr><td>Programación</td><td>Traducir el diseño a código.</td></tr>
+                                    <tr><td>Prueba</td><td>Comprobar que el software cumpla con lo especificado.</td></tr>
+                                    <tr><td>Mantenimiento</td><td>Corregir errores y adaptar el software a nuevos requisitos.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. CICLO DE VIDA -->
+                <section id="ciclo-vida" class="bm-section" aria-labelledby="s-ciclo">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / CICLO DE VIDA</span>
+                        <h2 id="s-ciclo" class="bm-section__title">Ciclo de Vida del Software</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        Es el conjunto de fases por las que pasa un sistema desde su concepción hasta su retiro. 
+                        Sirve como base para planificar, organizar y coordinar el proyecto.
+                    </p>
+
+                    <h3 class="bm-reveal">3.3 Modelos de Ciclo de Vida</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Modelo</th>
+                                        <th scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Cascada</td><td>Proceso lineal y secuencial.</td></tr>
+                                    <tr><td>En V</td><td>Verificación y validación en cada fase.</td></tr>
+                                    <tr><td>Iterativo</td><td>Ciclos repetitivos de mejora.</td></tr>
+                                    <tr><td>Incremental</td><td>Entregas parciales y funcionales.</td></tr>
+                                    <tr><td>Espiral</td><td>Combina cascada e iterativo con análisis de riesgos.</td></tr>
+                                    <tr><td>Prototipos</td><td>Validación temprana con usuarios.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. CRISIS DEL SOFTWARE -->
+                <section id="crisis" class="bm-section" aria-labelledby="s-crisis">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / HISTORIA</span>
+                        <h2 id="s-crisis" class="bm-section__title">La Crisis del Software (1968)</h2>
+                    </header>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        <strong>Contexto:</strong> Período en el que la industria enfrentó graves problemas 
+                        debido a la complejidad creciente y la incapacidad de los métodos tradicionales para gestionarla.
+                    </div>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Inconcluso:</strong> Muchos proyectos nunca se terminaban.</li>
+                        <li><strong>Sobrecostos y retrasos:</strong> Excedían presupuestos y plazos.</li>
+                        <li><strong>Insatisfacción:</strong> El producto final no cumplía expectativas.</li>
+                        <li><strong>Imposible de mantener:</strong> Difícil de corregir o modificar.</li>
+                    </ul>
+
+                    <p class="bm-reveal">
+                        Esta crisis llevó al nacimiento de la <strong>ingeniería de software</strong>, 
+                        que introdujo enfoques estructurados y metodologías para garantizar la calidad.
+                    </p>
+                </section>
+
+                <!-- 5. PERFILES Y ROLES -->
+                <section id="roles" class="bm-section" aria-labelledby="s-roles">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / EQUIPO</span>
+                        <h2 id="s-roles" class="bm-section__title">Perfiles y Roles en Proyectos de TI</h2>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Rol</th>
+                                        <th scope="col">Responsabilidades</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Cliente</td><td>Disponer de tiempo para entrevistas, validar el producto y aceptar formalmente el proyecto.</td></tr>
+                                    <tr><td>Gerente de proyecto</td><td>Asignar recursos, definir actividades, revisar y aprobar planes.</td></tr>
+                                    <tr><td>Líder de proyecto</td><td>Atender necesidades del equipo, controlar avances y dirigir juntas.</td></tr>
+                                    <tr><td>Responsable de calidad</td><td>Garantizar el cumplimiento de compromisos y metodologías adecuadas.</td></tr>
+                                    <tr><td>Responsable de pruebas</td><td>Planificar y ejecutar pruebas para verificar el cumplimiento y ausencia de fallas.</td></tr>
+                                    <tr><td>Ingeniero de software</td><td>Definir y mantener el código fuente, asegurando la funcionalidad.</td></tr>
+                                    <tr><td>Analista de sistemas</td><td>Análisis detallado, diseño de base de datos y documentación de flujos.</td></tr>
+                                    <tr><td>Diseñador</td><td>Asegurar accesibilidad, navegabilidad, interactividad y usabilidad.</td></tr>
+                                    <tr><td>Admin. de configuración</td><td>Gestionar versiones y ubicación de artefactos (ej. GitHub).</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. REFERENCIAS -->
+                <section id="referencias" class="bm-section" aria-labelledby="s-ref" style="border-bottom: none;">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">06 / REFERENCIAS</span>
+                        <h2 id="s-ref" class="bm-section__title">Referencias Bibliográficas</h2>
+                    </header>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><a href="https://aws.amazon.com/es/what-is/sdlc/" target="_blank" rel="noopener noreferrer">AWS - ¿Qué es SDLC?</a></li>
+                        <li><a href="https://www.microsoft.com/es-co/power-platform/topics/phases-of-the-software-development-lifecycle" target="_blank" rel="noopener noreferrer">Microsoft - Fases del ciclo de vida del desarrollo de software</a></li>
+                        <li><a href="https://www.ibm.com/mx-es/think/topics/sdlc" target="_blank" rel="noopener noreferrer">IBM - SDLC</a></li>
+                        <li><a href="https://www.globant.com/es/tech-terms/ciclo-vida-desarrollo-software" target="_blank" rel="noopener noreferrer">Globant - Ciclo de vida del desarrollo de software</a></li>
+                        <li><a href="https://www.freelancermap.com/blog/es/perfiles-it-freelance/" target="_blank" rel="noopener noreferrer">Freelancermap - Perfiles IT freelance</a></li>
+                    </ul>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="../index.html" class="footer-link">Planeación</a></li>
+                    <li><a href="../../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Créditos</h4>
+                <p class="small text-secondary">Apuntes de planeación de proyectos de software - ADSO.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
+            <p>Creado por <strong>santiagoencodigo</strong></p>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+    
+    <!-- Script de animaciones personalizadas con Motion -->
+    <script type="module">
+        import { inView, animate } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Animación de entrada para los nodos del diagrama de proceso
+            const nodes = document.querySelectorAll('.process-node');
+            const arrows = document.querySelectorAll('.process-arrow');
+            const feedback = document.querySelector('.feedback-arrow');
+
+            if (nodes.length > 0) {
+                animate(nodes, { opacity: [0, 1], scale: [0.9, 1], y: [10, 0] }, { 
+                    delay: (i) => i * 0.15, 
+                    duration: 0.5, 
+                    ease: "easeOut" 
+                });
+
+                animate(arrows, { opacity: [0, 1], x: [-10, 0] }, { 
+                    delay: (i) => (i * 0.15) + 0.2, 
+                    duration: 0.4, 
+                    ease: "easeOut" 
+                });
+
+                if (feedback) {
+                    animate(feedback, { opacity: [0, 1], rotate: [0, -10, 0] }, { 
+                        delay: 0.8, 
+                        duration: 0.6 
+                    });
+                }
+            }
+
+            // 2. Animación de filas de tabla al entrar en vista (Scroll-triggered)
+            const tableRows = document.querySelectorAll('.bm-table tbody tr');
+            
+            tableRows.forEach((row, index) => {
+                inView(row, () => {
+                    // Retraso escalonado basado en la posición de la fila
+                    animate(row, { opacity: [0, 1], y: [15, 0] }, { 
+                        delay: (index % 5) * 0.05, 
+                        duration: 0.4,
+                        ease: "easeOut"
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+
+            // 3. Efecto parallax sutil en el Hero (opcional, simulado)
+            const heroTitle = document.querySelector('.bm-hero__title');
+            if (heroTitle) {
+                inView(heroTitle, () => {
+                    animate(heroTitle, { y: [20, 0], opacity: [0, 1] }, { duration: 0.8, ease: "easeOut" });
+                });
+            }
+        });
+    </script>
+
 </body>
+
 </html>
