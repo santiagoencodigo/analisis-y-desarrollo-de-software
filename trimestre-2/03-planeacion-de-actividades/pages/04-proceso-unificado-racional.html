@@ -1,12 +1,776 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proceso Unificado Racional (RUP)</title>
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <title>Proceso Unificado Racional (RUP) · Trimestre 2 · ADSO</title>
+    <meta name="description"
+        content="Guía completa de RUP: fases, disciplinas, roles y características de la metodología tradicional pesada.">
+    <meta name="author" content="santiagoencodigo">
+
+    <!-- Favicon y SEO -->
+    <link rel="shortcut icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+        type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+
+    <!-- Estilos específicos de esta página -->
+    <style>
+        /* Contenedor del fondo de partículas */
+        #particles-js {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-color: var(--color-bg-primary);
+            pointer-events: none;
+            /* No interactúa con el mouse */
+        }
+
+        /* El contenido principal debe estar por encima de las partículas */
+        .main-header,
+        main,
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Ajuste para que el fondo de las secciones no tape las partículas */
+        .bm-content {
+            background: transparent;
+        }
+
+        /* Footer de 3 columnas */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 2.5rem var(--container-pad);
+        }
+
+        .footer-col h4 {
+            color: var(--color-text-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links .footer-link {
+            color: var(--color-text-secondary);
+            transition: color 0.3s ease;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .footer-links .footer-link:hover {
+            color: var(--color-accent);
+        }
+
+        .footer-bottom-text {
+            color: var(--color-text-secondary);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom-text strong {
+            color: var(--color-text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tarjetas de las Fases (Timeline visual) */
+        .phase-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+        }
+
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--color-accent);
+        }
+
+        .phase-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-card .objective {
+            font-size: 0.85rem;
+            color: var(--color-accent-2);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Diagrama ASCII */
+        .ascii-diagram {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: var(--color-text-secondary);
+        }
+
+        /* Grid Ventajas/Desventajas */
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .pros-cons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pros-box,
+        .cons-box {
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+
+        .pros-box {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 3px solid #10b981;
+        }
+
+        .cons-box {
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 3px solid #ef4444;
+        }
+
+        .pros-box h5 {
+            color: #10b981;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .cons-box h5 {
+            color: #ef4444;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .pros-box ul,
+        .cons-box ul {
+            padding-left: 1.2rem;
+            margin: 0;
+            font-size: 0.88rem;
+            color: var(--color-text-secondary);
+        }
+
+        .pros-box li,
+        .cons-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Imagen RUP */
+        .rup-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 2rem auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: #fff;
+            padding: 1rem;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Proceso Unificado Racional (RUP)</h1>
-    <p>Pendiente para trabajar!</p>
+
+    <!-- Fondo de Partículas -->
+    <div id="particles-js"></div>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt=""
+                        class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../index.html#proyectos">Proyectos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Metodología Tradicional
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Proceso Unificado <br>
+                    <span class="gradient-text">Racional (RUP)</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Un proceso de desarrollo de software iterativo e incremental, basado en el modelo
+                    en cascada y guiado por casos de uso. Se centra en la arquitectura del sistema y
+                    en la documentación exhaustiva.
+                </p>
+            </div>
+        </section>
+
+        <!-- LAYOUT -->
+        <div class="bm-layout">
+
+            <!-- TOC -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button" aria-expanded="false" aria-controls="bm-toc-list"
+                            aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#introduccion"><span
+                                        class="bm-toc__num">01</span>Introducción</a></li>
+                            <li><a class="bm-toc__link" href="#caracteristicas"><span
+                                        class="bm-toc__num">02</span>Características</a></li>
+                            <li><a class="bm-toc__link" href="#fases"><span class="bm-toc__num">03</span>Fases de
+                                    RUP</a></li>
+                            <li><a class="bm-toc__link" href="#disciplinas"><span
+                                        class="bm-toc__num">04</span>Disciplinas</a></li>
+                            <li><a class="bm-toc__link" href="#roles"><span class="bm-toc__num">05</span>Roles</a></li>
+                            <li><a class="bm-toc__link" href="#ventajas"><span class="bm-toc__num">06</span>Ventajas y
+                                    Desventajas</a></li>
+                            <li><a class="bm-toc__link" href="#referencias"><span
+                                        class="bm-toc__num">07</span>Referencias</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO -->
+            <article class="bm-content">
+
+                <!-- 1. INTRODUCCIÓN -->
+                <section id="introduccion" class="bm-section" aria-labelledby="s-intro">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / INTRODUCCIÓN</span>
+                        <h2 id="s-intro" class="bm-section__title">Introducción a RUP</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        El <strong>Proceso Racional Unificado</strong> (RUP) es un marco de trabajo de desarrollo de
+                        software
+                        que proporciona un enfoque disciplinado para asignar tareas y responsabilidades. Su objetivo es
+                        garantizar la producción de software de alta calidad dentro de un presupuesto y cronograma
+                        predecibles.
+                    </p>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Los 3 pilares de RUP:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li><strong>Dirigido por casos de uso:</strong> Guían todo el proceso, desde los requisitos
+                                hasta las pruebas.</li>
+                            <li><strong>Centrado en la arquitectura:</strong> El eje sobre el que se construye el
+                                software.</li>
+                            <li><strong>Iterativo e incremental:</strong> Ciclos que producen incrementos funcionales.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Rup_espanol.gif"
+                        alt="Flujo de trabajo de RUP" class="rup-image bm-reveal" loading="lazy">
+                </section>
+
+                <!-- 2. CARACTERÍSTICAS -->
+                <section id="caracteristicas" class="bm-section" aria-labelledby="s-carac">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / CARACTERÍSTICAS</span>
+                        <h2 id="s-carac" class="bm-section__title">Características Principales</h2>
+                    </header>
+
+                    <p class="bm-reveal">RUP se considera una metodología tradicional o "pesada" debido a su énfasis en
+                        la documentación y planificación.</p>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Característica</th>
+                                        <th scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Documentación extensiva</td>
+                                        <td>Cada fase genera artefactos documentados como base para las siguientes
+                                            etapas.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Planificación rigurosa</td>
+                                        <td>El plan de proyecto se define en las fases iniciales y se refina
+                                            iterativamente.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Flexibilidad limitada</td>
+                                        <td>Los cambios son costosos, especialmente en etapas avanzadas.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Roles definidos</td>
+                                        <td>Asigna responsabilidades claras a cada perfil dentro del equipo.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. FASES -->
+                <section id="fases" class="bm-section" aria-labelledby="s-fases">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / CICLO DE VIDA</span>
+                        <h2 id="s-fases" class="bm-section__title">Fases de RUP</h2>
+                    </header>
+
+                    <div class="phase-card bm-reveal">
+                        <h4>3.1 Incepción (Inicio)</h4>
+                        <span class="objective">Objetivo: Establecer la viabilidad y delimitar el alcance.</span>
+                        <p class="mb-2"><strong>Actividades:</strong> Definir el ámbito, identificar casos de uso
+                            críticos, evaluar riesgos, estimar costos.</p>
+                        <p class="mb-0 text-secondary"><strong>Artefactos:</strong> Documento de requerimientos, boceto
+                            de arquitectura, plan preliminar.</p>
+                    </div>
+
+                    <div class="phase-card bm-reveal">
+                        <h4>3.2 Elaboración</h4>
+                        <span class="objective">Objetivo: Sentar las bases arquitectónicas.</span>
+                        <p class="mb-2"><strong>Actividades:</strong> Refinar casos de uso (80%), construir prototipo
+                            arquitectural, mitigar riesgos.</p>
+                        <p class="mb-0 text-secondary"><strong>Artefactos:</strong> Prototipo ejecutable, casos de
+                            prueba iniciales, plan detallado.</p>
+                    </div>
+
+                    <div class="phase-card bm-reveal">
+                        <h4>3.3 Construcción</h4>
+                        <span class="objective">Objetivo: Desarrollar el código fuente completo.</span>
+                        <p class="mb-2"><strong>Actividades:</strong> Análisis, diseño, implementación y pruebas de
+                            iteraciones. Documentación del sistema.</p>
+                        <p class="mb-0 text-secondary"><strong>Artefactos:</strong> Software completo, casos de prueba
+                            actualizados, manuales de usuario.</p>
+                    </div>
+
+                    <div class="phase-card bm-reveal">
+                        <h4>3.4 Transición</h4>
+                        <span class="objective">Objetivo: Entregar el producto a los usuarios finales.</span>
+                        <p class="mb-2"><strong>Actividades:</strong> Liberar el producto, entrenamiento, soporte,
+                            ajustes finales.</p>
+                        <p class="mb-0 text-secondary"><strong>Criterio:</strong> Usuario satisfecho y objetivos de
+                            Incepción alcanzados.</p>
+                    </div>
+                </section>
+
+                <!-- 4. DISCIPLINAS -->
+                <section id="disciplinas" class="bm-section" aria-labelledby="s-disc">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / FLUJOS DE TRABAJO</span>
+                        <h2 id="s-disc" class="bm-section__title">Disciplinas de RUP</h2>
+                    </header>
+
+                    <p class="bm-reveal">RUP organiza las actividades en disciplinas aplicadas a lo largo de todas las
+                        fases.</p>
+
+                    <div class="ascii-diagram bm-reveal">
+                        <pre>
+                                        FASES
++-----------------------+------------+------------+--------------+------------+
+| Flujos de Trabajo     | Incepción  | Elaboración| Construcción | Transición |
++-----------------------+------------+------------+--------------+------------+
+| Modelado de Negocios  |   ______   |   ____     |              |            |
+| Requerimientos        |  ________  |  ______    |    ____      |            |
+| Análisis y Diseño     |     ____   | ________   |  ________    |   ____     |
+| Implementación        |            | ________   | __________   |  ______    |
+| Prueba                |            | ________   | __________   |  ______    |
+| Desarrollo            |            |            |  ________    |    __      |
+| Configuración/Cambio  |    ____    |  ________  | __________   | _________  |
+| Admin. del Proyecto   |  __    __  | __    __ __| __    __ __  | __    __ __|
+| Ambiente              | __      __ |      __    |      __      |      __    |
++-----------------------+------------+------------+--------------+------------+
+Iteraciones:             Preliminar   #1    #2    #3    #4    #N     #N+M
+</pre>
+                    </div>
+
+                    <div class="bm-table-wrap mt-4 bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Disciplina</th>
+                                        <th scope="col">Propósito</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Modelado de negocio</td>
+                                        <td>Comprender la organización e identificar oportunidades de mejora.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Requisitos</td>
+                                        <td>Consensuar capacidades del sistema con los stakeholders.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Análisis y diseño</td>
+                                        <td>Traducir requisitos en un diseño detallado y arquitectura.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Implementación</td>
+                                        <td>Construir el sistema mediante componentes y código fuente.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pruebas</td>
+                                        <td>Verificar que el sistema cumpla con los requisitos y esté libre de defectos.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gestión de configuración</td>
+                                        <td>Controlar versiones y cambios en los artefactos.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gestión de proyectos</td>
+                                        <td>Planificar, coordinar y supervisar el progreso y los recursos.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Entorno</td>
+                                        <td>Proporcionar infraestructura y herramientas.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. ROLES -->
+                <section id="roles" class="bm-section" aria-labelledby="s-roles">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / EQUIPO</span>
+                        <h2 id="s-roles" class="bm-section__title">Roles en RUP</h2>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Categoría</th>
+                                        <th scope="col">Roles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Analistas</td>
+                                        <td>Analistas de procesos, diseñadores del negocio, analistas del sistema,
+                                            especificadores de requisitos.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desarrolladores</td>
+                                        <td>Arquitectos de software, diseñadores de BD, desarrolladores
+                                            backend/frontend, integradores.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Probadores</td>
+                                        <td>Diseñadores de pruebas, implementadores de pruebas.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Otros</td>
+                                        <td>Artistas gráficos, administradores de sistemas, especialistas en
+                                            herramientas, gestores de configuración.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. VENTAJAS Y DESVENTAJAS -->
+                <section id="ventajas" class="bm-section" aria-labelledby="s-vent">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">06 / BALANCE</span>
+                        <h2 id="s-vent" class="bm-section__title">Ventajas y Desventajas</h2>
+                    </header>
+
+                    <div class="pros-cons-grid bm-reveal">
+                        <div class="pros-box">
+                            <h5><i class="fa-solid fa-plus-circle me-2"></i>Ventajas</h5>
+                            <ul>
+                                <li>Proporciona un marco estructurado y disciplinado.</li>
+                                <li>Genera documentación completa que facilita el mantenimiento.</li>
+                                <li>Permite una planificación detallada y control de costos.</li>
+                                <li>Es escalable para proyectos grandes y complejos.</li>
+                            </ul>
+                        </div>
+                        <div class="cons-box">
+                            <h5><i class="fa-solid fa-minus-circle me-2"></i>Desventajas</h5>
+                            <ul>
+                                <li>Puede ser demasiado pesado y burocrático para proyectos pequeños.</li>
+                                <li>La rigidez dificulta la adaptación a cambios frecuentes.</li>
+                                <li>Requiere una inversión inicial significativa en análisis y diseño.</li>
+                                <li>La curva de aprendizaje es alta para equipos sin experiencia.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. REFERENCIAS -->
+                <section id="referencias" class="bm-section" aria-labelledby="s-ref" style="border-bottom: none;">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">07 / REFERENCIAS</span>
+                        <h2 id="s-ref" class="bm-section__title">Referencias</h2>
+                    </header>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><a href="https://www.geeksforgeeks.org/software-engineering/rup-and-its-phases/"
+                                target="_blank" rel="noopener noreferrer">GeeksforGeeks - RUP and its Phases</a></li>
+                        <li><a href="https://activecollab.com/learn/project-management-methodologies/rup"
+                                target="_blank" rel="noopener noreferrer">ActiveCollab - RUP Methodology</a></li>
+                        <li><a href="https://es.wikipedia.org/wiki/Proceso_Unificado_de_Rational" target="_blank"
+                                rel="noopener noreferrer">Wikipedia - Proceso Unificado de Rational</a></li>
+                        <li><a href="https://www.ibm.com/cloud/learn/rational-unified-process" target="_blank"
+                                rel="noopener noreferrer">IBM - Rational Unified Process</a></li>
+                    </ul>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- FOOTER REDISEÑADO (3 COLUMNAS) -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <div class="footer-grid">
+            <!-- Col 1 -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="../index.html" class="footer-link">Planeación</a></li>
+                    <li><a href="../../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 2 -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank"
+                            rel="noopener noreferrer" class="footer-link"><i
+                                class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Créditos -->
+            <div class="footer-col">
+                <h4>Créditos</h4>
+                <p class="footer-bottom-text">© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
+                <p class="footer-bottom-text">Creado por <strong>santiagoencodigo</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <!-- Script de animaciones y partículas con Motion -->
+    <script type="module">
+        import { inView, animate } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Configuración de partículas que responde al tema
+            function getThemeColor() {
+                const rgb = getComputedStyle(document.documentElement).getPropertyValue('--color-accent-rgb').trim();
+                return rgb ? `rgb(${rgb})` : '#3b82f6';
+            }
+
+            function initParticles() {
+                const color = getThemeColor();
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 60, density: { enable: true, value_area: 800 } },
+                        color: { value: color },
+                        shape: { type: 'circle' },
+                        opacity: { value: 0.3, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                        size: { value: 2.5, random: true },
+                        line_linked: { enable: true, distance: 150, color: color, opacity: 0.15, width: 1 },
+                        move: { enable: true, speed: 1.2, direction: 'none', random: true, straight: false, out_mode: 'out' }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: {
+                            onhover: { enable: false }, // Desactivado explícitamente
+                            onclick: { enable: false },
+                            resize: true
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+
+            initParticles();
+
+            // Escuchar cambios de tema para actualizar el color de las partículas
+            window.addEventListener('adso:themechange', () => {
+                const canvas = document.querySelector('#particles-js canvas');
+                if (canvas) canvas.remove(); // Eliminar el canvas anterior
+                initParticles(); // Reiniciar con el nuevo color
+            });
+
+            // 2. Animaciones al hacer scroll (Motion)
+            const revealElements = document.querySelectorAll('.bm-reveal');
+            revealElements.forEach((el, index) => {
+                inView(el, () => {
+                    animate(el, { opacity: [0, 1], y: [20, 0] }, {
+                        duration: 0.6,
+                        delay: (index % 3) * 0.1,
+                        ease: "easeOut"
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+
+            // Animar las tablas
+            const tableRows = document.querySelectorAll('.bm-table tbody tr');
+            tableRows.forEach((row, index) => {
+                inView(row, () => {
+                    animate(row, { opacity: [0, 1], x: [-10, 0] }, {
+                        delay: (index % 5) * 0.05,
+                        duration: 0.4,
+                        ease: "easeOut"
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+        });
+    </script>
 </body>
+
 </html>
