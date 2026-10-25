@@ -1,12 +1,666 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metodologías ágiles</title>
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <title>Metodologías Ágiles · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Guía completa de metodologías ágiles: Manifiesto Ágil, XP, RAD, Scrum y Design Thinking. Comparativa con enfoques tradicionales.">
+    <meta name="author" content="santiagoencodigo">
+
+    <!-- Favicon y SEO -->
+    <link rel="shortcut icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+    
+    <!-- Estilos específicos de esta página -->
+    <style>
+        /* Footer de 3 columnas */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 2.5rem var(--container-pad);
+        }
+
+        .footer-col h4 {
+            color: var(--color-text-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        
+        .footer-links .footer-link {
+            color: var(--color-text-secondary);
+            transition: color 0.3s ease;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .footer-links .footer-link:hover { color: var(--color-accent); }
+
+        .footer-bottom-text {
+            color: var(--color-text-secondary);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .footer-bottom-text strong { color: var(--color-text-primary); }
+
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+        /* Estilos para las imágenes */
+        .content-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-border);
+        }
+
+        /* Tarjetas para los valores ágiles */
+        .value-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent);
+            padding: 1.25rem;
+            border-radius: 8px;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        .value-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--color-accent-2);
+        }
+        .value-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .value-card p {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Tarjetas de roles en grid */
+        .role-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(var(--color-accent-rgb), 0.1);
+            color: var(--color-text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0.25rem;
+            border: 1px solid rgba(var(--color-accent-rgb), 0.2);
+        }
+        .role-chip i {
+            color: var(--color-accent);
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Metodologías ágiles</h1>
-    <p>Pendiente para trabajar!</p>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../index.html#proyectos">Proyectos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Enfoques de Desarrollo
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Metodologías <br>
+                    <span class="gradient-text">Ágiles</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Un conjunto de enfoques que priorizan la entrega rápida de valor, 
+                    la colaboración con el cliente y la adaptabilidad al cambio, 
+                    contrastando con los procesos rígidos y la documentación extensiva 
+                    de las metodologías tradicionales.
+                </p>
+            </div>
+        </section>
+
+        <!-- LAYOUT -->
+        <div class="bm-layout">
+            
+            <!-- TOC -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button" aria-expanded="false" aria-controls="bm-toc-list" aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#introduccion"><span class="bm-toc__num">01</span>Introducción</a></li>
+                            <li><a class="bm-toc__link" href="#manifiesto"><span class="bm-toc__num">02</span>Manifiesto Ágil</a></li>
+                            <li><a class="bm-toc__link" href="#xp"><span class="bm-toc__num">03</span>Programación Extrema (XP)</a></li>
+                            <li><a class="bm-toc__link" href="#rad"><span class="bm-toc__num">04</span>Desarrollo Rápido (RAD)</a></li>
+                            <li><a class="bm-toc__link" href="#scrum"><span class="bm-toc__num">05</span>Scrum</a></li>
+                            <li><a class="bm-toc__link" href="#design-thinking"><span class="bm-toc__num">06</span>Design Thinking</a></li>
+                            <li><a class="bm-toc__link" href="#comparativa"><span class="bm-toc__num">07</span>Comparativa</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO -->
+            <article class="bm-content">
+
+                <!-- 1. INTRODUCCIÓN -->
+                <section id="introduccion" class="bm-section" aria-labelledby="s-intro">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / INTRODUCCIÓN</span>
+                        <h2 id="s-intro" class="bm-section__title">Introducción a las metodologías ágiles</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        Surgen como una alternativa a los enfoques tradicionales (como la cascada o RUP) 
+                        para abordar proyectos donde los requisitos no son completamente conocidos desde 
+                        el inicio o donde el entorno es volátil. Se basan en la premisa de que el cambio 
+                        es inevitable y debe ser abrazado, no combatido.
+                    </p>
+
+                    <div class="bm-callout bm-reveal">
+                        El <strong>Manifiesto Ágil</strong> (2001) sentó las bases de estos enfoques, 
+                        estableciendo que la interacción con el cliente, el software funcional y la 
+                        respuesta al cambio son más valiosos que la documentación exhaustiva y los 
+                        planes rígidos.
+                    </div>
+
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ilustracion-tabla-kanban-gestion-agil-scrum.jpg/500px-Ilustracion-tabla-kanban-gestion-agil-scrum.jpg" 
+                         alt="Tablero Kanban para gestión ágil" 
+                         class="content-image bm-reveal" loading="lazy">
+                </section>
+
+                <!-- 2. MANIFIESTO ÁGIL -->
+                <section id="manifiesto" class="bm-section" aria-labelledby="s-manifiesto">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / MANIFIESTO</span>
+                        <h2 id="s-manifiesto" class="bm-section__title">Manifiesto Ágil y sus principios</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">2.1 Los cuatro valores</h3>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6 bm-reveal">
+                            <div class="value-card">
+                                <h4>1. Individuos e interacciones</h4>
+                                <p>Sobre procesos y herramientas.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 bm-reveal">
+                            <div class="value-card">
+                                <h4>2. Software funcionando</h4>
+                                <p>Sobre documentación extensiva.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 bm-reveal">
+                            <div class="value-card">
+                                <h4>3. Colaboración con el cliente</h4>
+                                <p>Sobre negociación contractual.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 bm-reveal">
+                            <div class="value-card">
+                                <h4>4. Respuesta ante el cambio</h4>
+                                <p>Sobre seguir un plan.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">2.2 Los 12 principios ágiles</h3>
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li>Satisfacer al cliente mediante la entrega temprana y continua de software valioso.</li>
+                        <li>Aceptar requisitos cambiantes, incluso en etapas tardías.</li>
+                        <li>Entregar software funcional con frecuencia (semanas o meses).</li>
+                        <li>Personas de negocio y desarrolladores trabajan juntos diariamente.</li>
+                        <li>Construir proyectos en torno a individuos motivados.</li>
+                        <li>La conversación cara a cara es el método más eficiente de comunicación.</li>
+                        <li>El software funcional es la principal medida de progreso.</li>
+                        <li>Promover un ritmo de trabajo sostenible.</li>
+                        <li>La atención continua a la excelencia técnica mejora la agilidad.</li>
+                        <li>La simplicidad es esencial.</li>
+                        <li>Las mejores arquitecturas emergen de equipos autoorganizados.</li>
+                        <li>El equipo reflexiona periódicamente sobre cómo ser más efectivo.</li>
+                    </ol>
+                </section>
+
+                <!-- 3. XP -->
+                <section id="xp" class="bm-section" aria-labelledby="s-xp">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / XP</span>
+                        <h2 id="s-xp" class="bm-section__title">Programación Extrema (XP)</h2>
+                    </header>
+                    <p class="bm-reveal">
+                        Marco de desarrollo ágil enfocado en producir software de alta calidad 
+                        en entornos con requisitos cambiantes, equipos pequeños y riesgos asociados.
+                    </p>
+
+                    <h3 class="bm-reveal">3.1 Valores de XP</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Valor</th><th>Descripción</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Comunicación</td><td>Fomentar la comunicación constante en el equipo.</td></tr>
+                                    <tr><td>Simplicidad</td><td>Hacer lo más simple que funcione.</td></tr>
+                                    <tr><td>Retroalimentación</td><td>Obtener feedback continuo del cliente y del equipo.</td></tr>
+                                    <tr><td>Coraje</td><td>Tomar decisiones difíciles y enfrentar problemas.</td></tr>
+                                    <tr><td>Respeto</td><td>Respetar a los miembros y sus contribuciones.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">3.2 Prácticas de XP</h3>
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Programación en parejas:</strong> Dos desarrolladores en una estación.</li>
+                        <li><strong>TDD (Desarrollo guiado por pruebas):</strong> Escribir pruebas antes del código.</li>
+                        <li><strong>Integración continua:</strong> Integrar y probar varias veces al día.</li>
+                        <li><strong>Refactorización:</strong> Mejorar el diseño sin cambiar comportamiento.</li>
+                        <li><strong>Propiedad colectiva:</strong> Cualquiera puede modificar el código.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">3.3 Roles de XP</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Rol</th><th>Responsabilidad</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Cliente</td><td>Define prioridades y necesidades de negocio.</td></tr>
+                                    <tr><td>Programador</td><td>Transforma requisitos en código funcional.</td></tr>
+                                    <tr><td>Tester</td><td>Realiza pruebas para garantizar la calidad.</td></tr>
+                                    <tr><td>Coach</td><td>Asesora al equipo y guía el proceso.</td></tr>
+                                    <tr><td>Manager</td><td>Coordina recursos y gestiona comunicación externa.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. RAD -->
+                <section id="rad" class="bm-section" aria-labelledby="s-rad">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / RAD</span>
+                        <h2 id="s-rad" class="bm-section__title">Desarrollo Rápido de Aplicaciones (RAD)</h2>
+                    </header>
+                    <p class="bm-reveal">
+                        Creada por James Martin en 1991, centrada en iteraciones frecuentes, 
+                        retroalimentación constante y reducción de tiempos de desarrollo.
+                    </p>
+
+                    <h3 class="bm-reveal">4.1 Características de RAD</h3>
+                    <ul class="bm-list bm-reveal">
+                        <li>Alta flexibilidad y adaptabilidad a cambios.</li>
+                        <li>Iteraciones rápidas que aceleran la entrega.</li>
+                        <li>Fomento de la reutilización de código.</li>
+                        <li>Mejor gestión de riesgos mediante participación activa.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">4.2 Fases de RAD</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Fase</th><th>Descripción</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Definición de requisitos</td><td>Stakeholders definen objetivos y presupuesto.</td></tr>
+                                    <tr><td>Construcción de prototipos</td><td>Se construyen y validan con los usuarios.</td></tr>
+                                    <tr><td>Transformación</td><td>Los prototipos se convierten en modelos funcionales.</td></tr>
+                                    <tr><td>Pruebas</td><td>Pruebas exhaustivas de funcionamiento.</td></tr>
+                                    <tr><td>Lanzamiento</td><td>Puesta en producción y entrenamiento.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">4.3 Roles de RAD</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Rol</th><th>Responsabilidad</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Facilitador</td><td>Asegura objetivos y organiza workshops.</td></tr>
+                                    <tr><td>Escriba</td><td>Documenta todas las salidas de los workshops.</td></tr>
+                                    <tr><td>Equipo SWAT</td><td>Diseña y construye el sistema.</td></tr>
+                                    <tr><td>Admin. del modelo</td><td>Coordina arquitecturas y modelos.</td></tr>
+                                    <tr><td>Admin. de BD</td><td>Gestiona rendimiento, integridad y seguridad.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. SCRUM -->
+                <section id="scrum" class="bm-section" aria-labelledby="s-scrum">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / SCRUM</span>
+                        <h2 id="s-scrum" class="bm-section__title">Scrum</h2>
+                    </header>
+                    <p class="bm-reveal">
+                        Uno de los marcos ágiles más utilizados en la industria. Se organiza en torno 
+                        a tres pilares, roles, eventos y artefactos.
+                    </p>
+
+                    <h3 class="bm-reveal">5.1 Pilares de Scrum</h3>
+                    <div class="row g-3 mb-4 bm-reveal">
+                        <div class="col-md-4">
+                            <div class="value-card">
+                                <h4>Transparencia</h4>
+                                <p>Aspectos del proceso visibles para quienes participan.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="value-card">
+                                <h4>Inspección</h4>
+                                <p>Avances y artefactos se inspeccionan frecuentemente.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="value-card">
+                                <h4>Adaptación</h4>
+                                <p>Si se detectan desviaciones, el proceso se ajusta.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">5.2 Roles de Scrum</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Rol</th><th>Responsabilidad</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Product Owner</td><td>Representa al cliente, prioriza el Product Backlog.</td></tr>
+                                    <tr><td>Scrum Master</td><td>Facilita el proceso, elimina impedimentos.</td></tr>
+                                    <tr><td>Equipo de Desarrollo</td><td>Transforma requisitos en software funcional.</td></tr>
+                                    <tr><td>Stakeholders</td><td>Personas interesadas en el proyecto.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">5.3 Eventos de Scrum</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Evento</th><th>Descripción</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Sprint</td><td>Contenedor de un mes o menos para crear un incremento.</td></tr>
+                                    <tr><td>Sprint Planning</td><td>Reunión para acordar el alcance del Sprint.</td></tr>
+                                    <tr><td>Daily Scrum</td><td>Reunión diaria de 15 minutos para sincronizar.</td></tr>
+                                    <tr><td>Sprint Review</td><td>Revisión del incremento con los stakeholders.</td></tr>
+                                    <tr><td>Sprint Retrospective</td><td>Reflexión para identificar mejoras.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">5.4 Artefactos de Scrum</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Artefacto</th><th>Descripción</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Product Backlog</td><td>Lista priorizada de todo el trabajo.</td></tr>
+                                    <tr><td>Sprint Backlog</td><td>Elementos seleccionados para el Sprint.</td></tr>
+                                    <tr><td>Incremento</td><td>Suma de elementos terminados en el Sprint.</td></tr>
+                                    <tr><td>Burndown Chart</td><td>Gráfico de trabajo pendiente vs tiempo.</td></tr>
+                                    <tr><td>Scrumboard</td><td>Tablero visual con columnas de estado.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. DESIGN THINKING -->
+                <section id="design-thinking" class="bm-section" aria-labelledby="s-dt">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">06 / DESIGN THINKING</span>
+                        <h2 id="s-dt" class="bm-section__title">Design Thinking</h2>
+                    </header>
+                    <p class="bm-reveal">
+                        Metodología centrada en el ser humano para resolver problemas complejos y 
+                        fomentar la innovación. Se aplica en la definición de requisitos y diseño de experiencias.
+                    </p>
+
+                    <img src="https://www.fundacionaquae.org/wp-content/uploads/2017/01/DESIGNTHINKING.jpg.webp" 
+                         alt="Fases del Design Thinking" 
+                         class="content-image bm-reveal" loading="lazy">
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Fase</th><th>Descripción</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Empatizar</td><td>Comprender necesidades del usuario.</td></tr>
+                                    <tr><td>Definir</td><td>Sintetizar información y definir el problema central.</td></tr>
+                                    <tr><td>Idear</td><td>Generar múltiples soluciones creativas.</td></tr>
+                                    <tr><td>Prototipar</td><td>Construir prototipos rápidos para probar ideas.</td></tr>
+                                    <tr><td>Testear</td><td>Probar con usuarios y obtener feedback.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        <strong>Nota del autor:</strong> Buscando sobre el tema me sorprendió encontrar dominios 
+                        que comercializan esto al estilo SaaS, como una IA para esta metodología: 
+                        <a href="https://designthinking.es/" target="_blank" rel="noopener noreferrer">designthinking.es</a>. 
+                        Es interesante mirar esta página.
+                    </div>
+                </section>
+
+                <!-- 7. COMPARATIVA -->
+                <section id="comparativa" class="bm-section" aria-labelledby="s-comp" style="border-bottom: none;">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">07 / COMPARATIVA</span>
+                        <h2 id="s-comp" class="bm-section__title">Comparativa y selección de metodología</h2>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Factor</th>
+                                        <th scope="col">Agile</th>
+                                        <th scope="col">Waterfall</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Tamaño y complejidad</td><td>Pequeño, poco complejo</td><td>Grande o complejo</td></tr>
+                                    <tr><td>Disponibilidad del cliente</td><td>Muy disponible</td><td>Poco disponible</td></tr>
+                                    <tr><td>Integración con otros sistemas</td><td>Simple o no necesario</td><td>Varios y complejos</td></tr>
+                                    <tr><td>Tolerancia al cambio</td><td>Flexible</td><td>Fijo o difícil de modificar</td></tr>
+                                    <tr><td>Velocidad de salida</td><td>Rápida aunque tenga límites</td><td>Lenta pero controlada</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- FOOTER REDISEÑADO (3 COLUMNAS) -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <div class="footer-grid">
+            <!-- Col 1 -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="../index.html" class="footer-link">Planeación</a></li>
+                    <li><a href="../../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 2 -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://agilemanifesto.org" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-solid fa-link me-2"></i>Manifiesto Ágil</a></li>
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Créditos -->
+            <div class="footer-col">
+                <h4>Créditos</h4>
+                <p class="footer-bottom-text">© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
+                <p class="footer-bottom-text">Creado por <strong>santiagoencodigo</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+    
+    <!-- Animaciones con Motion -->
+    <script type="module">
+        import { inView, animate } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animar elementos con la clase .bm-reveal
+            const revealElements = document.querySelectorAll('.bm-reveal');
+            revealElements.forEach((el, index) => {
+                inView(el, () => {
+                    animate(el, { opacity: [0, 1], y: [20, 0] }, { 
+                        duration: 0.6, 
+                        delay: (index % 4) * 0.05,
+                        ease: "easeOut" 
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+
+            // Animar filas de las tablas
+            const tableRows = document.querySelectorAll('.bm-table tbody tr');
+            tableRows.forEach((row, index) => {
+                inView(row, () => {
+                    animate(row, { opacity: [0, 1], x: [-10, 0] }, { 
+                        delay: (index % 5) * 0.05, 
+                        duration: 0.4,
+                        ease: "easeOut"
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+
+            // Animar las imágenes
+            const images = document.querySelectorAll('.content-image');
+            images.forEach((img) => {
+                inView(img, () => {
+                    animate(img, { opacity: [0, 1], scale: [0.95, 1] }, { duration: 0.8, ease: "easeOut" });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+        });
+    </script>
 </body>
+
 </html>
