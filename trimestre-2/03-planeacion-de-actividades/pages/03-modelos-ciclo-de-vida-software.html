@@ -1,12 +1,671 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modelos de ciclo de vida del software</title>
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <title>Modelos de Ciclo de Vida del Software · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Descripción de los principales modelos de ciclo de vida del software: Cascada, V, Iterativo, Incremental, Espiral, Prototipos y RAD.">
+    <meta name="author" content="santiagoencodigo">
+
+    <!-- Favicon y SEO -->
+    <link rel="shortcut icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+    
+    <!-- Estilos específicos de esta página -->
+    <style>
+        /* Footer de 3 columnas */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 2.5rem var(--container-pad);
+        }
+
+        .footer-col h4 {
+            color: var(--color-text-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li { margin-bottom: 0.5rem; }
+        
+        .footer-links .footer-link {
+            color: var(--color-text-secondary);
+            transition: color 0.3s ease;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .footer-links .footer-link:hover { color: var(--color-accent); }
+
+        .footer-bottom-text {
+            color: var(--color-text-secondary);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .footer-bottom-text strong { color: var(--color-text-primary); }
+
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Estilos para las tarjetas de los Modelos */
+        .model-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .model-card:hover {
+            border-color: rgba(var(--color-accent-rgb), 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .model-icon {
+            font-size: 2rem;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Grid de Ventajas y Desventajas */
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .pros-cons-grid { grid-template-columns: 1fr; }
+        }
+
+        .pros-box, .cons-box {
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+
+        .pros-box {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 3px solid #10b981;
+        }
+
+        .cons-box {
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 3px solid #ef4444;
+        }
+
+        .pros-box h5, .cons-box h5 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .pros-box h5 { color: #10b981; }
+        .cons-box h5 { color: #ef4444; }
+
+        .pros-box ul, .cons-box ul {
+            padding-left: 1.2rem;
+            margin: 0;
+            font-size: 0.88rem;
+            color: var(--color-text-secondary);
+        }
+
+        .pros-box li, .cons-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Imagen del modelo Cascada */
+        .model-image {
+            display: block;
+            margin: 2rem auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: #fff;
+            padding: 1rem;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Modelos de ciclo de vida del software</h1>
-    <p>Pendiente para trabajar!</p>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../index.html#proyectos">Proyectos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Ingeniería de Software
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Modelos de Ciclo <br>
+                    <span class="gradient-text">de Vida del Software</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    Representación estructurada de las fases de un proyecto de desarrollo. 
+                    Conoce las ventajas, desventajas y escenarios ideales de aplicación 
+                    de los modelos más utilizados en la industria.
+                </p>
+            </div>
+        </section>
+
+        <!-- LAYOUT -->
+        <div class="bm-layout">
+            
+            <!-- TOC -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button" aria-expanded="false" aria-controls="bm-toc-list" aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#introduccion"><span class="bm-toc__num">01</span>Introducción</a></li>
+                            <li><a class="bm-toc__link" href="#cascada"><span class="bm-toc__num">02</span>Modelo en Cascada</a></li>
+                            <li><a class="bm-toc__link" href="#v-model"><span class="bm-toc__num">03</span>Modelo en V</a></li>
+                            <li><a class="bm-toc__link" href="#iterativo"><span class="bm-toc__num">04</span>Modelo Iterativo</a></li>
+                            <li><a class="bm-toc__link" href="#incremental"><span class="bm-toc__num">05</span>Modelo Incremental</a></li>
+                            <li><a class="bm-toc__link" href="#espiral"><span class="bm-toc__num">06</span>Modelo en Espiral</a></li>
+                            <li><a class="bm-toc__link" href="#prototipos"><span class="bm-toc__num">07</span>Modelo de Prototipos</a></li>
+                            <li><a class="bm-toc__link" href="#rad"><span class="bm-toc__num">08</span>Modelo RAD</a></li>
+                            <li><a class="bm-toc__link" href="#comparativa"><span class="bm-toc__num">09</span>Comparativa</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO -->
+            <article class="bm-content">
+
+                <!-- 1. INTRODUCCIÓN -->
+                <section id="introduccion" class="bm-section" aria-labelledby="s-intro">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / GENERALIDADES</span>
+                        <h2 id="s-intro" class="bm-section__title">Introducción</h2>
+                    </header>
+                    <p class="bm-reveal">
+                        Un <strong>modelo de ciclo de vida del software</strong> es una representación 
+                        estructurada de las fases que sigue un proyecto de desarrollo, desde la 
+                        concepción de la idea hasta la entrega y mantenimiento del producto. 
+                        Cada modelo establece un orden, una secuencia y unos criterios de transición 
+                        entre las etapas.
+                    </p>
+                    <div class="bm-callout bm-reveal">
+                        La elección del modelo adecuado depende de factores como el tamaño del proyecto, 
+                        la estabilidad de los requisitos, el nivel de riesgo, el presupuesto disponible 
+                        y la relación con el cliente.
+                    </div>
+                </section>
+
+                <!-- 2. CASCADA -->
+                <section id="cascada" class="bm-section" aria-labelledby="s-cascada">
+                    <div class="model-card bm-reveal">
+                        <header class="bm-section__head">
+                            <div class="model-icon"><i class="fa-solid fa-water"></i></div>
+                            <h2 id="s-cascada" class="bm-section__title">Modelo en Cascada (Waterfall)</h2>
+                        </header>
+                        <p>
+                            Metodología de gestión secuencial y lineal. Cada fase desciende en cascada, 
+                            implicando que cada etapa debe cumplirse antes de seguir a la siguiente, 
+                            y que la planificación de cada una debe ser detallada.
+                        </p>
+                        
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Modelo_de_desarrollo_en_cascada_-es.svg/960px-Modelo_de_desarrollo_en_cascada_-es.svg.png" 
+                             alt="Diagrama del modelo en cascada" 
+                             class="model-image bm-reveal"
+                             loading="lazy">
+
+                        <div class="pros-cons-grid">
+                            <div class="pros-box">
+                                <h5><i class="fa-solid fa-plus-circle me-2"></i>Ventajas</h5>
+                                <ul>
+                                    <li>Permite planificar con precisión.</li>
+                                    <li>Fácil de entender y gestionar.</li>
+                                    <li>Ideal para requisitos estables y bien definidos.</li>
+                                </ul>
+                            </div>
+                            <div class="cons-box">
+                                <h5><i class="fa-solid fa-minus-circle me-2"></i>Desventajas</h5>
+                                <ul>
+                                    <li>Poca flexibilidad a cambios.</li>
+                                    <li>Errores detectados tarde en el ciclo.</li>
+                                    <li>No apto para proyectos complejos o cambiantes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. MODELO EN V -->
+                <section id="v-model" class="bm-section" aria-labelledby="s-vmodel">
+                    <div class="model-card bm-reveal">
+                        <header class="bm-section__head">
+                            <div class="model-icon"><i class="fa-solid fa-check-double"></i></div>
+                            <h2 id="s-vmodel" class="bm-section__title">Modelo en V</h2>
+                        </header>
+                        <p>
+                            Divide el ciclo de vida en fases, cada una de las cuales está asociada a una 
+                            fase de prueba correspondiente. Su nombre proviene de la forma gráfica en V 
+                            de las etapas de desarrollo y verificación.
+                        </p>
+
+                        <div class="pros-cons-grid">
+                            <div class="pros-box">
+                                <h5><i class="fa-solid fa-plus-circle me-2"></i>Ventajas</h5>
+                                <ul>
+                                    <li>Detección temprana de errores.</li>
+                                    <li>Mayor control de calidad.</li>
+                                    <li>Claridad en los criterios de aceptación.</li>
+                                </ul>
+                            </div>
+                            <div class="cons-box">
+                                <h5><i class="fa-solid fa-minus-circle me-2"></i>Desventajas</h5>
+                                <ul>
+                                    <li>Poca flexibilidad ante cambios.</li>
+                                    <li>Puede ser más costoso que otros modelos.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. ITERATIVO -->
+                <section id="iterativo" class="bm-section" aria-labelledby="s-iterativo">
+                    <div class="model-card bm-reveal">
+                        <header class="bm-section__head">
+                            <div class="model-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+                            <h2 id="s-iterativo" class="bm-section__title">Modelo Iterativo</h2>
+                        </header>
+                        <p>
+                            Enfocado en mejorar continuamente el producto. Se produce un prototipo, 
+                            se prueba, se modifica y se repite el ciclo, buscando acercarse a la solución. 
+                            Cada iteración es el punto de partida de otra.
+                        </p>
+
+                        <div class="pros-cons-grid">
+                            <div class="pros-box">
+                                <h5><i class="fa-solid fa-plus-circle me-2"></i>Ventajas</h5>
+                                <ul>
+                                    <li>Mejora gradual del producto en cada ciclo.</li>
+                                    <li>Permite incorporar cambios y ajustes.</li>
+                                    <li>Reduce riesgos al entregar versiones funcionales.</li>
+                                </ul>
+                            </div>
+                            <div class="cons-box">
+                                <h5><i class="fa-solid fa-minus-circle me-2"></i>Desventajas</h5>
+                                <ul>
+                                    <li>Puede ser desgastante repetir el ciclo completo.</li>
+                                    <li>Requiere una buena gestión de cambios.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. INCREMENTAL -->
+                <section id="incremental" class="bm-section" aria-labelledby="s-incremental">
+                    <div class="model-card bm-reveal">
+                        <header class="bm-section__head">
+                            <div class="model-icon"><i class="fa-solid fa-layer-group"></i></div>
+                            <h2 id="s-incremental" class="bm-section__title">Modelo Incremental</h2>
+                        </header>
+                        <p>
+                            Se enfoca en entregar software operativo de forma rápida pero válida. 
+                            Cada requisito tiene una prioridad asignada y se entrega según el orden 
+                            de incremento correspondiente.
+                        </p>
+
+                        <div class="pros-cons-grid">
+                            <div class="pros-box">
+                                <h5><i class="fa-solid fa-plus-circle me-2"></i>Ventajas</h5>
+                                <ul>
+                                    <li>Entrega temprana de funcionalidades básicas.</li>
+                                    <li>Permite ajustes en cada incremento.</li>
+                                    <li>Reduce el tiempo de salida al mercado.</li>
+                                </ul>
+                            </div>
+                            <div class="cons-box">
+                                <h5><i class="fa-solid fa-minus-circle me-2"></i>Desventajas</h5>
+                                <ul>
+                                    <li>Requiere arquitectura bien definida.</li>
+                                    <li>Riesgo de deuda técnica si no se planifica.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. ESPIRAL -->
+                <section id="espiral" class="bm-section" aria-labelledby="s-espiral">
+                    <div class="model-card bm-reveal">
+                        <header class="bm-section__head">
+                            <div class="model-icon"><i class="fa-solid fa-hurricane"></i></div>
+                            <h2 id="s-espiral" class="bm-section__title">Modelo en Espiral</h2>
+                        </header>
+                        <p>
+                            Une cascada e iterativo. Las tareas son iterativas, acercándose al objetivo 
+                            mientras se minimizan los riesgos de fracaso gracias a controles regulares.
+                        </p>
+
+                        <div class="bm-callout bm-callout--amber">
+                            <strong>Fases:</strong> 
+                            1. Definir objetivos y alternativas. 
+                            2. Evaluar alternativas y riesgos. 
+                            3. Desarrollo y revisión. 
+                            4. Planificación del siguiente ciclo.
+                        </div>
+
+                        <div class="pros-cons-grid">
+                            <div class="pros-box">
+                                <h5><i class="fa-solid fa-plus-circle me-2"></i>Ventajas</h5>
+                                <ul>
+                                    <li>Reducción de riesgos al identificarlos temprano.</li>
+                                    <li>Mayor flexibilidad a cambios.</li>
+                                    <li>Entrega temprana de software funcional.</li>
+                                    <li>Mayor participación del cliente.</li>
+                                </ul>
+                            </div>
+                            <div class="cons-box">
+                                <h5><i class="fa-solid fa-minus-circle me-2"></i>Desventajas</h5>
+                                <ul>
+                                    <li>Requiere experiencia en gestión de riesgos.</li>
+                                    <li>Costoso para proyectos pequeños.</li>
+                                    <li>No es adecuado si los requisitos son fijos desde el inicio.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. PROTOTIPOS -->
+                <section id="prototipos" class="bm-section" aria-labelledby="s-proto">
+                    <div class="model-card bm-reveal">
+                        <header class="bm-section__head">
+                            <div class="model-icon"><i class="fa-solid fa-cubes"></i></div>
+                            <h2 id="s-proto" class="bm-section__title">Modelo de Prototipos</h2>
+                        </header>
+                        <p>
+                            Utiliza una versión reducida del modelo final para probar rápidamente 
+                            la funcionalidad y el rendimiento, detectando problemas antes de completar el diseño.
+                        </p>
+
+                        <div class="pros-cons-grid">
+                            <div class="pros-box">
+                                <h5><i class="fa-solid fa-plus-circle me-2"></i>Ventajas</h5>
+                                <ul>
+                                    <li>Alta participación del usuario.</li>
+                                    <li>Mejora la comprensión de los requisitos.</li>
+                                    <li>Reduce errores de diseño.</li>
+                                </ul>
+                            </div>
+                            <div class="cons-box">
+                                <h5><i class="fa-solid fa-minus-circle me-2"></i>Desventajas</h5>
+                                <ul>
+                                    <li>El cliente puede confundirlo con el producto final.</li>
+                                    <li>Muchos cambios pueden retrasar el desarrollo.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. RAD -->
+                <section id="rad" class="bm-section" aria-labelledby="s-rad">
+                    <div class="model-card bm-reveal">
+                        <header class="bm-section__head">
+                            <div class="model-icon"><i class="fa-solid fa-bolt"></i></div>
+                            <h2 id="s-rad" class="bm-section__title">Modelo de Desarrollo Rápido (RAD)</h2>
+                        </header>
+                        <p>
+                            Metodología ágil centrada en iteraciones frecuentes y retroalimentación constante, 
+                            inventada por James Martin en 1991. Fomenta la reutilización de código.
+                        </p>
+
+                        <div class="bm-table-wrap my-3">
+                            <div class="bm-table-scroll">
+                                <table class="bm-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fase</th>
+                                            <th>Descripción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Definición de requisitos</td><td>Objetivos, expectativas, plazos y presupuesto.</td></tr>
+                                        <tr><td>Construcción de prototipos</td><td>Se construyen y validan con los usuarios.</td></tr>
+                                        <tr><td>Transformación</td><td>Los prototipos se convierten en modelos funcionales.</td></tr>
+                                        <tr><td>Pruebas</td><td>Pruebas exhaustivas de funcionamiento.</td></tr>
+                                        <tr><td>Lanzamiento</td><td>Carga de datos y entrenamiento.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="pros-cons-grid">
+                            <div class="pros-box">
+                                <h5><i class="fa-solid fa-plus-circle me-2"></i>Ventajas</h5>
+                                <ul>
+                                    <li>Reduce significativamente los tiempos.</li>
+                                    <li>Alta participación del usuario.</li>
+                                    <li>Permite ajustes rápidos.</li>
+                                </ul>
+                            </div>
+                            <div class="cons-box">
+                                <h5><i class="fa-solid fa-minus-circle me-2"></i>Desventajas</h5>
+                                <ul>
+                                    <li>Requiere equipos altamente capacitados.</li>
+                                    <li>No apto para proyectos de alta complejidad.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. COMPARATIVA -->
+                <section id="comparativa" class="bm-section" aria-labelledby="s-comp" style="border-bottom: none;">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">09 / COMPARATIVA</span>
+                        <h2 id="s-comp" class="bm-section__title">Comparativa de Modelos</h2>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Modelo</th>
+                                        <th scope="col">Enfoque</th>
+                                        <th scope="col">Flexibilidad</th>
+                                        <th scope="col">Riesgo</th>
+                                        <th scope="col">Participación Cliente</th>
+                                        <th scope="col">Mejor para</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Cascada</td><td>Secuencial</td><td>Baja</td><td>Bajo</td><td>Baja</td><td>Requisitos fijos</td></tr>
+                                    <tr><td>V</td><td>Verificación</td><td>Baja</td><td>Bajo</td><td>Baja</td><td>Sistemas críticos</td></tr>
+                                    <tr><td>Iterativo</td><td>Repetición</td><td>Media</td><td>Medio</td><td>Media</td><td>Cambios graduales</td></tr>
+                                    <tr><td>Incremental</td><td>Entregas parciales</td><td>Alta</td><td>Medio</td><td>Alta</td><td>Entregas tempranas</td></tr>
+                                    <tr><td>Espiral</td><td>Riesgo</td><td>Alta</td><td>Muy bajo</td><td>Alta</td><td>Proyectos grandes</td></tr>
+                                    <tr><td>Prototipos</td><td>Validación temprana</td><td>Alta</td><td>Bajo</td><td>Muy alta</td><td>Requisitos poco claros</td></tr>
+                                    <tr><td>RAD</td><td>Rapidez</td><td>Muy alta</td><td>Medio</td><td>Muy alta</td><td>Plazos ajustados</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- FOOTER REDISEÑADO (3 COLUMNAS) -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <div class="footer-grid">
+            <!-- Col 1 -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="../index.html" class="footer-link">Planeación</a></li>
+                    <li><a href="../../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 2 -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Créditos -->
+            <div class="footer-col">
+                <h4>Créditos</h4>
+                <p class="footer-bottom-text">© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
+                <p class="footer-bottom-text">Creado por <strong>santiagoencodigo</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+    
+    <!-- Animaciones con Motion -->
+    <script type="module">
+        import { inView, animate } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animar las tarjetas de los modelos
+            const modelCards = document.querySelectorAll('.model-card');
+            modelCards.forEach((card) => {
+                inView(card, () => {
+                    animate(card, { opacity: [0, 1], y: [30, 0] }, { duration: 0.6, ease: "easeOut" });
+                }, { margin: "0px 0px -80px 0px" });
+            });
+
+            // Animar las imágenes (por ejemplo, el diagrama de cascada)
+            const images = document.querySelectorAll('.model-image');
+            images.forEach((img) => {
+                inView(img, () => {
+                    animate(img, { opacity: [0, 1], scale: [0.95, 1] }, { duration: 0.8, delay: 0.2 });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+
+            // Animar filas de tabla
+            const tableRows = document.querySelectorAll('.bm-table tbody tr');
+            tableRows.forEach((row, index) => {
+                inView(row, () => {
+                    animate(row, { opacity: [0, 1], x: [-10, 0] }, { 
+                        delay: (index % 5) * 0.05, 
+                        duration: 0.4
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+        });
+    </script>
 </body>
+
 </html>
