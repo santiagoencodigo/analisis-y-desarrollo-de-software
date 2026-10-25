@@ -1,12 +1,617 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planeación de proyectos informáticos</title>
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <title>Planeación de Proyectos Informáticos · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Fundamentos de la gestión de proyectos informáticos: elementos, administración, estructuras organizacionales, ciclo de vida, planificación y diagramas de Gantt.">
+    <meta name="author" content="santiagoencodigo">
+
+    <!-- Favicon y SEO -->
+    <link rel="shortcut icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="icon" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg">
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+    
+    <!-- Estilos específicos de esta página -->
+    <style>
+        /* Footer de 3 columnas */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 2.5rem var(--container-pad);
+        }
+
+        .footer-col h4 {
+            color: var(--color-text-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        
+        .footer-links .footer-link {
+            color: var(--color-text-secondary);
+            transition: color 0.3s ease;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .footer-links .footer-link:hover { color: var(--color-accent); }
+
+        .footer-bottom-text {
+            color: var(--color-text-secondary);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .footer-bottom-text strong { color: var(--color-text-primary); }
+
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+        /* Estilos para las imágenes */
+        .content-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-border);
+            background: var(--color-white); /* Para SVGs o imágenes con fondo transparente */
+            padding: 1rem;
+        }
+
+        /* Estilo para el organigrama textual */
+        .org-chart-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .org-role {
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-right: 0.5rem;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Planeación de proyectos informáticos</h1>
-    <p>Pendiente para trabajar!</p>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../index.html#proyectos">Proyectos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#footer">Footer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="inicio" class="bm-hero" aria-labelledby="hero-title">
+            <div class="bm-hero__bg" aria-hidden="true">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+
+            <div class="bm-hero__inner">
+                <span class="bm-hero__eyebrow">
+                    <span class="bm-dot" aria-hidden="true"></span>
+                    Gestión y Administración
+                </span>
+
+                <h1 id="hero-title" class="bm-hero__title">
+                    Planeación de Proyectos <br>
+                    <span class="gradient-text">Informáticos</span>
+                </h1>
+
+                <p class="bm-hero__lead">
+                    El éxito de un proyecto de software depende en gran medida de una planificación 
+                    adecuada. Descubre los fundamentos de la gestión de proyectos, desde la definición 
+                    de sus elementos clave hasta la elaboración de cronogramas.
+                </p>
+            </div>
+        </section>
+
+        <!-- LAYOUT -->
+        <div class="bm-layout">
+            
+            <!-- TOC -->
+            <aside class="bm-toc" id="bm-toc" aria-label="Tabla de contenido">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">Contenido</span>
+                        <button class="bm-toc__toggle" type="button" aria-expanded="false" aria-controls="bm-toc-list" aria-label="Mostrar u ocultar tabla de contenido">
+                            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav" id="bm-toc-list" aria-label="Secciones del documento">
+                        <ol class="bm-toc__list">
+                            <li><a class="bm-toc__link" href="#definicion"><span class="bm-toc__num">01</span>Definición</a></li>
+                            <li><a class="bm-toc__link" href="#elementos"><span class="bm-toc__num">02</span>Elementos del Proyecto</a></li>
+                            <li><a class="bm-toc__link" href="#administracion"><span class="bm-toc__num">03</span>Administración</a></li>
+                            <li><a class="bm-toc__link" href="#organizacion"><span class="bm-toc__num">04</span>Organización</a></li>
+                            <li><a class="bm-toc__link" href="#caracteristicas"><span class="bm-toc__num">05</span>Características y Tipos</a></li>
+                            <li><a class="bm-toc__link" href="#ciclo-vida"><span class="bm-toc__num">06</span>Ciclo de Vida</a></li>
+                            <li><a class="bm-toc__link" href="#planificacion"><span class="bm-toc__num">07</span>Planificación</a></li>
+                            <li><a class="bm-toc__link" href="#paquetes"><span class="bm-toc__num">08</span>Paquetes de Trabajo</a></li>
+                            <li><a class="bm-toc__link" href="#gantt"><span class="bm-toc__num">09</span>Diagrama de Gantt</a></li>
+                            <li><a class="bm-toc__link" href="#fallas"><span class="bm-toc__num">10</span>Fallas en la Planificación</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO -->
+            <article class="bm-content">
+
+                <!-- 1. DEFINICIÓN -->
+                <section id="definicion" class="bm-section" aria-labelledby="s-def">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">01 / DEFINICIÓN</span>
+                        <h2 id="s-def" class="bm-section__title">Definición de proyectos informáticos</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        Un <strong>proyecto informático</strong> es una asociación de esfuerzos, limitado en el tiempo, 
+                        con un objetivo definido, que requiere del acuerdo de un conjunto de especialidades y recursos. 
+                        También puede definirse como una organización temporal con el fin de lograr un propósito específico.
+                    </p>
+
+                    <ul class="bm-list bm-reveal">
+                        <li>Cuando los objetivos son alcanzados, el proyecto se considera completo.</li>
+                        <li>La gran variedad de elementos que intervienen hacen que cada proyecto sea único.</li>
+                        <li>Tienen impacto directo e indirecto en toda la organización.</li>
+                        <li>Suelen estar relacionados con otros proyectos informáticos.</li>
+                        <li>Son altamente propensos a sufrir obsolescencia, especialmente tecnológica.</li>
+                        <li>Requieren la participación intensa de recurso humano de distintas áreas.</li>
+                    </ul>
+                </section>
+
+                <!-- 2. ELEMENTOS -->
+                <section id="elementos" class="bm-section" aria-labelledby="s-elem">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">02 / ELEMENTOS</span>
+                        <h2 id="s-elem" class="bm-section__title">Elementos de definición de un proyecto</h2>
+                    </header>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Elemento</th>
+                                        <th scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Cliente</td><td>Persona a quien va dirigido el resultado; generalmente presentan un problema que requiere solución.</td></tr>
+                                    <tr><td>Usuario</td><td>Persona que utilizará el sistema o parte de él.</td></tr>
+                                    <tr><td>Inicio</td><td>Momento en que es expresada la necesidad específica por el cliente.</td></tr>
+                                    <tr><td>Término</td><td>Momento en que se cumple el resultado definido en costo, oportunidad, calidad o desempeño.</td></tr>
+                                    <tr><td>Costo</td><td>Recurso o insumo entrante al proyecto, expresado generalmente en dinero.</td></tr>
+                                    <tr><td>Tiempo</td><td>Recurso que origina una secuencia y luego un programa. Tiene duración y momento de realización.</td></tr>
+                                    <tr><td>Desempeño técnico</td><td>Característica de los resultados expresados a través de prototipos, índices y funcionamiento fiable.</td></tr>
+                                    <tr><td>Jefe de proyecto</td><td>Responsable de la dirección, planificación, control de costos, recursos y satisfacción del cliente.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. ADMINISTRACIÓN -->
+                <section id="administracion" class="bm-section" aria-labelledby="s-admin">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">03 / ADMINISTRACIÓN</span>
+                        <h2 id="s-admin" class="bm-section__title">Administración de proyectos informáticos</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">3.1 Actividades de administración</h3>
+                    <ul class="bm-list bm-reveal">
+                        <li>Generación de la propuesta.</li>
+                        <li>Estimación de costos.</li>
+                        <li>Planificación y creación de itinerario.</li>
+                        <li>Monitoreo y revisiones.</li>
+                        <li>Selección y evaluación de personal.</li>
+                        <li>Informes y presentaciones.</li>
+                    </ul>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Lectura Recomendada:</strong> 
+                        <a href="https://asana.com/es/resources/it-project-management" target="_blank" rel="noopener noreferrer">Guía de Gestión de Proyectos de TI (Asana)</a>.
+                    </div>
+
+                    <h3 class="bm-reveal">3.2 Diferencias con proyectos tradicionales</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Aspecto</th>
+                                        <th scope="col">Diferencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Producto intangible</td><td>El administrador depende de la documentación para revisar el progreso.</td></tr>
+                                    <tr><td>Comprensión limitada</td><td>No se tiene una comprensión acabada del proceso; los modelos son simplificaciones.</td></tr>
+                                    <tr><td>Proyectos únicos</td><td>Los proyectos grandes son únicos; la experiencia histórica es limitada.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. ORGANIZACIÓN -->
+                <section id="organizacion" class="bm-section" aria-labelledby="s-org">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">04 / ORGANIZACIÓN</span>
+                        <h2 id="s-org" class="bm-section__title">Organización para proyectos de software</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        Los equipos de trabajo deben ser <strong>pequeños</strong>, con no más de <strong>ocho personas</strong> en total. 
+                        Si el proyecto es muy grande, debe dividirse en subsistemas.
+                    </p>
+
+                    <h3 class="bm-reveal">4.1 Beneficios de equipos pequeños</h3>
+                    <ul class="bm-list bm-reveal">
+                        <li>Definición de estándares de calidad.</li>
+                        <li>Trabajo en conjunto y cohesión.</li>
+                        <li>Planificación sin afectar el ego.</li>
+                        <li>Conocimiento mutuo del trabajo.</li>
+                        <li>Comunicación rápida y eficiente.</li>
+                        <li>Canales de comunicación simples.</li>
+                        <li>Lazos afectivos que fortalecen la creatividad.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">4.2 Estructuras orgánicas</h3>
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Estructura</th><th>Descripción</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Proyecto</td><td>Grupo que lleva el proyecto de principio a fin (definición, diseño, codificación, pruebas).</td></tr>
+                                    <tr><td>Funcional</td><td>Las decisiones transversales dependen de un individuo. Basada en el principio de staff.</td></tr>
+                                    <tr><td>Matricial</td><td>Funciones (Desarrollo, QA, Mantenimiento) tienen su propia administración y equipo dedicado.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="bm-reveal">4.3 Organigrama</h3>
+                    <p class="bm-reveal">
+                        Un <strong>organigrama</strong> es el dibujo de cómo está organizado un equipo: quién reporta a quién, 
+                        quién manda, quién ejecuta y cómo se comunican los roles.
+                    </p>
+
+                    <img src="https://d2slcw3kip6qmk.cloudfront.net/marketing/pages/chart/examples/org-chart-templates/hierarchical-organizational-chart.svg" 
+                         alt="Ejemplo de organigrama jerárquico" 
+                         class="content-image bm-reveal" loading="lazy">
+
+                    <div class="org-chart-card bm-reveal">
+                        <p><span class="org-role">Director del Proyecto (Project Manager):</span> Lleva el timón, gestiona plazos, recursos y comunicación con el cliente.</p>
+                        <p><span class="org-role">Líder Técnico / Arquitecto:</span> El cerebro técnico. Define tecnologías, supervisa el código y resuelve dudas complejas.</p>
+                        <p class="mb-0"><span class="org-role">Equipo Especializado:</span> Desarrolladores (Frontend, Backend), Ingenieros de QA, Analistas de Sistemas, Administradores de BD, DevOps, Diseñadores UX/UI.</p>
+                    </div>
+                </section>
+
+                <!-- 5. CARACTERÍSTICAS Y TIPOS -->
+                <section id="caracteristicas" class="bm-section" aria-labelledby="s-carac">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">05 / TIPOS</span>
+                        <h2 id="s-carac" class="bm-section__title">Características y tipos de proyectos</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">5.1 Características del desarrollo de software</h3>
+                    <ul class="bm-list bm-reveal">
+                        <li>El desarrollo de un sistema es parte de una actividad mayor.</li>
+                        <li>El software es parte integral de un producto más amplio.</li>
+                        <li>El producto consiste en los servicios que informática ofrece a la organización.</li>
+                    </ul>
+
+                    <h3 class="bm-reveal">5.2 Tipos de proyecto</h3>
+                    <p class="bm-reveal">
+                        Los proyectos se clasifican según su alcance, complejidad técnica, sector, tipo de cliente, etc. 
+                        La selección de la metodología dependerá del tipo de proyecto.
+                    </p>
+                </section>
+
+                <!-- 6. CICLO DE VIDA -->
+                <section id="ciclo-vida" class="bm-section" aria-labelledby="s-ciclo">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">06 / CICLO DE VIDA</span>
+                        <h2 id="s-ciclo" class="bm-section__title">Ciclo de vida del proyecto</h2>
+                    </header>
+
+                    <p class="bm-reveal">Los modelos más utilizados son: Cascada, V, Iterativo, Incremental, Espiral y Prototipos.</p>
+
+                    <div class="bm-callout bm-reveal">
+                        <strong>Preguntas clave para cada etapa del ciclo de vida</strong> (Basado en Bedini):
+                    </div>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Etapa</th><th>Pregunta clave</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Necesidades del Software</td><td>¿Qué demanda existe? ¿Qué necesidades debe satisfacer?</td></tr>
+                                    <tr><td>Requerimientos (cliente)</td><td>¿Qué características debe tener para satisfacer al cliente?</td></tr>
+                                    <tr><td>Requerimientos (desarrollador)</td><td>¿Qué características debe tener para satisfacer al desarrollador?</td></tr>
+                                    <tr><td>Diseño del software</td><td>¿Cómo construir el producto para comportarse como se describe?</td></tr>
+                                    <tr><td>Codificación</td><td>¿Cómo construir el producto en una máquina y qué tecnología usar?</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. PLANIFICACIÓN -->
+                <section id="planificacion" class="bm-section" aria-labelledby="s-plan">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">07 / PLANIFICACIÓN</span>
+                        <h2 id="s-plan" class="bm-section__title">Planificación de proyectos de software</h2>
+                    </header>
+
+                    <h3 class="bm-reveal">7.1 Objetivos de la planificación</h3>
+                    <p class="bm-reveal">
+                        El principal objetivo es <strong>ordenar el qué hacer</strong> durante el proyecto y asignar 
+                        adecuadamente los recursos. <em>Buena planificación = cumplimiento.</em>
+                    </p>
+
+                    <h3 class="bm-reveal">7.2 Ciclo de planificación</h3>
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li>Negociación de compromisos (Jefe, cliente, usuario).</li>
+                        <li>División del producto (EDT/WBS).</li>
+                        <li>Estimación del tamaño de cada componente.</li>
+                        <li>Estimación de esfuerzo, tiempo y costo.</li>
+                        <li>Confección del itinerario.</li>
+                        <li>Definición de hitos.</li>
+                    </ol>
+
+                    <h3 class="bm-reveal">7.3 Plan del proyecto</h3>
+                    <p class="bm-reveal">El plan existe solo cuando está documentado, distribuido, entendido y comprometido.</p>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Componente</th><th>Elementos</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Descripción del proyecto</td><td>Nombre, objetivos, alcances, restricciones.</td></tr>
+                                    <tr><td>Organización del proyecto</td><td>Estructura orgánica, responsabilidades.</td></tr>
+                                    <tr><td>Productos entregables</td><td>Nombre, responsable, fecha de entrega.</td></tr>
+                                    <tr><td>Calendario del proyecto</td><td>Estimaciones, itinerario.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. PAQUETES DE TRABAJO -->
+                <section id="paquetes" class="bm-section" aria-labelledby="s-paq">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">08 / PAQUETES</span>
+                        <h2 id="s-paq" class="bm-section__title">Orden de paquetes de trabajo</h2>
+                    </header>
+
+                    <p class="bm-reveal">Define la sucesión lógica de todos los pasos del proyecto.</p>
+
+                    <div class="bm-table-wrap bm-reveal">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr><th>Modo</th><th>Descripción</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Sucesivamente</td><td>Un paquete debe estar terminado para que comience el siguiente.</td></tr>
+                                    <tr><td>Total o parcialmente en paralelo</td><td>Comienzan al mismo tiempo o con un intervalo.</td></tr>
+                                    <tr><td>A intervalos temporales</td><td>Son necesarias pausas de reposo entre paquetes.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. DIAGRAMA DE GANTT -->
+                <section id="gantt" class="bm-section" aria-labelledby="s-gantt">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">09 / GANTT</span>
+                        <h2 id="s-gantt" class="bm-section__title">Diagrama de Gantt</h2>
+                    </header>
+
+                    <p class="bm-reveal">
+                        Herramienta para planificar y programar tareas a lo largo de un período, 
+                        permitiendo el seguimiento y control del progreso.
+                    </p>
+
+                    <img src="https://content-management-files.canva.com/e771b989-de43-438a-98ab-cd5dc7c4dc68/long-form_gantt-chart_hero_desktop.jpg?resize-format=avif&resize-width=1696" 
+                         alt="Ejemplo de Diagrama de Gantt" 
+                         class="content-image bm-reveal" loading="lazy">
+
+                    <h3 class="bm-reveal">Recomendaciones para su elaboración</h3>
+                    <ol class="bm-list bm-list--ordered bm-reveal">
+                        <li>Listar todas las actividades.</li>
+                        <li>Definir tiempos, prioridades y orden.</li>
+                        <li>Agrupar actividades por partidas específicas.</li>
+                        <li>Diseño esquemático y claro.</li>
+                        <li>Mantener una versión detallada para el ejecutor.</li>
+                        <li>Claridad sobre lo que sucede en cada momento.</li>
+                    </ol>
+                </section>
+
+                <!-- 10. FALLAS -->
+                <section id="fallas" class="bm-section" aria-labelledby="s-fallas" style="border-bottom: none;">
+                    <header class="bm-section__head bm-reveal">
+                        <span class="bm-section__num">10 / RIESGOS</span>
+                        <h2 id="s-fallas" class="bm-section__title">Fallas en la planificación</h2>
+                    </header>
+
+                    <ul class="bm-list bm-reveal">
+                        <li><strong>Retrasos en la entrega</strong> del producto final.</li>
+                        <li><strong>Aumento de los costos</strong> de desarrollo y mantenimiento.</li>
+                        <li><strong>Escasa calidad</strong> del software entregado.</li>
+                    </ul>
+
+                    <p class="bm-reveal">
+                        Estas fallas suelen deberse a una mala estimación, falta de comunicación, 
+                        cambios no controlados o una planificación insuficiente.
+                    </p>
+
+                    <div class="bm-callout bm-callout--amber bm-reveal">
+                        Agradable que he entendido a medida del tecnólogo,
+                        que lo mejor es siempre decir la verdad y tener una interacción diaria con el grupo 
+                        de trabajo para una mejor resolución de conflictos.
+                    </div>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- FOOTER REDISEÑADO (3 COLUMNAS) -->
+    <footer role="contentinfo" id="footer" class="bg-hero">
+        <div class="footer-grid">
+            <!-- Col 1 -->
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                    <li><a href="../index.html" class="footer-link">Planeación</a></li>
+                    <li><a href="../../../trimestre-2/index.html" class="footer-link">Trimestre 2</a></li>
+                    <li><a href="../../../sitemap.html" class="footer-link">Mapa de sitio</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 2 -->
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="https://asana.com/es/resources/it-project-management" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-solid fa-link me-2"></i>Gestión de Proyectos TI</a></li>
+                    <li><a href="https://github.com/santiagoencodigo/analisis-y-desarrollo-de-software" target="_blank" rel="noopener noreferrer" class="footer-link"><i class="fa-brands fa-github me-2"></i>Repositorio ADSO</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Créditos -->
+            <div class="footer-col">
+                <h4>Créditos</h4>
+                <p class="footer-bottom-text">© 2025 · Análisis y Desarrollo de Software · Trimestre 2</p>
+                <p class="footer-bottom-text">Creado por <strong>santiagoencodigo</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+    
+    <!-- Animaciones con Motion -->
+    <script type="module">
+        import { inView, animate } from "https://cdn.jsdelivr.net/npm/motion@12/+esm";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animar elementos con la clase .bm-reveal
+            const revealElements = document.querySelectorAll('.bm-reveal');
+            revealElements.forEach((el, index) => {
+                inView(el, () => {
+                    animate(el, { opacity: [0, 1], y: [20, 0] }, { 
+                        duration: 0.6, 
+                        delay: (index % 4) * 0.05,
+                        ease: "easeOut" 
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+
+            // Animar filas de las tablas
+            const tableRows = document.querySelectorAll('.bm-table tbody tr');
+            tableRows.forEach((row, index) => {
+                inView(row, () => {
+                    animate(row, { opacity: [0, 1], x: [-10, 0] }, { 
+                        delay: (index % 5) * 0.05, 
+                        duration: 0.4,
+                        ease: "easeOut"
+                    });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+
+            // Animar las imágenes
+            const images = document.querySelectorAll('.content-image');
+            images.forEach((img) => {
+                inView(img, () => {
+                    animate(img, { opacity: [0, 1], scale: [0.95, 1] }, { duration: 0.8, ease: "easeOut" });
+                }, { margin: "0px 0px -50px 0px" });
+            });
+        });
+    </script>
 </body>
+
 </html>
