@@ -1,193 +1,170 @@
-# Desplegar el software: infinityfree
+# Despliegue de software en InfinityFree
 
-A continuación mi documentación para hacer el despliegue de una aplicación mediante **infinityfree**
+Documentación del proceso de despliegue de una aplicación web utilizando el servicio de alojamiento gratuito InfinityFree. Esta guía cubre la investigación del servicio, la configuración inicial, la creación de la base de datos, la carga de archivos y la resolución de errores.
 
-La competencia correspondiente a esto es: Implementar la solución de software de acuerdo con los requisitos de operación y modelos de referencia.
+Competencia: Implementar la solución de software de acuerdo con los requisitos de operación y modelos de referencia.
+Resultado de Aprendizaje: Desplegar el software de acuerdo con la arquitectura y las políticas establecidas.
 
-Por lo que veo termina siendo como la primera actividad para poner en marcha una aplicación web, primera configuración en el servidor y pues me siento emocionado, vamos a ver qué sucede.
+## Tabla de contenido
 
-> Este documento aun esta pendiente. Aun no termino el proceso de la implantación.
+1. [Investigación del servicio de alojamiento](#investigación-del-servicio-de-alojamiento)
+2. [Puesta en marcha y registro](#puesta-en-marcha-y-registro)
+3. [Creación de la base de datos](#creación-de-la-base-de-datos)
+4. [Importación de la base de datos](#importación-de-la-base-de-datos)
+5. [Carga de archivos del proyecto](#carga-de-archivos-del-proyecto)
+6. [Configuración de la conexión](#configuración-de-la-conexión)
+7. [Pruebas y solución de errores](#pruebas-y-solución-de-errores)
 
+## Investigación del servicio de alojamiento
 
+Antes de iniciar el despliegue, es necesario comprender el margen de maniobra técnico y las limitaciones del servicio gratuito.
 
+### Características de alojamiento gratuito
 
+InfinityFree proporciona un entorno real para PHP y MySQL. Según las especificaciones del servicio, las características principales son:
 
----
+- 5 GB de espacio en disco.
+- Ancho de banda ilimitado.
+- PHP 8.3.
+- MySQL 8.0 / MariaDB 10.6.
+- Nombres de subdominios gratuitos.
+- Traiga su propio dominio (dominios personalizados).
+- 400 bases de datos MySQL.
+- Servicio de DNS gratuito.
+- Certificados SSL gratuitos.
+- Soporte completo para `.htaccess`.
 
+A continuación, se muestra una comparativa de precios del servicio:
 
-
-
-
-
-## Tabla de Contenido
-
-1. [Caracteristicas y Restricciones del Servicio de Alojamiento](#caracteristicas-y-restricciones-del-servicio-de-alojamiento)
-2. [Puesta en marcha](#puesta-en-marcha)
-3. [Creación de Base de Datos](#creación-de-base-de-datos)
-4. []()
-
-
-
-
-
-
-
----
-
-
-
-
-
-
-##  Caracteristicas y Restricciones del Servicio de Alojamiento
-
-En cualquier alojamiento web, las características definen tu “margen de maniobra” técnico: espacio en disco, bases de datos, versiones de lenguaje (PHP, etc.), certificados SSL, panel de control o herramientas de instalación. Las restricciones, en cambio, son los topes que evitan que un solo usuario consuma recursos desproporcionados en un servidor compartido.
-
-En un plan gratuito, estas restricciones no son un detalle menor: suelen ser el factor que determina si tu proyecto es viable o no. Los límites más comunes son el consumo de CPU/RAM, el número de archivos (inodos), el tráfico o “hits” diarios, y las funciones bloqueadas (como el envío de correo o la ejecución de tareas programadas).
-
-InfinityFree es un servicio de alojamiento compartido gratuito (sin publicidad inyectada en tus páginas y sin tarjeta de crédito) pensado para aprender, hacer demos o portafolios pequeños. Es un entorno real de PHP y MySQL, pero con límites muy estrictos que lo hacen no apto para producción o tráfico comercial.
-
-Lo que te ofrece (características clave):
-
-PHP 8.3 y MySQL: soporte para WordPress y aplicaciones PHP.
-
-5 GB de disco y 400 bases de datos MySQL (una cifra muy alta para ser gratis).
-
-SSL Let’s Encrypt gratis (automático en subdominios; manual en dominios propios).
-
-Panel VistaPanel (simplificado) y Softaculous para instalar WordPress en un clic.
-
-Subdominios gratuitos y posibilidad de conectar un dominio propio.
-
-Lo que te limita (restricciones críticas):
-
-Límite de 50,000 “hits” diarios: Un “hit” es cada petición HTTP (cargar una página, una imagen, un CSS, un JS). Una sola visita puede consumir 20–50 hits, así que tu techo real es mucho menor de lo que parece.
-
-Tope de ~30,000 archivos (inodos): Se agota antes que los 5 GB de disco. WordPress con varios plugins y caché puede acercarse rápido a este límite.
-
-Sin correo electrónico: No puedes crear cuentas @tudominio.com ni enviar correos desde PHP de forma fiable.
-
-Sin SSH ni Cron: No hay acceso por consola ni tareas programadas; dependencias como Composer deben prepararse en local y subirse por FTP.
-
-Sin soporte directo: Solo foro comunitario y base de conocimiento; no hay tickets ni chat.
-
-Suspensión automática: Por exceder recursos, por inactividad (30 días sin visitas) o por contenido prohibido (proxy, spam, criptominería, etc.).
-
-Ahora bien, para chismosear infinityfree acceda al siguente enlace:
-
-https://www.infinityfree.com/
-
-A continuación una imagen que refleja los precios para comparar
-
-<img src="./assets/01-precios.png">
+<img src="./assets/01-precios.png" alt="Comparativa de precios de InfinityFree">
 
 *Captura tomada de https://www.infinityfree.com/premium/*
 
-* Como duda que me surgió 50.000 HITS como limite en el infinity free, un hit quiere decir que es cada peticicón HTTP  individual que llegará al servidor, pero esto no significa unicamente que sea un visitante, es cualquier solicitud al servidor. Es decir todos los archivos que se tienene que cargar. Por lo que si la pagina carga 1 archivo HTML, 1 CSS, 1 JS, 3 imagenes ahí ya son 3 HITS en un momento.
+### Restricciones críticas del plan gratuito
 
-> Me asusta un poco porque tengo proyectos, como este de ADSO que tiene muchas paginas y por cada una hay imagenes, html y demás... Pienso que facilmente por visita se podrian gastar hasta 500 hits.
-> Lo bueno, es que esto es diario.
+El plan gratuito de $0 presenta limitaciones estrictas que determinan si un proyecto es viable en este entorno:
 
+- Sin cuentas de correo electrónico (Email Accounts).
+- Sin panel de control cPanel (se utiliza VistaPanel).
+- Hits no ilimitados (límite diario).
+- Sin selección de versión de PHP.
+- Sin soporte para la función `PHP mail()`.
+- Sin administración completa de DNS (Full DNS Management).
+- Sin soporte para MySQL remoto.
+- Sin soporte para Python/Node.js.
 
+### Concepto de hit
 
+Un hit representa cada petición HTTP individual que llega al servidor. No equivale a un visitante único; incluye todos los archivos que el navegador debe cargar (HTML, CSS, JS, imágenes). 
 
+> Advertencia: En proyectos con múltiples páginas y recursos, el consumo de hits puede ser elevado por visita. Si una página carga 1 HTML, 1 CSS, 1 JS y 3 imágenes, se registran 6 hits por visita. El límite se reinicia diariamente.
 
+## Puesta en marcha y registro
 
----
+El primer paso consiste en descargar el repositorio base del proyecto:
+https://github.com/trianagel/PHP_crud_basico
 
+<img src="./assets/02-php-crud-repositorio.png">
 
+Extraiga el repositorio en una carpeta local para su revisión. Verifique la estructura de carpetas y el número de archivos.
 
+A continuación, registre una cuenta en InfinityFree:
 
+1. Ingrese a https://www.infinityfree.com/ y cree una cuenta.
+2. Seleccione la opción de plan gratuito (0 por mes) y haga clic en `Create Now`.
+3. Espere la verificación del sistema.
+4. Asigne un nombre al subdominio (por ejemplo, `tests-ventas`) y seleccione la extensión `infinityfreeapp.com`. Verifique la disponibilidad.
+5. Complete la información adicional. Genere una contraseña segura (entre 8 y 15 caracteres, letras y números) y guárdela. Esta contraseña será utilizada para el panel de control y la base de datos.
+6. En la opción de consentimiento de correo (Email Consent), seleccione `I Do Not Approve`.
+7. Haga clic en `Create Account` y espere a que el sistema confirme que la cuenta está lista.
 
-## Puesta en marcha
+> Nota: Es importante utilizar la plataforma en su idioma original (inglés) para evitar errores de traducción que puedan afectar el despliegue.
 
-Ahora bien, se nos pide hacer clonación del siguente proyecto: https://github.com/trianagel/PHP_crud_basico correspondiente aun repositorio de la instructora. Y voy a crear mi cuenta con infinityfree.
+## Creación de la base de datos
 
-<img src="./assets/02-php-crud-repositorio.png"
+Desde el panel principal de la cuenta, haga clic en `Control Panel`.
 
-Entonces lo descargue como zip en esta misma carpeta, y la nombre php_crud_basico.
+<img src="./assets/03-panel-control.png" alt="Panel de control">
 
-Esto para tenerlo asilado.
+En la sección `Databases`, seleccione `MySQL Databases` (no ingrese directamente a phpMyAdmin).
 
-Y entonces inicie sesión en infinityfree con mi cuenta, lo cual fue facil debido a que esta página tiene la API de google por lo que hice mi login con mi gmail.
+<img src="./assets/06-create-db.png" alt="Sección MySQL Databases">
 
-Y entonces le di a CREATE account que esto es equivalente a empezar con el tema del hosting.
+1. En el campo `New Database`, asigne un nombre (por ejemplo, `app`).
+2. Haga clic en `Create Database`.
+3. El sistema generará las credenciales de conexión. Es fundamental guardar esta información de forma segura:
 
-Y seleccioné la opción de 0 per month y entonces debia seleccionar un nombre a la página en donde aparecian muchas opciones cde extensión de dominio o sufijo de dominio como ifree.page, page.gd
+| Parámetro | Valor de ejemplo | Descripción |
+| :--- | :--- | :--- |
+| Nombre de la BD | `if0_39370677_app` | Nombre de la base de datos con prefijo. |
+| Nombre de usuario | `if0_39370677` | Usuario generado automáticamente. |
+| Contraseña | *(Tu contraseña del vPanel)* | La clave creada en el registro. |
+| Nombre del host | `sql101.infinityfree.com` | Servidor de la base de datos. |
 
-Y le puedo poner un nombre a mi dominio
+> Solución de problemas: Si phpMyAdmin muestra un error de tiempo de espera o no lista la base de datos recién creada, cierre sesión, borre la caché del navegador y vuelva a ingresar.
 
-Para seguir con la guia, en mi caso voy a escoger: inifinityfreeapp.com
+## Importación de la base de datos
 
-Y de nombre pondré santiagoencodigo.
+Una vez creada la base de datos, regrese a la sección `MySQL Databases` y haga clic en el botón `Admin` correspondiente a su base de datos. Esto abrirá phpMyAdmin.
 
-Va a haber tambien entonces una contraseña  y un consentimiento de Email.
+1. Seleccione su base de datos en el menú izquierdo.
+2. Diríjase a la pestaña `Importar`.
+3. En `Archivo a importar`, seleccione el archivo `.sql` incluido en la carpeta local del proyecto. Asegúrese de que el conjunto de caracteres sea `utf-8`.
+4. Desplácese al final y haga clic en `Continuar`.
+5. Verifique que la importación se haya ejecutado exitosamente y que las tablas se muestren en el panel izquierdo.
 
-La contraseña hay que guardarla, y el consentimiento pues en estecaso lo vamos a rechazar.
+<img src="./assets/07-php-importacion.png" alt="Importación de base de datos">
 
-Asi entonces quedo reservado **santiagoencodigo.infinityfreeapp.com**
+## Carga de archivos del proyecto
 
-Y de ahí ya hemos iniciado con el primer paso.
+Regrese a la página principal de su cuenta en InfinityFree y haga clic en `File Manager`.
 
+<img src="./assets/07-file-manager.png" alt="File Manager">
 
+1. Ingrese a la carpeta `htdocs`. Elimine cualquier archivo de prueba predeterminado que se encuentre allí.
+2. Suba los archivos y carpetas del proyecto local. Puede utilizar la función de arrastrar y soltar o el botón de `Upload`.
+3. Si se sube uno a uno, verifique que todos los archivos se hayan transferido correctamente.
 
+> Solución de problemas: Si aparece el error `Either your FTP account quota has been exceeded, or the file upload was blocked by security`, utilice la opción de carga manual (icono de subir) o suba los archivos en grupos más pequeños. A veces, las rutas de archivo muy extensas causan este error.
 
----
+## Configuración de la conexión
 
+El proyecto debe apuntar a las credenciales de la base de datos remota de InfinityFree. En el `File Manager`, navegue por la carpeta `htdocs` hasta encontrar el archivo de conexión (en este caso, `Conexion.php`).
 
+Haga clic derecho sobre el archivo y seleccione `Edit`.
 
+Modifique las variables con los datos proporcionados por InfinityFree:
 
-## Creación de Base de Datos
-
-Y entonces le di a back to acctounts y entonces en el panel le di a control panel, dejaré una imagen a continuación para que se pueda observar donde
-
-<img src="./assets/03-panel-control.png">
-
-Y entonces vamos a darle a la selección de bases de datos y haremos click en phpmyadmin
-
-<img src="./assets/04-panel-control-phpmyadmin.png">
-
-Y entonces ahora empezaremos con la creación de nuestra base de datos
-
-<img src="./assets/05-connect-db.png">
-
-Y entonces hay decidí ejecutar mi XAMPP y escribir localhost en mi navegador para abrir la interfaz y empece a trabajar con eso.
-
-de ahí en consultassql escribi:
-
-```sql
-    CREATE DATABASE testinfinityfree;
+```php
+<?php
+class Conexion {
+    private static $instancia = null;
+    private $db;
+    private $driver = "mysql";
+    private $host = "sql101.infinityfree.com"; // Host proporcionado
+    private $bd = "if0_39370677_app"; // Nombre de la BD con prefijo
+    private $usuario = "if0_39370677"; // Usuario de la BD
+    private $contrasena = "TuContrasenaSegura"; // Contraseña del vPanel
+    // ...
+}
 ```
 
-y seleccioné la base de datos.
+> Nota: Asegúrese de editar el archivo mientras la plataforma está en inglés. Guarde los cambios (`Save`) y cierre el editor (`Close`).
 
-Y en infinityfree le di a la opción de connect.
+## Pruebas y solución de errores
 
-De aqui tube mi primer problema, porque no encontraba nada para conectar y cuando le daba... Me aparecia "La pagina se ha demorado mucho en cargar"
+Regrese al panel principal y copie la URL de su sitio web (`Website`). Ábrala en una pestaña nueva del navegador.
 
-Esto es porque la pagina no es para crear una BD, sino que me encuentro ubicado en una para conectar.
+<img src="./assets/08-page.png" alt="Página desplegada">
 
-Entonces debo salirme de esta interfaz para enn vez de darle a phpmyadmin, darle a mysql databases
+> Nota: El sistema puede advertir que el dominio tardará hasta 72 horas en propagarse a nivel global (DNS caching). Sin embargo, el sitio suele estar accesible en minutos.
 
-<img src="./assets/06-create-db.png">
+Navegue por la aplicación y verifique los enlaces del menú y el funcionamiento del CRUD. Si encuentra errores en el código original, complete la siguiente tabla de acuerdo con los requerimientos de la actividad:
 
-de nombre le voy a poner santiagoencodigo.
+| Descripción del problema/error | Código antes de la solución | Código después de la solución |
+| :--- | :--- | :--- |
+| *Ejemplo: El enlace del menú apunta a una ruta local absoluta.* | `<a href="C:/xampp/htdocs/...">` | `<a href="./index.php">` |
+| | | |
 
-> Aqui vi entonces que en infinityfree puedo tener hasta 400 bases de datos. Y en este caso ahora puedo 399 porque ya voy una.
-
-Ahora sí, debo volver a phpmyadmin y realizar la conexión.
-
-Y me sigue apareciendo lo mismo en phpmyadmin, entonces para forzar esa actualización de base de datos porque ya esta creada.
-
-De aqui segui con los mismos problemas, por lo que me vi en la situación de querrer ver un video de yutu para informarme
-
-Po lo que fui a ver: https://www.youtube.com/watch?v=GbAKgXaF8jY
-
-> Aun no se responden mis dudas, ¿Por qué será que estoy teniendo problemas en crear  la Base de Datos?
-
-* Cuando la creo en MySQL connection, no se esta creando realmente.
-
-> Tristemente, esperaré a la ayuda de un compañero para solucionar este problema. No encuentro como solucionarlo ni con videos de youtube, ni con IA.
-
-
-
+Enlace del proyecto desplegado:
+https://crudsantiago.infinityfree.io/
