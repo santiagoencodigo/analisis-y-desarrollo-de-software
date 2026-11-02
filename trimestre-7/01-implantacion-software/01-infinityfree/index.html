@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Despliegue en InfinityFree · Trimestre 7 · ADSO</title>
+    <meta name="description" content="Documentación del proceso de despliegue de una aplicación web utilizando el servicio de alojamiento gratuito InfinityFree.">
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto (Ajustados a la profundidad de 3 carpetas) -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+
+    <!-- Estilos específicos para esta página (Sin modificar templates.css) -->
+    <style>
+        /* Estilo para el bloque de código PHP */
+        .bm-content pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--color-text-primary);
+        }
+        
+        .bm-content code {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.85em;
+            background: rgba(var(--color-text-secondary-rgb), 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: var(--color-accent-2);
+        }
+        
+        .bm-content pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Estilo para las imágenes del tutorial */
+        .bm-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            margin: 2rem auto 0.5rem;
+            display: block;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Texto de las capturas (em) */
+        .bm-content em {
+            display: block;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <!-- HERO EDITORIAL -->
+        <section class="bm-hero">
+            <div class="bm-hero__bg">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+            <div class="bm-hero__inner">
+                <div class="bm-hero__eyebrow">
+                    <span class="bm-dot"></span> Trimestre 7 · Implantación de Software
+                </div>
+                <h1 class="bm-hero__title">
+                    Despliegue de software en <br>
+                    <span class="gradient-text">InfinityFree</span>
+                </h1>
+                <p class="bm-hero__lead">
+                    Documentación del proceso de despliegue de una aplicación web utilizando el servicio de alojamiento gratuito InfinityFree. Esta guía cubre la investigación del servicio, la configuración inicial, la creación de la base de datos, la carga de archivos y la resolución de errores.
+                </p>
+                
+                <div class="bm-hero__meta">
+                    <div class="bm-meta-item">
+                        <span class="bm-meta-label">Competencia</span>
+                        <span class="bm-meta-value" style="font-size: 0.8rem; max-width: 350px; line-height: 1.4;">Implementar la solución de software de acuerdo con los requisitos de operación y modelos de referencia.</span>
+                    </div>
+                    <div class="bm-meta-item">
+                        <span class="bm-meta-label">Resultado de Aprendizaje</span>
+                        <span class="bm-meta-value" style="font-size: 0.8rem; max-width: 350px; line-height: 1.4;">Desplegar el software de acuerdo con la arquitectura y las políticas establecidas.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT PRINCIPAL -->
+        <div class="bm-layout">
+            
+            <!-- TABLA DE CONTENIDO (STICKY) -->
+            <aside class="bm-toc" id="bm-toc">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">En esta página</span>
+                        <button class="bm-toc__toggle" aria-label="Abrir índice" aria-expanded="false">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav">
+                        <ul class="bm-toc__list">
+                            <li><a href="#investigacion" class="bm-toc__link"><span class="bm-toc__num">01</span> Investigación del servicio</a></li>
+                            <li><a href="#puesta-marcha" class="bm-toc__link"><span class="bm-toc__num">02</span> Puesta en marcha</a></li>
+                            <li><a href="#creacion-bd" class="bm-toc__link"><span class="bm-toc__num">03</span> Creación de la BD</a></li>
+                            <li><a href="#importacion-bd" class="bm-toc__link"><span class="bm-toc__num">04</span> Importación de la BD</a></li>
+                            <li><a href="#carga-archivos" class="bm-toc__link"><span class="bm-toc__num">05</span> Carga de archivos</a></li>
+                            <li><a href="#configuracion" class="bm-toc__link"><span class="bm-toc__num">06</span> Configuración de conexión</a></li>
+                            <li><a href="#pruebas" class="bm-toc__link"><span class="bm-toc__num">07</span> Pruebas y errores</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <article class="bm-content">
+                
+                <!-- SECCIÓN 1 -->
+                <section id="investigacion" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">01</span>
+                        <h2 class="bm-section__title">Investigación del servicio de alojamiento</h2>
+                        <p class="bm-section__sub">Antes de iniciar el despliegue, es necesario comprender el margen de maniobra técnico y las limitaciones del servicio gratuito.</p>
+                    </div>
+
+                    <h3>Características de alojamiento gratuito</h3>
+                    <p>InfinityFree proporciona un entorno real para PHP y MySQL. Según las especificaciones del servicio, las características principales son:</p>
+                    
+                    <ul class="bm-list">
+                        <li>5 GB de espacio en disco.</li>
+                        <li>Ancho de banda ilimitado.</li>
+                        <li>PHP 8.3.</li>
+                        <li>MySQL 8.0 / MariaDB 10.6.</li>
+                        <li>Nombres de subdominios gratuitos.</li>
+                        <li>Traiga su propio dominio (dominios personalizados).</li>
+                        <li>400 bases de datos MySQL.</li>
+                        <li>Servicio de DNS gratuito.</li>
+                        <li>Certificados SSL gratuitos.</li>
+                        <li>Soporte completo para <code>.htaccess</code>.</li>
+                    </ul>
+
+                    <p>A continuación, se muestra una comparativa de precios del servicio:</p>
+                    <img src="./assets/01-precios.png" alt="Comparativa de precios de InfinityFree" loading="lazy">
+                    <em>Captura tomada de https://www.infinityfree.com/premium/</em>
+
+                    <h3>Restricciones críticas del plan gratuito</h3>
+                    <p>El plan gratuito de $0 presenta limitaciones estrictas que determinan si un proyecto es viable en este entorno:</p>
+                    <ul class="bm-list">
+                        <li>Sin cuentas de correo electrónico (Email Accounts).</li>
+                        <li>Sin panel de control cPanel (se utiliza VistaPanel).</li>
+                        <li>Hits no ilimitados (límite diario).</li>
+                        <li>Sin selección de versión de PHP.</li>
+                        <li>Sin soporte para la función <code>PHP mail()</code>.</li>
+                        <li>Sin administración completa de DNS (Full DNS Management).</li>
+                        <li>Sin soporte para MySQL remoto.</li>
+                        <li>Sin soporte para Python/Node.js.</li>
+                    </ul>
+
+                    <h3>Concepto de hit</h3>
+                    <p>Un hit representa cada petición HTTP individual que llega al servidor. No equivale a un visitante único; incluye todos los archivos que el navegador debe cargar (HTML, CSS, JS, imágenes).</p>
+                    
+                    <div class="bm-callout bm-callout--amber">
+                        <strong>Advertencia:</strong> En proyectos con múltiples páginas y recursos, el consumo de hits puede ser elevado por visita. Si una página carga 1 HTML, 1 CSS, 1 JS y 3 imágenes, se registran 6 hits por visita. El límite se reinicia diariamente.
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 2 -->
+                <section id="puesta-marcha" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">02</span>
+                        <h2 class="bm-section__title">Puesta en marcha y registro</h2>
+                    </div>
+
+                    <p>El primer paso consiste en descargar el repositorio base del proyecto: <br>
+                    <a href="https://github.com/trianagel/PHP_crud_basico" target="_blank" rel="noopener noreferrer">https://github.com/trianagel/PHP_crud_basico</a></p>
+
+                    <img src="./assets/02-php-crud-repositorio.png" alt="Repositorio PHP CRUD" loading="lazy">
+
+                    <p>Extraiga el repositorio en una carpeta local para su revisión. Verifique la estructura de carpetas y el número de archivos.</p>
+                    <p>A continuación, registre una cuenta en InfinityFree:</p>
+
+                    <ol class="bm-list bm-list--ordered">
+                        <li>Ingrese a <a href="https://www.infinityfree.com/" target="_blank" rel="noopener noreferrer">https://www.infinityfree.com/</a> y cree una cuenta.</li>
+                        <li>Seleccione la opción de plan gratuito (0 por mes) y haga clic en <code>Create Now</code>.</li>
+                        <li>Espere la verificación del sistema.</li>
+                        <li>Asigne un nombre al subdominio (por ejemplo, <code>tests-ventas</code>) y seleccione la extensión <code>infinityfreeapp.com</code>. Verifique la disponibilidad.</li>
+                        <li>Complete la información adicional. Genere una contraseña segura (entre 8 y 15 caracteres, letras y números) y guárdela. Esta contraseña será utilizada para el panel de control y la base de datos.</li>
+                        <li>En la opción de consentimiento de correo (Email Consent), seleccione <code>I Do Not Approve</code>.</li>
+                        <li>Haga clic en <code>Create Account</code> y espere a que el sistema confirme que la cuenta está lista.</li>
+                    </ol>
+
+                    <div class="bm-callout">
+                        <strong>Nota:</strong> Es importante utilizar la plataforma en su idioma original (inglés) para evitar errores de traducción que puedan afectar el despliegue.
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3 -->
+                <section id="creacion-bd" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">03</span>
+                        <h2 class="bm-section__title">Creación de la base de datos</h2>
+                    </div>
+
+                    <p>Desde el panel principal de la cuenta, haga clic en <code>Control Panel</code>.</p>
+                    <img src="./assets/03-panel-control.png" alt="Panel de control" loading="lazy">
+
+                    <p>En la sección <code>Databases</code>, seleccione <code>MySQL Databases</code> (no ingrese directamente a phpMyAdmin).</p>
+                    <img src="./assets/06-create-db.png" alt="Sección MySQL Databases" loading="lazy">
+
+                    <ol class="bm-list bm-list--ordered">
+                        <li>En el campo <code>New Database</code>, asigne un nombre (por ejemplo, <code>app</code>).</li>
+                        <li>Haga clic en <code>Create Database</code>.</li>
+                        <li>El sistema generará las credenciales de conexión. Es fundamental guardar esta información de forma segura:</li>
+                    </ol>
+
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parámetro</th>
+                                        <th>Valor de ejemplo</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Nombre de la BD</td>
+                                        <td><code>if0_39370677_app</code></td>
+                                        <td>Nombre de la base de datos con prefijo.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre de usuario</td>
+                                        <td><code>if0_39370677</code></td>
+                                        <td>Usuario generado automáticamente.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contraseña</td>
+                                        <td><em>(Tu contraseña del vPanel)</em></td>
+                                        <td>La clave creada en el registro.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre del host</td>
+                                        <td><code>sql101.infinityfree.com</code></td>
+                                        <td>Servidor de la base de datos.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bm-callout bm-callout--amber">
+                        <strong>Solución de problemas:</strong> Si phpMyAdmin muestra un error de tiempo de espera o no lista la base de datos recién creada, cierre sesión, borre la caché del navegador y vuelva a ingresar.
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 4 -->
+                <section id="importacion-bd" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">04</span>
+                        <h2 class="bm-section__title">Importación de la base de datos</h2>
+                    </div>
+
+                    <p>Una vez creada la base de datos, regrese a la sección <code>MySQL Databases</code> y haga clic en el botón <code>Admin</code> correspondiente a su base de datos. Esto abrirá phpMyAdmin.</p>
+
+                    <ol class="bm-list bm-list--ordered">
+                        <li>Seleccione su base de datos en el menú izquierdo.</li>
+                        <li>Diríjase a la pestaña <code>Importar</code>.</li>
+                        <li>En <code>Archivo a importar</code>, seleccione el archivo <code>.sql</code> incluido en la carpeta local del proyecto. Asegúrese de que el conjunto de caracteres sea <code>utf-8</code>.</li>
+                        <li>Desplácese al final y haga clic en <code>Continuar</code>.</li>
+                        <li>Verifique que la importación se haya ejecutado exitosamente y que las tablas se muestren en el panel izquierdo.</li>
+                    </ol>
+
+                    <img src="./assets/07-php-importacion.png" alt="Importación de base de datos" loading="lazy">
+                </section>
+
+                <!-- SECCIÓN 5 -->
+                <section id="carga-archivos" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">05</span>
+                        <h2 class="bm-section__title">Carga de archivos del proyecto</h2>
+                    </div>
+
+                    <p>Regrese a la página principal de su cuenta en InfinityFree y haga clic en <code>File Manager</code>.</p>
+                    <img src="./assets/07-file-manager.png" alt="File Manager" loading="lazy">
+
+                    <ol class="bm-list bm-list--ordered">
+                        <li>Ingrese a la carpeta <code>htdocs</code>. Elimine cualquier archivo de prueba predeterminado que se encuentre allí.</li>
+                        <li>Suba los archivos y carpetas del proyecto local. Puede utilizar la función de arrastrar y soltar o el botón de <code>Upload</code>.</li>
+                        <li>Si se sube uno a uno, verifique que todos los archivos se hayan transferido correctamente.</li>
+                    </ol>
+
+                    <div class="bm-callout bm-callout--amber">
+                        <strong>Solución de problemas:</strong> Si aparece el error <code>Either your FTP account quota has been exceeded, or the file upload was blocked by security</code>, utilice la opción de carga manual (icono de subir) o suba los archivos en grupos más pequeños. A veces, las rutas de archivo muy extensas causan este error.
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 6 -->
+                <section id="configuracion" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">06</span>
+                        <h2 class="bm-section__title">Configuración de la conexión</h2>
+                    </div>
+
+                    <p>El proyecto debe apuntar a las credenciales de la base de datos remota de InfinityFree. En el <code>File Manager</code>, navegue por la carpeta <code>htdocs</code> hasta encontrar el archivo de conexión (en este caso, <code>Conexion.php</code>).</p>
+                    <p>Haga clic derecho sobre el archivo y seleccione <code>Edit</code>. Modifique las variables con los datos proporcionados por InfinityFree:</p>
+
+<pre><code>&lt;?php
+class Conexion {
+    private static $instancia = null;
+    private $db;
+    private $driver = "mysql";
+    private $host = "sql101.infinityfree.com"; // Host proporcionado
+    private $bd = "if0_39370677_app"; // Nombre de la BD con prefijo
+    private $usuario = "if0_39370677"; // Usuario de la BD
+    private $contrasena = "TuContrasenaSegura"; // Contraseña del vPanel
+    // ...
+}</code></pre>
+
+                    <div class="bm-callout">
+                        <strong>Nota:</strong> Asegúrese de editar el archivo mientras la plataforma está en inglés. Guarde los cambios (<code>Save</code>) y cierre el editor (<code>Close</code>).
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 7 -->
+                <section id="pruebas" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">07</span>
+                        <h2 class="bm-section__title">Pruebas y solución de errores</h2>
+                    </div>
+
+                    <p>Regrese al panel principal y copie la URL de su sitio web (<code>Website</code>). Ábrala en una pestaña nueva del navegador.</p>
+                    
+                    <img src="./assets/08-page.png" alt="Página desplegada" loading="lazy">
+
+                    <div class="bm-callout bm-callout--amber">
+                        <strong>Nota:</strong> El sistema puede advertir que el dominio tardará hasta 72 horas en propagarse a nivel global (DNS caching). Sin embargo, el sitio suele estar accesible en minutos.
+                    </div>
+
+                    <p>Navegue por la aplicación y verifique los enlaces del menú y el funcionamiento del CRUD. Si encuentra errores en el código original, complete la siguiente tabla de acuerdo con los requerimientos de la actividad:</p>
+
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Descripción del problema/error</th>
+                                        <th>Código antes de la solución</th>
+                                        <th>Código después de la solución</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><em>Ejemplo: El enlace del menú apunta a una ruta local absoluta.</em></td>
+                                        <td><code>&lt;a href="C:/xampp/htdocs/..."&gt;</code></td>
+                                        <td><code>&lt;a href="./index.php"&gt;</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 2rem;">Enlace del proyecto desplegado: <br>
+                    <a href="https://crudsantiago.infinityfree.io/" target="_blank" rel="noopener noreferrer">https://crudsantiago.infinityfree.io/</a></p>
+
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+
+</body>
+
+</html>
