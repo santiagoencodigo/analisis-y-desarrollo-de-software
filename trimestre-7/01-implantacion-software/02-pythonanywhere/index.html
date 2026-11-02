@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Despliegue en PythonAnywhere · Trimestre 7 · ADSO</title>
+    <meta name="description"
+        content="Documentación del proceso de despliegue de una aplicación web con Django y Python utilizando PythonAnywhere.">
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto (Ajustados a la profundidad de 3 carpetas) -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+
+    <!-- Estilos específicos para esta página (Sin modificar templates.css) -->
+    <style>
+        /* Estilo para los bloques de código */
+        .bm-content pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--color-text-primary);
+        }
+
+        .bm-content code {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.85em;
+            background: rgba(var(--color-text-secondary-rgb), 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: var(--color-accent-2);
+        }
+
+        .bm-content pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Estilo para las preguntas y respuestas (Q&A) */
+        .qa-block {
+            background: rgba(var(--color-accent-rgb), 0.03);
+            border-left: 3px solid var(--color-accent);
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .qa-question {
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-start;
+        }
+
+        .qa-question::before {
+            content: "Q.";
+            color: var(--color-accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .qa-answer {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt=""
+                        class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <!-- HERO EDITORIAL -->
+        <section class="bm-hero">
+            <div class="bm-hero__bg">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+            <div class="bm-hero__inner">
+                <div class="bm-hero__eyebrow">
+                    <span class="bm-dot"></span> Trimestre 7 · Implantación de Software
+                </div>
+                <h1 class="bm-hero__title">
+                    Despliegue en <br>
+                    <span class="gradient-text">PythonAnywhere con Django</span>
+                </h1>
+                <p class="bm-hero__lead">
+                    Documentación del proceso de despliegue de una aplicación web desarrollada con el framework Django y
+                    el lenguaje Python, utilizando el servicio de alojamiento PythonAnywhere.
+                </p>
+
+                <div class="bm-hero__meta">
+                    <div class="bm-meta-item">
+                        <span class="bm-meta-label">Competencia</span>
+                        <span class="bm-meta-value"
+                            style="font-size: 0.8rem; max-width: 350px; line-height: 1.4;">Implementar la solución de
+                            software de acuerdo con los requisitos de operación y modelos de referencia.</span>
+                    </div>
+                    <div class="bm-meta-item">
+                        <span class="bm-meta-label">Resultado de Aprendizaje</span>
+                        <span class="bm-meta-value"
+                            style="font-size: 0.8rem; max-width: 350px; line-height: 1.4;">Desplegar el software de
+                            acuerdo con la arquitectura y las políticas establecidas.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT PRINCIPAL -->
+        <div class="bm-layout">
+
+            <!-- TABLA DE CONTENIDO (STICKY) -->
+            <aside class="bm-toc" id="bm-toc">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">En esta página</span>
+                        <button class="bm-toc__toggle" aria-label="Abrir índice" aria-expanded="false">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav">
+                        <ul class="bm-toc__list">
+                            <li><a href="#investigacion" class="bm-toc__link"><span class="bm-toc__num">01</span>
+                                    Investigación de servicios</a></li>
+                            <li><a href="#registro" class="bm-toc__link"><span class="bm-toc__num">02</span> Registro y
+                                    configuración</a></li>
+                            <li><a href="#despliegue-wsgi" class="bm-toc__link"><span class="bm-toc__num">03</span>
+                                    Despliegue y WSGI</a></li>
+                            <li><a href="#base-datos" class="bm-toc__link"><span class="bm-toc__num">04</span> Base de
+                                    datos MySQL</a></li>
+                            <li><a href="#pruebas" class="bm-toc__link"><span class="bm-toc__num">05</span> Pruebas
+                                    finales</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <article class="bm-content">
+
+                <!-- SECCIÓN 1 -->
+                <section id="investigacion" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">01</span>
+                        <h2 class="bm-section__title">Investigación de servicios de alojamiento</h2>
+                        <p class="bm-section__sub">Análisis de opciones para el despliegue de aplicaciones en Python.
+                        </p>
+                    </div>
+
+                    <p>Para el despliegue de aplicaciones en Python, se investigaron las siguientes plataformas:</p>
+
+                    <ul class="bm-list">
+                        <li><a href="https://www.pythonanywhere.com/" target="_blank"
+                                rel="noopener noreferrer">PythonAnywhere</a></li>
+                        <li><a href="https://render.com/" target="_blank" rel="noopener noreferrer">Render</a></li>
+                        <li><a href="https://www.heroku.com/" target="_blank" rel="noopener noreferrer">Heroku</a></li>
+                        <li><a href="https://azure.microsoft.com/es-es" target="_blank"
+                                rel="noopener noreferrer">Azure</a></li>
+                        <li><a href="https://vercel.com/" target="_blank" rel="noopener noreferrer">Vercel</a></li>
+                    </ul>
+
+                    <div class="qa-block">
+                        <div class="qa-question">¿Estoy dispuesto a realizar un pago para obtener mejoras en las
+                            funcionalidades que brinda el host?</div>
+                        <p class="qa-answer">En esta fase de aprendizaje y para el alcance del proyecto formativo
+                            OperPan, no se realizará un pago. Se utilizará el plan gratuito (Beginner) que ofrece
+                            recursos suficientes para validar el despliegue y el funcionamiento básico del software. Sin
+                            embargo, para un entorno de producción real, sería necesario adquirir un plan de pago para
+                            obtener mayor cuota de CPU, bases de datos relacionales y dominios personalizados.</p>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 2 -->
+                <section id="registro" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">02</span>
+                        <h2 class="bm-section__title">Registro y configuración inicial</h2>
+                    </div>
+
+                    <p>El primer paso consiste en crear una cuenta. Para evitar recibir correos no deseados en la
+                        bandeja personal durante las pruebas, se recomienda utilizar un correo temporal.</p>
+
+                    <ol class="bm-list bm-list--ordered">
+                        <li>Ingrese a <a href="https://temp-mail.org/es/" target="_blank" rel="noopener noreferrer">Temp
+                                Mail</a> y copie la dirección generada.</li>
+                        <li>Diríjase a <a href="https://www.pythonanywhere.com/" target="_blank"
+                                rel="noopener noreferrer">PythonAnywhere</a> y seleccione la opción
+                            <code>Pricing &amp; signup</code>.</li>
+                        <li>Haga clic en <code>Create a Beginner account</code>.</li>
+                        <li>Complete el formulario con el correo temporal. El nombre de usuario elegido será el dominio
+                            de su aplicación (por ejemplo, <code>santiagooperpan</code>).</li>
+                        <li>Acepte los términos y haga clic en <code>Register</code>.</li>
+                        <li>Revise la bandeja de entrada del correo temporal, abra el mensaje de PythonAnywhere y haga
+                            clic en el enlace de confirmación para activar la cuenta.</li>
+                    </ol>
+
+                    <div class="bm-callout bm-callout--amber">
+                        <strong>Nota:</strong> Es importante hacer clic en el enlace de confirmación; de lo contrario,
+                        la cuenta no se activará y no se podrá acceder al panel principal.
+                    </div>
+
+                    <div class="qa-block">
+                        <div class="qa-question">¿Por qué cree que es necesario un correo temporal en este despliegue?
+                        </div>
+                        <p class="qa-answer">Utilizar un correo temporal permite mantener la bandeja de entrada personal
+                            limpia de posibles correos de spam, promociones o notificaciones del servicio de hosting.
+                            Además, facilita la creación de múltiples cuentas para pruebas sin comprometer la identidad
+                            principal del desarrollador.</p>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3 -->
+                <section id="despliegue-wsgi" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">03</span>
+                        <h2 class="bm-section__title">Despliegue base y configuración WSGI</h2>
+                    </div>
+
+                    <p>Para la preparación del código, el repositorio base es: <br>
+                        <a href="https://github.com/trianagel/crud_python_django" target="_blank"
+                            rel="noopener noreferrer">https://github.com/trianagel/crud_python_django</a>
+                    </p>
+
+                    <h3>Verificación de recursos</h3>
+                    <p>En el panel principal (Dashboard), verifique los recursos disponibles en el plan gratuito:</p>
+                    <ul class="bm-list">
+                        <li><strong>CPU Usage:</strong> 0% used – 0.00s of 100s. Resets in 23 hours.</li>
+                        <li><strong>File storage:</strong> 0% full – 60.0 KB of your 512.0 MB quota.</li>
+                    </ul>
+
+                    <div class="qa-block">
+                        <div class="qa-question">¿Qué quiere decir lo que se muestra allí?</div>
+                        <p class="qa-answer">La plataforma limita el consumo de procesamiento a 100 segundos diarios y
+                            el almacenamiento a 512 MB. El contador de CPU se reinicia cada 24 horas. Estas
+                            restricciones significan que la aplicación debe ser eficiente y no puede ejecutar procesos
+                            pesados o prolongados en segundo plano.</p>
+                    </div>
+
+                    <h3>Configuración de la consola y el entorno virtual</h3>
+                    <ol class="bm-list bm-list--ordered">
+                        <li>Diríjase al menú <code>Consoles</code> y seleccione <code>$ Bash</code>.</li>
+                        <li>Clone el repositorio desde la consola:
+                            <pre><code>git clone https://github.com/trianagel/crud_python_django</code></pre>
+                        </li>
+                        <li>Cree el entorno virtual especificando la versión de Python (3.13 en este caso):
+                            <pre><code>mkvirtualenv --python=/usr/bin/python3.13 venv</code></pre>
+                        </li>
+                        <li>Active el entorno virtual e instale Django:
+                            <pre><code>workon venv
+pip install django</code></pre>
+                        </li>
+                    </ol>
+
+                    <h3>Creación de la aplicación web</h3>
+                    <ol class="bm-list bm-list--ordered">
+                        <li>Vaya al menú <code>Web</code> y haga clic en <code>Add a new web app</code>.</li>
+                        <li>En la configuración, seleccione <code>Manual configuration</code> para personalizar el
+                            proceso.</li>
+                        <li>Seleccione la versión <code>Python 3.13</code> y haga clic en <code>Next</code>.</li>
+                    </ol>
+
+                    <div class="qa-block">
+                        <div class="qa-question">¿Qué puede ser el archivo wsgi?</div>
+                        <p class="qa-answer">WSGI (Web Server Gateway Interface) es una especificación estándar que
+                            define cómo un servidor web (como el de PythonAnywhere) se comunica con una aplicación web
+                            de Python. El archivo <code>wsgi.py</code> actúa como un puente o punto de entrada que le
+                            dice al servidor cómo cargar y ejecutar el proyecto Django.</p>
+                    </div>
+
+                    <h3>Configuración de rutas y seguridad</h3>
+                    <ol class="bm-list bm-list--ordered">
+                        <li>En la sección <code>Code</code>, configure el <code>Source code</code> con la ruta del
+                            proyecto: <code>/home/tu_usuario/crud_python_django</code>.</li>
+                        <li>En <code>Virtualenv</code>, ingrese la ruta:
+                            <code>/home/tu_usuario/.virtualenvs/venv</code>.</li>
+                        <li>En <code>Static files</code>, agregue la ruta de las imágenes:
+                            <ul>
+                                <li>URL: <code>/imagenes/</code></li>
+                                <li>Directory: <code>/home/tu_usuario/crud_python_django/imagenes</code></li>
+                            </ul>
+                        </li>
+                        <li>En la sección <code>Security</code>, haga clic en <code>Enabled</code> en la opción
+                            <code>Force HTTPS</code>.</li>
+                    </ol>
+
+                    <div class="qa-block">
+                        <div class="qa-question">¿Qué hace el HTTPS?</div>
+                        <p class="qa-answer">HTTPS (Hypertext Transfer Protocol Secure) cifra la comunicación entre el
+                            navegador del usuario y el servidor mediante certificados SSL/TLS. Esto protege la
+                            información sensible (como contraseñas y datos de formularios) de ser interceptada por
+                            terceros, garantizando la integridad y privacidad de los datos.</p>
+                    </div>
+
+                    <h3>Edición del archivo WSGI y migraciones (SQLite)</h3>
+                    <p>Para que PythonAnywhere reconozca el proyecto Django, edite el archivo WSGI:</p>
+                    <ol class="bm-list bm-list--ordered">
+                        <li>En la sección <code>Code</code>, haga clic en el enlace del archivo <code>wsgi.py</code>.
+                        </li>
+                        <li>Borre todo el contenido y pegue la siguiente configuración (reemplace
+                            <code>NOMBREGITHUB</code> por <code>crud_python_django</code> y <code>NOMBRE AQUI</code> por
+                            <code>project</code>):
+                            <pre><code>import os
+import sys
+
+path = os.path.expanduser('~/crud_python_django')
+if path not in sys.path:
+    sys.path.insert(0, path)
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'project.settings'
+
+from django.core.wsgi import get_wsgi_application
+from django.contrib.staticfiles.handlers import StaticFilesHandler
+
+application = StaticFilesHandler(get_wsgi_application())</code></pre>
+                        </li>
+                        <li>Haga clic en <code>Save</code> y regrese al menú <code>Web</code> para hacer clic en
+                            <code>Reload</code>.</li>
+                    </ol>
+
+                    <div class="qa-block">
+                        <div class="qa-question">¿Qué se ha hecho hasta ahora?</div>
+                        <p class="qa-answer">Se ha clonado el repositorio, se ha preparado un entorno virtual aislado
+                            con Django, y se ha configurado la aplicación web en PythonAnywhere. Además, se ha
+                            establecido el puente (WSGI) para que el servidor ejecute el código, se han mapeado los
+                            archivos estáticos y se ha asegurado la conexión. La aplicación está lista para inicializar
+                            su base de datos.</p>
+                    </div>
+
+                    <ol class="bm-list bm-list--ordered" start="4">
+                        <li>Diríjase a la consola Bash, ingrese a la carpeta del proyecto e instale las dependencias
+                            para imágenes y realice las migraciones iniciales (usando SQLite por defecto):
+                            <pre><code>cd crud_python_django
+pip install pymysql
+python -m pip install pillow
+python manage.py makemigrations
+python manage.py migrate</code></pre>
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- SECCIÓN 4 -->
+                <section id="base-datos" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">04</span>
+                        <h2 class="bm-section__title">Implementación de base de datos MySQL</h2>
+                    </div>
+
+                    <p>PythonAnywhere permite crear una base de datos MySQL en el plan gratuito para proyectos pequeños.
+                    </p>
+
+                    <ol class="bm-list bm-list--ordered">
+                        <li>Diríjase al menú <code>Databases</code> y haga clic en <code>Initialize MySQL</code>.</li>
+                        <li>Asigne una contraseña segura y guárdela.</li>
+                        <li>En la consola Bash, instale el conector de MySQL para Python:
+                            <pre><code>pip install mysqlclient
+pip install pymysql</code></pre>
+                        </li>
+                        <li>Vaya al menú <code>Files</code> y abra el archivo <code>project/settings.py</code>.</li>
+                        <li>Modifique la sección <code>DATABASES</code> con las credenciales proporcionadas por la
+                            plataforma:
+                            <pre><code>DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tu_usuario$default',
+        'USER': 'tu_usuario',
+        'PASSWORD': 'tu_contraseña_mysql',
+        'HOST': 'tu_usuario.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
+    }
+}</code></pre>
+                        </li>
+                        <li>En el mismo archivo, ubique <code>ALLOWED_HOSTS</code> y agregue su dominio:
+                            <pre><code>ALLOWED_HOSTS = ['santiagooperpan.pythonanywhere.com']</code></pre>
+                        </li>
+                        <li>Guarde los cambios, vaya al menú <code>Web</code> y haga clic en <code>Reload</code>.</li>
+                        <li>Abra la consola Bash y aplique las migraciones a la nueva base de datos MySQL:
+                            <pre><code>python manage.py migrate</code></pre>
+                        </li>
+                        <li>Verifique la creación de las tablas. En el menú <code>Databases</code>, haga clic en el
+                            nombre de su base de datos (<code>tu_usuario$default</code>). En la consola MySQL que se
+                            abre, ejecute:
+                            <pre><code>show tables;</code></pre>
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- SECCIÓN 5 -->
+                <section id="pruebas" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">05</span>
+                        <h2 class="bm-section__title">Pruebas finales</h2>
+                    </div>
+
+                    <p>Acceda a la URL de su aplicación (por ejemplo, <a
+                            href="https://santiagooperpan.pythonanywhere.com/" target="_blank"
+                            rel="noopener noreferrer">https://santiagooperpan.pythonanywhere.com/</a>). Navegue por los
+                        enlaces del menú y realice las pruebas del CRUD (Crear, Leer, Actualizar, Eliminar) para
+                        verificar que la conexión con la base de datos MySQL funciona correctamente.</p>
+
+                    <p style="margin-top: 2rem;">Enlace del proyecto desplegado: <br>
+                        <a href="https://santiagooperpan.pythonanywhere.com/" target="_blank"
+                            rel="noopener noreferrer">https://santiagooperpan.pythonanywhere.com/</a>
+                    </p>
+
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+
+</body>
+
+</html>
