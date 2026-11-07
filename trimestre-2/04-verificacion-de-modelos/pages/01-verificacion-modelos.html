@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verificación de Modelos · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Verificación de modelos en el análisis de software: reglas de negocio, casos de uso y diagramas de clases.">
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto (Ajustados a la profundidad de 3 carpetas) -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+
+    <!-- Estilos específicos para esta página -->
+    <style>
+        .bm-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            margin: 2rem auto 0.5rem;
+            display: block;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .bm-content em {
+            display: block;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            font-style: normal;
+        }
+        /* Estilo para tablas de formato de documentación (Key-Value) */
+        .doc-table td:first-child {
+            width: 30%;
+            background-color: rgba(var(--color-text-secondary-rgb), 0.04);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <!-- HERO EDITORIAL -->
+        <section class="bm-hero">
+            <div class="bm-hero__bg">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+            <div class="bm-hero__inner">
+                <div class="bm-hero__eyebrow">
+                    <span class="bm-dot"></span> Trimestre 2 · Análisis de Software
+                </div>
+                <h1 class="bm-hero__title">
+                    Verificación de <br>
+                    <span class="gradient-text">Modelos en el Análisis</span>
+                </h1>
+                <p class="bm-hero__lead">
+                    Verificar los modelos realizados en la fase de análisis de acuerdo con lo establecido en el informe de requisitos.
+                </p>
+                
+                <div class="bm-hero__meta">
+                    <div class="bm-meta-item">
+                        <span class="bm-meta-label">Competencia</span>
+                        <span class="bm-meta-value" style="font-size: 0.8rem; max-width: 350px; line-height: 1.4;">Análisis de la especificación de requisitos de software.</span>
+                    </div>
+                    <div class="bm-meta-item">
+                        <span class="bm-meta-label">Resultado de Aprendizaje</span>
+                        <span class="bm-meta-value" style="font-size: 0.8rem; max-width: 350px; line-height: 1.4;">RA04: Verificar los modelos realizados en la fase de análisis.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT PRINCIPAL -->
+        <div class="bm-layout">
+            
+            <!-- TABLA DE CONTENIDO (STICKY) -->
+            <aside class="bm-toc" id="bm-toc">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">En esta página</span>
+                        <button class="bm-toc__toggle" aria-label="Abrir índice" aria-expanded="false">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav">
+                        <ul class="bm-toc__list">
+                            <li><a href="#introduccion" class="bm-toc__link"><span class="bm-toc__num">01</span> Introducción</a></li>
+                            <li><a href="#reglas-negocio" class="bm-toc__link"><span class="bm-toc__num">02</span> Reglas de negocio</a></li>
+                            <li><a href="#casos-uso" class="bm-toc__link"><span class="bm-toc__num">03</span> Casos de uso</a></li>
+                            <li><a href="#diagramas-clases" class="bm-toc__link"><span class="bm-toc__num">04</span> Diagramas de clases</a></li>
+                            <li><a href="#consistencia" class="bm-toc__link"><span class="bm-toc__num">05</span> Consistencia de modelos</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <article class="bm-content">
+                
+                <img src="../../../Assets/img/trimestre-2/00-validacion-modelos.png" alt="Validación de modelos" loading="lazy">
+                <em>Imagen generada con Gemini - AI</em>
+
+                <!-- SECCIÓN 1 -->
+                <section id="introduccion" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">01</span>
+                        <h2 class="bm-section__title">Introducción: El mercado y los ingenieros de requisitos</h2>
+                    </div>
+
+                    <p>El mercado en la tecnología ha ido cambiando. Con la llegada de la inteligencia artificial, el desarrollo de software ha evolucionado en sus procesos, especialmente en la escritura de código. Ahora, escribir código es más sencillo si se sabe lo que se necesita y se sabe cómo hacer un buen <strong>prompt</strong> (instrucción o pregunta que se le proporciona a un modelo de IA para que genere una respuesta).</p>
+
+                    <div class="bm-callout">
+                        <strong>Mercado:</strong> Conjunto de transacciones o intercambio de bienes y servicios entre individuos.
+                    </div>
+                    <div class="bm-callout">
+                        <strong>Prompt:</strong> Instrucción, pregunta o texto que se le proporciona a un sistema, programa o modelo de inteligencia artificial para que genere una respuesta o realice alguna acción.
+                    </div>
+
+                    <p>El paradigma del cómo se aprendía a programar ha cambiado totalmente. Incluso se puede pensar en hechos como que <strong>depurar ya no existe</strong> en el sentido tradicional: en lugar de utilizar una herramienta de depuración, es preferible utilizar un modelo de lenguaje (LLM) para pedirle ayuda con problemas de sintaxis o lógica.</p>
+
+                    <p>Por esta razón, está tomando más importancia el hecho de realizar una <strong>buena documentación</strong>: finita, delimitada y específica, en donde hay diferentes procesos que se describen detalladamente. Esto ha hecho que, en el mercado tecnológico, los <strong>ingenieros de requisitos</strong> hayan ganado más oportunidades laborales. El trabajo de un <em>requirements engineer</em> es uno de los más importantes en el ciclo de vida del software.</p>
+
+                    <h3>¿Qué hace un ingeniero de requisitos?</h3>
+                    <ul class="bm-list">
+                        <li>Define y documenta los requisitos del sistema.</li>
+                        <li>Establece reglas de negocio y restricciones.</li>
+                        <li>Verifica que los modelos (casos de uso, diagramas de clases, DFD) cumplan con los requisitos establecidos.</li>
+                        <li>Actúa como puente entre el cliente y el equipo de desarrollo.</li>
+                    </ul>
+                </section>
+
+                <!-- SECCIÓN 2 -->
+                <section id="reglas-negocio" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">02</span>
+                        <h2 class="bm-section__title">Reglas de negocio</h2>
+                    </div>
+
+                    <h3>2.1 Definición y propósito</h3>
+                    <p>Una <strong>regla de negocio</strong> es una declaración que define o restringe algún aspecto del funcionamiento de una organización o sistema. En el contexto del software, las reglas de negocio son lineamientos o restricciones que describen cómo deben comportarse los datos dentro del sistema para asegurar que las operaciones respeten la lógica y objetivos del negocio.</p>
+
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Característica</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Claridad y Especificidad</td>
+                                        <td>Establecen condiciones o restricciones claras que deben cumplirse dentro del sistema.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Automatización</td>
+                                        <td>Son integradas en la estructura de la base de datos (a través de restricciones, validaciones y lógica de negocio) para garantizar su cumplimiento.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Integridad y Consistencia</td>
+                                        <td>Ayudan a mantener la integridad de los datos y evitar errores o inconsistencias.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Apoyo a Procesos</td>
+                                        <td>Definen cómo deben manejarse los datos en ciertas condiciones o situaciones específicas.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>2.2 Sintaxis para redacción de reglas de negocio</h3>
+                    <p><strong>Estructura general:</strong></p>
+                    <pre><code>[Entidad principal] + [Condición/Restricción] + [Acción/Resultado esperado]</code></pre>
+
+                    <p><strong>Ejemplo: Restricción de Cantidad</strong><br>
+                    > "Cada Usuario puede tomar en préstamo un máximo de cinco Libros a la vez."</p>
+                    
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parte</th>
+                                        <th>Contenido</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Entidad principal</td>
+                                        <td>Usuario</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Condición/Restricción</td>
+                                        <td>puede tomar en préstamo un máximo de cinco libros</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Acción/Resultado esperado</td>
+                                        <td>a la vez</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>2.3 Estructura detallada para reglas de negocio</h3>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Campo</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Nombre de la regla</td>
+                                        <td>Un título breve para identificar la regla.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Descripción</td>
+                                        <td>Explicación completa de la regla.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Condición de Aplicación</td>
+                                        <td>Condición que debe cumplirse.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Acción o Resultado</td>
+                                        <td>Efecto o acción que debe ocurrir si se cumple la condición.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>2.4 Ejemplos de reglas de negocio</h3>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID Regla</th>
+                                        <th>Regla de Negocio</th>
+                                        <th>Descripción</th>
+                                        <th>Propósito</th>
+                                        <th>Resultado Esperado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>R1</td>
+                                        <td>Un usuario no puede tener más de 5 préstamos activos.</td>
+                                        <td>Limita el número de libros que un usuario puede tomar.</td>
+                                        <td>Controlar el número de libros prestados.</td>
+                                        <td>Rechazo de préstamo si supera el límite.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>R2</td>
+                                        <td>Un libro solo puede ser reservado si está disponible.</td>
+                                        <td>Un libro no puede ser reservado si ya está prestado.</td>
+                                        <td>Evitar reservas duplicadas.</td>
+                                        <td>La reserva se confirma solo si el libro está disponible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>R3</td>
+                                        <td>Cada préstamo tiene un plazo de devolución de 15 días.</td>
+                                        <td>Plazo máximo para devolver un libro.</td>
+                                        <td>Asegurar la rotación de libros.</td>
+                                        <td>El sistema calcula la fecha de devolución a 15 días.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>R4</td>
+                                        <td>Al devolver un Libro, el estado debe actualizarse a "disponible".</td>
+                                        <td>Actualización automática del estado del libro.</td>
+                                        <td>Mantener inventario actualizado.</td>
+                                        <td>Estado del libro cambia a "disponible".</td>
+                                    </tr>
+                                    <tr>
+                                        <td>R5</td>
+                                        <td>Un usuario no puede realizar un nuevo préstamo si tiene 3 o más multas activas.</td>
+                                        <td>Bloqueo de préstamos por mora.</td>
+                                        <td>Controlar usuarios con deudas.</td>
+                                        <td>Rechazo de préstamo si tiene multas activas.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>2.5 Lista de chequeo para reglas de negocio</h3>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Criterio</th>
+                                        <th>Descripción</th>
+                                        <th>Cumple (Sí/No)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Claridad y Especificidad</td>
+                                        <td>Cada regla está claramente definida, sin ambigüedades.</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Consistencia con el Caso de Estudio</td>
+                                        <td>Las reglas están alineadas con los objetivos y procesos descritos en el caso de estudio.</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Determinación de Relaciones</td>
+                                        <td>Se identifican correctamente las relaciones entre entidades (uno a uno, uno a muchos, muchos a muchos).</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Identificación de Restricciones</td>
+                                        <td>Todas las restricciones (como límites de cantidad o condiciones de acceso) están claramente indicadas.</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reglas de Integridad de Datos</td>
+                                        <td>Cada regla asegura la integridad de los datos, evitando redundancias y valores inconsistentes.</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>2.6 Actividad: Matriz de verificación</h3>
+                    <p>Para el proyecto formativo, se debe desarrollar una <strong>matriz de verificación de reglas de negocio</strong>. Esta matriz es un archivo en Excel que contiene todas las reglas de negocio del proyecto.</p>
+                    <ol class="bm-list bm-list--ordered">
+                        <li>Revisar los requerimientos funcionales del proyecto.</li>
+                        <li>Para cada requerimiento, identificar las restricciones y condiciones que debe cumplir.</li>
+                        <li>Redactar las reglas de negocio siguiendo la sintaxis propuesta.</li>
+                        <li>Verificar que cada regla tenga correspondencia en el modelo.</li>
+                        <li>Entregar la matriz en formato Excel.</li>
+                    </ol>
+                </section>
+
+                <!-- SECCIÓN 3 -->
+                <section id="casos-uso" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">03</span>
+                        <h2 class="bm-section__title">Casos de uso</h2>
+                    </div>
+
+                    <h3>3.1 Conceptos fundamentales</h3>
+                    <p><strong>¿Qué es un caso de uso?</strong> Es un modelo funcional que describe las interacciones entre los actores y el sistema para lograr un objetivo específico. Representa una unidad funcional del sistema desde el punto de vista del usuario.</p>
+                    <p><strong>¿Qué es un actor?</strong> Representa a cualquier entidad externa al sistema que interactúa con él. Pueden ser personas, otros sistemas o dispositivos.</p>
+                    
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo de Actor</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primarios</td>
+                                        <td>Inician la interacción con el sistema.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Secundarios</td>
+                                        <td>Son invocados por el sistema.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Internos vs. Externos</td>
+                                        <td>Dependiendo de si pertenecen a la organización que desarrolla el sistema o no.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>3.2 Relaciones entre elementos</h3>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Relación</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Actor – Caso de uso</td>
+                                        <td>Asociación (línea recta).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Entre actores</td>
+                                        <td>Generalización (herencia).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Include</td>
+                                        <td>Una funcionalidad común que siempre se ejecuta (obligatoria).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Extend</td>
+                                        <td>Un comportamiento opcional o condicional.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Generalización</td>
+                                        <td>Un caso de uso puede especializar a otro.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>3.3 Notación UML</h3>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Elemento</th>
+                                        <th>Notación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Caso de uso</td>
+                                        <td>Óvalo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Actor</td>
+                                        <td>Stickman (monigote)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Asociación</td>
+                                        <td>Línea continua</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Generalización</td>
+                                        <td>Línea con triángulo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Include</td>
+                                        <td>Línea punteada con estereotipo <code>«include»</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Extend</td>
+                                        <td>Línea punteada con estereotipo <code>«extend»</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>3.5 Documentación de casos de uso</h3>
+                    <p>A continuación se muestra un ejemplo de la estructura de documentación de un caso de uso:</p>
+                    
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table doc-table">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Código:</strong></td>
+                                        <td>CU_lns_001</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nombre:</strong></td>
+                                        <td>Registrar préstamo de libro</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Actores:</strong></td>
+                                        <td>Bibliotecario</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descripción:</strong></td>
+                                        <td>El bibliotecario registra el préstamo de uno o varios libros a un usuario previamente registrado y habilitado. El sistema verifica disponibilidad, aplica reglas de préstamo, y genera los datos correspondientes.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Requerimientos asociados:</strong></td>
+                                        <td>RF-01: Registrar préstamo<br>RF-02: Verificar disponibilidad<br>RF-03: Calcular fecha de devolución</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Reglas de negocio aplicables:</strong></td>
+                                        <td>RN-01: Límite de libros por usuario<br>RN-02: Bloqueo por mora<br>RN-03: Verificación de disponibilidad<br>RN-04: Límite de 15 días</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Precondiciones:</strong></td>
+                                        <td>El bibliotecario debe estar autenticado en el sistema.<br>El usuario debe estar registrado y activo.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Flujo principal:</strong></td>
+                                        <td>
+                                            1. El bibliotecario inicia sesión en el sistema.<br>
+                                            2. Selecciona la opción "Registrar préstamo".<br>
+                                            3. Ingresa el ID del usuario.<br>
+                                            4. El sistema valida que el usuario esté activo y sin moras (RN-02).<br>
+                                            5. El bibliotecario ingresa o escanea los códigos de los libros a prestar.<br>
+                                            6. El sistema verifica que los libros estén disponibles (RF-02, RN-03).<br>
+                                            7. El sistema valida que el usuario no supere el máximo de préstamos permitidos (RN-01).<br>
+                                            8. El sistema calcula la fecha estimada de devolución (RF-03, RN-04).<br>
+                                            9. El bibliotecario confirma y el sistema registra el préstamo.<br>
+                                            10. El sistema actualiza el estado de los libros a "prestado" y emite un comprobante.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Flujos alternos:</strong></td>
+                                        <td>
+                                            4a. Usuario con mora: El sistema informa al bibliotecario y no permite continuar.<br>
+                                            6a. Libro no disponible: El sistema lo indica y no lo agrega al préstamo.<br>
+                                            7a. Usuario con 3 libros prestados: El sistema impide registrar más préstamos.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Postcondiciones:</strong></td>
+                                        <td>
+                                            El préstamo queda registrado.<br>
+                                            El libro cambia a estado "prestado".<br>
+                                            El sistema actualiza el historial del usuario.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 4 -->
+                <section id="diagramas-clases" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">04</span>
+                        <h2 class="bm-section__title">Diagramas de clases</h2>
+                    </div>
+
+                    <h3>4.1 Conceptos fundamentales</h3>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Concepto</th>
+                                        <th>Definición</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Clase</td>
+                                        <td>Plantilla que define los atributos y métodos comunes a un conjunto de objetos.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Atributo</td>
+                                        <td>Característica o propiedad de una clase.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Método</td>
+                                        <td>Comportamiento o función que puede realizar una clase.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Clase abstracta</td>
+                                        <td>Clase que no puede ser instanciada directamente; sirve como base para otras clases.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Interfaz</td>
+                                        <td>Contrato que define un conjunto de métodos que una clase debe implementar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Abstracción</td>
+                                        <td>Proceso de simplificar una realidad compleja modelando solo los aspectos relevantes.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Encapsulamiento</td>
+                                        <td>Ocultar los detalles internos de una clase y exponer solo lo necesario.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Herencia</td>
+                                        <td>Mecanismo por el cual una clase (subclase) adquiere los atributos y métodos de otra (superclase).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Polimorfismo</td>
+                                        <td>Capacidad de un objeto de tomar muchas formas; mismo nombre de método, comportamiento diferente.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Composición</td>
+                                        <td>Relación fuerte donde una clase contiene a otra y su ciclo de vida depende de ella.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agregación</td>
+                                        <td>Relación débil donde una clase contiene a otra pero su ciclo de vida es independiente.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>4.3 Proceso guiado para extraer clases</h3>
+                    <p><strong>Paso 2: Extraer clases candidatas</strong> (Clasificar cada término)</p>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Criterio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Clase</td>
+                                        <td>Tiene identidad/ciclo de vida.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Atributo</td>
+                                        <td>Describe a otra clase (sin identidad propia).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rol/Asociación</td>
+                                        <td>Expresa relación (ej. "anfitrión publica propiedad").</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p><strong>Paso 3: Depurar y clasificar</strong> (Estereotipar cada clase)</p>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Estereotipo</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Entity</td>
+                                        <td>Concepto con identidad (p.ej., Reserva).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Value Object</td>
+                                        <td>Valor inmutable, sin identidad (p.ej., Money, Dirección).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Control/Service</td>
+                                        <td>Orquesta un caso de uso o lógica de aplicación (p.ej., GestorReservas).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Boundary</td>
+                                        <td>Interfaz con actores (opcional en análisis).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 5 -->
+                <section id="consistencia" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">05</span>
+                        <h2 class="bm-section__title">Relación con la consistencia de modelos</h2>
+                    </div>
+
+                    <p>La verificación de modelos está directamente relacionada con la <strong>consistencia entre modelos</strong>. Los diferentes artefactos de un proyecto de software deben ser consistentes entre sí.</p>
+
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Artefacto</th>
+                                        <th>Verificación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Reglas de negocio</td>
+                                        <td>Deben ser coherentes con los requerimientos funcionales y el modelo de datos.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Casos de uso</td>
+                                        <td>Deben cubrir todos los requerimientos funcionales.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diagrama de clases</td>
+                                        <td>Debe implementar las entidades identificadas en las reglas de negocio.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Consistencia intermodelos</td>
+                                        <td>Los nombres y conceptos deben ser consistentes entre diagramas.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>Ejemplo de verificación</h3>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Regla de negocio</th>
+                                        <th>Caso de uso asociado</th>
+                                        <th>Clase asociada</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>RN-01: Límite de 5 libros por usuario</td>
+                                        <td>Registrar préstamo de libro</td>
+                                        <td>Usuario, Prestamo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RN-03: Verificación de disponibilidad</td>
+                                        <td>Registrar préstamo de libro</td>
+                                        <td>Libro</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RN-04: Plazo de 15 días</td>
+                                        <td>Registrar préstamo de libro</td>
+                                        <td>Prestamo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>Búsquedas recomendadas</h3>
+                    <ul class="bm-list">
+                        <li><a href="https://www.youtube.com/results?search_query=diagrama+casos+de+uso+uml" target="_blank" rel="noopener noreferrer">Introducción a casos de uso UML</a></li>
+                        <li><a href="https://www.youtube.com/results?search_query=diagrama+de+clases+uml" target="_blank" rel="noopener noreferrer">Diagramas de clases UML</a></li>
+                    </ul>
+
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+
+</body>
+
+</html>
