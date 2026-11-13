@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reglas de Consistencia en UML · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Comprender cómo verificar que los diagramas de clases, casos de uso e interfaces de usuario de un proyecto de software sean consistentes entre sí, utilizando reglas formales definidas en OCL.">
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto (Ajustados a la profundidad de 3 carpetas) -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilo para bloques de código (OCL, etc.) */
+        .bm-content pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--color-text-primary);
+        }
+        
+        .bm-content code {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.85em;
+            background: rgba(var(--color-text-secondary-rgb), 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: var(--color-accent-2);
+        }
+        
+        .bm-content pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Estilo para las imágenes del tutorial */
+        .bm-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            margin: 2rem auto 0.5rem;
+            display: block;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Texto de las capturas (em) */
+        .bm-content em {
+            display: block;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <!-- HERO EDITORIAL -->
+        <section class="bm-hero">
+            <div class="bm-hero__bg">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+            <div class="bm-hero__inner">
+                <div class="bm-hero__eyebrow">
+                    <span class="bm-dot"></span> Trimestre 2 · Verificación de Modelos
+                </div>
+                <h1 class="bm-hero__title">
+                    Reglas de <br>
+                    <span class="gradient-text">Consistencia en UML</span>
+                </h1>
+                <p class="bm-hero__lead">
+                    Comprender cómo verificar que los diagramas de clases, casos de uso e interfaces de usuario de un proyecto de software sean consistentes entre sí, utilizando reglas formales definidas en OCL (Object Constraint Language).
+                </p>
+            </div>
+        </section>
+
+        <!-- LAYOUT PRINCIPAL -->
+        <div class="bm-layout">
+            
+            <!-- TABLA DE CONTENIDO (STICKY) -->
+            <aside class="bm-toc" id="bm-toc">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">En esta página</span>
+                        <button class="bm-toc__toggle" aria-label="Abrir índice" aria-expanded="false">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav">
+                        <ul class="bm-toc__list">
+                            <li><a href="#introduccion" class="bm-toc__link"><span class="bm-toc__num">01</span> Introducción</a></li>
+                            <li><a href="#contexto" class="bm-toc__link"><span class="bm-toc__num">02</span> Contexto y problemática</a></li>
+                            <li><a href="#que-son-reglas" class="bm-toc__link"><span class="bm-toc__num">03</span> ¿Qué son las reglas?</a></li>
+                            <li><a href="#ocl" class="bm-toc__link"><span class="bm-toc__num">04</span> OCL (Object Constraint Language)</a></li>
+                            <li><a href="#modelo-interfaces" class="bm-toc__link"><span class="bm-toc__num">05</span> Modelo de interfaces (GUI)</a></li>
+                            <li><a href="#reglas-clases-casos" class="bm-toc__link"><span class="bm-toc__num">06</span> Reglas Clases / Casos de uso</a></li>
+                            <li><a href="#reglas-interfaces" class="bm-toc__link"><span class="bm-toc__num">07</span> Reglas con Interfaces</a></li>
+                            <li><a href="#herramientas" class="bm-toc__link"><span class="bm-toc__num">08</span> Herramientas</a></li>
+                            <li><a href="#recursos" class="bm-toc__link"><span class="bm-toc__num">09</span> Recursos y Referencias</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <article class="bm-content">
+                
+                <img src="../../../Assets/img/trimestre-2/01-reglas-de-consistencia.png" alt="Reglas de consistencia" loading="lazy">
+                <em>Imagen generada con ChatGPT</em>
+
+                <!-- SECCIÓN 1 -->
+                <section id="introduccion" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">01</span>
+                        <h2 class="bm-section__title">Introducción</h2>
+                    </div>
+
+                    <p>En el ciclo de vida del software, durante las fases de definición y análisis, se realiza una especificación de los requisitos. Para ello, es necesario realizar un proceso de captura de las necesidades y expectativas de los interesados (stakeholders), que se traduce posteriormente en un conjunto de modelos que representan tanto el problema como su solución. Por lo general, la mayoría de esos modelos se expresan en el <strong>Lenguaje de Modelado Unificado (UML)</strong>.</p>
+
+                    <p>UML define un conjunto de artefactos que permiten especificar los requisitos del software, los cuales <strong>deberían guardar consistencia</strong> cuando se trate del mismo modelo. Sin embargo, la consistencia entre diferentes artefactos no se encuentra definida en la especificación de UML y poco se ha trabajado con este tipo de consistencia.</p>
+
+                    <p>Las <strong>reglas de consistencia</strong> nos permiten la planeación para la construcción de nuestro Software, garantizando que los diferentes diagramas y artefactos de un proyecto estén alineados y no presenten contradicciones.</p>
+
+                    <div class="bm-callout">
+                        <strong>OCL (Object Constraint Language):</strong> Es un lenguaje de especificación formal que permite definir restricciones sobre los modelos UML de manera precisa y sin ambigüedades.
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 2 -->
+                <section id="contexto" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">02</span>
+                        <h2 class="bm-section__title">Contexto y problemática</h2>
+                    </div>
+
+                    <h3>El problema de la consistencia intermodelos</h3>
+                    <p>Un proceso de desarrollo de software tiene como propósito la producción eficaz y eficiente de un producto software que cumpla con las necesidades y expectativas de los interesados. Este proceso empieza típicamente cuando se identifica un problema que puede requerir una solución computarizada.</p>
+
+                    <p>Los métodos de desarrollo de software (como el Proceso Unificado) son iterativos e incrementales. El costo de los errores encontrados al principio en el ciclo de desarrollo es muy inferior al costo de los errores encontrados en los últimos pasos (codificación o pruebas). Por lo tanto, se debe tratar de hacer un buen análisis desde el principio del proceso, especialmente en la especificación de requisitos.</p>
+
+                    <p><strong>Problemas actuales:</strong></p>
+                    <ul class="bm-list bm-list--ordered">
+                        <li>La consistencia intermodelos no se especifica formalmente.</li>
+                        <li>Solo se realizan algunos chequeos de consistencia de manera automática entre algunos artefactos y el código resultante.</li>
+                        <li>En algunos trabajos se definen reglas de consistencia de manera formal pero solo en el nivel de intramodelo.</li>
+                    </ul>
+
+                    <h3>Enfoque propuesto</h3>
+                    <p>En el artículo de Zapata y González (2008) se propone un método para verificar la consistencia entre el diagrama de clases y el diagrama de casos de uso de UML de una manera formal, evaluando una serie de reglas definidas en <strong>OCL</strong> que se deben cumplir para garantizar que la información brindada por dichos modelos sea consistente. Se define, adicionalmente, la consistencia con las <strong>interfaces gráficas de usuario (GUI)</strong>.</p>
+                </section>
+
+                <!-- SECCIÓN 3 -->
+                <section id="que-son-reglas" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">03</span>
+                        <h2 class="bm-section__title">¿Qué son las reglas de consistencia?</h2>
+                    </div>
+
+                    <p>Las reglas de consistencia son <strong>condiciones que deben cumplir los diferentes artefactos de un modelo UML</strong> para garantizar que la información que representan es coherente y no contradictoria.</p>
+
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo de consistencia</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Intramodelo</td>
+                                        <td>Verifica que todos los elementos de un mismo diagrama o artefacto sean consistentes entre sí.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Intermodelos</td>
+                                        <td>Verifica la consistencia entre diferentes diagramas o artefactos que pertenecen al mismo modelo.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p>La mayoría de las herramientas CASE actuales realizan chequeos de consistencia interna de los diagramas, pero se realizan pocas revisiones sobre la consistencia entre los diferentes diagramas o artefactos.</p>
+                </section>
+
+                <!-- SECCIÓN 4 -->
+                <section id="ocl" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">04</span>
+                        <h2 class="bm-section__title">OCL: Lenguaje de Restricciones de Objetos</h2>
+                    </div>
+
+                    <p><strong>OCL (Object Constraint Language)</strong> es un lenguaje de especificación formal que permite definir restricciones sobre los modelos UML. Fue desarrollado como parte del estándar UML y es utilizado para:</p>
+
+                    <ul class="bm-list">
+                        <li><strong>Definir invariantes</strong> sobre clases y tipos.</li>
+                        <li><strong>Especificar condiciones previas y posteriores</strong> para operaciones.</li>
+                        <li><strong>Describir restricciones</strong> que deben cumplir los elementos de un modelo.</li>
+                    </ul>
+
+                    <h3>Características principales</h3>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Característica</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Lenguaje de expresión</td>
+                                        <td>No es un lenguaje de programación, sino de especificación.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sin efectos colaterales</td>
+                                        <td>Las expresiones OCL no modifican el estado del sistema.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Basado en conjuntos</td>
+                                        <td>Opera sobre colecciones de objetos (Sets, Sequences, Bags).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Navegación</td>
+                                        <td>Permite navegar a través de las relaciones del modelo.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>Sintaxis básica</h3>
+<pre><code>-- Contexto de la restricción
+context NombreDeLaClase
+
+-- Invariante
+inv NombreDelInvariante: expresión_booleana
+
+-- Precondición
+pre NombreDeLaPrecondicion: expresión_booleana
+
+-- Postcondición
+post NombreDeLaPostcondicion: expresión_booleana</code></pre>
+
+                    <p><strong>Ejemplo de invariante:</strong></p>
+<pre><code>context Persona
+inv EdadValida: self.edad &gt;= 0 and self.edad &lt;= 120</code></pre>
+                </section>
+
+                <!-- SECCIÓN 5 -->
+                <section id="modelo-interfaces" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">05</span>
+                        <h2 class="bm-section__title">El modelo de interfaces (GUI)</h2>
+                    </div>
+
+                    <p>El modelo de interfaces describe la presentación de información entre los actores y el sistema (Weitzenfeld, 2005). Es complementario con la información que se presenta en los diagramas de clases y casos de uso.</p>
+
+                    <p>Una interfaz común consta de:</p>
+                    <ul class="bm-list">
+                        <li><strong>Título</strong>: Verbo + sustantivo (ej. "Registrar Cliente")</li>
+                        <li><strong>Etiquetas (labels)</strong>: Describen los campos</li>
+                        <li><strong>Campos de texto y selección</strong></li>
+                        <li><strong>Botón de enviar (submit)</strong></li>
+                        <li><strong>Botón de cancelar o salir</strong></li>
+                    </ul>
+
+                    <p>Las interfaces gráficas de usuario son esenciales porque:</p>
+                    <ul class="bm-list">
+                        <li>Permiten a los interesados visualizar el sistema.</li>
+                        <li>Facilitan la validación de requisitos.</li>
+                        <li>Ayudan a eliminar malos entendidos.</li>
+                    </ul>
+                </section>
+
+                <!-- SECCIÓN 6 -->
+                <section id="reglas-clases-casos" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">06</span>
+                        <h2 class="bm-section__title">Reglas de consistencia entre diagrama de clases y casos de uso</h2>
+                    </div>
+
+                    <h3>Diagrama de referencia</h3>
+                    <p>Para entender las reglas, utilizaremos los siguientes diagramas de ejemplo:</p>
+                    
+                    <p><strong>Diagrama de Casos de Uso (Vista de alto nivel):</strong></p>
+                    <img src="../../../Assets/img/trimestre-2/02-casos-de-uso.png" alt="Diagrama de casos de uso" loading="lazy">
+                    <em>Imagen generada con ChatGPT</em>
+
+                    <p><strong>Diagrama de Clases (Estructura):</strong></p>
+                    <img src="../../../Assets/img/trimestre-2/03-diagramas-de-clase.png" alt="Diagrama de clases" loading="lazy">
+                    <em>Imagen generada con ChatGPT</em>
+
+                    <h3>Regla 1: Correspondencia sustantivo - clase</h3>
+                    <div class="bm-callout">
+                        <strong>Enunciado:</strong> El nombre de un caso de uso debe incluir un verbo y un sustantivo. El sustantivo debe corresponder al nombre de una clase en el diagrama de clases.
+                    </div>
+                    <p><strong>Verbo:</strong> Debe corresponder a una operación de una clase: <em>Registrar</em><br>
+                    <strong>Sustantivo:</strong> Siempre será candidato a ser clase: <em>Cliente</em></p>
+                    <p><strong>Ejemplo:</strong> Caso de uso "Registrar Cliente" → Debe existir una clase "Cliente"</p>
+                    <img src="../../../Assets/img/trimestre-2/regla-consistencia-1.png" alt="Regla 1" loading="lazy">
+                    <em>Imagen generada con Gemini</em>
+
+                    <h3>Regla 2: Correspondencia verbo - operación</h3>
+                    <div class="bm-callout">
+                        <strong>Enunciado:</strong> El nombre de un caso de uso debe incluir un verbo y un sustantivo. El verbo debe corresponder a una operación de una clase del diagrama de clases.
+                    </div>
+                    <p><strong>Ejemplo:</strong> Caso de uso "Registrar Cliente" → La clase "Cliente" debe tener una operación "registrar()"</p>
+                    <img src="../../../Assets/img/trimestre-2/regla-consistencia-2.png" alt="Regla 2" loading="lazy">
+                    <em>Imagen generada con Gemini</em>
+                </section>
+
+                <!-- SECCIÓN 7 -->
+                <section id="reglas-interfaces" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">07</span>
+                        <h2 class="bm-section__title">Reglas de consistencia con interfaces de usuario</h2>
+                    </div>
+
+                    <h3>Regla 3: Título de interfaz - clase</h3>
+                    <div class="bm-callout">
+                        <strong>Enunciado:</strong> En el título de cada interfaz gráfica de usuario debe ir un verbo y un sustantivo. El sustantivo debe corresponder al nombre de una clase.
+                    </div>
+                    <p><strong>Ejemplo:</strong> Interfaz "Registrar Cliente" → Debe existir una clase "Cliente"</p>
+                    <img src="../../../Assets/img/trimestre-2/regla-consistencia-3.png" alt="Regla 3" loading="lazy">
+                    <em>Imagen generada con Gemini</em>
+
+                    <h3>Regla 4: Título de interfaz - operación</h3>
+                    <div class="bm-callout">
+                        <strong>Enunciado:</strong> Una interfaz gráfica de usuario tiene en su título un verbo y un sustantivo. Dicho verbo debe corresponder a una operación de la clase identificada.
+                    </div>
+                    <p><strong>Ejemplo:</strong> Interfaz "Registrar Cliente" → La clase "Cliente" debe tener una operación "registrar()"</p>
+                    <img src="../../../Assets/img/trimestre-2/regla-consistencia-4.png" alt="Regla 4" loading="lazy">
+                    <em>Imagen generada con Gemini</em>
+
+                    <h3>Regla 5: Botón de enviar - operación</h3>
+                    <div class="bm-callout">
+                        <strong>Enunciado:</strong> En una interfaz gráfica de usuario debe existir un botón de enviar (submit). Dicho botón tiene en su etiqueta un verbo que debe corresponder a una operación de una clase.
+                    </div>
+                    <p><strong>Ejemplo:</strong> Botón "Registrar" → La clase correspondiente debe tener una operación "registrar()"</p>
+                    <img src="../../../Assets/img/trimestre-2/regla-consistencia-5.png" alt="Regla 5" loading="lazy">
+                    <em>Imagen generada con Gemini</em>
+
+                    <h3>Regla 6: Etiquetas de campos - atributos</h3>
+                    <div class="bm-callout">
+                        <strong>Enunciado:</strong> Si una interfaz gráfica de usuario posee campos de texto, estos deben ir precedidos por etiquetas que deben tener sus atributos correspondientes en una clase.
+                    </div>
+                    <p><strong>Ejemplo:</strong> Etiqueta "Cédula" y campo de texto → La clase "Cliente" debe tener un atributo "cédula"</p>
+                    <img src="../../../Assets/img/trimestre-2/regla-consistencia-6.png" alt="Regla 6" loading="lazy">
+                    <em>Imagen generada con Gemini</em>
+
+                    <h3>Regla 7: Título de interfaz - caso de uso</h3>
+                    <div class="bm-callout">
+                        <strong>Enunciado:</strong> En el título de cada interfaz gráfica de usuario debe ir un verbo y un sustantivo que correspondan con el nombre de un caso de uso.
+                    </div>
+                    <p><strong>Ejemplo:</strong> Interfaz "Registrar Cliente" → Debe existir un caso de uso "Registrar Cliente"</p>
+                    <img src="../../../Assets/img/trimestre-2/regla-consistencia-7.png" alt="Regla 7" loading="lazy">
+                    <em>Imagen generada con Gemini</em>
+
+                    <h3>Regla 8: Botón de enviar - caso de uso</h3>
+                    <div class="bm-callout">
+                        <strong>Enunciado:</strong> Un botón de enviar tiene en su etiqueta un verbo que debe corresponder a un verbo de un nombre de un caso de uso.
+                    </div>
+                    <p><strong>Ejemplo:</strong> Botón "Registrar" → Debe existir un caso de uso que contenga el verbo "Registrar"</p>
+                    <img src="../../../Assets/img/trimestre-2/regla-consistencia-8.png" alt="Regla 8" loading="lazy">
+                    <em>Imagen generada con Gemini</em>
+                </section>
+
+                <!-- SECCIÓN 8 -->
+                <section id="herramientas" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">08</span>
+                        <h2 class="bm-section__title">Herramientas para verificar consistencia</h2>
+                    </div>
+
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Herramienta</th>
+                                        <th>Descripción</th>
+                                        <th>Enlace</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>StarUML</td>
+                                        <td>Herramienta CASE moderna con soporte para UML 2.0.</td>
+                                        <td><a href="https://staruml.io" target="_blank" rel="noopener noreferrer">staruml.io</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>Formatos de intercambio</h3>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Formato</th>
+                                        <th>Descripción</th>
+                                        <th>Enlace</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>XMI</td>
+                                        <td>XML Metadata Interchange - Estándar OMG para intercambio de metadatos.</td>
+                                        <td><a href="http://www.omg.org/technology/xml/" target="_blank" rel="noopener noreferrer">omg.org/technology/xml</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>XML</td>
+                                        <td>Extensible Markup Language - Lenguaje de marcado para datos estructurados.</td>
+                                        <td><a href="https://www.w3.org/XML/" target="_blank" rel="noopener noreferrer">w3.org/XML</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>XPath</td>
+                                        <td>Lenguaje para navegar en documentos XML.</td>
+                                        <td><a href="https://www.w3.org/TR/xpath/" target="_blank" rel="noopener noreferrer">w3.org/XPath</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 9 -->
+                <section id="recursos" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">09</span>
+                        <h2 class="bm-section__title">Recursos y Referencias</h2>
+                    </div>
+
+                    <h3>Referencias</h3>
+                    <div class="bm-callout">
+                        ZAPATA, C.M. y GONZÁLEZ, G., 2008. <em>Especificación formal en OCL de reglas de consistencia entre los diagramas de clases y casos de uso de UML y el modelo de interfaces</em>. Revista Ingenierías Universidad de Medellín, 7(12), 169-191.
+                    </div>
+
+                    <h3>Lecturas recomendadas</h3>
+                    <ul class="bm-list">
+                        <li><a href="https://lucid.co/es/diagrama/uml/tutorial-diagrama-de-clases" target="_blank" rel="noopener noreferrer">Diagrama de clases - Lucidchart</a></li>
+                        <li><a href="https://miro.com/es/diagrama/que-es-diagrama-clases-uml/" target="_blank" rel="noopener noreferrer">Qué es un diagrama de clases UML - Miro</a></li>
+                        <li><a href="https://es.wikipedia.org/wiki/Diagrama_de_clases" target="_blank" rel="noopener noreferrer">Diagrama de clases - Wikipedia</a></li>
+                    </ul>
+
+                    <h3>Especificaciones oficiales</h3>
+                    <ul class="bm-list">
+                        <li><a href="https://www.omg.org/spec/OCL/2.4/PDF" target="_blank" rel="noopener noreferrer">OCL 2.4 Specification - OMG</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Object_Constraint_Language" target="_blank" rel="noopener noreferrer">Object Constraint Language - Wikipedia</a></li>
+                    </ul>
+
+                    <h3>Sitios web oficiales</h3>
+                    <ul class="bm-list">
+                        <li><a href="https://www.omg.org/spec/UML/" target="_blank" rel="noopener noreferrer">OMG UML Specification</a> – Especificación oficial de UML.</li>
+                        <li><a href="https://www.omg.org/spec/OCL/" target="_blank" rel="noopener noreferrer">OCL Specification</a> – Especificación oficial de OCL.</li>
+                        <li><a href="https://www.w3.org/XML/" target="_blank" rel="noopener noreferrer">W3C XML</a> – Estándares XML.</li>
+                        <li><a href="https://www.omg.org/spec/XMI/" target="_blank" rel="noopener noreferrer">XMI Specification</a> – Especificación de XMI.</li>
+                    </ul>
+
+                    <h3>Artículos relacionados</h3>
+                    <ul class="bm-list">
+                        <li><a href="http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S1692-33242008000100010" target="_blank" rel="noopener noreferrer">SciELO - Especificación formal en OCL</a></li>
+                    </ul>
+
+                    <h3>Conclusión</h3>
+                    <p>Las reglas de consistencia entre los diagramas de clases, casos de uso e interfaces de usuario son fundamentales para garantizar la calidad y coherencia de los modelos de software. El uso de <strong>OCL</strong> permite especificar estas reglas de manera formal y precisa, facilitando su verificación automática y reduciendo la probabilidad de errores en fases tempranas del desarrollo.</p>
+                    
+                    <p>Al integrar las interfaces de usuario en las reglas de consistencia, se logra:</p>
+                    <ul class="bm-list">
+                        <li>Validar la correspondencia de los atributos de las clases con los casos de uso.</li>
+                        <li>Garantizar que los prototipos de interfaz sean consistentes con los modelos.</li>
+                        <li>Reducir la ambigüedad en la comunicación entre analistas y stakeholders.</li>
+                    </ul>
+
+                    <div class="bm-callout bm-callout--amber">
+                        <strong>El diagrama de clases debe dar solución al diagrama de casos de uso, y las interfaces deben reflejar esa solución de manera coherente.</strong>
+                    </div>
+
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+
+</body>
+
+</html>
