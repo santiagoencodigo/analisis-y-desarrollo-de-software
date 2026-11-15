@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Modelado de Funciones · Trimestre 2 · ADSO</title>
+    <meta name="description" content="Fundamentos del modelado de funciones, requisitos verificables, reglas de negocio, criterios SMART y herramientas como DRAW.IO.">
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto (Ajustados a la profundidad de 3 carpetas) -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilo para citas o ejemplos destacados */
+        .bm-content blockquote {
+            border-left: 3px solid var(--color-accent-2);
+            padding-left: 1rem;
+            color: var(--color-text-primary);
+            font-style: italic;
+            margin: 1.5rem 0;
+            background: rgba(var(--color-accent-2-rgb), 0.05);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <!-- HERO EDITORIAL -->
+        <section class="bm-hero">
+            <div class="bm-hero__bg">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+            <div class="bm-hero__inner">
+                <div class="bm-hero__eyebrow">
+                    <span class="bm-dot"></span> Trimestre 2 · Verificación de Modelos
+                </div>
+                <h1 class="bm-hero__title">
+                    Modelado de <br>
+                    <span class="gradient-text">Funciones</span>
+                </h1>
+                <p class="bm-hero__lead">
+                    Fundamentos del modelado de funciones, la importancia de los requisitos verificables, las reglas de negocio, el uso de herramientas como DRAW.IO y conceptos clave como SMART y refinería de requisitos con inteligencia artificial.
+                </p>
+            </div>
+        </section>
+
+        <!-- LAYOUT PRINCIPAL -->
+        <div class="bm-layout">
+            
+            <!-- TABLA DE CONTENIDO (STICKY) -->
+            <aside class="bm-toc" id="bm-toc">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">En esta página</span>
+                        <button class="bm-toc__toggle" aria-label="Abrir índice" aria-expanded="false">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav">
+                        <ul class="bm-toc__list">
+                            <li><a href="#introduccion" class="bm-toc__link"><span class="bm-toc__num">01</span> Introducción al modelado</a></li>
+                            <li><a href="#requisitos" class="bm-toc__link"><span class="bm-toc__num">02</span> Requisitos necesarios</a></li>
+                            <li><a href="#reglas-negocio" class="bm-toc__link"><span class="bm-toc__num">03</span> Reglas de negocio</a></li>
+                            <li><a href="#refineria-ia" class="bm-toc__link"><span class="bm-toc__num">04</span> Refinería de requisitos con IA</a></li>
+                            <li><a href="#documentacion" class="bm-toc__link"><span class="bm-toc__num">05</span> Documentación como soporte legal</a></li>
+                            <li><a href="#smart" class="bm-toc__link"><span class="bm-toc__num">06</span> Criterios SMART</a></li>
+                            <li><a href="#drawio" class="bm-toc__link"><span class="bm-toc__num">07</span> Herramienta DRAW.IO para DFD</a></li>
+                            <li><a href="#adaptabilidad" class="bm-toc__link"><span class="bm-toc__num">08</span> Adaptabilidad y plataforma</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <article class="bm-content">
+                
+                <!-- SECCIÓN 1 -->
+                <section id="introduccion" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">01</span>
+                        <h2 class="bm-section__title">Introducción al modelado de funciones</h2>
+                    </div>
+
+                    <p>El <strong>modelado de funciones</strong> es el proceso de definir, estructurar y documentar las funciones que un sistema de software debe realizar para cumplir con los requisitos del negocio. Su propósito es establecer un <strong>lenguaje común</strong> entre los stakeholders (clientes, usuarios, analistas y desarrolladores) y garantizar que el sistema entregue el valor esperado.</p>
+
+                    <h3>¿Por qué es importante limitar el modelado?</h3>
+                    <p>Limitar el alcance del modelado es fundamental para evitar el <em>scope creep</em> (expansión no controlada del alcance). Al establecer límites claros, se protege tanto al equipo de desarrollo como al cliente, asegurando que los esfuerzos se concentren en lo esencial y que los recursos (tiempo, dinero, personal) se utilicen de manera eficiente. Un modelado sin límites puede llevar a:</p>
+
+                    <ul class="bm-list">
+                        <li>Incremento de costos no planificados.</li>
+                        <li>Retrasos en la entrega.</li>
+                        <li>Insatisfacción del cliente.</li>
+                        <li>Pérdida de control sobre el proyecto.</li>
+                    </ul>
+                </section>
+
+                <!-- SECCIÓN 2 -->
+                <section id="requisitos" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">02</span>
+                        <h2 class="bm-section__title">Requisitos necesarios y verificables</h2>
+                    </div>
+
+                    <p>Un <strong>requisito</strong> es una condición o capacidad que debe poseer un sistema para satisfacer una necesidad del negocio. Para que un requisito sea útil, debe cumplir con dos características fundamentales:</p>
+
+                    <ol class="bm-list bm-list--ordered">
+                        <li><strong>Necesario:</strong> El requisito debe estar alineado con los objetivos del proyecto y aportar valor real al negocio. Si un requisito no es necesario, debe eliminarse o postergarse.</li>
+                        <li><strong>Verificable:</strong> El requisito debe poder ser comprobado mediante pruebas objetivas. Es decir, debe existir una manera de determinar si el sistema cumple o no con el requisito.</li>
+                    </ol>
+
+                    <p><strong>Ejemplo:</strong></p>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Descripción</th>
+                                        <th>Verificable</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Buen requisito</td>
+                                        <td>"El sistema debe permitir al usuario iniciar sesión con correo electrónico y contraseña."</td>
+                                        <td>Sí, se puede probar que el formulario de inicio de sesión funcione correctamente.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mal requisito</td>
+                                        <td>"El sistema debe ser rápido."</td>
+                                        <td>No, "rápido" es subjetivo y no se puede medir objetivamente.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3 -->
+                <section id="reglas-negocio" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">03</span>
+                        <h2 class="bm-section__title">Reglas de negocio</h2>
+                    </div>
+
+                    <p>Una <strong>regla de negocio</strong> es una declaración que define o restringe algún aspecto del funcionamiento de una organización. En el contexto de un sistema de software, las reglas de negocio son lineamientos que describen cómo deben comportarse los datos y las operaciones para asegurar que el sistema respete la lógica del negocio.</p>
+
+                    <p><strong>Características de una regla de negocio:</strong></p>
+                    <ul class="bm-list">
+                        <li>Son específicas y claras.</li>
+                        <li>Son integradas en la estructura del sistema (validaciones, restricciones, flujos).</li>
+                        <li>Ayudan a mantener la integridad y consistencia de los datos.</li>
+                    </ul>
+
+                    <p><strong>Ejemplo:</strong></p>
+                    <blockquote>
+                        "Un camión no puede salir con carga si no ocupa por lo menos el 80 por ciento de su capacidad."
+                    </blockquote>
+                    <p>Esta regla implica que, al momento de registrar una salida, el sistema debe verificar que el nivel de carga sea mayor o igual al 80% antes de permitir el envío.</p>
+                </section>
+
+                <!-- SECCIÓN 4 -->
+                <section id="refineria-ia" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">04</span>
+                        <h2 class="bm-section__title">Refinería de requisitos con IA</h2>
+                    </div>
+
+                    <p>La <strong>refinería</strong> es el proceso de ajustar, mejorar y especificar con mayor precisión los requisitos de un sistema. Actúa como un <strong>ingeniero de requisitos</strong>, tomando una declaración vaga o imprecisa y transformándola en un requisito claro, medible y verificable.</p>
+
+                    <p><strong>Ejemplo:</strong></p>
+                    
+                    <div class="bm-callout">
+                        <strong>Requerimiento inicial:</strong><br>
+                        "El sistema debe mejorar la comunicación interna."
+                    </div>
+
+                    <div class="bm-callout bm-callout--green">
+                        <strong>Refinamiento con IA (o con un analista):</strong><br>
+                        "El sistema debe proporcionar un módulo de mensajería instantánea que permita a los empleados enviar y recibir mensajes en tiempo real, con historial de conversaciones y notificaciones push."
+                    </div>
+
+                    <p>La refinería ayuda a eliminar ambigüedades y a asegurar que los requisitos sean comprensibles y accionables.</p>
+                </section>
+
+                <!-- SECCIÓN 5 -->
+                <section id="documentacion" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">05</span>
+                        <h2 class="bm-section__title">Importancia de la documentación como soporte legal</h2>
+                    </div>
+
+                    <p>La documentación en un proyecto de software no es solo una herramienta técnica, sino también un <strong>soporte legal</strong> que protege a ambas partes: al proveedor del servicio y al cliente.</p>
+
+                    <p><strong>¿Por qué es importante?</strong></p>
+                    <ul class="bm-list">
+                        <li><strong>Define el alcance:</strong> La documentación establece qué se va a entregar y qué no, evitando malentendidos.</li>
+                        <li><strong>Sirve como contrato:</strong> Si el cliente solicita funcionalidades adicionales no documentadas, el proveedor puede argumentar que no están incluidas en el presupuesto inicial.</li>
+                        <li><strong>Protege contra reclamaciones:</strong> Si se entrega exactamente lo documentado, el proveedor tiene un respaldo para demostrar que cumplió con lo acordado.</li>
+                    </ul>
+
+                    <div class="bm-callout bm-callout--amber">
+                        <strong>Consecuencia de no documentar correctamente:</strong>
+                        <ul style="margin-top: 0.5rem; margin-bottom: 0;">
+                            <li>El cliente puede exigir más trabajo sin pago adicional.</li>
+                            <li>El proveedor puede perder dinero y tiempo.</li>
+                            <li>Ambas partes pueden tener expectativas diferentes que generen conflictos.</li>
+                        </ul>
+                    </div>
+
+                    <p>Por lo tanto, es fundamental documentar cada requisito, cada función y cada límite del proyecto.</p>
+                </section>
+
+                <!-- SECCIÓN 6 -->
+                <section id="smart" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">06</span>
+                        <h2 class="bm-section__title">Criterios SMART: medible y testeable</h2>
+                    </div>
+
+                    <p>El acrónimo <strong>SMART</strong> es una guía para definir requisitos y objetivos de manera efectiva:</p>
+
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Letra</th>
+                                        <th>Significado</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>S</td>
+                                        <td>Specific (Específico)</td>
+                                        <td>El requisito debe ser claro y concreto.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M</td>
+                                        <td>Measurable (Medible)</td>
+                                        <td>Debe poder cuantificarse o evaluarse objetivamente.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>A</td>
+                                        <td>Achievable (Alcanzable)</td>
+                                        <td>Debe ser realista y posible de implementar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>R</td>
+                                        <td>Relevant (Relevante)</td>
+                                        <td>Debe estar alineado con los objetivos del negocio.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>T</td>
+                                        <td>Time-bound (Con límite de tiempo)</td>
+                                        <td>Debe tener un plazo definido para su cumplimiento.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p><strong>Ejemplo SMART:</strong></p>
+                    <div class="bm-table-wrap">
+                        <div class="bm-table-scroll">
+                            <table class="bm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Requisito</th>
+                                        <th>Cumple SMART</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>"El sistema debe generar un informe de ventas mensual en formato PDF con un tiempo de generación menor a 3 segundos."</td>
+                                        <td>Sí: específico, medible (3 segundos), alcanzable, relevante y con límite temporal (mensual).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 7 -->
+                <section id="drawio" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">07</span>
+                        <h2 class="bm-section__title">Herramienta DRAW.IO para DFD</h2>
+                    </div>
+
+                    <p><strong>DRAW.IO</strong> (ahora conocido como <strong>diagrams.net</strong>) es una herramienta gratuita y en línea para la creación de diagramas, incluyendo <strong>Diagramas de Flujo de Datos (DFD)</strong>.</p>
+
+                    <p><strong>¿Por qué usar DRAW.IO para DFD?</strong></p>
+                    <ul class="bm-list">
+                        <li><strong>Gratuita:</strong> No requiere licencia ni instalación.</li>
+                        <li><strong>Colaborativa:</strong> Permite trabajar en equipo en tiempo real.</li>
+                        <li><strong>Versátil:</strong> Soporta múltiples tipos de diagramas UML, DFD, organigramas, etc.</li>
+                        <li><strong>Exportación:</strong> Permite guardar en formatos PNG, SVG, PDF y otros.</li>
+                        <li><strong>Integración:</strong> Se puede usar con Google Drive, OneDrive y otros servicios en la nube.</li>
+                    </ul>
+
+                    <p><strong>Uso de DFD con DRAW.IO:</strong></p>
+                    <ol class="bm-list bm-list--ordered">
+                        <li>Identificar las entidades externas (fuentes y destinos de datos).</li>
+                        <li>Definir los procesos que transforman los datos.</li>
+                        <li>Establecer los flujos de datos entre entidades, procesos y almacenes.</li>
+                        <li>Documentar los almacenes de datos donde se guarda la información.</li>
+                    </ol>
+                </section>
+
+                <!-- SECCIÓN 8 -->
+                <section id="adaptabilidad" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">08</span>
+                        <h2 class="bm-section__title">Adaptabilidad y plataforma amigable</h2>
+                    </div>
+
+                    <p>El modelado de funciones no solo se trata de definir procesos, sino también de considerar la <strong>experiencia del usuario final</strong>. Dos conceptos clave en este aspecto son:</p>
+
+                    <ul class="bm-list">
+                        <li><strong>Adaptabilidad:</strong> El sistema debe ser capaz de ajustarse a diferentes contextos y necesidades de los usuarios. Por ejemplo, una interfaz que se adapta a diferentes dispositivos (responsive design) o que permite personalizar configuraciones.</li>
+                        <li><strong>Plataforma amigable:</strong> El sistema debe ser intuitivo, fácil de usar y accesible para usuarios con diferentes niveles de conocimiento técnico. Una plataforma amigable reduce la curva de aprendizaje y mejora la productividad.</li>
+                    </ul>
+
+                    <p><strong>¿Cómo se relaciona con el modelado de funciones?</strong></p>
+                    <p>Durante el modelado, se deben considerar los siguientes aspectos:</p>
+
+                    <ul class="bm-list">
+                        <li><strong>Usabilidad:</strong> ¿El flujo de trabajo es claro para el usuario?</li>
+                        <li><strong>Accesibilidad:</strong> ¿El sistema es utilizable por personas con discapacidades?</li>
+                        <li><strong>Feedback:</strong> ¿El sistema proporciona retroalimentación clara sobre las acciones del usuario?</li>
+                        <li><strong>Consistencia:</strong> ¿Los elementos de la interfaz son coherentes en todo el sistema?</li>
+                    </ul>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+
+</body>
+
+</html>
