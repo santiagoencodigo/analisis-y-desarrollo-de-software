@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Modelado de Funciones · Caso Clínica Dental · Trimestre 2</title>
+    <meta name="description" content="Caso práctico de modelado de funciones aplicado a la Clínica Dental Sonrisa Perfecta. Requerimientos funcionales, no funcionales, reglas de negocio y casos de uso.">
+
+    <!-- Anti-FOUC -->
+    <script>try { var t = localStorage.getItem('adso-theme'); if (t && t !== 'blue') document.documentElement.setAttribute('data-theme', t); } catch (e) { }</script>
+
+    <!-- Fuentes y librerías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos del proyecto (Ajustados a la profundidad de 3 carpetas) -->
+    <link rel="stylesheet" href="../../../Assets/style.css">
+    <link rel="stylesheet" href="../../../Assets/templates.css">
+
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* =========================================
+           ANIMACIONES Y TARJETAS DE REQUERIMIENTOS
+           ========================================= */
+        .req-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Borde lateral animado */
+        .req-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--color-accent);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s ease;
+        }
+
+        .req-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            border-color: rgba(var(--color-accent-rgb), 0.4);
+            background: var(--color-bg-primary);
+        }
+
+        .req-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        /* Encabezado de la tarjeta */
+        .req-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .req-icon {
+            font-size: 1.75rem;
+            color: var(--color-accent);
+            transition: transform 0.3s ease;
+        }
+
+        .req-card:hover .req-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .req-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Variantes de color según el tipo */
+        .card-rf::before { background: var(--color-accent); }
+        .card-rf .req-icon { color: var(--color-accent); }
+
+        .card-rnf::before { background: #10b981; }
+        .card-rnf .req-icon { color: #10b981; }
+        .card-rnf:hover { border-color: rgba(16, 185, 129, 0.4); }
+        .card-rnf:hover::before { background: #10b981; }
+
+        .card-rn::before { background: var(--color-accent-2); }
+        .card-rn .req-icon { color: var(--color-accent-2); }
+        .card-rn:hover { border-color: rgba(var(--color-accent-2-rgb), 0.4); }
+
+        /* Etiquetas dentro de las tarjetas */
+        .req-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Efecto de zoom en imágenes */
+        .img-container {
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            margin: 2rem 0;
+            cursor: pointer;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de progreso -->
+    <div class="bm-progress" aria-hidden="true">
+        <div class="bm-progress-bar"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header" role="banner">
+        <nav class="navbar navbar-expand-md nav-container">
+            <div class="container-fluid px-0">
+                <a href="../../../index.html" class="navbar-brand nav-logo" aria-label="Ir al inicio del proyecto ADSO">
+                    <img src="../../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" alt="" class="nav-logo-img" aria-hidden="true">
+                    ADSO
+                </a>
+                <button class="navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-md-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trimestres</a>
+                            <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                                <li><a class="dropdown-item" href="../../../index.html#trimestres">Estructura</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-1/index.html">Trimestre 1</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-2/index.html">Trimestre 2</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-3/index.html">Trimestre 3</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-4/index.html">Trimestre 4</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-5/index.html">Trimestre 5</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-6/index.html">Trimestre 6</a></li>
+                                <li><a class="dropdown-item" href="../../../trimestre-7/index.html">Trimestre 7</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="../../../sitemap.html">Mapa de sitio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <!-- HERO EDITORIAL -->
+        <section class="bm-hero">
+            <div class="bm-hero__bg">
+                <div class="bm-hero__grid"></div>
+                <div class="bm-hero__glow"></div>
+            </div>
+            <div class="bm-hero__inner">
+                <div class="bm-hero__eyebrow">
+                    <span class="bm-dot"></span> Trimestre 2 · Caso Práctico
+                </div>
+                <h1 class="bm-hero__title">
+                    Modelado de Funciones:<br>
+                    <span class="gradient-text">Clínica Dental Sonrisa Perfecta</span>
+                </h1>
+                <p class="bm-hero__lead">
+                    Taller práctico de identificación, documentación y representación de las funciones que un sistema de software debe ofrecer, aplicando requerimientos, reglas de negocio y casos de uso a un escenario real.
+                </p>
+            </div>
+        </section>
+
+        <!-- LAYOUT PRINCIPAL -->
+        <div class="bm-layout">
+            
+            <!-- TABLA DE CONTENIDO (STICKY) -->
+            <aside class="bm-toc" id="bm-toc">
+                <div class="bm-toc__inner">
+                    <div class="bm-toc__header">
+                        <span class="bm-toc__label">En esta página</span>
+                        <button class="bm-toc__toggle" aria-label="Abrir índice" aria-expanded="false">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <nav class="bm-toc__nav">
+                        <ul class="bm-toc__list">
+                            <li><a href="#introduccion" class="bm-toc__link"><span class="bm-toc__num">01</span> Introducción</a></li>
+                            <li><a href="#problema" class="bm-toc__link"><span class="bm-toc__num">02</span> Problema Identificado</a></li>
+                            <li><a href="#requerimientos-funcionales" class="bm-toc__link"><span class="bm-toc__num">03</span> Requerimientos Funcionales</a></li>
+                            <li><a href="#requerimientos-no-funcionales" class="bm-toc__link"><span class="bm-toc__num">04</span> Requerimientos No Funcionales</a></li>
+                            <li><a href="#reglas-negocio" class="bm-toc__link"><span class="bm-toc__num">05</span> Reglas de Negocio</a></li>
+                            <li><a href="#casos-uso" class="bm-toc__link"><span class="bm-toc__num">06</span> Diagramas de Casos de Uso</a></li>
+                            <li><a href="#diseno" class="bm-toc__link"><span class="bm-toc__num">07</span> Modelo de Diseño</a></li>
+                            <li><a href="#reflexion" class="bm-toc__link"><span class="bm-toc__num">08</span> Reflexión</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <article class="bm-content">
+                
+                <!-- SECCIÓN 1 -->
+                <section id="introduccion" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">01</span>
+                        <h2 class="bm-section__title">Introducción al modelado de funciones</h2>
+                    </div>
+
+                    <p>El <strong>modelado de funciones</strong> es el proceso de identificar, documentar y representar las funciones que un sistema de software debe ofrecer para satisfacer las necesidades de los usuarios y del negocio. Su objetivo es transformar los requisitos en una representación visual que facilite:</p>
+
+                    <ul class="bm-list">
+                        <li><i class="bi bi-chat-dots text-accent me-2"></i> La comunicación entre analistas, desarrolladores y clientes.</li>
+                        <li><i class="bi bi-check-circle text-accent me-2"></i> La validación temprana de los requisitos.</li>
+                        <li><i class="bi bi-diagram-3 text-accent me-2"></i> La identificación de actores, procesos y flujos de información.</li>
+                        <li><i class="bi bi-code-slash text-accent me-2"></i> La base para el diseño detallado y la implementación.</li>
+                    </ul>
+
+                    <p>Uno de los artefactos más utilizados es el <strong>diagrama de casos de uso</strong>, que muestra los actores y las funcionalidades que el sistema debe proporcionar. A continuación, se presenta un caso práctico que ilustra la aplicación de estos conceptos.</p>
+                </section>
+
+                <!-- SECCIÓN 2 -->
+                <section id="problema" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">02</span>
+                        <h2 class="bm-section__title">Problema identificado</h2>
+                    </div>
+
+                    <p>La clínica dental <strong>Sonrisa Perfecta</strong> es una pequeña empresa que actualmente maneja su gestión mediante una <strong>agenda manual en papel</strong>. Esto ha generado múltiples problemas:</p>
+
+                    <ul class="bm-list">
+                        <li><strong>Pérdida de información</strong> y registros importantes.</li>
+                        <li><strong>Confusiones en los horarios</strong>, lo que ocasiona pérdida de citas y largos tiempos de espera.</li>
+                        <li><strong>Dificultad para hacer seguimiento</strong> de los historiales clínicos.</li>
+                        <li><strong>Ineficiencia operativa</strong> que afecta la experiencia del paciente y la productividad del personal.</li>
+                    </ul>
+
+                    <p>Por esta razón, se ha propuesto desarrollar un sistema de información que automatice la gestión de citas y el historial clínico de los pacientes, mejorando la eficiencia y la calidad del servicio.</p>
+
+                    <div class="bm-callout bm-callout--amber">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <strong>Precondición fundamental:</strong> Para utilizar el sistema, el paciente debe estar previamente registrado en la plataforma. El registro incluye datos personales básicos y la aceptación de las normas de confidencialidad.
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3 -->
+                <section id="requerimientos-funcionales" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">03</span>
+                        <h2 class="bm-section__title">Requerimientos Funcionales (RF)</h2>
+                        <p class="bm-section__sub">Definen <strong>qué</strong> debe hacer el sistema.</p>
+                    </div>
+
+                    <!-- RF-001 -->
+                    <div class="req-card card-rf">
+                        <div class="req-header">
+                            <i class="bi bi-calendar-plus req-icon"></i>
+                            <h3 class="req-title">RF-001: Agendamiento de citas por roles autorizados</h3>
+                        </div>
+                        <p><strong>Descripción:</strong> El sistema debe permitir a los usuarios con roles de Administrador o Recepción agendar una cita médica, seleccionando paciente, odontólogo, fecha y hora disponibles, y confirmando la cita.</p>
+                        <span class="req-label">Validaciones y Criterios de Aceptación:</span>
+                        <ul class="bm-list">
+                            <li>Impedir agendamiento en horarios no laborales o sin disponibilidad.</li>
+                            <li>Alertar si el paciente tiene citas pendientes en un rango cercano.</li>
+                            <li>Validar disponibilidad en tiempo real y notificar a paciente/odontólogo.</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary-subtle">
+                            <span class="badge bg-danger">Prioridad: Alta</span>
+                            <span class="text-secondary" style="font-size: 0.8rem;"><i class="bi bi-link-45deg"></i> Depende de: Módulo de usuarios y calendario.</span>
+                        </div>
+                    </div>
+
+                    <!-- RF-002 -->
+                    <div class="req-card card-rf">
+                        <div class="req-header">
+                            <i class="bi bi-clock-history req-icon"></i>
+                            <h3 class="req-title">RF-002: Validación de disponibilidad de horarios</h3>
+                        </div>
+                        <p><strong>Descripción:</strong> El sistema debe verificar en tiempo real la disponibilidad de horarios antes de confirmar una cita.</p>
+                        <span class="req-label">Criterios de Aceptación:</span>
+                        <ul class="bm-list">
+                            <li>Consultar base de datos de agenda para verificar disponibilidad.</li>
+                            <li>Notificar y sugerir alternativas si el horario está ocupado.</li>
+                            <li>Registrar error y evitar confirmación en caso de doble asignación.</li>
+                        </ul>
+                    </div>
+
+                    <!-- RF-003 -->
+                    <div class="req-card card-rf">
+                        <div class="req-header">
+                            <i class="bi bi-folder2-open req-icon"></i>
+                            <h3 class="req-title">RF-003: Gestión de historiales médicos digitales</h3>
+                        </div>
+                        <p><strong>Descripción:</strong> Almacenar y organizar de manera segura el historial médico completo de cada paciente (tratamientos, diagnósticos, medicamentos y observaciones).</p>
+                        <span class="req-label">Requisitos Clave:</span>
+                        <ul class="bm-list">
+                            <li><strong>Estructura:</strong> Fecha, ID paciente, diagnósticos (CIE-10), tratamientos y medicamentos.</li>
+                            <li><strong>Seguridad:</strong> Solo personal autorizado. Logs de auditoría. Encriptación en reposo y tránsito.</li>
+                            <li><strong>Exportación:</strong> PDF o HL7 FHIR opcional.</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary-subtle">
+                            <span class="badge bg-danger">Prioridad: Crítica</span>
+                        </div>
+                    </div>
+
+                    <!-- RF-004 -->
+                    <div class="req-card card-rf">
+                        <div class="req-header">
+                            <i class="bi bi-shield-lock req-icon"></i>
+                            <h3 class="req-title">RF-004: Gestión de cuentas de usuario (RBAC)</h3>
+                        </div>
+                        <p><strong>Descripción:</strong> Creación y modificación de cuentas asignando roles predefinidos (Recepción, Administrador, Odontólogo) con permisos específicos.</p>
+                        <span class="req-label">Criterios de Aceptación:</span>
+                        <ul class="bm-list">
+                            <li>Campos obligatorios con contraseña encriptada.</li>
+                            <li>Validación en tiempo real para restringir funcionalidades no autorizadas.</li>
+                            <li>Bloqueo de cuenta tras 3 intentos fallidos de inicio de sesión.</li>
+                        </ul>
+                    </div>
+
+                    <!-- RF-005 y RF-006 resumidos en tarjetas -->
+                    <div class="req-card card-rf">
+                        <div class="req-header">
+                            <i class="bi bi-bell req-icon"></i>
+                            <h3 class="req-title">RF-005: Notificación a pacientes</h3>
+                        </div>
+                        <p><strong>Descripción:</strong> Enviar notificaciones automáticas (SMS, email o WhatsApp) ante modificaciones en las citas, con al menos 24 horas de antelación.</p>
+                    </div>
+
+                    <div class="req-card card-rf">
+                        <div class="req-header">
+                            <i class="bi bi-bell-fill req-icon"></i>
+                            <h3 class="req-title">RF-006: Notificación interna a odontólogos</h3>
+                        </div>
+                        <p><strong>Descripción:</strong> Generar notificaciones en la bandeja del sistema sobre cambios en los horarios asignados al odontólogo, antes del inicio de su turno.</p>
+                    </div>
+
+                </section>
+
+                <!-- SECCIÓN 4 -->
+                <section id="requerimientos-no-funcionales" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">04</span>
+                        <h2 class="bm-section__title">Requerimientos No Funcionales (RNF)</h2>
+                        <p class="bm-section__sub">Definen <strong>cómo</strong> debe comportarse el sistema.</p>
+                    </div>
+
+                    <!-- RNF-001 -->
+                    <div class="req-card card-rnf">
+                        <div class="req-header">
+                            <i class="bi bi-fingerprint req-icon"></i>
+                            <h3 class="req-title">RNF-001: Autenticación segura</h3>
+                        </div>
+                        <p>Acceso a funcionalidades críticas mediante contraseñas seguras (mínimo 8 caracteres, mayúscula, número y símbolo). Uso de HTTPS/TLS y bloqueo tras 5 intentos fallidos.</p>
+                    </div>
+
+                    <!-- RNF-002 -->
+                    <div class="req-card card-rnf">
+                        <div class="req-header">
+                            <i class="bi bi-phone req-icon"></i>
+                            <h3 class="req-title">RNF-002: Compatibilidad responsiva</h3>
+                        </div>
+                        <p>Experiencia de usuario óptima en escritorio, tablets y smartphones. Uso de grids flexibles y botones con área táctil mínima de 48x48px (WCAG).</p>
+                    </div>
+
+                    <!-- RNF-003 -->
+                    <div class="req-card card-rnf">
+                        <div class="req-header">
+                            <i class="bi bi-hourglass-split req-icon"></i>
+                            <h3 class="req-title">RNF-003: Configuración de horario laboral</h3>
+                        </div>
+                        <p>Restringir operaciones de gestión de citas al horario laboral (7:00 AM - 7:00 PM, L-S). Bloqueo de funcionalidades fuera de horario excepto para roles administrativos.</p>
+                    </div>
+
+                    <!-- RNF-004 -->
+                    <div class="req-card card-rnf">
+                        <div class="req-header">
+                            <i class="bi bi-file-earmark-lock req-icon"></i>
+                            <h3 class="req-title">RNF-004: Cifrado de historiales médicos</h3>
+                        </div>
+                        <p>Garantizar el cifrado de datos sensibles en reposo (AES-256) y en tránsito (TLS 1.2+). Doble capa de seguridad: cifrado + RBAC.</p>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 5 -->
+                <section id="reglas-negocio" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">05</span>
+                        <h2 class="bm-section__title">Reglas de Negocio (RN)</h2>
+                    </div>
+
+                    <!-- RN-001 -->
+                    <div class="req-card card-rn">
+                        <div class="req-header">
+                            <i class="bi bi-person-badge req-icon"></i>
+                            <h3 class="req-title">RN-001: Control de creación de cuentas</h3>
+                        </div>
+                        <p>La creación y asignación de roles estará limitada estrictamente al rol <strong>"Administrador"</strong>, garantizando el mínimo privilegio.</p>
+                    </div>
+
+                    <!-- RN-002 -->
+                    <div class="req-card card-rn">
+                        <div class="req-header">
+                            <i class="bi bi-calendar-check req-icon"></i>
+                            <h3 class="req-title">RN-002: Gestión de citas por roles</h3>
+                        </div>
+                        <p>Agendar, reprogramar y cancelar estará restringido a <strong>"Administrador"</strong> o <strong>"Recepción"</strong>. Recepción solo gestiona su sede.</p>
+                    </div>
+
+                    <!-- RN-003 -->
+                    <div class="req-card card-rn">
+                        <div class="req-header">
+                            <i class="bi bi-shield-x req-icon"></i>
+                            <h3 class="req-title">RN-003: Agendamiento único por slot</h3>
+                        </div>
+                        <p>Cada slot de tiempo solo puede tener <strong>una única cita</strong>. El sistema sugiere alternativas si está ocupado. Solo el Administrador puede forzar con justificación.</p>
+                    </div>
+
+                    <!-- RN-004 -->
+                    <div class="req-card card-rn">
+                        <div class="req-header">
+                            <i class="bi bi-envelope-paper req-icon"></i>
+                            <h3 class="req-title">RN-004: Notificación automática obligatoria</h3>
+                        </div>
+                        <p>Cualquier cambio en la cita <strong>debe</strong> generar notificación inmediata (email, SMS o WhatsApp) con los datos del cambio.</p>
+                    </div>
+
+                    <!-- RN-005 -->
+                    <div class="req-card card-rn">
+                        <div class="req-header">
+                            <i class="bi bi-people req-icon"></i>
+                            <h3 class="req-title">RN-005: Restricción de múltiples roles</h3>
+                        </div>
+                        <p>Ningún usuario podrá tener más de <strong>dos roles simultáneos</strong> para evitar conflictos de permisos. Superadministrador no cuenta para el límite.</p>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 6 -->
+                <section id="casos-uso" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">06</span>
+                        <h2 class="bm-section__title">Diagramas de Casos de Uso</h2>
+                        <p class="bm-section__sub">Actores: Paciente, Odontólogo, Personal autorizado y Sistema.</p>
+                    </div>
+
+                    <h3>Gestión de agenda</h3>
+                    <p>Muestra las interacciones para el agendamiento, modificación y visualización de citas.</p>
+                    
+                    <div class="img-container">
+                        <img src="../assets/sonrisa-01-caso-de-uso.png" alt="Diagrama de Casos de Uso - Gestión de Agenda" loading="lazy">
+                    </div>
+
+                    <h3 class="mt-5">Historial del paciente</h3>
+                    <p>Muestra las interacciones relacionadas con la consulta, registro y almacenamiento del historial clínico.</p>
+                    
+                    <div class="img-container">
+                        <img src="../assets/sonrisa-02-caso-de-uso.png" alt="Diagrama de Casos de Uso - Historial del Paciente" loading="lazy">
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 7 -->
+                <section id="diseno" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">07</span>
+                        <h2 class="bm-section__title">Modelo de Diseño y Usabilidad</h2>
+                    </div>
+
+                    <div class="bm-callout bm-callout--green">
+                        <h4 class="h5 mb-2 text-success"><i class="bi bi-lightbulb me-2"></i> Regla de Navegación</h4>
+                        <p class="mb-0" style="color: var(--color-text-primary);">"Ninguna funcionalidad del sistema debe requerir más de <strong>3 o 4 clics</strong> para ser alcanzada desde la pantalla principal."</p>
+                    </div>
+
+                    <p>Para cumplir con esta regla, el diseño debe incluir:</p>
+                    <ul class="bm-list">
+                        <li>Menús y accesos directos claros.</li>
+                        <li>Flujos de trabajo optimizados (agendamiento en pasos mínimos).</li>
+                        <li>Búsquedas inteligentes y filtros.</li>
+                        <li>Botones de acción principal visibles.</li>
+                    </ul>
+
+                    <h3>Anexo técnico: usabilidad e intuición</h3>
+                    <p>El sistema debe ser amigable para todos los perfiles:</p>
+                    <ul class="bm-list">
+                        <li><strong>Interfaz limpia:</strong> Colores suaves y tipografía legible.</li>
+                        <li><strong>Consistencia visual:</strong> Botones e iconos uniformes.</li>
+                        <li><strong>Feedback inmediato:</strong> Confirmaciones visuales tras cada acción.</li>
+                        <li><strong>Accesibilidad:</strong> Estándares WCAG 2.1 AA (contraste, navegación por teclado).</li>
+                        <li><strong>Privacidad:</strong> Consentimiento explícito del paciente.</li>
+                    </ul>
+                </section>
+
+                <!-- SECCIÓN 8 -->
+                <section id="reflexion" class="bm-section bm-reveal">
+                    <div class="bm-section__head">
+                        <span class="bm-section__num">08</span>
+                        <h2 class="bm-section__title">Reflexión sobre el taller</h2>
+                    </div>
+
+                    <p>Este ejercicio fue desarrollado como un <strong>taller inicial</strong> para comprender el concepto de modelado de funciones. A través del caso de la clínica dental, pudimos:</p>
+                    
+                    <ul class="bm-list bm-list--ordered">
+                        <li>Identificar los actores (Paciente, Odontólogo, Administrador, Sistema).</li>
+                        <li>Extraer requerimientos funcionales y no funcionales detallando criterios de aceptación.</li>
+                        <li>Definir reglas de negocio formalizadas que condicionan el sistema.</li>
+                        <li>Establecer un modelo de diseño con restricciones de navegación.</li>
+                        <li>Representar gráficamente las funcionalidades mediante diagramas de casos de uso.</li>
+                    </ul>
+
+                    <p>Este taller demuestra que antes de escribir una línea de código, es fundamental comprender el problema, los actores y las funciones. La documentación adecuada y el modelado visual son herramientas clave para garantizar el éxito del proyecto.</p>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Botón volver arriba -->
+    <button class="bm-top" type="button" aria-label="Volver arriba">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../Assets/templates.js"></script>
+
+</body>
+
+</html>
